@@ -25,9 +25,13 @@
                             ></path>
                         </svg>
                     </button>
-                    <a href="{{ route('dashboard') }}">
-                        <img src="./images/fixi.png" class="h-10" alt="Logo"/>
-                    </a>
+                    {{-- logo --}}
+                    <div class="shrink-0 flex items-center">
+                        <a href="{{ route('dashboard') }}">
+                            <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        </a>
+                    </div>
+                    {{-- logo end --}}
                 </div>
                 {{-- avatar start --}}
                 <div class="flex items-center">
