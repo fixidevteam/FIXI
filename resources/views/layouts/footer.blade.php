@@ -35,5 +35,5 @@
   </div>
 </footer>
 <p class="text-center text-sm text-gray-500 my-10">
-  &copy; 2024 <a href="https://themesberg.com" class="hover:underline" target="_blank">Fixi</a>. All rights reserved.
+  &copy; 2024 <a href="" class="hover:underline" target="_blank">Fixi</a>. All rights reserved.
 </p>
