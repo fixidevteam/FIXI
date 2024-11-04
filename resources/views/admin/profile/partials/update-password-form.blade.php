@@ -6,8 +6,8 @@
             x-show="show"
             x-transition
             x-init="setTimeout(() => show = false, 5000)"
-            class="w-full text-sm text-green-800 bg-green-100 border border-green-300 rounded p-4">
-            {{ __('Saved.') }}
+            class="w-full text-sm text-green-800 bg-green-100 border border-green-300 rounded p-4 mb-4">
+            {{ __('Enregistré.') }}
         </div>
         @endif
         <h2 class="text-lg font-medium text-gray-900">
