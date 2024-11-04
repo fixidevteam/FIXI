@@ -63,7 +63,7 @@
                                         <x-dropdown-link class="text-red-600" :href="route('logout')"
                                                 onclick="event.preventDefault();
                                                             this.closest('form').submit();">
-                                            {{ __('Log Out') }}
+                                            {{ __('Se déconnecter') }}
                                         </x-dropdown-link>
                                     </form>
                                 </x-slot>
