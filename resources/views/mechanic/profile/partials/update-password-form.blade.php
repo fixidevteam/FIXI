@@ -1,5 +1,15 @@
 <section>
     <header>
+        @if (session('status') === 'password-updated')
+        <div
+            x-data="{ show: true }"
+            x-show="show"
+            x-transition
+            x-init="setTimeout(() => show = false, 5000)"
+            class="w-full text-sm text-green-800 bg-green-100 border border-green-300 rounded p-4">
+            {{ __('Saved.') }}
+        </div>
+        @endif
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('Mettre à jour le mot de passe') }}
         </h2>
@@ -9,7 +19,7 @@
         </p>
     </header>
 
-    <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('mechanic.password.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('put')
 
@@ -33,16 +43,6 @@
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('sauvegarder') }}</x-primary-button>
-
-            @if (session('status') === 'password-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Enregistré.') }}</p>
-            @endif
         </div>
     </form>
 </section>
