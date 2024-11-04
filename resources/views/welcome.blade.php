@@ -12,44 +12,89 @@
     </head>
     <body class="antialiased"> 
         <div>
-            @if (Route::has('login'))
-                <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
-                    {{-- user auth --}}
-                    @auth('web')
-                        <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-black focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-black focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-black focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
+            <section class="relative flex flex-wrap lg:h-screen lg:items-center">
+                <div class="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
+                    <div class="mx-auto max-w-lg text-center">
+                        <a href="/">
+                            <img class="mx-auto h-16 w-auto" src="../images/fixi.png" alt="Fixi">
+                        </a>
+                        <p class="mt-4 text-gray-500">
+                            Bienvenue sur la plateforme Fixi ! Veuillez choisir votre espace pour commencer.
+                        </p>
+                    </div>
+                    {{-- platform space --}}
+                    <div class="mx-auto mb-0 mt-8 max-w-md space-y-4">
+                        @if (Route::has('login'))
+                            <div>
+                                {{-- user auth --}}
+                                @auth('web')
+                                    <a href="{{ url('/dashboard') }}">
+                                        <button
+                                        class="w-full inline-block capitalize border border-transparent rounded-[20px] bg-red-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-500 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                                    >
+                                        tableau de bord de l'utilisateur
+                                        </button>
+                                    </a>
+                                @else
+                                    <a href="{{ route('login') }}">
+                                        <button
+                                        class="w-full inline-block capitalize border border-transparent rounded-[20px] bg-red-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-500 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                                    >
+                                        Espace Client
+                                        </button>
+                                    </a>
+                                @endauth
+                                {{-- mechanic auth --}}
+                                @auth('mechanic')
+                                    <a href="{{ url('/mechanic/dashboard') }}">
+                                        <button
+                                        class="my-5 w-full inline-block capitalize border border-transparent rounded-[20px] bg-red-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-500 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                                    >
+                                        tableau de bord du mécanicien
+                                        </button>
+                                    </a>
+                                @else
+                                    <a href="{{ route('mechanic.login') }}">
+                                        <button
+                                        class="my-5 w-full inline-block capitalize border border-transparent rounded-[20px] bg-red-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-500 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                                    >
+                                        Espace mécanicien
+                                        </button>
+                                    </a>
+                                @endauth
+                                {{-- admin auth --}}
+                                @auth('admin')
+                                    <a href="{{ url('/admin/dashboard') }}">
+                                        <button
+                                        class="w-full inline-block capitalize border border-transparent rounded-[20px] bg-red-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-500 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                                    >
+                                        tableau de bord de l'administrateur
+                                        </button>
+                                    </a>
+                                @else
+                                    <a href="{{ route('admin.login') }}">
+                                        <button
+                                        class="w-full inline-block capitalize border border-transparent rounded-[20px] bg-red-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-500 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                                    >
+                                        Espace administrateur
+                                        </button>
+                                    </a>
+                                @endauth
+                            </div>
                         @endif
-                    @endauth
-                    {{-- admin auth --}}
-                    @auth('admin')
-                        <a href="{{ url('/admin/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-black focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Admin Dashboard</a>
-                    @else
-                        <a href="{{ route('admin.login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-black focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Admin Log in</a>
-
-                        @if (Route::has('admin.register'))
-                            <a href="{{ route('admin.register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-black focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Admin Register</a>
-                        @endif
-                    @endauth
-                    {{-- mechanic auth --}}
-                    @auth('mechanic')
-                        <a href="{{ url('/mechanic/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-black focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Mechanic Dashboard</a>
-                    @else
-                        <a href="{{ route('mechanic.login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-black focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Mechanic Log in</a>
-
-                        @if (Route::has('mechanic.register'))
-                            <a href="{{ route('mechanic.register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-black focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Mechanic Register</a>
-                        @endif
-                    @endauth
+                        {{-- space for user --}}
+                        {{-- space for mechanic --}}
+                        {{-- space for admin --}}
+                    </div>
                 </div>
-            @endif
-            <div class="max-w-7xl mx-auto p-6 lg:p-8">
-                {{-- content of the 1st page go here --}}
-                <h1 class="text-lg text-black uppercase">hello world</h1>
-            </div>
+                    <div class="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
+                        <img
+                            alt="Fixi Welcome Image"
+                            src="../images/fixiRepair.jpg"
+                            class="absolute inset-0 h-full w-full object-cover"
+                        />
+                    </div>
+            </section>
         </div>
     </body>
 </html>
