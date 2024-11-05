@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PapierPeronnelController;
+use App\Http\Controllers\PapierVoitureController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoitureController;
@@ -28,9 +30,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::resource('/voiture',VoitureController::class);
+    Route::resource('/voiture', VoitureController::class);
+    Route::resource('/paiperPersonnel', PapierPeronnelController::class);
+    Route::resource('/paiperVoiture', PapierVoitureController::class);
 });
 
-require __DIR__.'/auth.php';
-require __DIR__.'/admin-auth.php';
-require __DIR__.'/mechanic-auth.php';
+require __DIR__ . '/auth.php';
+require __DIR__ . '/admin-auth.php';
+require __DIR__ . '/mechanic-auth.php';

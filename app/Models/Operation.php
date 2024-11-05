@@ -11,7 +11,7 @@ class Operation extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'Categorie',
+        'categorie',
         'nom',
         'description',
         'date_operation',
