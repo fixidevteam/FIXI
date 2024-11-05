@@ -16,6 +16,6 @@ class SousOperation extends Model
     ];
     public function operation(): BelongsTo
     {
-        return $this->belongsTo(operation::class);
+        return $this->belongsTo(Operation::class);
     }
 }

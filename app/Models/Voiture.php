@@ -19,14 +19,13 @@ class Voiture extends Model
         'date_achat',
         'date_de_dédouanement',
         'user_id'
-
     ];
     public function papiersVoiture(): HasMany
     {
-        return $this->hasMany(PapierVoiture::class);
+        return $this->hasMany(VoiturePapier::class);
     }
     public function user(): BelongsTo
     {
-        return $this->belongsTo(user::class);
+        return $this->belongsTo(User::class);
     }
 }

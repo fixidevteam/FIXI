@@ -19,10 +19,10 @@ class Operation extends Model
     ];
     public function voiture(): BelongsTo
     {
-        return $this->belongsTo(voiture::class);
+        return $this->belongsTo(Voiture::class);
     }
     public function sousOperation(): HasMany
     {
-        return $this->hasMany(sousOperation::class);
+        return $this->hasMany(SousOperation::class);
     }
 }

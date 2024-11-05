@@ -13,7 +13,7 @@ class OperationFactory extends Factory
     public function definition()
     {
         return [
-            'Categorie' => $this->faker->word,
+            'categorie' => $this->faker->word,
             'nom' => $this->faker->word,
             'description' => $this->faker->sentence(),
             'date_operation' => $this->faker->date(),

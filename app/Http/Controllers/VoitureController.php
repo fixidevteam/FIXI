@@ -9,7 +9,7 @@ class VoitureController extends Controller
 
     public function index()
     {
-        //
+        return view('userCars.voiture');
     }
 
     /**
@@ -17,7 +17,7 @@ class VoitureController extends Controller
      */
     public function create()
     {
-        return view("AjouterVoiture");
+        return view("userCars.AjouterVoiture");
     }
 
     /**

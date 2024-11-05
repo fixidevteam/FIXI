@@ -42,9 +42,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    // relations :
     public function papiersUser(): HasMany
     {
-        return $this->hasMany(PapierUser::class);
+        return $this->hasMany(UserPapier::class);
     }
     public function voitures(): HasMany
     {
