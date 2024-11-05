@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserPapier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PapierPeronnelController extends Controller
 {
@@ -11,7 +13,9 @@ class PapierPeronnelController extends Controller
      */
     public function index()
     {
-        return view('userPaiperPersonnel.paiperPersonnel');
+        $user_id = Auth::user()->id;
+        $papiers = UserPapier::where('user_id', $user_id)->get();
+        return view('userPaiperPersonnel.paiperPersonnel',compact('papiers'));
     }
 
     /**
@@ -27,7 +31,22 @@ class PapierPeronnelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user_id = Auth::user()->id;
+        $data = $request->validate([
+            'type' => ['required','max:30'],
+            'note' =>['max:255'],
+            'date_debut' => ['required', 'date'],
+            'date_fin' => ['required', 'date'],
+            
+        ]);
+        // dd($data['note']);
+        if ($request->hasFile('photo')) {
+            $imagePath = $request->file('photo')->store('user/papierperso', 'public');
+            $data['photo'] = $imagePath;
+        }
+        $data['user_id'] = $user_id;
+        UserPapier::create($data);
+        return redirect()->route('paiperPersonnel.index');
     }
 
     /**
@@ -35,7 +54,8 @@ class PapierPeronnelController extends Controller
      */
     public function show(string $id)
     {
-        return view('userPaiperPersonnel.details');
+        $papier = UserPapier::find($id);
+        return view('userPaiperPersonnel.details',compact('papier'));
     }
 
     /**

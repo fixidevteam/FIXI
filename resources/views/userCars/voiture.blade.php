@@ -61,6 +61,9 @@
                 {{-- table --}}
                 <div class="my-5">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                        @if($voitures->isEmpty())
+                        <p class="p-4 text-gray-500 text-center">Aucune voiture disponible.</p>
+                        @else
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr>
@@ -117,6 +120,7 @@
                             </tbody>
                         </table>
                     </div>
+                    @endif
                 </div>
                 {{-- table close --}}
 

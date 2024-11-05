@@ -29,6 +29,7 @@ class VoitureController extends Controller
      */
     public function store(Request $request)
     {
+        
         $user_id = Auth::user()->id;
         $data = $request->validate([
             'numero_immatriculation' => [
@@ -58,7 +59,9 @@ class VoitureController extends Controller
      */
     public function show(string $id)
     {
-        return view('userCars.details');
+        // dd(Voiture::find(11)->operations);
+        $voiture  = Voiture::find($id);
+        return view('userCars.details',compact('voiture'));
     }
 
     /**
