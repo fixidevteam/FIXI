@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Voiture;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VoitureController extends Controller
 {
 
     public function index()
     {
-        return view('userCars.voiture');
+        $user_id = Auth::user()->id;
+        $voitures = Voiture::where('user_id', $user_id)->get();
+        return view('userCars.voiture',compact('voitures'));
     }
 
     /**
@@ -25,7 +29,28 @@ class VoitureController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user_id = Auth::user()->id;
+        $data = $request->validate([
+            'numero_immatriculation' => [
+                'required',
+                'regex:/^\d{1,6}-[A-Za-z]{1}-\d+$/',
+                'unique:voitures,numero_immatriculation'
+
+            ],
+            'marque' => ['required', 'max:30'],
+            'modele' => ['required', 'max:30'],
+            'photo' => ['required', 'image'],
+            'date_de_première_mise_en_circulation' => ['required', 'date'],
+            'date_achat' => ['required', 'date'],
+            'date_de_dédouanement' => ['required', 'date'],
+        ]);
+        if ($request->hasFile('photo')) {
+            $imagePath = $request->file('photo')->store('user/voitures', 'public');
+            $data['photo'] = $imagePath;
+        }
+        $data['user_id'] = $user_id;
+        Voiture::create($data);
+        return redirect()->route('voiture.index');
     }
 
     /**

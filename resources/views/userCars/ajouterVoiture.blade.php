@@ -67,14 +67,14 @@
             {{-- content (slot on layouts/app.blade.php)--}}
             <div class=" px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <h2 class="mt-10  text-2xl font-bold leading-9 tracking-tight text-gray-900">Ajouter Voiture</h2>
-            <form method="POST" action="{{ route('voiture.store') }}" class="space-y-6">
+            <form method="POST" action="{{ route('voiture.store') }}" class="space-y-6" enctype="multipart/form-data">
                 @csrf
 
 
                 <div>
-                    <x-input-label for="immatriculation" :value="__("Numero d'immatriculation")" />
-                    <x-text-input id="immatriculation" class="block mt-1 w-full" type="text" name="immatriculation" :value="old('immatriculation')" autofocus autocomplete="immatriculation" />
-                    <x-input-error :messages="$errors->get('immatriculation')" class="mt-2" />
+                    <x-input-label for="numero_immatriculation" :value="__('Numero d\'immatriculation')" />
+                    <x-text-input id="numero_immatriculation" class="block mt-1 w-full" type="text" name="numero_immatriculation" :value="old('numero_immatriculation')" autofocus autocomplete="numero_immatriculation" />
+                    <x-input-error :messages="$errors->get('numero_immatriculation')" class="mt-2" />
                 </div>
                 <div>
                     <x-input-label for="marque" :value="__('Marque')" />
@@ -88,7 +88,7 @@
                 </div>
                 <div>
                     <x-input-label for="file_input" :value="__('Photo')" />
-                    <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" />
+                    <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" accept="image/*" />
                     <x-input-error :messages="$errors->get('photo')" class="mt-2" />
                 </div>
                 <div>
@@ -97,7 +97,7 @@
                     <x-input-error :messages="$errors->get('date_de_première_mise_en_circulation')" class="mt-2" />
                 </div>
                 <div>
-                    <x-input-label for="date_achat" :value="__("Date d'achat")" />
+                    <x-input-label for="date_achat" :value="__('Date d\'achat')" />
                     <x-text-input id="date_achat" class="block mt-1 w-full" type="date" name="date_achat" :value="old('date_achat')" autofocus autocomplete="date_achat" />
                     <x-input-error :messages="$errors->get('date_achat')" class="mt-2" />
                 </div>
