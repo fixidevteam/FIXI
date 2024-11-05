@@ -70,6 +70,78 @@
                 <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Details du véhicule</h2>
             </div>
             {{-- details of cars --}}
+            <div class="flex items-center gap-5">
+              <div class="w-[160px] h-[160px] overflow-hidden rounded-full border">
+                <img class="w-full h-full" src="../images/fixi.png" alt="voiture image">
+              </div>
+              {{-- details of car --}}
+              <div class="space-y-4">
+                {{-- row 1 --}}
+                <div class="flex gap-10 md:gap-28">
+                  {{-- Marque --}}
+                    <div>
+                      <p class="capitalize text-sm font-medium text-gray-900 truncate">
+                        Marque
+                      </p>
+                      <p class="text-sm text-gray-500 truncate">
+                        email@windster.com
+                      </p>
+                    </div>
+                  {{-- date de première mise en circulation --}}
+                  <div>
+                    <p class="capitalize text-sm font-medium text-gray-900 truncate">
+                      date de première mise en circulation
+                    </p>
+                    <p class="text-sm text-gray-500 truncate">
+                      email@windster.com
+                    </p>
+                  </div>
+                </div>
+                {{-- row 2 --}}
+                <div class="flex gap-5 md:gap-28">
+                  {{-- Matricule --}}
+                    <div>
+                      <p class="capitalize text-sm font-medium text-gray-900 truncate">
+                        Matricule
+                      </p>
+                      <p class="text-sm text-gray-500 truncate">
+                        email@windster.com
+                      </p>
+                    </div>
+                  {{-- date d'achat --}}
+                  <div>
+                    <p class="capitalize text-sm font-medium text-gray-900 truncate">
+                      date d'achat
+                    </p>
+                    <p class="text-sm text-gray-500 truncate">
+                      email@windster.com
+                    </p>
+                  </div>
+                </div>
+                {{-- row 3 --}}
+                <div class="flex gap-5 md:gap-28">
+                  {{-- Modèle --}}
+                    <div>
+                      <p class="capitalize text-sm font-medium text-gray-900 truncate">
+                        Modèle
+                      </p>
+                      <p class="text-sm text-gray-500 truncate">
+                        email@windster.com
+                      </p>
+                    </div>
+                  {{-- la date de dédouanement --}}
+                  <div>
+                    <p class="capitalize text-sm font-medium text-gray-900 truncate">
+                      la date de dédouanement
+                    </p>
+                    <p class="text-sm text-gray-500 truncate">
+                      email@windster.com
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {{-- details of car close --}}
+            </div>
             {{-- details of cars close --}}
           </div>
       </div>
