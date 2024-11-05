@@ -7,7 +7,7 @@
                     <h1 class="text-lg font-medium text-gray-900">Bonjour, {{ Auth::user()->name }} </h1>
                     <p class="mt-1 text-sm text-gray-600">Ajoutez vos informations en quelques clics,et accédez <br> à une vue d’ensemble claire et sécurisée de toutes vos <br> données importantes.</p>
                     <div class="mt-4">
-                      <a href="#">
+                      <a href="{{ route('voiture.create') }}">
                         <x-primary-button>Ajoutr une voiture</x-primary-button>
                       </a>
                     </div>
@@ -75,7 +75,7 @@
                         <div class="bg-white shadow rounded-lg mb-4 p-4 sm:p-6 h-full">
                             <div class="flex items-center justify-between mb-4">
                               <h3 class="text-xl font-bold leading-none text-gray-900 capitalize">Mes voitures</h3>
-                              <a href="#" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">
+                              <a href="{{ route('voiture.index') }}" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">
                                 afficher tout
                               </a>
                             </div>
@@ -179,7 +179,7 @@
                         <div class="bg-white shadow rounded-lg mb-4 p-4 sm:p-6 h-full">
                             <div class="flex items-center justify-between mb-4">
                               <h3 class="text-xl font-bold leading-none text-gray-900 capitalize">Mes papiers Personnels</h3>
-                              <a href="#" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">
+                              <a href="{{ route('paiperPersonnel.index') }}" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">
                                 afficher tout
                               </a>
                             </div>

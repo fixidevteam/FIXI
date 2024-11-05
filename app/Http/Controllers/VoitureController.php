@@ -58,7 +58,7 @@ class VoitureController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('userCars.details');
     }
 
     /**

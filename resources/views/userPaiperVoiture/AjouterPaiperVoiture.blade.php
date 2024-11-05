@@ -30,9 +30,9 @@
                                     d="m1 9 4-4-4-4" />
                             </svg>
                             <a
-                                href="{{ route('voiture.index') }}"
+                                href=""
                                 class="inline-flex items-center text-sm font-medium text-gray-700   ">
-                                Mes voitures
+                                Details du véhicule 
                             </a>
                         </div>
                     </li>
@@ -52,9 +52,9 @@
                                     d="m1 9 4-4-4-4" />
                             </svg>
                             <a
-                                href="{{ route('voiture.create') }}"
+                                href="{{ route('paiperVoiture.create') }}"
                                 class="inline-flex items-center text-sm font-medium text-gray-700   ">
-                                Ajouter Voiture
+                                Ajouter un papier
                             </a>
                         </div>
                     </li>
@@ -66,56 +66,33 @@
         <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
             {{-- content (slot on layouts/app.blade.php)--}}
             <div class=" px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <h2 class="mt-10  text-2xl font-bold leading-9 tracking-tight text-gray-900">Ajouter Voiture</h2>
-            <form method="POST" action="{{ route('voiture.store') }}" class="space-y-6" enctype="multipart/form-data">
+            <h2 class="mt-10  text-2xl font-bold leading-9 tracking-tight text-gray-900">Ajouter un papier du véhicule</h2>
+            <form method="POST" action="{{ route('paiperVoiture.store') }}" class="space-y-6">
                 @csrf
                 <div>
-<<<<<<< HEAD
-                    <x-input-label for="numero_immatriculation" :value="__('Numero d\'immatriculation')" />
-                    <x-text-input id="numero_immatriculation" class="block mt-1 w-full" type="text" name="numero_immatriculation" :value="old('numero_immatriculation')" autofocus autocomplete="numero_immatriculation" />
-                    <x-input-error :messages="$errors->get('numero_immatriculation')" class="mt-2" />
-=======
-                    <x-input-label for="immatriculation" :value="__('Numero d\'immatriculation')" />
-                    <x-text-input id="immatriculation" class="block mt-1 w-full" type="text" name="immatriculation" :value="old('immatriculation')" autofocus autocomplete="immatriculation" />
-                    <x-input-error :messages="$errors->get('immatriculation')" class="mt-2" />
->>>>>>> 89e5e74894a755e83e91994e11943aad5905589f
+                    <x-input-label for="type" :value="__('Type')" />
+                    <x-text-input id="type" class="block mt-1 w-full" type="text" name="type" :value="old('type')" autofocus autocomplete="type" />
+                    <x-input-error :messages="$errors->get('type')" class="mt-2" />
                 </div>
                 <div>
-                    <x-input-label for="marque" :value="__('Marque')" />
-                    <x-text-input id="marque" class="block mt-1 w-full" type="text" name="marque" :value="old('marque')" autofocus autocomplete="marque" />
-                    <x-input-error :messages="$errors->get('marque')" class="mt-2" />
+                    <x-input-label for="date_debut" :value="__('Date debut')" />
+                    <x-text-input id="date_debut" class="block mt-1 w-full" type="date" name="date_debut" :value="old('date_debut')" autofocus autocomplete="date_debut" />
+                    <x-input-error :messages="$errors->get('date_debut')" class="mt-2" />
                 </div>
                 <div>
-                    <x-input-label for="modele" :value="__('Modele')" />
-                    <x-text-input id="modele" class="block mt-1 w-full" type="text" name="modele" :value="old('modele')" autofocus autocomplete="modele" />
-                    <x-input-error :messages="$errors->get('Modele')" class="mt-2" />
+                    <x-input-label for="date_fin" :value="__("Date fin")" />
+                    <x-text-input id="date_fin" class="block mt-1 w-full" type="date" name="date_fin" :value="old('date_fin')" autofocus autocomplete="date_fin" />
+                    <x-input-error :messages="$errors->get('date_fin')" class="mt-2" />
                 </div>
                 <div>
                     <x-input-label for="file_input" :value="__('Photo')" />
-                    <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" accept="image/*" />
+                    <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" />
                     <x-input-error :messages="$errors->get('photo')" class="mt-2" />
                 </div>
-                <div>
-                    <x-input-label for="date_de_première_mise_en_circulation" :value="__('Date de première mise en circulation')" />
-                    <x-text-input id="date_de_première_mise_en_circulation" class="block mt-1 w-full" type="date" name="date_de_première_mise_en_circulation" :value="old('date_de_première_mise_en_circulation')" autofocus autocomplete="date_de_première_mise_en_circulation" />
-                    <x-input-error :messages="$errors->get('date_de_première_mise_en_circulation')" class="mt-2" />
-                </div>
-                <div>
-                    <x-input-label for="date_achat" :value="__('Date d\'achat')" />
-                    <x-text-input id="date_achat" class="block mt-1 w-full" type="date" name="date_achat" :value="old('date_achat')" autofocus autocomplete="date_achat" />
-                    <x-input-error :messages="$errors->get('date_achat')" class="mt-2" />
-                </div>
-                <div>
-                    <x-input-label for="date_de_dédouanement" :value="__('Date de dédouanement')" />
-                    <x-text-input id="date_de_dédouanement" class="block mt-1 w-full" type="date" name="date_de_dédouanement" :value="old('date_de_dédouanement')" autofocus autocomplete="date_de_dédouanement" />
-                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                </div>
-
-
 
                 <div class="flex items-center justify-end mt-4">
                     <x-primary-button class="flex justify-center rounded-[20px] bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
-                        {{ __('Ajouter voiture') }}
+                        {{ __('ajouter Papier Véhicule') }}
                     </x-primary-button>
                 </div>
             </form>
