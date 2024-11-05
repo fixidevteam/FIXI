@@ -90,7 +90,6 @@
                             <tbody>
 
                                 @foreach($voitures as $voiture)
-
                                 <tr class="bg-white border-b">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                         {{$voiture->numero_immatriculation}}
@@ -105,12 +104,10 @@
                                         {{$voiture->date_de_première_mise_en_circulation}}
                                     </td>
                                     <td class="px-6 py-4">
-
-                                        <img class="rounded-full w-[50px]" src="{{asset('storage/'.$voiture->photo)}}" alt="image description">
-
+                                        <img class="rounded-full w-8 h-8" src="{{asset('storage/'.$voiture->photo)}}" alt="image description">
                                     </td>
                                     <td class="px-6 py-4">
-                                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                        <a href="{{ route('voiture.show',$voiture->id) }}" class="font-medium capitalize text-blue-600 dark:text-blue-500 hover:underline">details</a>
                                     </td>
                                     <td class="px-6 py-4">
                                         <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>

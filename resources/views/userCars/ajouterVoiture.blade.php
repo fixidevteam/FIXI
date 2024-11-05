@@ -70,15 +70,9 @@
             <form method="POST" action="{{ route('voiture.store') }}" class="space-y-6" enctype="multipart/form-data">
                 @csrf
                 <div>
-<<<<<<< HEAD
                     <x-input-label for="numero_immatriculation" :value="__('Numero d\'immatriculation')" />
                     <x-text-input id="numero_immatriculation" class="block mt-1 w-full" type="text" name="numero_immatriculation" :value="old('numero_immatriculation')" autofocus autocomplete="numero_immatriculation" />
                     <x-input-error :messages="$errors->get('numero_immatriculation')" class="mt-2" />
-=======
-                    <x-input-label for="immatriculation" :value="__('Numero d\'immatriculation')" />
-                    <x-text-input id="immatriculation" class="block mt-1 w-full" type="text" name="immatriculation" :value="old('immatriculation')" autofocus autocomplete="immatriculation" />
-                    <x-input-error :messages="$errors->get('immatriculation')" class="mt-2" />
->>>>>>> 89e5e74894a755e83e91994e11943aad5905589f
                 </div>
                 <div>
                     <x-input-label for="marque" :value="__('Marque')" />
@@ -88,7 +82,7 @@
                 <div>
                     <x-input-label for="modele" :value="__('Modele')" />
                     <x-text-input id="modele" class="block mt-1 w-full" type="text" name="modele" :value="old('modele')" autofocus autocomplete="modele" />
-                    <x-input-error :messages="$errors->get('Modele')" class="mt-2" />
+                    <x-input-error :messages="$errors->get('modele')" class="mt-2" />
                 </div>
                 <div>
                     <x-input-label for="file_input" :value="__('Photo')" />
@@ -108,7 +102,7 @@
                 <div>
                     <x-input-label for="date_de_dédouanement" :value="__('Date de dédouanement')" />
                     <x-text-input id="date_de_dédouanement" class="block mt-1 w-full" type="date" name="date_de_dédouanement" :value="old('date_de_dédouanement')" autofocus autocomplete="date_de_dédouanement" />
-                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                    <x-input-error :messages="$errors->get('date_de_dédouanement')" class="mt-2" />
                 </div>
 
 
