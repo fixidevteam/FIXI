@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string("description");
             $table->date("date_operation");
             $table->foreignId("voiture_id")->constrained();
-
+            $table->softDeletes();
             $table->timestamps();
         });
     }

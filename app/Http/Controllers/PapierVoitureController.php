@@ -7,6 +7,8 @@ use App\Models\VoiturePapier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
+use function PHPSTORM_META\type;
+
 class PapierVoitureController extends Controller
 {
     /**
@@ -53,8 +55,9 @@ class PapierVoitureController extends Controller
      */
     public function show(string $id)
     {
+
         $papier = VoiturePapier::find($id);
-        if (!$papier || $papier->user_id !== auth()->id()) {
+        if (!$papier || $papier->voiture_id  != Session::get('voiture_id')) {
             abort(403);
         }
         

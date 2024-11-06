@@ -6,6 +6,7 @@ use App\Models\Voiture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\Rule;
 
 class VoitureController extends Controller
 {
@@ -36,7 +37,7 @@ class VoitureController extends Controller
             'numero_immatriculation' => [
                 'required',
                 'regex:/^\d{1,6}-[A-Za-z]{1}-\d+$/',
-                'unique:voitures,numero_immatriculation'
+                Rule::unique('voitures', 'numero_immatriculation')->whereNull('deleted_at')
 
             ],
             'marque' => ['required', 'max:30'],
@@ -64,7 +65,7 @@ class VoitureController extends Controller
         Session::put('voiture_id', $id);
 
         $voiture  = Voiture::find($id);
-        if ($voiture->user_id !== auth()->id()) {
+        if (!$voiture || $voiture->user_id !== auth()->id()) {
             abort(403);
         }
         return view('userCars.details',compact('voiture'));
@@ -75,7 +76,11 @@ class VoitureController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $voiture = Voiture::find($id);
+        if ($voiture->user_id !== auth()->id()) {
+            abort(403);
+        }
+        return view('userCars.modifierVoiture',compact('voiture'));
     }
 
     /**
@@ -83,7 +88,30 @@ class VoitureController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $voiture = Voiture::find($id);
+        $user_id = Auth::user()->id;
+        $data = $request->validate([
+            'numero_immatriculation' => [
+                'required',
+                'regex:/^\d{1,6}-[A-Za-z]{1}-\d+$/',
+                Rule::unique('voitures', 'numero_immatriculation')->ignore($voiture->id)->withoutTrashed()
+
+            ],
+            'marque' => ['required', 'max:30'],
+            'modele' => ['required', 'max:30'],
+            'photo' => ['image'],
+            'date_de_première_mise_en_circulation' => ['required', 'date'],
+            'date_achat' => ['required', 'date'],
+            'date_de_dédouanement' => ['required', 'date'],
+        ]);
+        if ($request->hasFile('photo')) {
+            $imagePath = $request->file('photo')->store('user/voitures', 'public');
+            $data['photo'] = $imagePath;
+        }
+        $data['user_id'] = $user_id;
+        $voiture->update($data);
+        return redirect()->route('voiture.index');
+        
     }
 
     /**
@@ -91,6 +119,11 @@ class VoitureController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+        $voiture = Voiture::find($id);
+        if($voiture){
+            $voiture->delete();
+        }
+        return redirect()->route('voiture.index');
     }
 }

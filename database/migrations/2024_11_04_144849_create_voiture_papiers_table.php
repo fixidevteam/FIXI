@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date("date_debut");
             $table->date("date_fin");
             $table->foreignId("voiture_id")->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

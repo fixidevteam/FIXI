@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date("date_achat");
             $table->date("date_de_dédouanement");
             $table->foreignId('user_id')->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
