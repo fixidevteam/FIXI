@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('voiture_papiers', function (Blueprint $table) {
             $table->id();
             $table->string("type");
-            $table->string("photo");
-            $table->string("note");
+            $table->string("photo")->nullable();
+            $table->string("note")->nullable();
             $table->date("date_debut");
             $table->date("date_fin");
             $table->foreignId("voiture_id")->constrained();

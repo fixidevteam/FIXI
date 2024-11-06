@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Voiture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class VoitureController extends Controller
 {
@@ -13,7 +14,7 @@ class VoitureController extends Controller
     {
         $user_id = Auth::user()->id;
         $voitures = Voiture::where('user_id', $user_id)->get();
-        return view('userCars.voiture',compact('voitures'));
+        return view('userCars.voiture', compact('voitures'));
     }
 
     /**
@@ -29,7 +30,7 @@ class VoitureController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $user_id = Auth::user()->id;
         $data = $request->validate([
             'numero_immatriculation' => [
@@ -60,8 +61,9 @@ class VoitureController extends Controller
     public function show(string $id)
     {
         // dd(Voiture::find(11)->operations);
+        Session::put('voiture_id', $id);
         $voiture  = Voiture::find($id);
-        return view('userCars.details',compact('voiture'));
+        return view('userCars.details', compact('voiture'));
     }
 
     /**
