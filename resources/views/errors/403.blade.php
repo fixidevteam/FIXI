@@ -10,11 +10,6 @@
         <div class="sm:ml-64">
             <div class="py-16">
                 <div class="flex h-screen flex-col bg-white">
-                    <img
-                      src="../images/403.jpg"
-                      alt="Error Image"
-                      class="h-64 w-full object-cover"
-                    />
                   
                     <div class="flex flex-1 items-center justify-center">
                       <div class="mx-auto max-w-xl px-4 py-8 text-center">

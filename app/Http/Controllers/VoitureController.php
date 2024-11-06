@@ -80,7 +80,7 @@ class VoitureController extends Controller
     public function edit(string $id)
     {
         $voiture = Voiture::find($id);
-        if ($voiture->user_id !== auth()->id()) {
+        if (!$voiture || $voiture->user_id !== auth()->id()) {
             abort(403);
         }
         return view('userCars.modifierVoiture',compact('voiture'));
