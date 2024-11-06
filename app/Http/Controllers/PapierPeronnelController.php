@@ -15,7 +15,7 @@ class PapierPeronnelController extends Controller
     {
         $user_id = Auth::user()->id;
         $papiers = UserPapier::where('user_id', $user_id)->get();
-        return view('userPaiperPersonnel.paiperPersonnel',compact('papiers'));
+        return view('userPaiperPersonnel.paiperPersonnel', compact('papiers'));
     }
 
     /**
@@ -33,11 +33,12 @@ class PapierPeronnelController extends Controller
     {
         $user_id = Auth::user()->id;
         $data = $request->validate([
-            'type' => ['required','max:30'],
-            'note' =>['max:255'],
+            'type' => ['required', 'max:30'],
+            'note' => ['max:255'],
+            'photo' => ['image'],
             'date_debut' => ['required', 'date'],
             'date_fin' => ['required', 'date'],
-            
+
         ]);
         // dd($data['note']);
         if ($request->hasFile('photo')) {
@@ -58,7 +59,7 @@ class PapierPeronnelController extends Controller
         if (!$papier || $papier->user_id != auth()->id()) {
             abort(403);
         }
-        return view('userPaiperPersonnel.details',compact('papier'));
+        return view('userPaiperPersonnel.details', compact('papier'));
     }
 
     /**

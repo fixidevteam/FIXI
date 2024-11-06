@@ -50,7 +50,7 @@
 
             {{-- details of paiper perso --}}
             <div class="flex justify-between items-center my-6">
-                <h3 class="text-xl font-medium leading-9 tracking-tight text-gray-900">Carte Grise</h3>
+                <h3 class="text-xl font-medium leading-9 tracking-tight text-gray-900">{{$papier->type}}</h3>
                 <div class="flex items-center">
                   <a href="">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -68,7 +68,11 @@
             </div>
             {{-- paipe image  --}}
             <div class="flex justify-center my-8">
-              <img src="{{asset('storage/'.$papier->photo)}}" alt="paiperPersonnel">
+              @if($papier->photo !== NULL)
+                <img class="" src="{{asset('storage/'.$papier->photo)}}" alt="image description">
+              @else
+                <img class="" src="../images/defaultimage.jpg" alt="image description">
+              @endif
             </div>
             {{-- paipe close  --}}
             {{-- paipe note  --}}
@@ -94,15 +98,16 @@
               </div>
             </div>
             {{-- note --}}
-            <div class="my-4">
-              <p class="capitalize text-sm font-medium text-gray-900 truncate">
-                note
-              </p>
-              <p class="text-sm text-gray-500 truncate">
-              {{$papier->note}}
-                 
-              </p>
-            </div>
+            @if($papier->note !== NULL)
+              <div class="my-4">
+                <p class="capitalize text-sm font-medium text-gray-900 truncate">
+                  note
+                </p>
+                <p class="text-sm text-gray-500 truncate">
+                {{$papier->note}}
+                </p>
+              </div>
+        @endif
             {{-- paipe note close  --}}
             {{-- details of paiper perso close --}}
           </div>

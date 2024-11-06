@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Voiture;
 use App\Models\VoiturePapier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -32,20 +31,21 @@ class PapierVoitureController extends Controller
     {
         $voiture_id = Session::get('voiture_id');
         $data = $request->validate([
-            'type' => ['required','max:30'],
-            'note' =>['max:255'],
+            'type' => ['required', 'max:30'],
+            'note' => ['max:255'],
+            'photo' => ['image'],
             'date_debut' => ['required', 'date'],
             'date_fin' => ['required', 'date'],
-            
+
         ]);
-        
+
         if ($request->hasFile('photo')) {
             $imagePath = $request->file('photo')->store('user/papierVoiture', 'public');
             $data['photo'] = $imagePath;
         }
         $data['voiture_id'] = $voiture_id;
         VoiturePapier::create($data);
-        return redirect()->route('voiture.show',$voiture_id);
+        return redirect()->route('voiture.show', $voiture_id);
     }
 
     /**
@@ -54,11 +54,10 @@ class PapierVoitureController extends Controller
     public function show(string $id)
     {
         $papier = VoiturePapier::find($id);
-        if (!$papier || $papier->user_id !== auth()->id()) {
+        if(!$papier || $papier->voiture_id != Session::get('voiture_id')) {
             abort(403);
         }
-        
-        return view('userPaiperVoiture.details',compact('papier'));
+        return view('userPaiperVoiture.details', compact('papier'));
     }
 
     /**

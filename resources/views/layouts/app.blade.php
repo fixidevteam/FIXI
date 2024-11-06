@@ -19,7 +19,6 @@
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-[#F9FAFB]">
         @include('layouts.n')
-
         <!-- Page Heading -->
         {{-- @if (isset($header))
                 <header class="bg-white shadow">

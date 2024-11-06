@@ -52,6 +52,9 @@ class VoitureController extends Controller
         }
         $data['user_id'] = $user_id;
         Voiture::create($data);
+          // Flash message to the session
+            session()->flash('success', 'Voiture ajoutée');
+            session()->flash('subtitle', 'Votre voiture a été ajoutée avec succès à la liste.');
         return redirect()->route('voiture.index');
     }
 
@@ -64,7 +67,7 @@ class VoitureController extends Controller
         Session::put('voiture_id', $id);
 
         $voiture  = Voiture::find($id);
-        if ($voiture->user_id !== auth()->id()) {
+        if (!$voiture || $voiture->user_id !== auth()->id()) {
             abort(403);
         }
         return view('userCars.details',compact('voiture'));
