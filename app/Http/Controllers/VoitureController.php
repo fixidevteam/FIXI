@@ -62,7 +62,11 @@ class VoitureController extends Controller
     {
         // dd(Voiture::find(11)->operations);
         Session::put('voiture_id', $id);
+
         $voiture  = Voiture::find($id);
+        if ($voiture->user_id !== auth()->id()) {
+            abort(403);
+        }
         return view('userCars.details',compact('voiture'));
     }
 
