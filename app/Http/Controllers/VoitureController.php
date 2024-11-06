@@ -53,6 +53,9 @@ class VoitureController extends Controller
         }
         $data['user_id'] = $user_id;
         Voiture::create($data);
+          // Flash message to the session
+            session()->flash('success', 'Voiture ajoutée');
+            session()->flash('subtitle', 'Votre voiture a été ajoutée avec succès à la liste.');
         return redirect()->route('voiture.index');
     }
 
