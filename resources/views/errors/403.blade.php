@@ -22,13 +22,12 @@
                             403 - Accès Refusé
                         </h1>
                   
-                        <p class="mt-4 text-gray-500">
+                        <p class="my-4 text-gray-500">
                             Désolé, vous n'avez pas l'autorisation d'accéder à cette page.
                         </p>
                   
                         <a
                           href="{{ route('dashboard') }}"
-                          class="mt-6"
                         >
                         <x-primary-button>
                             Retourner à l'accueil
