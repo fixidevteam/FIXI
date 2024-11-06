@@ -107,7 +107,11 @@
                                         {{$voiture->date_de_première_mise_en_circulation}}
                                     </td>
                                     <td class="px-6 py-4">
+                                        @if($voiture->photo !== NULL)
                                         <img class="rounded-full w-8 h-8" src="{{asset('storage/'.$voiture->photo)}}" alt="image description">
+                                        @else
+                                        <img class="rounded-full w-8 h-8" src="images/defaultimage.jpg" alt="image description">
+                                        @endif
                                     </td>
                                     <td class="px-6 py-4">
                                         <a href="{{ route('voiture.show',$voiture->id) }}" class="font-medium capitalize text-blue-600 dark:text-blue-500 hover:underline">details</a>

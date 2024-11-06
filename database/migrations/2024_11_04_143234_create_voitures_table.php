@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string("numero_immatriculation");
             $table->string("marque");
             $table->string("modele");
-            $table->string("photo");
+            $table->string("photo")->nullable();
             $table->date("date_de_première_mise_en_circulation");
             $table->date("date_achat");
             $table->date("date_de_dédouanement");

@@ -41,7 +41,7 @@ class VoitureController extends Controller
             ],
             'marque' => ['required', 'max:30'],
             'modele' => ['required', 'max:30'],
-            'photo' => ['required', 'image'],
+            'photo' => ['image'],
             'date_de_première_mise_en_circulation' => ['required', 'date'],
             'date_achat' => ['required', 'date'],
             'date_de_dédouanement' => ['required', 'date'],
@@ -63,7 +63,7 @@ class VoitureController extends Controller
         // dd(Voiture::find(11)->operations);
         Session::put('voiture_id', $id);
         $voiture  = Voiture::find($id);
-        return view('userCars.details', compact('voiture'));
+        return view('userCars.details',compact('voiture'));
     }
 
     /**

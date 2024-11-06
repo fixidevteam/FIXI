@@ -73,29 +73,33 @@
         <div class="flex flex-col md:flex-row gap-10 items-center">
           {{-- Car Image --}}
           <div class="w-[160px] h-[160px] overflow-hidden rounded-full border flex-shrink-0">
+            @if($voiture->photo !== NULL)
             <img class="w-full h-full object-cover" src="{{asset('storage/'.$voiture->photo)}}" alt="voiture image">
+            @else
+            <img class="w-full h-full object-cover" src="../images/defaultimage.jpg" alt="image description">
+            @endif
           </div>
 
           {{-- Car Details in Two Columns --}}
           <div class="flex flex-col md:flex-row gap-5 w-full justify-center md:justify-start">
             {{-- Column 1 --}}
             <div class="flex-1 space-y-4">
-              {{-- Marque --}}
-              <div>
-                <p class="capitalize text-sm font-medium text-gray-900">Marque</p>
-                <p class="text-sm text-gray-500">Test</p>
-              </div>
-
               {{-- Matricule --}}
               <div>
                 <p class="capitalize text-sm font-medium text-gray-900">Matricule</p>
-                <p class="text-sm text-gray-500">1111-a-21</p>
+                <p class="text-sm text-gray-500">{{$voiture->numero_immatriculation}}</p>
+              </div>
+
+              {{-- Marque --}}
+              <div>
+                <p class="capitalize text-sm font-medium text-gray-900">Marque</p>
+                <p class="text-sm text-gray-500">{{$voiture->marque}}</p>
               </div>
 
               {{-- Modèle --}}
               <div>
                 <p class="capitalize text-sm font-medium text-gray-900">Modèle</p>
-                <p class="text-sm text-gray-500">iuiuiui</p>
+                <p class="text-sm text-gray-500">{{$voiture->modele}}</p>
               </div>
             </div>
 
