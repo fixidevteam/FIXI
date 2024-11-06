@@ -47,6 +47,8 @@ class PapierPeronnelController extends Controller
         }
         $data['user_id'] = $user_id;
         UserPapier::create($data);
+        session()->flash('success', 'Document ajouté');
+        session()->flash('subtitle', 'Votre document a été ajouté avec succès à la liste.');
         return redirect()->route('paiperPersonnel.index');
     }
 

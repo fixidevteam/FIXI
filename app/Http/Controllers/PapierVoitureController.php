@@ -45,6 +45,8 @@ class PapierVoitureController extends Controller
         }
         $data['voiture_id'] = $voiture_id;
         VoiturePapier::create($data);
+        session()->flash('success', 'Document ajouté');
+        session()->flash('subtitle', 'Votre document a été ajouté avec succès à la liste.');
         return redirect()->route('voiture.show', $voiture_id);
     }
 
