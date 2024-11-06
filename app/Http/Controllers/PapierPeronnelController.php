@@ -55,6 +55,9 @@ class PapierPeronnelController extends Controller
     public function show(string $id)
     {
         $papier = UserPapier::find($id);
+        if (!$papier || $papier->user_id != auth()->id()) {
+            abort(403);
+        }
         return view('userPaiperPersonnel.details',compact('papier'));
     }
 

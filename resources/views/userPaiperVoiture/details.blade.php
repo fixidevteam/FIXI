@@ -68,7 +68,7 @@
             </div>
             {{-- paipe image  --}}
             <div class="flex justify-center my-8">
-              <img src="../images/fixi.png" alt="paiperPersonnel">
+              <img src="{{asset('storage/'.$papier->photo)}}" alt="paiperPersonnel">
             </div>
             {{-- paipe close  --}}
             {{-- paipe note  --}}
@@ -79,7 +79,7 @@
                     date debut
                   </p>
                   <p class="text-sm text-gray-500 truncate">
-                    email@windster.com
+                    {{$papier->date_debut}}
                   </p>
                 </div>
               {{-- date fin --}}
@@ -88,7 +88,8 @@
                   date fin
                 </p>
                 <p class="text-sm text-gray-500 truncate">
-                  email@windster.com
+                {{$papier->date_fin}}
+                  
                 </p>
               </div>
             </div>
@@ -98,7 +99,8 @@
                 note
               </p>
               <p class="text-sm text-gray-500 truncate">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum, temporibus.
+              {{$papier->note}}
+                 
               </p>
             </div>
             {{-- paipe note close  --}}

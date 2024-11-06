@@ -134,7 +134,7 @@
         <div class="flex justify-between items-center my-6">
           <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Liste des papiers du véhicule</h2>
           <div>
-            <a href="">
+            <a href="{{route('paiperVoiture.create',$voiture)}}">
               <x-primary-button class="hidden md:block">ajouter un papier</x-primary-button>
               <x-primary-button class="sm:hidden">
                 <svg class="w-5 h-5 text-white" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -187,10 +187,14 @@
                     {{$papier->date_fin}}
                   </td>
                   <td class="px-6 py-4">
+                    @if($papier->photo !== NULL)
                     <img class="rounded-full w-8 h-8" src="{{asset('storage/'.$papier->photo)}}" alt="image description">
+                    @else
+                    <img class="rounded-full w-8 h-8" src="../images/defaultimage.jpg" alt="image description">
+                    @endif
                   </td>
                   <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    <a href="{{route('paiperVoiture.show',$papier)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detail</a>
                   </td>
                   <td class="px-6 py-4">
                     <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
