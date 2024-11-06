@@ -72,7 +72,7 @@
 
         {{-- details of paiper perso --}}
         <div class="flex justify-between items-center my-6">
-          <h3 class="text-xl font-medium leading-9 tracking-tight text-gray-900">Carte d'Identité nationale</h3>
+          <h3 class="text-xl font-medium leading-9 tracking-tight text-gray-900">{{$papier->type}}</h3>
           <div class="flex items-center">
             <a href="">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -107,7 +107,6 @@
             </p>
             <p class="text-sm text-gray-500 truncate">
             {{$papier->date_debut}}
-
             </p>
           </div>
           {{-- date fin --}}
@@ -117,20 +116,20 @@
             </p>
             <p class="text-sm text-gray-500 truncate">
             {{$papier->date_fin}}
-
             </p>
           </div>
         </div>
         {{-- note --}}
+        @if($papier->note !== NULL)
         <div class="my-4">
           <p class="capitalize text-sm font-medium text-gray-900 truncate">
             note
           </p>
           <p class="text-sm text-gray-500 truncate">
           {{$papier->note}}
-
            </p>
         </div>
+        @endif
         {{-- paipe note close  --}}
         {{-- details of paiper perso close --}}
       </div>
