@@ -61,6 +61,10 @@ class VoitureController extends Controller
     {
         // dd(Voiture::find(11)->operations);
         $voiture  = Voiture::find($id);
+        // Check if the authenticated user is the owner of the car
+        if ($voiture->user_id !== auth()->id()) {
+            abort(403);
+        }
         return view('userCars.details',compact('voiture'));
     }
 
