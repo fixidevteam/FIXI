@@ -59,7 +59,7 @@ class PapierVoitureController extends Controller
     {
 
         $papier = VoiturePapier::find($id);
-        if (!$papier || $papier->user_id !== auth()->id()) {
+        if (!$papier || $papier->voiture_id != Session::get('voiture_id')) {
             abort(403);
         }
         return view('userPaiperVoiture.details', compact('papier'));

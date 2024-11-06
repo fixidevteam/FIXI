@@ -83,8 +83,8 @@
                 @if(Auth::user()->voitures ->isEmpty())
                 <p class="p-4 text-gray-500 text-center">Aucune voiture disponible.</p>
                 @else
-                @foreach (Auth::user()->voitures as $voiture)
                 <ul role="list" class="divide-y divide-gray-200">
+                  @foreach (Auth::user()->voitures as $voiture)
                   <li class="py-3 sm:py-4">
                     <div class="flex items-center space-x-4">
                       <div class="flex-shrink-0">
@@ -96,20 +96,20 @@
                       </div>
                       <div class="flex-1 min-w-0">
                         <p class="text-sm font-medium text-gray-900 truncate">
-                          {{$voiture->marque . $voiture->modele}}
+                          {{$voiture->marque ." ". $voiture->modele}}
                         </p>
                         <p class="text-sm text-gray-500 truncate">
                           {{$voiture->numero_immatriculation}}
                         </p>
                       </div>
                       <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                        <a href="{{ route('voiture.show',$voiture->id) }}" class="font-medium capitalize text-blue-600 dark:text-blue-500 hover:underline">details</a>
+                        <a href="{{ route('voiture.show',$voiture->id) }}" class="text-sm font-medium text-blue-600  inline-flex items-center p-2 capitalize hover:underline">details</a>
 
                       </div>
                     </div>
                   </li>
+                  @endforeach
                 </ul>
-                @endforeach
                 @endif
               </div>
             </div>
@@ -126,8 +126,8 @@
                 @if(Auth::user()->papiersUsers->isEmpty())
                 <p class="p-4 text-gray-500 text-center">Aucune papier disponible.</p>
                 @else
-                @foreach (Auth::user()->papiersUsers as $papier)
                 <ul role="list" class="divide-y divide-gray-200">
+                  @foreach (Auth::user()->papiersUsers as $papier)
                   <li class="py-3 sm:py-4">
                     <div class="flex items-center space-x-4">
                       <div class="flex-shrink-0">
@@ -142,17 +142,17 @@
                           {{$papier->type}}
                         </p>
                         <p class="text-sm text-gray-500 truncate">
-                          {{$papier->date_debut . ' || '.$papier->date_fin}}
+                          {{$papier->date_debut }} / <span class="text-red-600">{{$papier->date_fin}}</span> 
                         </p>
                       </div>
                       <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                      <a href="{{route('paiperPersonnel.show',$papier->id)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Details</a>
+                      <a href="{{route('paiperPersonnel.show',$papier->id)}}" class="text-sm font-medium text-blue-600 inline-flex items-center p-2 capitalize hover:underline">Details</a>
                         
                       </div>
                     </div>
                   </li>
+                  @endforeach
                 </ul>
-                @endforeach
                 @endif
               </div>
             </div>
