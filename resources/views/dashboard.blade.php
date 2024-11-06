@@ -95,7 +95,7 @@
                                       </p>
                                     </div>
                                     <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                      $320
+                                        <a href="#" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">details</a>
                                     </div>
                                   </div>
                                 </li>
@@ -113,7 +113,7 @@
                                       </p>
                                     </div>
                                     <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                      $3467
+                                      <a href="#" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">details</a>
                                     </div>
                                   </div>
                                 </li>
@@ -131,7 +131,7 @@
                                       </p>
                                     </div>
                                     <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                      $67
+                                      <a href="#" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">details</a>
                                     </div>
                                   </div>
                                 </li>
@@ -149,7 +149,7 @@
                                       </p>
                                     </div>
                                     <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                      $2367
+                                      <a href="#" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">details</a>
                                     </div>
                                   </div>
                                 </li>
@@ -167,7 +167,7 @@
                                       </p>
                                     </div>
                                     <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                      $367
+                                      <a href="#" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">details</a>
                                     </div>
                                   </div>
                                 </li>
@@ -199,7 +199,7 @@
                                       </p>
                                     </div>
                                     <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                      $320
+                                      <a href="#" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">details</a>
                                     </div>
                                   </div>
                                 </li>
@@ -217,7 +217,7 @@
                                       </p>
                                     </div>
                                     <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                      $3467
+                                      <a href="#" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">details</a>
                                     </div>
                                   </div>
                                 </li>
@@ -235,7 +235,7 @@
                                       </p>
                                     </div>
                                     <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                      $67
+                                      <a href="#" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">details</a>
                                     </div>
                                   </div>
                                 </li>
@@ -253,7 +253,7 @@
                                       </p>
                                     </div>
                                     <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                      $2367
+                                      <a href="#" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">details</a>
                                     </div>
                                   </div>
                                 </li>
@@ -271,7 +271,7 @@
                                       </p>
                                     </div>
                                     <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                      $367
+                                      <a href="#" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">details</a>
                                     </div>
                                   </div>
                                 </li>

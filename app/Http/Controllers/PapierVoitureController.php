@@ -11,7 +11,7 @@ class PapierVoitureController extends Controller
      */
     public function index()
     {
-        return "<h1>Bonjour</h1>";
+        return abort(403);
     }
 
     /**
