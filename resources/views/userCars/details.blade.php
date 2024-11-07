@@ -356,13 +356,13 @@
         <!-- Action Buttons -->
         <div class="flex justify-end mt-4">
           <button onclick="toggleModal(false)" class="px-4 py-2 bg-gray-300 text-gray-800 rounded mr-2">
-            Cancel
+            Annuler
           </button>
           <form id="deleteForm" action="{{ route('voiture.destroy', ['voiture' => $voiture->id]) }}" method="POST">
             @csrf
             @method('DELETE')
             <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
-              Confirm
+              confirmer
             </button>
           </form>
         </div>

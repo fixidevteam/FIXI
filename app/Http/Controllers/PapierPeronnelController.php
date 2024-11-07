@@ -69,7 +69,11 @@ class PapierPeronnelController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $papier = UserPapier::find($id);
+        if (!$papier || $papier->user_id != auth()->id()) {
+            abort(403);
+        }
+        return view('userPaiperPersonnel.edit', compact('papier'));
     }
 
     /**
@@ -77,7 +81,26 @@ class PapierPeronnelController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $papier = UserPapier::find($id);
+        $user_id = Auth::user()->id;
+        $data = $request->validate([
+            'type' => ['required', 'max:30'],
+            'note' => ['max:255'],
+            'photo' => ['image'],
+            'date_debut' => ['required', 'date'],
+            'date_fin' => ['required', 'date'],
+
+        ]);
+        // dd($data['note']);
+        if ($request->hasFile('photo')) {
+            $imagePath = $request->file('photo')->store('user/papierperso', 'public');
+            $data['photo'] = $imagePath;
+        }
+        $data['user_id'] = $user_id;
+        $papier->update($data);
+        session()->flash('success', 'Document mise à jour');
+        session()->flash('subtitle', 'Votre document a été mise à jour avec succès à la liste.');
+        return redirect()->route('paiperPersonnel.index');
     }
 
     /**
@@ -85,6 +108,12 @@ class PapierPeronnelController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $papier = UserPapier::find($id);
+        if ($papier) {
+            $papier->delete();
+        }
+        session()->flash('success', 'Document supprimée');
+        session()->flash('subtitle', 'Votre document a été supprimée avec succès.');
+        return redirect()->route('paiperPersonnel.index');
     }
 }

@@ -53,9 +53,9 @@ class VoitureController extends Controller
         }
         $data['user_id'] = $user_id;
         Voiture::create($data);
-          // Flash message to the session
-            session()->flash('success', 'Voiture ajoutée');
-            session()->flash('subtitle', 'Votre voiture a été ajoutée avec succès à la liste.');
+        // Flash message to the session
+        session()->flash('success', 'Voiture ajoutée');
+        session()->flash('subtitle', 'Votre voiture a été ajoutée avec succès à la liste.');
         return redirect()->route('voiture.index');
     }
 
@@ -71,7 +71,7 @@ class VoitureController extends Controller
         if (!$voiture || $voiture->user_id !== auth()->id()) {
             abort(403);
         }
-        return view('userCars.details',compact('voiture'));
+        return view('userCars.details', compact('voiture'));
     }
 
     /**
@@ -83,7 +83,7 @@ class VoitureController extends Controller
         if (!$voiture || $voiture->user_id !== auth()->id()) {
             abort(403);
         }
-        return view('userCars.modifierVoiture',compact('voiture'));
+        return view('userCars.modifierVoiture', compact('voiture'));
     }
 
     /**
@@ -113,8 +113,10 @@ class VoitureController extends Controller
         }
         $data['user_id'] = $user_id;
         $voiture->update($data);
+        // Flash message to the session
+        session()->flash('success', 'Voiture mise à jour');
+        session()->flash('subtitle', 'Votre voiture a été mise à jour avec succès dans la liste.');
         return redirect()->route('voiture.index');
-        
     }
 
     /**
@@ -124,9 +126,11 @@ class VoitureController extends Controller
     {
 
         $voiture = Voiture::find($id);
-        if($voiture){
+        if ($voiture) {
             $voiture->delete();
         }
+        session()->flash('success', 'Voiture supprimée');
+        session()->flash('subtitle', 'Votre voiture a été supprimée avec succès.');
         return redirect()->route('voiture.index');
     }
 }
