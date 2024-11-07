@@ -138,9 +138,9 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         @if($papier->photo !== NULL)
-                                        <img class="rounded-full w-8 h-8" src="{{asset('storage/'.$papier->photo)}}" alt="image description">
+                                        <img class="rounded-full w-8 h-8 object-cover" src="{{asset('storage/'.$papier->photo)}}" alt="image description">
                                         @else
-                                        <img class="rounded-full w-8 h-8" src="images/defaultimage.jpg" alt="image description">
+                                        <img class="rounded-full w-8 h-8 object-cover" src="images/defaultimage.jpg" alt="image description">
                                         @endif
                                     </td>
                                     <td class="px-6 py-4">

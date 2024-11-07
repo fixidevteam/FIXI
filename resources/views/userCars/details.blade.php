@@ -52,7 +52,7 @@
                   d="m1 9 4-4-4-4" />
               </svg>
               <a
-                href="#"
+                href=""
                 class="inline-flex items-center text-sm font-medium text-gray-700   ">
                 Details du Véhicule
               </a>
@@ -240,9 +240,9 @@
                   </td>
                   <td class="px-6 py-4">
                     @if($papier->photo !== NULL)
-                    <img class="rounded-full w-8 h-8" src="{{asset('storage/'.$papier->photo)}}" alt="image description">
+                    <img class="rounded-full w-8 h-8 object-cover" src="{{asset('storage/'.$papier->photo)}}" alt="image description">
                     @else
-                    <img class="rounded-full w-8 h-8" src="../images/defaultimage.jpg" alt="image description">
+                    <img class="rounded-full w-8 h-8 object-cover" src="../images/defaultimage.jpg" alt="image description">
                     @endif
                   </td>
                   <td class="px-6 py-4">

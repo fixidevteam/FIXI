@@ -52,7 +52,7 @@
                                     d="m1 9 4-4-4-4" />
                             </svg>
                             <a
-                                href="{{ route('paiperVoiture.create') }}"
+                                href=""
                                 class="inline-flex items-center text-sm font-medium text-gray-700   ">
                                 Ajouter un papier
                             </a>
