@@ -290,7 +290,6 @@
                   <th scope="col" class="px-6 py-3">Operation</th>
                   <th scope="col" class="px-6 py-3">Photo</th>
                   <th scope="col" class="px-6 py-3">Date d'operation</th>
-                  <th scope="col" class="px-6 py-3">photo</th>
                   <th scope="col" class="px-6 py-3">Action</th>
                   <th scope="col" class="px-6 py-3"></th>
                 </tr>
@@ -321,17 +320,6 @@
                   <td class="px-6 py-4">
                     {{ $operation->date_operation }}
                   </td>
-
-                  <td class="px-6 py-4">
-                    @if($operation->photo !== NULL)
-                    <img class="rounded-full w-8 h-8 object-cover" src="{{asset('storage/'.$operation->photo)}}" alt="image description">
-                    @else
-                    <img class="rounded-full w-8 h-8 object-cover" src="../images/defaultimage.jpg" alt="image description">
-                    @endif
-                  </td>
-
-
-
                   {{-- Action --}}
                   <td class="px-6 py-4">
                     <a href="{{ route('operation.show',$operation->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Details</a>

@@ -82,12 +82,7 @@
                     </div>
                     <div>
                         <x-input-label for="nom" :value="__('Nom de l\'opération')" />
-<<<<<<< HEAD
-                        <select id="operation" name="nom" class="block mt-1 w-full rounded-md border-0 block py-1.5 w-full text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" disabled>
-=======
-                        <!-- <x-text-input id="nom" class="block mt-1 w-full" type="text" name="nom" :value="old('nom')" autofocus autocomplete="nom" /> -->
                         <select id="operation" name="nom" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
->>>>>>> 2edb582b12b1d563d14e50f259ed92ab95f9fc81
                             <option value="">Select Operation</option>
                         </select>
 
