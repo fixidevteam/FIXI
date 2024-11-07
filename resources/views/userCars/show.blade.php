@@ -268,7 +268,7 @@
         <div class="flex justify-between items-center my-6">
           <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Liste des operations du véhicule</h2>
           <div>
-            <a href="">
+            <a href="{{route('operation.create')}}">
               <x-primary-button class="hidden md:block">ajouter une operation</x-primary-button>
               <x-primary-button class="sm:hidden">
                 <svg class="w-5 h-5 text-white" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

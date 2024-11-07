@@ -6,6 +6,7 @@ use App\Http\Controllers\PapierVoitureController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoitureController;
+use App\Models\nom_categorie;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,7 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/paiperVoiture', PapierVoitureController::class);
     Route::resource('/operation', OperationController::class);
 });
-
+Route::get('/api/operations/{categorieId}', [App\Http\Controllers\DataController::class, 'getOperations']);
+Route::get('/api/sous-operations/{operationId}', [App\Http\Controllers\DataController::class, 'getSousOperations']);
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin-auth.php';
 require __DIR__ . '/mechanic-auth.php';

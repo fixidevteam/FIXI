@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string("nom");
             $table->string("description");
             $table->date("date_operation");
+            $table->string('photo')->nullable();
             $table->foreignId("voiture_id")->constrained();
             $table->softDeletes();
             $table->timestamps();

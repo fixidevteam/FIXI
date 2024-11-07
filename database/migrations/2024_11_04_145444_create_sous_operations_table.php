@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sous_operations', function (Blueprint $table) {
             $table->id();
             $table->string("nom");
-            $table->string("description");
+            $table->string("description")->nullable();
             $table->foreignId("operation_id")->constrained();
             $table->softDeletes();
             $table->timestamps();
