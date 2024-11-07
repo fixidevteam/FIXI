@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OperationController;
 use App\Http\Controllers\PapierPeronnelController;
 use App\Http\Controllers\PapierVoitureController;
 use App\Http\Controllers\ProfileController;
@@ -33,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/voiture', VoitureController::class);
     Route::resource('/paiperPersonnel', PapierPeronnelController::class);
     Route::resource('/paiperVoiture', PapierVoitureController::class);
+    Route::resource('/operation', OperationController::class);
 });
 
 require __DIR__ . '/auth.php';
