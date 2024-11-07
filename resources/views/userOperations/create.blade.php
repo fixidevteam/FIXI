@@ -72,7 +72,7 @@
                     <div>
                         <x-input-label for="categorie" :value="__('Categorie de l\'opération')" />
                         <!-- <x-text-input id="categorie" class="block mt-1 w-full" type="text" name="categorie" :value="old('categorie')" autofocus autocomplete="categorie" /> -->
-                        <select id="categorie" name="categorie" class="block mt-1 w-full rounded-md border-0 block py-1.5 w-full text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <select id="categorie" name="categorie" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             <option value="">Select Categorie</option>
                             @foreach ($categories as $categorie)
                             <option value="{{ $categorie->id }}">{{ $categorie->nom_categorie }}</option>
@@ -83,7 +83,7 @@
                     <div>
                         <x-input-label for="nom" :value="__('Nom de l\'opération')" />
                         <!-- <x-text-input id="nom" class="block mt-1 w-full" type="text" name="nom" :value="old('nom')" autofocus autocomplete="nom" /> -->
-                        <select id="operation" name="nom" class="block mt-1 w-full rounded-md border-0 block py-1.5 w-full text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" disabled>
+                        <select id="operation" name="nom" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             <option value="">Select Operation</option>
                         </select>
 

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("categorie");
             $table->string("nom");
-            $table->string("description");
+            $table->string("description")->nullable();
             $table->date("date_operation");
             $table->string('photo')->nullable();
             $table->foreignId("voiture_id")->constrained();
