@@ -70,7 +70,11 @@ class PapierVoitureController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $papier = VoiturePapier::find($id);
+        if (!$papier || $papier->voiture_id != Session::get('voiture_id')) {
+            abort(403);
+        }
+        return view('userPaiperVoiture.edit', compact('papier'));
     }
 
     /**
@@ -78,7 +82,26 @@ class PapierVoitureController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $papier = VoiturePapier::find($id);
+        $voiture_id = Session::get('voiture_id');
+        $data = $request->validate([
+            'type' => ['required', 'max:30'],
+            'note' => ['max:255'],
+            'photo' => ['image'],
+            'date_debut' => ['required', 'date'],
+            'date_fin' => ['required', 'date'],
+
+        ]);
+
+        if ($request->hasFile('photo')) {
+            $imagePath = $request->file('photo')->store('user/papierVoiture', 'public');
+            $data['photo'] = $imagePath;
+        }
+        $data['voiture_id'] = $voiture_id;
+        $papier->update($data);
+        session()->flash('success', 'Document mise à jour');
+        session()->flash('subtitle', 'Votre document a été mise à jour avec succès à la liste.');
+        return redirect()->route('voiture.show', $voiture_id);
     }
 
     /**
@@ -86,6 +109,14 @@ class PapierVoitureController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $papier = VoiturePapier::find($id);
+        $voiture_id = $papier->voiture_id;
+        // dd($voiture_id);
+        if ($papier) {
+            $papier->delete();
+        }
+        session()->flash('success', 'Document supprimée');
+        session()->flash('subtitle', 'Votre document a été supprimée avec succès.');
+        return redirect()->route('voiture.show', $voiture_id);
     }
 }
