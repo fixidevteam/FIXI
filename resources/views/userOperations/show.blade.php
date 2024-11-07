@@ -95,11 +95,11 @@
         <div class="flex flex-col md:flex-row gap-10 items-center">
           {{-- Car Image --}}
           <div class="w-[160px] h-[160px] overflow-hidden rounded-full border flex-shrink-0">
-            {{-- @if($voiture->photo !== NULL)
+            @if($voiture->photo !== NULL)
             <img class="w-full h-full object-cover" src="{{asset('storage/'.$voiture->photo)}}" alt="voiture image">
             @else
             <img class="w-full h-full object-cover" src="../images/defaultimage.jpg" alt="image description">
-            @endif --}}
+            @endif
           </div>
 
           {{-- Car Details in Two Columns --}}
@@ -109,19 +109,19 @@
               {{-- Matricule --}}
               <div>
                 <p class="capitalize text-sm font-medium text-gray-900">Matricule</p>
-                {{-- <p class="text-sm text-gray-500">{{$voiture->numero_immatriculation}}</p> --}}
+                <p class="text-sm text-gray-500">{{$voiture->numero_immatriculation}}</p>
               </div>
 
               {{-- Marque --}}
               <div>
                 <p class="capitalize text-sm font-medium text-gray-900">Marque</p>
-                {{-- <p class="text-sm text-gray-500">{{$voiture->marque}}</p> --}}
+                <p class="text-sm text-gray-500">{{$voiture->marque}}</p>
               </div>
 
               {{-- Modèle --}}
               <div>
                 <p class="capitalize text-sm font-medium text-gray-900">Modèle</p>
-                {{-- <p class="text-sm text-gray-500">{{$voiture->modele}}</p> --}}
+                <p class="text-sm text-gray-500">{{$voiture->modele}}</p>
               </div>
             </div>
 
@@ -130,19 +130,19 @@
               {{-- Date de première mise en circulation --}}
               <div>
                 <p class="capitalize text-sm font-medium text-gray-900">Date de première mise en circulation</p>
-                {{-- <p class="text-sm text-gray-500">{{$voiture->date_de_première_mise_en_circulation}}</p> --}}
+                <p class="text-sm text-gray-500">{{$voiture->date_de_première_mise_en_circulation}}</p>
               </div>
 
               {{-- Date d'achat --}}
               <div>
                 <p class="capitalize text-sm font-medium text-gray-900">Date d'achat</p>
-                {{-- <p class="text-sm text-gray-500">{{$voiture->date_achat}}</p> --}}
+                <p class="text-sm text-gray-500">{{$voiture->date_achat}}</p>
               </div>
 
               {{-- Date de dédouanement --}}
               <div>
                 <p class="capitalize text-sm font-medium text-gray-900">Date de dédouanement</p>
-                {{-- <p class="text-sm text-gray-500">{{$voiture->date_de_dédouanement}}</p> --}}
+                <p class="text-sm text-gray-500">{{$voiture->date_de_dédouanement}}</p>
               </div>
             </div>
           </div>
@@ -153,8 +153,8 @@
     <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
       {{-- content (slot on layouts/app.blade.php)--}}
       <div class=" px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-          <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Details d'operation</h2>
-          {{-- details of operation --}}
+        <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Details d'operation</h2>
+        {{-- details of operation --}}
         <div class="flex justify-between items-center my-6">
           <h3 class="text-xl font-medium leading-9 tracking-tight text-gray-900">{{ $operation->categorie }}</h3>
           <div class="flex items-center">
@@ -206,9 +206,13 @@
             <p class="capitalize text-sm font-medium text-gray-900 truncate">
               Sous operation
             </p>
+
+            @foreach ($operation->sousoperation as $sousOp)
             <p class="text-sm text-gray-500 truncate">
-              Sous operation type
+              {{$sousOp->nom}}
             </p>
+            @endforeach
+
           </div>
         </div>
         {{-- description --}}
@@ -219,7 +223,7 @@
           </p>
           <p class="text-sm text-gray-500 truncate">
             {{ $operation->description }}
-           </p>
+          </p>
         </div>
         @endif
         {{-- operation description close  --}}
@@ -238,20 +242,20 @@
             Annuler
           </button>
           <form id="deleteForm" action="{{ route('voiture.destroy', ['voiture' => $voiture->id]) }}" method="POST">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
-              confirmer
-            </button>
-          </form>
-        </div>
-      </div>
-    </div> --}}
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+      confirmer
+    </button>
+    </form>
+  </div>
+  </div>
+  </div> --}}
 
-    {{-- contet close colse --}}
-    {{-- footer --}}
-    <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
-      @include('layouts.footer')
-    </div>
+  {{-- contet close colse --}}
+  {{-- footer --}}
+  <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
+    @include('layouts.footer')
+  </div>
   </div>
 </x-app-layout>

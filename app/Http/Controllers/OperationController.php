@@ -7,6 +7,7 @@ use App\Models\nom_operation;
 use App\Models\nom_sous_operation;
 use App\Models\Operation;
 use App\Models\SousOperation;
+use App\Models\Voiture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
@@ -86,8 +87,13 @@ class OperationController extends Controller
      */
     public function show(string $id)
     {
+        $idvoiture = Session::get('voiture_id');
+        $voiture = Voiture::find($idvoiture);
         $operation = Operation::find($id);
-        return view('userOperations.show',compact('operation'));
+        if (!$operation || $operation->voiture_id != Session::get('voiture_id')) {
+            abort(403);
+        }
+        return view('userOperations.show',['voiture'=>$voiture,'operation'=>$operation]);
     }
 
     /**
