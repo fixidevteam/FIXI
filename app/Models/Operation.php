@@ -15,6 +15,7 @@ class Operation extends Model
         'nom',
         'description',
         'date_operation',
+        'photo',
         'voiture_id'
     ];
     public function voiture(): BelongsTo

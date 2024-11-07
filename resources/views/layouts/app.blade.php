@@ -34,6 +34,8 @@
     </main>
     </div>
     <script>
+
+
         document.getElementById('categorie').addEventListener('change', function() {
             const categorieId = this.value;
             if (categorieId) {

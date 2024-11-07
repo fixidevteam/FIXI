@@ -75,14 +75,13 @@
                         <select id="categorie" name="categorie" class="block mt-1 w-full rounded-md border-0 block py-1.5 w-full text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             <option value="">Select Categorie</option>
                             @foreach ($categories as $categorie)
-                            <option value="{{ $categorie->id }}">{{ $categorie->nom_categorie }}</option>
+                            <option value="{{ $categorie->id }}"@if(old('categorie') == $categorie->id) selected @endif>{{ $categorie->nom_categorie }}</option>
                             @endforeach
                         </select>
                         <x-input-error :messages="$errors->get('categorie')" class="mt-2" />
                     </div>
                     <div>
                         <x-input-label for="nom" :value="__('Nom de l\'opération')" />
-                        <!-- <x-text-input id="nom" class="block mt-1 w-full" type="text" name="nom" :value="old('nom')" autofocus autocomplete="nom" /> -->
                         <select id="operation" name="nom" class="block mt-1 w-full rounded-md border-0 block py-1.5 w-full text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" disabled>
                             <option value="">Select Operation</option>
                         </select>
@@ -90,11 +89,7 @@
                         <x-input-error :messages="$errors->get('nom')" class="mt-2" />
                     </div>
                     <div>
-                        <!-- <x-input-label for="modele" :value="__('Sous opération')" /> -->
-                        <!-- <x-text-input id="modele" class="block mt-1 w-full" type="text" name="modele" :value="old('modele')" autofocus autocomplete="modele" /> -->
-                        <!-- <select id="sousOperation" name="sousOperation" class="block mt-1 w-full rounded-md border-0 block py-1.5 w-full text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" disabled>
-                            <option value="">Select Sous Operation</option>
-                        </select> -->
+
                         <div id="sousOperationCheckboxes" style="margin-top: 10px;">
 
                             <!-- Checkboxes for sous operations will be appended here -->

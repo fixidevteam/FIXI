@@ -37,9 +37,7 @@ class OperationController extends Controller
     public function store(Request $request)
     {
 
-            // add operation 
-        $operation_name = nom_operation::find($request->nom)->nom_operation;
-        $categorie_name = nom_categorie::find($request->nom)->nom_categorie;
+        
         $voiture = Session::get('voiture_id');
         $data = $request->validate([
             'categorie' => [
@@ -54,6 +52,9 @@ class OperationController extends Controller
             $imagePath = $request->file('photo')->store('user/operations', 'public');
             $data['photo'] = $imagePath;
         }
+        // add operation 
+        $operation_name = nom_operation::find($request->nom)->nom_operation;
+        $categorie_name = nom_categorie::find($request->nom)->nom_categorie;
         $data['nom'] = $operation_name;
         $data['categorie'] = $categorie_name;
         $data['voiture_id'] = $voiture;
