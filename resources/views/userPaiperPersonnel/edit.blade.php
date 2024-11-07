@@ -92,7 +92,9 @@
               </div>
               <div>
                   <x-input-label for="note" :value="__('Note')" />
-                  <x-text-textarea id="note" class="block mt-1 w-full" name="note" :value="old('note')  ?? $papier->note" autofocus autocomplete="note" />
+                  <x-text-textarea id="note" class="block mt-1 w-full" name="note" autofocus autocomplete="note">
+                    {{ old('note', $papier->note) }}
+                  </x-text-textarea>
                   <x-input-error :messages="$errors->get('note')" class="mt-2" />
               </div>
 

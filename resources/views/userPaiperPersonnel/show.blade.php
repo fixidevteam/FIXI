@@ -95,7 +95,6 @@
           @else
           <img class="" src="../images/defaultimage.jpg" alt="image description">
           @endif
-
         </div>
         {{-- paipe close  --}}
         {{-- paipe note  --}}
