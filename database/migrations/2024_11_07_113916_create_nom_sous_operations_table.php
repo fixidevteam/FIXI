@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nom_sous_operation');
             $table->foreignId('nom_operation_id')->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
