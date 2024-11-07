@@ -23,7 +23,7 @@ class PapierVoitureController extends Controller
      */
     public function create()
     {
-        return view("userPaiperVoiture.AjouterPaiperVoiture");
+        return view("userPaiperVoiture.create");
     }
 
     /**
@@ -62,7 +62,7 @@ class PapierVoitureController extends Controller
         if (!$papier || $papier->voiture_id != Session::get('voiture_id')) {
             abort(403);
         }
-        return view('userPaiperVoiture.details', compact('papier'));
+        return view('userPaiperVoiture.show', compact('papier'));
     }
 
     /**

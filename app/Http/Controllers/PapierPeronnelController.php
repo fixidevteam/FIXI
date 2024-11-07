@@ -15,7 +15,7 @@ class PapierPeronnelController extends Controller
     {
         $user_id = Auth::user()->id;
         $papiers = UserPapier::where('user_id', $user_id)->get();
-        return view('userPaiperPersonnel.paiperPersonnel', compact('papiers'));
+        return view('userPaiperPersonnel.index', compact('papiers'));
     }
 
     /**
@@ -23,7 +23,7 @@ class PapierPeronnelController extends Controller
      */
     public function create()
     {
-        return view("userPaiperPersonnel.AjouterPaiperPersonnel");
+        return view("userPaiperPersonnel.create");
     }
 
     /**
@@ -61,7 +61,7 @@ class PapierPeronnelController extends Controller
         if (!$papier || $papier->user_id != auth()->id()) {
             abort(403);
         }
-        return view('userPaiperPersonnel.details', compact('papier'));
+        return view('userPaiperPersonnel.show', compact('papier'));
     }
 
     /**

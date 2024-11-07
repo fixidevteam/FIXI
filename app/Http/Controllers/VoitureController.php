@@ -15,7 +15,7 @@ class VoitureController extends Controller
     {
         $user_id = Auth::user()->id;
         $voitures = Voiture::where('user_id', $user_id)->get();
-        return view('userCars.voiture', compact('voitures'));
+        return view('userCars.index', compact('voitures'));
     }
 
     /**
@@ -23,7 +23,7 @@ class VoitureController extends Controller
      */
     public function create()
     {
-        return view("userCars.AjouterVoiture");
+        return view("userCars.create");
     }
 
     /**
@@ -71,7 +71,7 @@ class VoitureController extends Controller
         if (!$voiture || $voiture->user_id !== auth()->id()) {
             abort(403);
         }
-        return view('userCars.details',compact('voiture'));
+        return view('userCars.show',compact('voiture'));
     }
 
     /**
@@ -83,7 +83,7 @@ class VoitureController extends Controller
         if (!$voiture || $voiture->user_id !== auth()->id()) {
             abort(403);
         }
-        return view('userCars.modifierVoiture',compact('voiture'));
+        return view('userCars.edit',compact('voiture'));
     }
 
     /**
