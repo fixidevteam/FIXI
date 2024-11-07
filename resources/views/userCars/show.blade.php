@@ -288,7 +288,7 @@
                 <tr>
                   <th scope="col" class="px-6 py-3">Categorie</th>
                   <th scope="col" class="px-6 py-3">Operation</th>
-                  <th scope="col" class="px-6 py-3">Description</th>
+                  <th scope="col" class="px-6 py-3">Photo</th>
                   <th scope="col" class="px-6 py-3">Date d'operation</th>
                   <th scope="col" class="px-6 py-3">photo</th>
                   <th scope="col" class="px-6 py-3">Action</th>
@@ -310,7 +310,11 @@
 
                   {{-- description --}}
                   <td class="px-6 py-4">
-                    {{ $operation->description }}
+                    @if($operation->photo !== NULL)
+                    <img class="rounded-full w-8 h-8 object-cover" src="{{asset('storage/'.$operation->photo)}}" alt="image description">
+                    @else
+                    <img class="rounded-full w-8 h-8 object-cover" src="../images/defaultimage.jpg" alt="image description">
+                    @endif
                   </td>
 
                   {{-- date doperation --}}
@@ -330,16 +334,12 @@
 
                   {{-- Action --}}
                   <td class="px-6 py-4">
-                    <a href="" class="font-medium text-blue-600 hover:underline">Editer</a>
+                    <a href="{{ route('operation.show',$operation->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Details</a>
                   </td>
 
                   {{-- Delete --}}
                   <td class="px-6 py-4">
-                    <form action="" method="POST">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="font-medium text-red-600 hover:underline">Supprimer</button>
-                    </form>
+                    Edit
                   </td>
                 </tr>
                 @endforeach

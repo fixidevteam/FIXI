@@ -103,13 +103,13 @@ class DatabaseSeeder extends Seeder
             'nom_sous_operation' => 'Remplacement des filtres à carburant',
             'nom_operation_id' => '2'
         ]);
-        // $this->call([
-        //     VoitureSeeder::class,
-        //     PapierVoitureSeeder::class,
-        //     PapierUserSeeder::class,
-        //     OperationSeeder::class,
-        //     SousOperationSeeder::class,
-        //     // Other seeders can be listed here
-        // ]);
+        $this->call([
+            VoitureSeeder::class,
+            PapierVoitureSeeder::class,
+            PapierUserSeeder::class,
+            OperationSeeder::class,
+            SousOperationSeeder::class,
+            // Other seeders can be listed here
+        ]);
     }
 }

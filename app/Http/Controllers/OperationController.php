@@ -10,6 +10,7 @@ use App\Models\SousOperation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
+use PHPUnit\Framework\Constraint\Operator;
 
 class OperationController extends Controller
 {
@@ -18,7 +19,7 @@ class OperationController extends Controller
      */
     public function index()
     {
-        //
+        abort(403);
     }
 
     /**
@@ -44,7 +45,7 @@ class OperationController extends Controller
                 'required',
             ],
             'nom' => ['required'],
-            'description' => ['required'],
+            'description' => ['max:255'],
             'photo' => ['image'],
             'date_operation' => ['required', 'date'],
         ]);
@@ -75,9 +76,9 @@ class OperationController extends Controller
         }
 
         // Flash message to the session
-        // session()->flash('success', 'Voiture ajoutée');
-        // session()->flash('subtitle', 'Votre voiture a été ajoutée avec succès à la liste.');
-        return redirect()->route('voiture.index');
+        session()->flash('success', 'Operation ajoutée');
+        session()->flash('subtitle', 'Votre Operation a été ajoutée avec succès à la liste.');
+        return redirect()->route('voiture.show',$voiture);
     }
 
     /**
@@ -85,7 +86,8 @@ class OperationController extends Controller
      */
     public function show(string $id)
     {
-        return view('userOperations.show');
+        $operation = Operation::find($id);
+        return view('userOperations.show',compact('operation'));
     }
 
     /**

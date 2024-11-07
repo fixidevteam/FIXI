@@ -156,7 +156,7 @@
           <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Details d'operation</h2>
           {{-- details of operation --}}
         <div class="flex justify-between items-center my-6">
-          <h3 class="text-xl font-medium leading-9 tracking-tight text-gray-900">operation type</h3>
+          <h3 class="text-xl font-medium leading-9 tracking-tight text-gray-900">{{ $operation->categorie }}</h3>
           <div class="flex items-center">
             <a href="">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -180,7 +180,7 @@
               Operation
             </p>
             <p class="text-sm text-gray-500 truncate">
-              Operation type
+              {{ $operation->nom }}
             </p>
           </div>
           {{-- Gagare --}}
@@ -198,7 +198,7 @@
               Date
             </p>
             <p class="text-sm text-gray-500 truncate">
-              Date operation
+              {{ $operation->date_operation }}
             </p>
           </div>
           {{-- Sous operation --}}
@@ -212,16 +212,16 @@
           </div>
         </div>
         {{-- description --}}
-        {{-- @if($papier->note !== NULL) --}}
+        @if($operation->description !== NULL)
         <div class="my-4">
           <p class="capitalize text-sm font-medium text-gray-900 truncate">
             description
           </p>
           <p class="text-sm text-gray-500 truncate">
-            description content
+            {{ $operation->description }}
            </p>
         </div>
-        {{-- @endif --}}
+        @endif
         {{-- operation description close  --}}
       </div>
     </div>
