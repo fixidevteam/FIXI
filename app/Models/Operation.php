@@ -24,7 +24,7 @@ class Operation extends Model
     {
         return $this->belongsTo(Voiture::class);
     }
-    public function sousOperation(): HasMany
+    public function sousOperations(): HasMany
     {
         return $this->hasMany(SousOperation::class);
     }

@@ -54,11 +54,7 @@ class OperationController extends Controller
             $imagePath = $request->file('photo')->store('user/operations', 'public');
             $data['photo'] = $imagePath;
         }
-        // add operation 
-        $operation_name = nom_operation::find($request->nom)->nom_operation;
-        $categorie_name = nom_categorie::find($request->nom)->nom_categorie;
-        $data['nom'] = $operation_name;
-        $data['categorie'] = $categorie_name;
+
         $data['voiture_id'] = $voiture;
         $operation = Operation::create($data);
 
@@ -69,10 +65,11 @@ class OperationController extends Controller
                 $name = nom_sous_operation::find($idSous);
                 SousOperation::create(
                     [
-                        'nom' => $name->nom_sous_operation,
+                        'nom' => $name->id,
                         'operation_id' => $operation->id
                     ]
                 );
+            
             }
         }
 
@@ -90,10 +87,13 @@ class OperationController extends Controller
         $idvoiture = Session::get('voiture_id');
         $voiture = Voiture::find($idvoiture);
         $operation = Operation::find($id);
+        $operations = nom_operation::all();
+        $categories = nom_categorie::all();
+        $sousOperation = nom_sous_operation::all();
         if (!$operation || $operation->voiture_id != Session::get('voiture_id')) {
             abort(403);
         }
-        return view('userOperations.show',['voiture'=>$voiture,'operation'=>$operation]);
+        return view('userOperations.show',compact('voiture','operation','operations','categories','sousOperation'));
     }
 
     /**
@@ -101,7 +101,10 @@ class OperationController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $categories = nom_categorie::all();
+
+        $operation = Operation::find($id);
+        return view('userOperations.edit',compact('operation','categories'));
     }
 
     /**
@@ -109,7 +112,43 @@ class OperationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $operation = Operation::find($id);
+        $voiture = Session::get('voiture_id');
+        $data = $request->validate([
+            'categorie' => [
+                'required',
+            ],
+            'nom' => ['required'],
+            'description' => ['max:255'],
+            'photo' => ['image'],
+            'date_operation' => ['required', 'date'],
+        ]);
+        if ($request->hasFile('photo')) {
+            $imagePath = $request->file('photo')->store('user/operations', 'public');
+            $data['photo'] = $imagePath;
+        }
+        // add operation 
+        $data['voiture_id'] = $voiture;
+        $operation->update($data);
+
+
+        // update sous operation 
+        if ($request->filled('sousOperations')) {
+            // Delete existing sousOperations related to this operation
+            $operation->sousOperations()->delete();
+    
+            // Re-add each sousOperation from the request
+            foreach ($request->input('sousOperations') as $idSous) {
+                $name = nom_sous_operation::find($idSous);
+                SousOperation::create([
+                    'nom' => $name->id,
+                    'operation_id' => $operation->id
+                ]);
+            }
+        }
+        session()->flash('success', 'Operation modifiée');
+        session()->flash('subtitle', 'Votre Operation a été modifiée avec succès à la liste.');
+        return redirect()->route('voiture.show',$voiture);
     }
 
     /**
@@ -117,6 +156,12 @@ class OperationController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $voiture = Session::get('voiture_id');
+        $operation = Operation::find($id);
+        $operation->sousOperations()->delete();
+        $operation->delete();
+        session()->flash('success', 'Operation supprimée');
+        session()->flash('subtitle', 'Votre Operation a été supprimée avec succès à la liste.');
+        return redirect()->route('voiture.show',$voiture);
     }
 }

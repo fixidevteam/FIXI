@@ -299,12 +299,16 @@
                 <tr class="bg-white border-b">
                   {{-- Categorie --}}
                   <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    {{ $operation->categorie }}
+                    {{
+                      $categories->where('id',$operation->categorie)->first()->nom_categorie ;
+                    }}
                   </th>
 
                   {{-- nom --}}
                   <td class="px-6 py-4">
-                    {{ $operation->nom }}
+                    {{
+                      $operations->where('id', $operation->nom)->first()->nom_operation ;
+                    }}
                   </td>
 
                   {{-- description --}}

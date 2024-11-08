@@ -34,26 +34,36 @@
     </main>
     </div>
     <script>
+        function loadOperations(categorieId = null) {
+            // Use the provided categorieId or fallback to the selected value from the 'categorie' element
+            categorieId = categorieId || document.getElementById('categorie').value;
 
-
-        document.getElementById('categorie').addEventListener('change', function() {
-            const categorieId = this.value;
             if (categorieId) {
                 fetch(`/api/operations/${categorieId}`)
                     .then(response => response.json())
                     .then(data => {
                         const operationSelect = document.getElementById('operation');
                         operationSelect.innerHTML = '<option value="">Select Operation</option>';
+
                         data.forEach(operation => {
                             const option = document.createElement('option');
                             option.value = operation.id;
                             option.textContent = operation.nom_operation;
                             operationSelect.appendChild(option);
                         });
+
                         operationSelect.disabled = false;
                         document.getElementById('sousOperation').disabled = true;
                     });
             }
+        }
+
+        // Run loadOperations on page load with the current value of 'categorie'
+        window.addEventListener('DOMContentLoaded', () => loadOperations());
+
+        // Attach loadOperations to the 'change' event of 'categorie' and pass the selected value
+        document.getElementById('categorie').addEventListener('change', function() {
+            loadOperations(this.value);
         });
 
         document.getElementById('operation').addEventListener('change', function() {

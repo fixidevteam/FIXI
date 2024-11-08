@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\nom_categorie;
+use App\Models\nom_operation;
 use App\Models\Voiture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -65,12 +67,14 @@ class VoitureController extends Controller
     {
         // dd(Voiture::find(11)->operations);
         Session::put('voiture_id', $id);
-
+        $operations = nom_operation::all();
+        $categories = nom_categorie::all();
         $voiture  = Voiture::find($id);
         if (!$voiture || $voiture->user_id !== auth()->id()) {
             abort(403);
         }
-        return view('userCars.show', compact('voiture'));
+
+        return view('userCars.show', compact('voiture','operations','categories'));
     }
 
     /**
