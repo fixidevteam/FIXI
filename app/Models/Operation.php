@@ -18,11 +18,16 @@ class Operation extends Model
         'description',
         'date_operation',
         'photo',
-        'voiture_id'
+        'voiture_id',
+        'garage_id'
     ];
     public function voiture(): BelongsTo
     {
         return $this->belongsTo(Voiture::class);
+    }
+    public function garage(): BelongsTo
+    {
+        return $this->belongsTo(garage::class);
     }
     public function sousOperations(): HasMany
     {

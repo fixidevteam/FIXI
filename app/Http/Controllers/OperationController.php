@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\garage;
 use App\Models\nom_categorie;
 use App\Models\nom_operation;
 use App\Models\nom_sous_operation;
@@ -29,8 +30,9 @@ class OperationController extends Controller
     public function create()
     {
         // dd(Session::get('voiture_id'));
+        $garages = garage::all();
         $categories = nom_categorie::all();
-        return view('userOperations.create', compact('categories'));
+        return view('userOperations.create', compact('categories','garages'));
     }
 
     /**
@@ -49,6 +51,7 @@ class OperationController extends Controller
             'description' => ['max:255'],
             'photo' => ['image'],
             'date_operation' => ['required', 'date'],
+            'garage_id'=>['required']
         ]);
         if ($request->hasFile('photo')) {
             $imagePath = $request->file('photo')->store('user/operations', 'public');
@@ -102,9 +105,9 @@ class OperationController extends Controller
     public function edit(string $id)
     {
         $categories = nom_categorie::all();
-
+        $garages = garage::all();
         $operation = Operation::find($id);
-        return view('userOperations.edit',compact('operation','categories'));
+        return view('userOperations.edit',compact('operation','categories','garages'));
     }
 
     /**
@@ -122,6 +125,7 @@ class OperationController extends Controller
             'description' => ['max:255'],
             'photo' => ['image'],
             'date_operation' => ['required', 'date'],
+            'garage_id'=>['required']
         ]);
         if ($request->hasFile('photo')) {
             $imagePath = $request->file('photo')->store('user/operations', 'public');

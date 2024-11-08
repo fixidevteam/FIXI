@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\garage;
 use App\Models\nom_categorie;
 use App\Models\nom_operation;
 use App\Models\nom_sous_operation;
@@ -102,6 +103,23 @@ class DatabaseSeeder extends Seeder
         nom_sous_operation::create([
             'nom_sous_operation' => 'Remplacement des filtres à carburant',
             'nom_operation_id' => '2'
+        ]);
+
+        garage::create([
+            'nom'=>'garage1',
+            'ref'=>'AA11'
+        ]);
+        garage::create([
+            'nom'=>'garage2',
+            'ref'=>'AA22'
+        ]);
+        garage::create([
+            'nom'=>'garage3',
+            'ref'=>'AA3'
+        ]);
+        garage::create([
+            'nom'=>'garage3',
+            'ref'=>'AA33'
         ]);
     //     $this->call([
     //         VoitureSeeder::class,

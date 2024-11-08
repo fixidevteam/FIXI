@@ -106,7 +106,12 @@
                     </div>
                     <div>
                         <x-input-label for="garage" :value="__('Garage')" />
-                        <x-text-input id="garage" class="block mt-1 w-full" type="text" name="garage" :value="old('garage')" autofocus autocomplete="garage" />
+                        <select id="garage" name="garage_id" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <option value="">Select garage</option>
+                            @foreach ($garages as $garage)
+                            <option value="{{ $garage->id }}" @if(old('garage_id') == $garage->id || $operation->garage_id == $garage->id) selected @endif>{{ $garage->nom }}</option>
+                            @endforeach
+                        </select>
                         <x-input-error :messages="$errors->get('garage')" class="mt-2" />
                     </div>
                     <div>

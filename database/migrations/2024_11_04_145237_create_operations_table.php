@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date("date_operation");
             $table->string('photo')->nullable();
             $table->foreignId("voiture_id")->constrained();
+            $table->foreignId("garage_id")->constrained();
             $table->softDeletes();
             $table->timestamps();
         });
