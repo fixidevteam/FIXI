@@ -112,7 +112,7 @@
                             <option value="{{ $garage->id }}" @if(old('garage_id') == $garage->id || $operation->garage_id == $garage->id) selected @endif>{{ $garage->nom }}</option>
                             @endforeach
                         </select>
-                        <x-input-error :messages="$errors->get('garage')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('garage_id')" class="mt-2" />
                     </div>
                     <div>
                         <x-input-label for="description" :value="__('Description')" />
