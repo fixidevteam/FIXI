@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\ProviderController;
 use App\Http\Controllers\OperationController;
 use App\Http\Controllers\PapierPeronnelController;
 use App\Http\Controllers\PapierVoitureController;
@@ -23,6 +24,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// auth google 
+Route::get('/auth/{provider}/redirect', [ProviderController::class,'redirect']);
+Route::get('/auth/{provider}/callback', [ProviderController::class,'callback']);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
