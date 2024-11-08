@@ -87,7 +87,7 @@
         {{-- Details of cars --}}
         <div class="flex flex-col md:flex-row gap-10 items-center">
           {{-- Car Image --}}
-          <div class="w-[160px] h-[160px] overflow-hidden rounded-full border flex-shrink-0">
+          <div class="md:w-[160px] md:h-[160px] overflow-hidden md:rounded-full border flex-shrink-0">
             @if($voiture->photo !== NULL)
             <img class="w-full h-full object-cover" src="{{asset('storage/'.$voiture->photo)}}" alt="voiture image">
             @else

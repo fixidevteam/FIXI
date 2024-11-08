@@ -94,7 +94,7 @@
         {{-- Details of cars --}}
         <div class="flex flex-col md:flex-row gap-10 items-center">
           {{-- Car Image --}}
-          <div class="w-[160px] h-[160px] overflow-hidden rounded-full border flex-shrink-0">
+          <div class="md:w-[160px] md:h-[160px] overflow-hidden md:rounded-full border flex-shrink-0">
             @if($voiture->photo !== NULL)
             <img class="w-full h-full object-cover" src="{{asset('storage/'.$voiture->photo)}}" alt="voiture image">
             @else
@@ -172,6 +172,13 @@
             </a>
           </div>
         </div>
+        <div class="flex justify-center my-8">
+          @if($operation->photo !== NULL)
+          <img class="" src="{{asset('storage/'.$operation->photo)}}" alt="image description">
+          @else
+          <img class="" src="../images/defaultimage.jpg" alt="image description">
+          @endif
+        </div>
         {{-- content of details  --}}
         <div class="grid grid-cols-1 md:grid-cols-2">
           {{-- Operation --}}
@@ -202,18 +209,18 @@
             </p>
           </div>
           {{-- Sous operation --}}
+          @if(!$operation->sousoperation->isEmpty())
           <div>
             <p class="capitalize text-sm font-medium text-gray-900 truncate">
               Sous operation
             </p>
-
             @foreach ($operation->sousoperation as $sousOp)
             <p class="text-sm text-gray-500 truncate">
               {{$sousOp->nom}}
             </p>
             @endforeach
-
           </div>
+          @endif
         </div>
         {{-- description --}}
         @if($operation->description !== NULL)
