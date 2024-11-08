@@ -62,7 +62,7 @@
                 <div class="my-5">
                     {{-- alert --}}
                     @if (session('success'))
-                        <div class="fixed top-20 right-4 mb-5 flex justify-end"
+                        <div class="fixed top-20 right-4 mb-5 flex justify-end z-10"
                         x-data="{ show: true }" 
                         x-show="show" 
                         x-transition:leave="transition ease-in duration-1000" 

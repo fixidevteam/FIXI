@@ -240,29 +240,6 @@
         {{-- operation description close  --}}
       </div>
     </div>
-
-    <!-- Confirmation Modal (Hidden by default) -->
-    {{-- <div id="confirmationModal" class="fixed inset-0 bg-white bg-opacity-30 backdrop-blur-[2px] flex items-center justify-center hidden">
-      <div class="bg-white rounded-lg p-6 w-96 shadow-lg ">
-        <h2 class="text-lg font-bold text-gray-800">Confirmation de suppression</h2>
-        <p class="text-gray-600 mt-2">Êtes-vous sûr de vouloir supprimer cette voiture ? Cette action ne peut pas être annulée.</p>
-
-        <!-- Action Buttons -->
-        <div class="flex justify-end mt-4">
-          <button onclick="toggleModal(false)" class="px-4 py-2 bg-gray-300 text-gray-800 rounded mr-2">
-            Annuler
-          </button>
-          <form id="deleteForm" action="{{ route('voiture.destroy', ['voiture' => $voiture->id]) }}" method="POST">
-    @csrf
-    @method('DELETE')
-    <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
-      confirmer
-    </button>
-    </form>
-  </div>
-  </div>
-  </div> --}}
-
   {{-- contet close colse --}}
   <div id="confirmationModal" class="fixed inset-0 bg-white bg-opacity-30 backdrop-blur-[2px] flex items-center justify-center hidden">
     <div class="bg-white rounded-lg p-6 w-96 shadow-lg ">

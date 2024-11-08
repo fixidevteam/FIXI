@@ -116,7 +116,7 @@
     <div id="confirmationModal" class="fixed inset-0 bg-white bg-opacity-30 backdrop-blur-[2px] flex items-center justify-center hidden">
       <div class="bg-white rounded-lg p-6 w-96 shadow-lg ">
         <h2 class="text-lg font-bold text-gray-800">Confirmation de suppression</h2>
-        <p class="text-gray-600 mt-2">Êtes-vous sûr de vouloir supprimer cette document ? Cette action ne peut pas être annulée.</p>
+        <p class="text-gray-600 mt-2">Êtes-vous sûr de vouloir supprimer cette operation ? Cette action ne peut pas être annulée.</p>
 
         <!-- Action Buttons -->
         <div class="flex justify-end mt-4">
