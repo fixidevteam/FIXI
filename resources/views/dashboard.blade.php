@@ -45,9 +45,15 @@
               </div>
             </div>
             {{-- box 3 --}}
+            {{-- count all operations that made on the cars --}}
+            @php
+            $operationsCount = Auth::user()->voitures->sum(function ($voiture) {
+                return $voiture->operations->count();
+            });
+            @endphp
             <div class="flex items-center bg-white p-8 rounded-lg shadow">
               <div class="flex-shrink-0">
-                <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">0</span>
+                <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{ $operationsCount }}</span>
                 <h3 class="text-base font-normal text-gray-500 capitalize">nombre des operations</h3>
               </div>
               <div class="ml-5 w-0 flex items-center justify-end flex-1 text-gray-600 text-base font-bold">
