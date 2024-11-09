@@ -45,6 +45,7 @@
               </div>
             </div>
             {{-- box 3 --}}
+            {{-- count all operations that made on the cars --}}
             @php
             $operationsCount = Auth::user()->voitures->sum(function ($voiture) {
                 return $voiture->operations->count();
