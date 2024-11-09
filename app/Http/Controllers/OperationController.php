@@ -12,6 +12,7 @@ use App\Models\Voiture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
+use PhpParser\Node\Stmt\Foreach_;
 use PHPUnit\Framework\Constraint\Operator;
 
 class OperationController extends Controller
@@ -41,7 +42,6 @@ class OperationController extends Controller
     public function store(Request $request)
     {
 
-        
         $voiture = Session::get('voiture_id');
         $data = $request->validate([
             'categorie' => [
@@ -51,7 +51,7 @@ class OperationController extends Controller
             'description' => ['max:255'],
             'photo' => ['image'],
             'date_operation' => ['required', 'date'],
-            'garage_id'=>['required']
+            'garage_id'=>['required'],
         ]);
         if ($request->hasFile('photo')) {
             $imagePath = $request->file('photo')->store('user/operations', 'public');
@@ -107,6 +107,7 @@ class OperationController extends Controller
         $categories = nom_categorie::all();
         $garages = garage::all();
         $operation = Operation::find($id);
+
         return view('userOperations.edit',compact('operation','categories','garages'));
     }
 
