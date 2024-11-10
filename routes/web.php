@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\ProviderController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OperationController;
 use App\Http\Controllers\PapierPeronnelController;
 use App\Http\Controllers\PapierVoitureController;
@@ -42,6 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/paiperPersonnel', PapierPeronnelController::class);
     Route::resource('/paiperVoiture', PapierVoitureController::class);
     Route::resource('/operation', OperationController::class);
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
 });
 Route::get('/api/operations/{categorieId}', [App\Http\Controllers\DataController::class, 'getOperations']);
 Route::get('/api/sous-operations/{operationId}', [App\Http\Controllers\DataController::class, 'getSousOperations']);
