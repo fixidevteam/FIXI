@@ -1,4 +1,3 @@
-
 <x-app-layout>
     <div class="p-4 sm:ml-64">
         <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-14">
@@ -74,7 +73,6 @@
                         <x-input-label for="categorie" :value="__('Categorie de l\'opération')" />
                         <!-- <x-text-input id="categorie" class="block mt-1 w-full" type="text" name="categorie" :value="old('categorie')" autofocus autocomplete="categorie" /> -->
                         <select id="categorie" name="categorie" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            <option value="">Select Categorie</option>
                             @foreach ($categories as $categorie)
                             <option value="{{ $categorie->id }}" @if(old('categorie')==$categorie->id) selected @endif>{{ $categorie->nom_categorie }}</option>
                             @endforeach
@@ -83,6 +81,7 @@
                     </div>
                     <div>
                         <x-input-label for="nom" :value="__('Nom de l\'opération')" />
+                        <input type="hidden" id="existingOperationId" value="{{old('nom')}}">
                         <select id="operation" name="nom" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             <option value="">Select Operation</option>
                         </select>
@@ -92,7 +91,9 @@
                     <div>
 
                         <div id="sousOperationCheckboxes" style="margin-top: 10px;">
-
+                            @if(!empty($sousOperations))
+                            <input type="hidden" id="existingSousOperations" value="{{ json_encode($operation->sousOperations->pluck('id')->toArray()) }}">
+                            @endif
                             <!-- Checkboxes for sous operations will be appended here -->
                         </div>
                         <x-input-error :messages="$errors->get('modele')" class="mt-2" />
@@ -107,7 +108,7 @@
                         <select id="garage" name="garage_id" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             <option value="">Select garage</option>
                             @foreach ($garages as $garage)
-                            <option value="{{ $garage->id }}" @if(old('garage_id') == $garage->id) selected @endif>{{ $garage->nom }}</option>
+                            <option value="{{ $garage->id }}" @if(old('garage_id')==$garage->id) selected @endif>{{ $garage->nom }}</option>
                             @endforeach
                         </select>
                         <x-input-error :messages="$errors->get('garage_id')" class="mt-2" />
