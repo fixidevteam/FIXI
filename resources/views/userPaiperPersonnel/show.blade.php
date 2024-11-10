@@ -68,8 +68,67 @@
       <div class=" px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="flex justify-between items-center my-6">
           <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Détails des papiers personnels</h2>
+        {{-- alert   --}}
+        <div>
+          <div>
+            @if($isCloseToExpiry && $daysRemaining > 0)
+            <svg class="text-yellow-500" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M15 2.09302C7.87167 2.09302 2.09302 7.87167 2.09302 15C2.09302 22.1283 7.87167 27.907 15 27.907C22.1283 27.907 27.907 22.1283 27.907 15C27.907 7.87167 22.1283 2.09302 15 2.09302ZM0 15C0 6.71573 6.71573 0 15 0C23.2843 0 30 6.71573 30 15C30 23.2843 23.2843 30 15 30C6.71573 30 0 23.2843 0 15ZM15 8.37209C15.578 8.37209 16.0465 8.84063 16.0465 9.4186V14.5665L19.2284 17.7484C19.6371 18.1571 19.6371 18.8197 19.2284 19.2284C18.8197 19.6371 18.1571 19.6371 17.7484 19.2284L14.26 15.74C14.0637 15.5437 13.9535 15.2776 13.9535 15V9.4186C13.9535 8.84063 14.422 8.37209 15 8.37209Z" fill="currentColor"/>
+            </svg>
+            @elseif($daysRemaining === 0)
+            <svg class="text-yellow-500" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M15 2.09302C7.87167 2.09302 2.09302 7.87167 2.09302 15C2.09302 22.1283 7.87167 27.907 15 27.907C22.1283 27.907 27.907 22.1283 27.907 15C27.907 7.87167 22.1283 2.09302 15 2.09302ZM0 15C0 6.71573 6.71573 0 15 0C23.2843 0 30 6.71573 30 15C30 23.2843 23.2843 30 15 30C6.71573 30 0 23.2843 0 15ZM15 8.37209C15.578 8.37209 16.0465 8.84063 16.0465 9.4186V14.5665L19.2284 17.7484C19.6371 18.1571 19.6371 18.8197 19.2284 19.2284C18.8197 19.6371 18.1571 19.6371 17.7484 19.2284L14.26 15.74C14.0637 15.5437 13.9535 15.2776 13.9535 15V9.4186C13.9535 8.84063 14.422 8.37209 15 8.37209Z" fill="currentColor"/>
+            </svg>
+            @elseif($daysRemaining < 0)
+            <svg class="text-red-500" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M15 2.09302C7.87167 2.09302 2.09302 7.87167 2.09302 15C2.09302 22.1283 7.87167 27.907 15 27.907C22.1283 27.907 27.907 22.1283 27.907 15C27.907 7.87167 22.1283 2.09302 15 2.09302ZM0 15C0 6.71573 6.71573 0 15 0C23.2843 0 30 6.71573 30 15C30 23.2843 23.2843 30 15 30C6.71573 30 0 23.2843 0 15ZM15 8.37209C15.578 8.37209 16.0465 8.84063 16.0465 9.4186V14.5665L19.2284 17.7484C19.6371 18.1571 19.6371 18.8197 19.2284 19.2284C18.8197 19.6371 18.1571 19.6371 17.7484 19.2284L14.26 15.74C14.0637 15.5437 13.9535 15.2776 13.9535 15V9.4186C13.9535 8.84063 14.422 8.37209 15 8.37209Z" fill="currentColor"/>
+            </svg>
+            @else
+            <svg class="text-green-500" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M15 2.09302C7.87167 2.09302 2.09302 7.87167 2.09302 15C2.09302 22.1283 7.87167 27.907 15 27.907C22.1283 27.907 27.907 22.1283 27.907 15C27.907 7.87167 22.1283 2.09302 15 2.09302ZM0 15C0 6.71573 6.71573 0 15 0C23.2843 0 30 6.71573 30 15C30 23.2843 23.2843 30 15 30C6.71573 30 0 23.2843 0 15ZM15 8.37209C15.578 8.37209 16.0465 8.84063 16.0465 9.4186V14.5665L19.2284 17.7484C19.6371 18.1571 19.6371 18.8197 19.2284 19.2284C18.8197 19.6371 18.1571 19.6371 17.7484 19.2284L14.26 15.74C14.0637 15.5437 13.9535 15.2776 13.9535 15V9.4186C13.9535 8.84063 14.422 8.37209 15 8.37209Z" fill="currentColor"/>
+            </svg>
+            @endif
         </div>
-
+      </div>
+        {{-- alert close --}}
+        </div>
+        {{-- alert --}}
+        @if (session('success'))
+        <div class="fixed top-20 right-4 mb-5 flex justify-end z-10"
+        x-data="{ show: true }" 
+        x-show="show" 
+        x-transition:leave="transition ease-in duration-1000" 
+        x-transition:leave-start="opacity-100" 
+        x-transition:leave-end="opacity-0" 
+        x-init="setTimeout(() => show = false, 3000)" 
+        >
+            <div role="alert" class="rounded-xl border border-gray-100 bg-white p-4">
+                <div class="flex items-start gap-4">
+                <span class="text-green-600">
+                    <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="size-6"
+                    >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                    </svg>
+                </span>
+                <div class="flex-1">
+                    <strong class="block font-medium text-gray-900"> {{ session('success') }} </strong>
+                    <p class="mt-1 text-sm text-gray-700">{{ session('subtitle') }}</p>
+                </div>
+                </div>
+            </div>
+        </div>
+    @endif
+    {{-- alert close --}}
         {{-- details of paiper perso --}}
         <div class="flex justify-between items-center my-6">
           <h3 class="text-xl font-medium leading-9 tracking-tight text-gray-900">{{$papier->type}}</h3>
@@ -133,7 +192,6 @@
         {{-- details of paiper perso close --}}
       </div>
     </div>
-
     <!-- Confirmation Modal (Hidden by default) -->
     <div id="confirmationModal" class="fixed inset-0 bg-white bg-opacity-30 backdrop-blur-[2px] flex items-center justify-center hidden">
       <div class="bg-white rounded-lg p-6 w-96 shadow-lg ">

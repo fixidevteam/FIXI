@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\VoiturePapier;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -62,7 +63,13 @@ class PapierVoitureController extends Controller
         if (!$papier || $papier->voiture_id != Session::get('voiture_id')) {
             abort(403);
         }
-        return view('userPaiperVoiture.show', compact('papier'));
+        // Calculate days remaining until expiration
+        $dateFin = Carbon::parse($papier->date_fin);
+        $today = Carbon::now();
+        $daysRemaining = $today->diffInDays($dateFin,false); // false makes it negative if date_fin is in the past
+        // Determine if it's close to expiring, e.g., less than 7 days left
+        $isCloseToExpiry = $daysRemaining <= 7 && $daysRemaining > 0; 
+        return view('userPaiperVoiture.show', compact('papier','daysRemaining','isCloseToExpiry'));
     }
 
     /**

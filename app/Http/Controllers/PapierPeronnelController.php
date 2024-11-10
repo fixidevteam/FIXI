@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\UserPapier;
 use App\Notifications\UserNotification;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Notifications\Notifiable;
 
 class PapierPeronnelController extends Controller
 {
+    use Notifiable; 
     /**
      * Display a listing of the resource.
      */
@@ -61,12 +64,19 @@ class PapierPeronnelController extends Controller
     public function show(string $id)
     {
         $papier = UserPapier::find($id);
-        auth()->user()->notify(new UserNotification($papier,$papier->date_fin));
+
 
         if (!$papier || $papier->user_id != auth()->id()) {
             abort(403);
         }
-        return view('userPaiperPersonnel.show', compact('papier'));
+        // Calculate days remaining until expiration
+        $dateFin = Carbon::parse($papier->date_fin);
+        $today = Carbon::now();
+        $daysRemaining = $today->diffInDays($dateFin,false); // false makes it negative if date_fin is in the past
+        // Determine if it's close to expiring, e.g., less than 7 days left
+        $isCloseToExpiry = $daysRemaining <= 7 && $daysRemaining > 0; 
+        auth()->user()->notify(new UserNotification($papier,$papier->date_fin));
+        return view('userPaiperPersonnel.show', compact('papier','daysRemaining','isCloseToExpiry'));
     }
 
     /**
@@ -105,7 +115,7 @@ class PapierPeronnelController extends Controller
         $papier->update($data);
         session()->flash('success', 'Document mise à jour');
         session()->flash('subtitle', 'Votre document a été mise à jour avec succès à la liste.');
-        return redirect()->route('paiperPersonnel.index');
+        return redirect()->route('paiperPersonnel.show',$papier->id);
     }
 
     /**

@@ -121,9 +121,6 @@
                                     <th scope="col" class="px-6 py-3">
                                         Action
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
-
-                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -151,9 +148,6 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         <a href="{{ route('voiture.show',$voiture->id) }}" class="font-medium capitalize text-blue-600 dark:text-blue-500 hover:underline">details</a>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                                     </td>
                                 </tr>
                                 @endforeach
