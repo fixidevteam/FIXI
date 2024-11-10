@@ -142,7 +142,7 @@
                      </form>
                 </li>
                 <li>
-                    <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100  group">
+                    <a href="https://fixi.ma/a-propos/" target="_blanck" class="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100  group">
                         <svg class="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M11.75 18.5C12.1642 18.5 12.5 18.1642 12.5 17.75V11.75C12.5 11.3358 12.1642 11 11.75 11C11.3358 11 11 11.3358 11 11.75V17.75C11 18.1642 11.3358 18.5 11.75 18.5Z" fill="currentColor"/>
                             <path d="M11.75 7.75C12.3023 7.75 12.75 8.19772 12.75 8.75C12.75 9.30228 12.3023 9.75 11.75 9.75C11.1977 9.75 10.75 9.30228 10.75 8.75C10.75 8.19772 11.1977 7.75 11.75 7.75Z" fill="currentColor"/>
