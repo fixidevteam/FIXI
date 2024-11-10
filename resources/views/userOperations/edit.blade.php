@@ -54,7 +54,7 @@
                             <a
                                 href=""
                                 class="inline-flex items-center text-sm font-medium text-gray-700   ">
-                                Modiifier une operation
+                                Modifier une operation
                             </a>
                         </div>
                     </li>
@@ -128,7 +128,7 @@
                     </div>
                     <div class="flex items-center justify-end mt-4">
                         <x-primary-button class="flex justify-center rounded-[20px] bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
-                            {{ __('ajouter operation') }}
+                            {{ __('Modifier operation') }}
                         </x-primary-button>
                     </div>
                 </form>
