@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserPapier;
-use App\Notifications\UserNotification;
+// use App\Notifications\UserNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -75,7 +75,7 @@ class PapierPeronnelController extends Controller
         $daysRemaining = $today->diffInDays($dateFin,false); // false makes it negative if date_fin is in the past
         // Determine if it's close to expiring, e.g., less than 7 days left
         $isCloseToExpiry = $daysRemaining <= 7 && $daysRemaining > 0; 
-        auth()->user()->notify(new UserNotification($papier,$papier->date_fin));
+        // auth()->user()->notify(new UserNotification($papier,$papier->date_fin));
         return view('userPaiperPersonnel.show', compact('papier','daysRemaining','isCloseToExpiry'));
     }
 
