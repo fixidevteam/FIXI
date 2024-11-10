@@ -130,6 +130,8 @@ class VoitureController extends Controller
 
         $voiture = Voiture::find($id);
         if ($voiture) {
+            $voiture->papiersVoiture()->delete();
+            $voiture->operations()->delete();
             $voiture->delete();
         }
         session()->flash('success', 'Voiture supprimée');

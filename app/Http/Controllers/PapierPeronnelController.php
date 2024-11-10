@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserPapier;
+use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,8 +14,10 @@ class PapierPeronnelController extends Controller
      */
     public function index()
     {
+        
         $user_id = Auth::user()->id;
         $papiers = UserPapier::where('user_id', $user_id)->get();
+
         return view('userPaiperPersonnel.index', compact('papiers'));
     }
 
@@ -58,6 +61,8 @@ class PapierPeronnelController extends Controller
     public function show(string $id)
     {
         $papier = UserPapier::find($id);
+        auth()->user()->notify(new UserNotification($papier,$papier->date_fin));
+
         if (!$papier || $papier->user_id != auth()->id()) {
             abort(403);
         }

@@ -153,6 +153,11 @@
                 modal.classList.add('hidden');
             }
         }
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById("dropdownNotification");
+            dropdown.classList.toggle("hidden");
+        }
     </script>
 </body>
 
