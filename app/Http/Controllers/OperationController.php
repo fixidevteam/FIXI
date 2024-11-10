@@ -12,6 +12,7 @@ use App\Models\Voiture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
+use PhpParser\Node\Stmt\Foreach_;
 use PHPUnit\Framework\Constraint\Operator;
 
 class OperationController extends Controller
@@ -32,7 +33,7 @@ class OperationController extends Controller
         // dd(Session::get('voiture_id'));
         $garages = garage::all();
         $categories = nom_categorie::all();
-        return view('userOperations.create', compact('categories','garages'));
+        return view('userOperations.create', compact('categories', 'garages'));
     }
 
     /**
@@ -41,7 +42,6 @@ class OperationController extends Controller
     public function store(Request $request)
     {
 
-        
         $voiture = Session::get('voiture_id');
         $data = $request->validate([
             'categorie' => [
@@ -51,7 +51,7 @@ class OperationController extends Controller
             'description' => ['max:255'],
             'photo' => ['image'],
             'date_operation' => ['required', 'date'],
-            'garage_id'=>['required']
+            'garage_id' => ['required'],
         ]);
         if ($request->hasFile('photo')) {
             $imagePath = $request->file('photo')->store('user/operations', 'public');
@@ -72,14 +72,13 @@ class OperationController extends Controller
                         'operation_id' => $operation->id
                     ]
                 );
-            
             }
         }
 
         // Flash message to the session
         session()->flash('success', 'Operation ajoutée');
         session()->flash('subtitle', 'Votre Operation a été ajoutée avec succès à la liste.');
-        return redirect()->route('voiture.show',$voiture);
+        return redirect()->route('voiture.show', $voiture);
     }
 
     /**
@@ -96,7 +95,7 @@ class OperationController extends Controller
         if (!$operation || $operation->voiture_id != Session::get('voiture_id')) {
             abort(403);
         }
-        return view('userOperations.show',compact('voiture','operation','operations','categories','sousOperation'));
+        return view('userOperations.show', compact('voiture', 'operation', 'operations', 'categories', 'sousOperation'));
     }
 
     /**
@@ -107,7 +106,11 @@ class OperationController extends Controller
         $categories = nom_categorie::all();
         $garages = garage::all();
         $operation = Operation::find($id);
-        return view('userOperations.edit',compact('operation','categories','garages'));
+        $sousOperation = nom_sous_operation::all();
+        if (!$operation || $operation->voiture_id != Session::get('voiture_id')) {
+            abort(403);
+        }
+        return view('userOperations.edit', compact('operation', 'categories', 'garages'));
     }
 
     /**
@@ -115,7 +118,9 @@ class OperationController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
         $operation = Operation::find($id);
+
         $voiture = Session::get('voiture_id');
         $data = $request->validate([
             'categorie' => [
@@ -125,7 +130,7 @@ class OperationController extends Controller
             'description' => ['max:255'],
             'photo' => ['image'],
             'date_operation' => ['required', 'date'],
-            'garage_id'=>['required']
+            'garage_id' => ['required']
         ]);
         if ($request->hasFile('photo')) {
             $imagePath = $request->file('photo')->store('user/operations', 'public');
@@ -140,7 +145,7 @@ class OperationController extends Controller
         if ($request->filled('sousOperations')) {
             // Delete existing sousOperations related to this operation
             $operation->sousOperations()->delete();
-    
+
             // Re-add each sousOperation from the request
             foreach ($request->input('sousOperations') as $idSous) {
                 $name = nom_sous_operation::find($idSous);
@@ -152,7 +157,7 @@ class OperationController extends Controller
         }
         session()->flash('success', 'Operation modifiée');
         session()->flash('subtitle', 'Votre Operation a été modifiée avec succès à la liste.');
-        return redirect()->route('voiture.show',$voiture);
+        return redirect()->route('voiture.show', $voiture);
     }
 
     /**
@@ -166,6 +171,6 @@ class OperationController extends Controller
         $operation->delete();
         session()->flash('success', 'Operation supprimée');
         session()->flash('subtitle', 'Votre Operation a été supprimée avec succès à la liste.');
-        return redirect()->route('voiture.show',$voiture);
+        return redirect()->route('voiture.show', $voiture);
     }
 }

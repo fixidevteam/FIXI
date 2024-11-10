@@ -7,22 +7,19 @@
                     <button
                         type="button"
                         class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
-                        @click="openSideBar = !openSideBar"
-                    >
+                        @click="openSideBar = !openSideBar">
                         <span class="sr-only">Open sidebar</span>
                         <svg
                             class="w-6 h-6"
                             aria-hidden="true"
                             fill="currentColor"
                             viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
+                            xmlns="http://www.w3.org/2000/svg">
                             <path
                                 clip-rule="evenodd"
                                 fill-rule="evenodd"
                                 d="M2 4.75A.75.75 0 012.75
-    4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
-                            ></path>
+    4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
                         </svg>
                     </button>
                     {{-- logo --}}
@@ -77,7 +74,7 @@
                                         @csrf
 
                                         <x-dropdown-link class="text-red-600" :href="route('logout')"
-                                                onclick="event.preventDefault();
+                                            onclick="event.preventDefault();
                                                             this.closest('form').submit();">
                                             {{ __('Se déconnecter') }}
                                         </x-dropdown-link>
@@ -97,8 +94,7 @@
     <aside
         x-bind:class="{ '-translate-x-full': !openSideBar }"
         class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform  bg-white border-r border-gray-200 lg:translate-x-0 lg:block"
-        aria-label="Sidebar"
-    >
+        aria-label="Sidebar">
         <div class="h-full px-3 pb-4 overflow-y-auto bg-white">
             <div class="flex-1 bg-white divide-y space-y-1">
             <ul class="space-y-2 font-medium pb-2">
@@ -160,35 +156,31 @@
                      </a>
                 </li>
             </ul>
-            {{-- second list --}}
-            <ul class="space-y-2 font-medium pt-2">
-                <li>
-                    <form method="POST" action="{{ route('logout') }}" class="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100  group">
-                        <svg class="w-5 h-5 text-red-500 transition duration-75 group-hover:text-red-700" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 3.25C12.4142 3.25 12.75 3.58579 12.75 4C12.75 4.41421 12.4142 4.75 12 4.75C7.99594 4.75 4.75 7.99594 4.75 12C4.75 16.0041 7.99594 19.25 12 19.25C12.4142 19.25 12.75 19.5858 12.75 20C12.75 20.4142 12.4142 20.75 12 20.75C7.16751 20.75 3.25 16.8325 3.25 12C3.25 7.16751 7.16751 3.25 12 3.25Z" fill="currentColor"/>
-                            <path d="M16.4697 9.53033C16.1768 9.23744 16.1768 8.76256 16.4697 8.46967C16.7626 8.17678 17.2374 8.17678 17.5303 8.46967L20.5303 11.4697C20.8232 11.7626 20.8232 12.2374 20.5303 12.5303L17.5303 15.5303C17.2374 15.8232 16.7626 15.8232 16.4697 15.5303C16.1768 15.2374 16.1768 14.7626 16.4697 14.4697L18.1893 12.75H10C9.58579 12.75 9.25 12.4142 9.25 12C9.25 11.5858 9.58579 11.25 10 11.25H18.1893L16.4697 9.53033Z" fill="currentColor"/>
-                        </svg>
+                {{-- second list --}}
+                <ul class="space-y-2 font-medium pt-2">
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}" class="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100  group">
+                            <svg class="w-5 h-5 text-red-500 transition duration-75 group-hover:text-red-700" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 3.25C12.4142 3.25 12.75 3.58579 12.75 4C12.75 4.41421 12.4142 4.75 12 4.75C7.99594 4.75 4.75 7.99594 4.75 12C4.75 16.0041 7.99594 19.25 12 19.25C12.4142 19.25 12.75 19.5858 12.75 20C12.75 20.4142 12.4142 20.75 12 20.75C7.16751 20.75 3.25 16.8325 3.25 12C3.25 7.16751 7.16751 3.25 12 3.25Z" fill="currentColor" />
+                                <path d="M16.4697 9.53033C16.1768 9.23744 16.1768 8.76256 16.4697 8.46967C16.7626 8.17678 17.2374 8.17678 17.5303 8.46967L20.5303 11.4697C20.8232 11.7626 20.8232 12.2374 20.5303 12.5303L17.5303 15.5303C17.2374 15.8232 16.7626 15.8232 16.4697 15.5303C16.1768 15.2374 16.1768 14.7626 16.4697 14.4697L18.1893 12.75H10C9.58579 12.75 9.25 12.4142 9.25 12C9.25 11.5858 9.58579 11.25 10 11.25H18.1893L16.4697 9.53033Z" fill="currentColor" />
+                            </svg>
                             @csrf
                             <button type="submit" class="ms-3 capitalize text-red-500 transition duration-75 group-hover:text-red-700">Se déconnecter</button>
                         </form>
-                     </form>
-                </li>
-                <li>
-                    <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100  group">
-                        <svg class="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.75 18.5C12.1642 18.5 12.5 18.1642 12.5 17.75V11.75C12.5 11.3358 12.1642 11 11.75 11C11.3358 11 11 11.3358 11 11.75V17.75C11 18.1642 11.3358 18.5 11.75 18.5Z" fill="currentColor"/>
-                            <path d="M11.75 7.75C12.3023 7.75 12.75 8.19772 12.75 8.75C12.75 9.30228 12.3023 9.75 11.75 9.75C11.1977 9.75 10.75 9.30228 10.75 8.75C10.75 8.19772 11.1977 7.75 11.75 7.75Z" fill="currentColor"/>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1 12.75C1 6.81294 5.81294 2 11.75 2C17.6871 2 22.5 6.81294 22.5 12.75C22.5 18.6871 17.6871 23.5 11.75 23.5C5.81294 23.5 1 18.6871 1 12.75ZM11.75 3.5C6.64137 3.5 2.5 7.64137 2.5 12.75C2.5 17.8586 6.64137 22 11.75 22C16.8586 22 21 17.8586 21 12.75C21 7.64137 16.8586 3.5 11.75 3.5Z" fill="currentColor"/>
-                        </svg>
-                        <span class="ms-3 capitalize">À propos de nous</span>
-                     </a>
-                </li>
-            </ul>
+                        </form>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100  group">
+                            <svg class="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.75 18.5C12.1642 18.5 12.5 18.1642 12.5 17.75V11.75C12.5 11.3358 12.1642 11 11.75 11C11.3358 11 11 11.3358 11 11.75V17.75C11 18.1642 11.3358 18.5 11.75 18.5Z" fill="currentColor" />
+                                <path d="M11.75 7.75C12.3023 7.75 12.75 8.19772 12.75 8.75C12.75 9.30228 12.3023 9.75 11.75 9.75C11.1977 9.75 10.75 9.30228 10.75 8.75C10.75 8.19772 11.1977 7.75 11.75 7.75Z" fill="currentColor" />
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M1 12.75C1 6.81294 5.81294 2 11.75 2C17.6871 2 22.5 6.81294 22.5 12.75C22.5 18.6871 17.6871 23.5 11.75 23.5C5.81294 23.5 1 18.6871 1 12.75ZM11.75 3.5C6.64137 3.5 2.5 7.64137 2.5 12.75C2.5 17.8586 6.64137 22 11.75 22C16.8586 22 21 17.8586 21 12.75C21 7.64137 16.8586 3.5 11.75 3.5Z" fill="currentColor" />
+                            </svg>
+                            <span class="ms-3 capitalize">À propos de nous</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </aside>
 </div>
-
-
-
-

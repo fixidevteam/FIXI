@@ -1,5 +1,7 @@
 <x-app-layout>
+
   <div class="p-4 sm:ml-64">
+
     <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-14">
       {{-- content (slot on layouts/app.blade.php)--}}
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -48,7 +50,7 @@
             {{-- count all operations that made on the cars --}}
             @php
             $operationsCount = Auth::user()->voitures->sum(function ($voiture) {
-                return $voiture->operations->count();
+            return $voiture->operations->count();
             });
             @endphp
             <div class="flex items-center bg-white p-8 rounded-lg shadow">
@@ -148,12 +150,12 @@
                           {{$papier->type}}
                         </p>
                         <p class="text-sm text-gray-500 truncate">
-                          {{$papier->date_debut }} / <span class="text-red-600">{{$papier->date_fin}}</span> 
+                          {{$papier->date_debut }} / <span class="text-red-600">{{$papier->date_fin}}</span>
                         </p>
                       </div>
                       <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                      <a href="{{route('paiperPersonnel.show',$papier->id)}}" class="text-sm font-medium text-blue-600 inline-flex items-center p-2 capitalize hover:underline">Details</a>
-                        
+                        <a href="{{route('paiperPersonnel.show',$papier->id)}}" class="text-sm font-medium text-blue-600 inline-flex items-center p-2 capitalize hover:underline">Details</a>
+
                       </div>
                     </div>
                   </li>
@@ -169,6 +171,7 @@
     </div>
     {{-- contet close colse --}}
     {{-- footer --}}
+
     <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
       @include('layouts.footer')
     </div>
