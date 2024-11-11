@@ -153,7 +153,20 @@
             }
         }
 
+        function toggleDropdown() {
+            const dropdownMenu = document.getElementById('dropdown-menu');
+            dropdownMenu.classList.toggle('hidden');
+        }
 
+        // Close the dropdown if the user clicks outside of it
+        window.addEventListener('click', function(event) {
+            const dropdownMenu = document.getElementById('dropdown-menu');
+            const notificationButton = event.target.closest('button');
+
+            if (!event.target.closest('.relative') && dropdownMenu && !notificationButton) {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
     </script>
 </body>
 

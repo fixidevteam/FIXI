@@ -2,27 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UserPapier;
-use App\Models\VoiturePapier;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
     public function index()
     {
-        $today = Carbon::now();
+        $notifications = Auth::user()->notifications()->paginate(10); // Paginate for better performance
+        return view('notifications.index', compact('notifications'));
+    }
+    public function markAsRead($id)
+    {
+        $notification = Auth::user()->notifications()->findOrFail($id);
 
-        // Fetch personnel documents near expiration or expired
-        $paipersPersonnels = UserPapier::where('date_fin', '<=', $today->copy()->addDays(7))
-            ->orWhere('date_fin', '<', $today)
-            ->get();
+        if (is_null($notification->read_at)) {
+            $notification->markAsRead();
+        }
 
-        // Fetch vehicle documents near expiration or expired
-        $papiersVoitures = VoiturePapier::where('date_fin', '<=', $today->copy()->addDays(7))
-            ->orWhere('date_fin', '<', $today)
-            ->get();
+        return redirect()->back()->with('success', 'Notification marquée comme lue.');
+    }
+    public function markAllAsRead()
+    {
+        $user = Auth::user();
 
-        return view('notifications.index', compact('paipersPersonnels', 'papiersVoitures'));
+        // Mark all unread notifications as read
+        $user->unreadNotifications->markAsRead();
+
+        return redirect()->back()->with('success', 'Toutes les notifications ont été marquées comme lues.');
     }
 }
