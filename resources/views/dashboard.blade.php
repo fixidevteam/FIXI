@@ -92,7 +92,7 @@
                 <p class="p-4 text-gray-500 text-center">Aucune voiture disponible.</p>
                 @else
                 <ul role="list" class="divide-y divide-gray-200">
-                  @foreach (Auth::user()->voitures as $voiture)
+                  @foreach (Auth::user()->voitures->take(5) as $voiture)
                   <li class="py-3 sm:py-4">
                     <div class="flex items-center space-x-4">
                       <div class="flex-shrink-0">
@@ -135,7 +135,7 @@
                 <p class="p-4 text-gray-500 text-center">Aucune papier disponible.</p>
                 @else
                 <ul role="list" class="divide-y divide-gray-200">
-                  @foreach (Auth::user()->papiersUsers as $papier)
+                  @foreach (Auth::user()->papiersUsers->take(5) as $papier)
                   <li class="py-3 sm:py-4">
                     <div class="flex items-center space-x-4">
                       <div class="flex-shrink-0">
