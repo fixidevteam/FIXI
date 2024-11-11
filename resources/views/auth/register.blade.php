@@ -13,8 +13,14 @@
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="text" name="email" :value="old('email')"  autocomplete="username" />
+            <x-text-input id="email" class="block mt-1 w-full" type="text" name="email" :value="old('email')"  autocomplete="email" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
+        <!-- phone -->
+        <div class="mt-4">
+            <x-input-label for="telephone" :value="__('Téléphone')" />
+            <x-text-input id="telephone" class="block mt-1 w-full" type="text" name="telephone" :value="old('telephone')"  autocomplete="telephone" />
+            <x-input-error :messages="$errors->get('telephone')" class="mt-2" />
         </div>
 
         <!-- Password -->
@@ -42,7 +48,7 @@
 
         <div class="flex items-center justify-end mt-4">
             <x-primary-button class="flex w-full justify-center rounded-[20px] bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
-                {{ __('S’inscrire') }}
+                {{ __('S\'inscrire') }}
             </x-primary-button>
         </div>
     </form>
