@@ -324,7 +324,6 @@
                   <th scope="col" class="px-6 py-3">Photo</th>
                   <th scope="col" class="px-6 py-3">Date d'operation</th>
                   <th scope="col" class="px-6 py-3">Action</th>
-                  <th scope="col" class="px-6 py-3"></th>
                 </tr>
               </thead>
               <tbody>
@@ -360,11 +359,6 @@
                   {{-- Action --}}
                   <td class="px-6 py-4">
                     <a href="{{ route('operation.show',$operation->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Details</a>
-                  </td>
-
-                  {{-- Delete --}}
-                  <td class="px-6 py-4">
-                    Edit
                   </td>
                 </tr>
                 @endforeach

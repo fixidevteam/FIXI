@@ -12,7 +12,7 @@
                   </div>
                     <p class="mt-1 text-sm text-gray-600">Ajoutez vos informations en quelques clics,et accédez <br> à une vue d’ensemble claire et sécurisée de toutes vos <br> données importantes.</p>
                     <div class="mt-4">
-                      <a href="#">
+                      <a href="{{ route('mechanic.operations.index') }}">
                         <x-primary-button>mes opération</x-primary-button>
                       </a>
                     </div>
