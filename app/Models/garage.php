@@ -11,10 +11,7 @@ class garage extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'email',
         'ref',
-        'password',
-        'garage_id'
     ];
     public function mechanics(): HasMany
     {
