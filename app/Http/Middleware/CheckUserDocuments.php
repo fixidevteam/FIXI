@@ -48,10 +48,13 @@ class CheckUserDocuments
             $daysLeft = $now->diffInDays(Carbon::parse($document->date_fin), false);
 
             // Construct the message
-            $message = $daysLeft < 0
-                ? "Le document '{$document->type}' a expiré il y a " . abs($daysLeft) . " jour(s)."
-                : "Le document '{$document->type}' expirera dans {$daysLeft} jour(s).";
-
+            if ($daysLeft === 0) {
+                $message = "Le document '{$document->type}' expire aujourd'hui.";
+            } elseif ($daysLeft < 0) {
+                $message = "Le document '{$document->type}' a expiré il y a " . abs($daysLeft) . " jour(s).";
+            } else {
+                $message = "Le document '{$document->type}' expirera dans {$daysLeft} jour(s).";
+            }
             // Check for existing notification
             $existingNotification = $user->notifications()
                 ->where('data->document_id', $document->id)
