@@ -22,7 +22,7 @@ return [
     ],
     'boolean' => 'Le champ :attribute doit être vrai ou faux.',
     'can' => 'Le champ :attribute contient une valeur non autorisée.',
-    'confirmed' => 'La confirmation du champ :attribute ne correspond pas.',
+    'confirmed' => 'La confirmation du champ mot de passe ne correspond pas.',
     'current_password' => 'Le mot de passe est incorrect.',
     'date' => 'Le champ :attribute n\'est pas une date valide.',
     'date_equals' => 'Le champ :attribute doit être une date égale à :date.',
@@ -117,6 +117,9 @@ return [
                         +2127 suivi de 8 chiffres, 
                         06 suivi de 8 chiffres, ou 
                         07 suivi de 8 chiffres.",
+        ],
+        'password' => [
+            'required' => 'Le champ mot de passe est obligatoire.',
         ],
     ],
 
