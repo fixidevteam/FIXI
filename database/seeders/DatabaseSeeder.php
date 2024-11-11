@@ -107,22 +107,22 @@ class DatabaseSeeder extends Seeder
 
         garage::create([
             'id' => 1,
-            'nom'=>'garage1',
+            'name'=>'garage1',
             'ref'=>'AA11'
         ]);
         garage::create([
             'id' => 2,
-            'nom'=>'garage2',
+            'name'=>'garage2',
             'ref'=>'AA22'
         ]);
         garage::create([
             'id' => 3,
-            'nom'=>'garage3',
+            'name'=>'garage3',
             'ref'=>'AA3'
         ]);
         garage::create([
             'id' => 4,
-            'nom'=>'garage3',
+            'name'=>'garage3',
             'ref'=>'AA33'
         ]);
         // $this->call([

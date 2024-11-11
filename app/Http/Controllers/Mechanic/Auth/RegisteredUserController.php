@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Mechanic\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\garage;
 use App\Models\Mechanic;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -20,7 +21,9 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('mechanic.auth.register');
+        $garages = garage::all();
+
+        return view('mechanic.auth.register',compact('garages'));
     }
 
     /**
@@ -33,12 +36,14 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Mechanic::class],
+            'garage_id' => ['required'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $mechanic = Mechanic::create([
             'name' => $request->name,
             'email' => $request->email,
+            'garage_id' => $request->garage_id,
             'password' => Hash::make($request->password),
         ]);
 

@@ -12,6 +12,7 @@ class garage extends Model
     protected $fillable = [
         'name',
         'email',
+        'ref',
         'password',
         'garage_id'
     ];
