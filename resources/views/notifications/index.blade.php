@@ -84,18 +84,18 @@
           {{-- notifications --}}
           <div>
             <div class="mb-4">
-              <a href="{{ route('notifications.markAllAsRead') }}" class="px-4 py-2 mb-2 text-blue-500 hover:text-blue-700 text-sm font-medium">
-                Marquer tout comme lu
-              </a>
+                <a href="{{ route('notifications.markAllAsRead') }}" class="px-4 py-2 mb-2 text-blue-500 hover:text-blue-700 text-sm font-medium">
+                    Marquer tout comme lu
+                </a>
             </div>
 
     
             <div class="bg-white shadow rounded-lg">
               @foreach($notifications as $notification)
-              <div class="px-4 py-2 border-b {{ $notification->read_at ? 'bg-gray-100' : 'bg-white' }}">
-                {{ $notification->data['message'] }}
-                <small class="text-gray-500 block">{{ $notification->created_at->diffForHumans() }}</small>
-              </div>
+                <div class="px-4 py-2 border-b {{ $notification->read_at ? 'bg-gray-100' : 'bg-white' }}">
+                    {{ $notification->data['message'] }}
+                    <small class="text-gray-500 block">{{ $notification->created_at->diffForHumans() }}</small>
+                </div>
               @endforeach
             </div>
             <div class="mt-4">

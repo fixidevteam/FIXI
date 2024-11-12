@@ -33,4 +33,8 @@ class Operation extends Model
     {
         return $this->hasMany(SousOperation::class);
     }
+    public function nom_operation(): BelongsTo
+    {
+        return $this->belongsTo(nom_operation::class);
+    }
 }

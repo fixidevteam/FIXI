@@ -30,7 +30,7 @@
                                   d="m1 9 4-4-4-4" />
                           </svg>
                           <a
-                              href=""
+                              href="{{ route('mechanic.operations.index') }}"
                               class="inline-flex items-center text-sm font-medium text-gray-700   ">
                               Mes opération
                           </a>
@@ -65,9 +65,9 @@
               {{-- table --}}
               <div class="my-5">
                   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                      {{-- @if($voitures->isEmpty()) --}}
-                      {{-- <p class="p-4 text-gray-500 text-center">Aucune voiture disponible.</p> --}}
-                      {{-- @else --}}
+                      @if($operations->isEmpty())
+                      <p class="p-4 text-gray-500 text-center">Aucune operation disponible.</p>
+                      @else
                       <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                           <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                             <tr>
@@ -96,44 +96,45 @@
                           </thead>
                           <tbody>
 
-                              {{-- @foreach($voitures as $voiture) --}}
+                              @foreach($operations as $operation)
                               <tr class="bg-white border-b">
                                   <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                      {{-- {{$voiture->numero_immatriculation}} --}}
-                                      numero_immatriculation
+                                    {{ $operation->voiture->numero_immatriculation}}
                                   </th>
                                   <td class="px-6 py-4">
-                                      {{-- {{$voiture->marque}} --}}
-                                      Categorie
+                                    {{-- {{ $operation->nom_operation->categorie->nom_categorie ?? 'N/A' }} --}}
+                                    {{
+                                        $categories->where('id',$operation->categorie)->first()->nom_categorie ;
+                                    }}
                                   </td>
                                   <td class="px-6 py-4">
-                                      {{-- {{$voiture->modele}} --}}
-                                      Operation
+                                        {{ $ope->where('id', $operation->nom)->first()->nom_operation ; }}
+                                    </td>
+                                  <td class="px-6 py-4">
+                                    @php
+                                    $sousOperations = $ope->where('id', $operation->nom)->first()->sousOperations ?? [];
+                                    @endphp
+                                    {{ $sousOperations->first()->nom_sous_operation ?? 'N/A' }}
                                   </td>
                                   <td class="px-6 py-4">
-                                      {{-- {{$voiture->date_de_première_mise_en_circulation}} --}}
-                                      sous operation
+                                      {{ $operation->date_operation }}
                                   </td>
                                   <td class="px-6 py-4">
-                                      {{-- {{$voiture->date_de_première_mise_en_circulation}} --}}
-                                      Date d'operation
-                                  </td>
-                                  <td class="px-6 py-4">
-                                      {{-- @if($voiture->photo !== NULL) --}}
-                                      {{-- <img class="rounded-full w-8 h-8 object-cover" src="{{asset('storage/'.$voiture->photo)}}" alt="image description"> --}}
-                                      {{-- @else --}}
+                                      @if($operation->voiture->photo !== NULL)
+                                      <img class="rounded-full w-8 h-8 object-cover" src="{{asset('storage/'.$operation->voiture->photo)}}" alt="image description">
+                                      @else
                                       <img class="rounded-full w-8 h-8 object-cover" src="../images/defaultimage.jpg" alt="image description">
-                                      {{-- @endif --}}
+                                      @endif
                                   </td>
                                   <td class="px-6 py-4">
                                       <a href="" class="font-medium capitalize text-blue-600 dark:text-blue-500 hover:underline">details</a>
                                   </td>
                               </tr>
-                              {{-- @endforeach --}}
+                              @endforeach
                           </tbody>
                       </table>
                   </div>
-                  {{-- @endif --}}
+                  @endif
               </div>
               {{-- table close --}}
 

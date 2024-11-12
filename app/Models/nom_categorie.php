@@ -14,7 +14,8 @@ class nom_categorie extends Model
     protected $fillable = [
         'nom_categorie'
     ];
-    public function operations():HasMany{
-        return $this->hasMany(nom_operation::class);
+    public function operations(): HasMany
+    {
+        return $this->hasMany(nom_operation::class, 'nom_categorie_id');
     }
 }

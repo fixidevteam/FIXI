@@ -15,7 +15,8 @@ class nom_sous_operation extends Model
         'nom_sous_operation',
         'nom_operation_id'
     ];
-    public function operation():BelongsTo{
-        return $this->BelongsTo(nom_operation::class);
+    public function operation(): BelongsTo
+    {
+        return $this->belongsTo(nom_operation::class, 'nom_operation_id');
     }
 }

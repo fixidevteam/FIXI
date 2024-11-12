@@ -17,12 +17,16 @@ class nom_operation extends Model
         'nom_operation',
         'nom_categorie_id'
     ];
-    public function categorie():BelongsTo{
-        return $this->BelongsTo(nom_categorie::class);
+    public function operations():HasMany
+    {
+        return $this->HasMany(Operation::class);
     }
-    public function sousOperations():HasMany{
+    public function categorie(): BelongsTo
+    {
+        return $this->belongsTo(nom_categorie::class, 'nom_categorie_id');
+    }
+    public function sousOperations(): HasMany
+    {
         return $this->hasMany(nom_sous_operation::class);
     }
-    
-
 }
