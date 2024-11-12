@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\VoiturePapier;
+use App\Notifications\DocumentExpiryNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -151,6 +152,7 @@ class PapierVoitureController extends Controller
                                 'unique_key' => $uniqueKey,
                             ]),
                         ]);
+                        $notification->update(['created_at' => now()]);
                     } else {
                         // Create a new notification
                         $user->notify(new DocumentExpiryNotification($papier, $message, $uniqueKey, true));
