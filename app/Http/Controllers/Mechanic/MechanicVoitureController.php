@@ -3,9 +3,6 @@
 namespace App\Http\Controllers\Mechanic;
 
 use App\Http\Controllers\Controller;
-use App\Models\nom_categorie;
-use App\Models\nom_operation;
-use App\Models\Operation;
 use App\Models\Voiture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,31 +15,34 @@ class MechanicVoitureController extends Controller
      */
     public function index(Request $request)
     {
+        // Get the authenticated user's garage operations
         $user = Auth::user();
+        $search = $request->input('search'); // Retrieve the search query
 
-        // Get the search query
-        $search = $request->input('search');
+        // Fetch voitures related to the user's garage operations
+        $voitures = collect(); // Initialize an empty collection for voitures
 
-        // Fetch the authenticated mechanic's operations and include necessary relationships
-        $operations = Operation::whereHas('garage', function ($query) use ($user) {
-            $query->where('id', $user->garage_id);
-        })
-            ->with('voiture')
-            ->when($search, function ($query, $search) {
-                // Filter by numero_immatriculation
-                $query->whereHas('voiture', function ($query) use ($search) {
-                    $query->where('numero_immatriculation', 'like', '%' . $search . '%');
-                });
-            })
-            ->get();
+        $operations = $user->garage->operations()->with('voiture')->get();
 
-        $ope = nom_operation::all(); // Assuming this fetches all operation names
-        $categories = nom_categorie::all(); // Assuming this fetches all category names
+        foreach ($operations as $operation) {
+            if ($operation->voiture) {
+                $voitures->push($operation->voiture);
+            }
+        }
 
-        // Return the view with the operations, categories, and search term
-        return view('mechanic.operations.index', compact('operations', 'categories', 'ope', 'search'));
+        // Filter voitures if search query is provided
+        if (!empty($search)) {
+            $voitures = $voitures->filter(function ($voiture) use ($search) {
+                return stripos($voiture->numero_immatriculation, $search) !== false;
+            });
+        }
+
+        // Remove duplicate voitures (if any)
+        $voitures = $voitures->unique('id')->values();
+
+        // Pass the voitures and search query to the view
+        return view('mechanic.voitures.index', compact('voitures', 'search'));
     }
-
 
 
     /**
