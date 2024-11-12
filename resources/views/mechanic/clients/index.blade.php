@@ -30,7 +30,7 @@
                                   d="m1 9 4-4-4-4" />
                           </svg>
                           <a
-                              href=""
+                              href="{{ route('mechanic.clients.index') }}"
                               class="inline-flex items-center text-sm font-medium text-gray-700   ">
                               La liste des clients
                           </a>
@@ -48,10 +48,10 @@
               </div>
               {{-- search --}}
               <div>
-                <form class="flex items-center w-full mx-auto">   
+                <form action="{{ route('mechanic.clients.index') }}" method="GET" class="flex items-center w-full mx-auto">   
                   <label for="simple-search" class="sr-only">Search</label>
                   <div class="w-full">
-                      <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-500 block w-full ps-5 p-2.5" placeholder="client nom" required />
+                      <input type="text" name="search" value="{{ old('search', $search) }}" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-500 block w-full ps-5 p-2.5" placeholder="client nom"  />
                   </div>
                   <button type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-gray-700 rounded-lg border border-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300">
                       <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -59,15 +59,19 @@
                       </svg>
                       <span class="sr-only">Search</span>
                   </button>
+                {{-- Reset Button --}}
+                <a href="{{ route('mechanic.clients.index') }}" class="p-2.5 ms-2 bg-gray-200 text-gray-900 rounded-lg hover:bg-gray-300">
+                    Reset
+                </a>
                 </form>
               </div>
               {{-- search close --}}
               {{-- table --}}
               <div class="my-5">
                   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                      {{-- @if($voitures->isEmpty()) --}}
-                      {{-- <p class="p-4 text-gray-500 text-center">Aucune voiture disponible.</p> --}}
-                      {{-- @else --}}
+                      @if($clients->isEmpty())
+                      <p class="p-4 text-gray-500 text-center">Aucune client disponible.</p>
+                      @else
                       <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                           <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                             <tr>
@@ -83,27 +87,23 @@
                             </tr>
                           </thead>
                           <tbody>
-
-                              {{-- @foreach($voitures as $voiture) --}}
+                              @foreach($clients as $client)
                               <tr class="bg-white border-b">
                                   <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                      {{-- {{$voiture->numero_immatriculation}} --}}
-                                      nom complet
+                                    {{ $client->name }}
                                   </th>
                                   <td class="px-6 py-4">
-                                      {{-- {{$voiture->marque}} --}}
-                                      email@gamil.com
+                                    {{ $client->email }}
                                   </td>
                                   <td class="px-6 py-4">
-                                      {{-- {{$voiture->modele}} --}}
-                                      061234
+                                    {{ $client->telephone }}
                                   </td>
                               </tr>
-                              {{-- @endforeach --}}
+                              @endforeach
                           </tbody>
                       </table>
                   </div>
-                  {{-- @endif --}}
+                  @endif
               </div>
               {{-- table close --}}
 
