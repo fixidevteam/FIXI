@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
@@ -32,3 +33,4 @@ class NotificationController extends Controller
         return redirect()->back()->with('success', 'Toutes les notifications ont été marquées comme lues.');
     }
 }
+
