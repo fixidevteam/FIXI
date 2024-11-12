@@ -17,7 +17,7 @@ class UserPapier extends Model
         'note',
         'date_debut',
         'date_fin',
-        'user_id'
+        'user_id',
     ];
     public function user():BelongsTo
     {

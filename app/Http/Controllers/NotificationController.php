@@ -33,4 +33,3 @@ class NotificationController extends Controller
         return redirect()->back()->with('success', 'Toutes les notifications ont été marquées comme lues.');
     }
 }
-

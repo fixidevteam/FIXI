@@ -116,6 +116,7 @@ class PapierPeronnelController extends Controller
             // Update the document
             $papier->update($validatedData);
 
+
             // Handle related notifications
             // Handle related notifications
             $user = $papier->user; // Ensure this relationship exists in your UserPapier model
@@ -155,6 +156,7 @@ class PapierPeronnelController extends Controller
                                 'unique_key' => $uniqueKey,
                             ]),
                         ]);
+                        $notification->update(['created_at' => now()]);
                     } else {
                         // Create a new notification
                         $user->notify(new DocumentExpiryNotification($papier, $message, $uniqueKey, false));
