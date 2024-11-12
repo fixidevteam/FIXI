@@ -62,6 +62,10 @@
                             </svg>
                             <span class="sr-only">Search</span>
                         </button>
+                        {{-- Reset Button --}}
+                        <a href="{{ route('mechanic.voitures.index') }}" class="p-2.5 ms-2 bg-gray-200 text-gray-900 rounded-lg hover:bg-gray-300">
+                            Reset
+                        </a>
                     </form> 
                 </div>
                 {{-- search close --}}
