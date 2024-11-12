@@ -117,29 +117,47 @@ class PapierVoitureController extends Controller
             // Handle related notifications
             $user = $papier->voiture->user; // Ensure Voiture model has a `user` relationship
             if ($user) {
-                $notification = $user->notifications()
-                    ->where('data->document_id', $papier->id)
-                    ->first();
-                if ($notification) {
-                    if (Carbon::parse($papier->date_fin)->gt(Carbon::now()->addDays(7))) {
-                        // Delete notification if document is no longer expiring soon
-                        $notification->delete();
-                    } else {
-                        // Mark notification as unread and update its message
-                        $daysLeft = Carbon::now()->diffInDays(Carbon::parse($papier->date_fin), false);
-                        $message = $daysLeft === 0
-                            ? "Le document '{$papier->type}' expire aujourd'hui."
-                            : ($daysLeft < 0
-                                ? "Le document '{$papier->type}' a expiré il y a " . abs($daysLeft) . " jour(s)."
-                                : "Le document '{$papier->type}' expirera dans {$daysLeft} jour(s).");
+                // Generate unique key for the notification
+                $uniqueKey = "car-{$papier->id}";
 
+                // Check if a notification already exists
+                $notification = $user->notifications()
+                    ->where('data->unique_key', $uniqueKey)
+                    ->first();
+
+                $daysLeft = Carbon::now()->diffInDays(Carbon::parse($papier->date_fin), false);
+
+                if ($daysLeft > 7) {
+                    // Delete notification if document is no longer expiring soon
+                    if ($notification) {
+                        $notification->delete();
+                    }
+                } else {
+                    // Generate the notification message
+                    $message = $daysLeft === 0
+                        ? "Le document '{$papier->type}' expire aujourd'hui."
+                        : ($daysLeft < 0
+                            ? "Le document '{$papier->type}' a expiré il y a " . abs($daysLeft) . " jour(s)."
+                            : "Le document '{$papier->type}' expirera dans {$daysLeft} jour(s).");
+
+                    if ($notification) {
+                        // Update existing notification
                         $notification->update([
                             'read_at' => null, // Mark as unread
-                            'data' => array_merge($notification->data, ['message' => $message]),
+                            'data' => array_merge($notification->data, [
+                                'message' => $message,
+                                'document_id' => $papier->id,
+                                'type' => $papier->type,
+                                'unique_key' => $uniqueKey,
+                            ]),
                         ]);
+                    } else {
+                        // Create a new notification
+                        $user->notify(new DocumentExpiryNotification($papier, $message, $uniqueKey, true));
                     }
                 }
             }
+
 
             session()->flash('success', 'Document mise à jour');
             session()->flash('subtitle', 'Votre document a été mis à jour avec succès.');

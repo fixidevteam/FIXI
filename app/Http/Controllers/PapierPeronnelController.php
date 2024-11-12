@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserPapier;
+use App\Notifications\DocumentExpiryNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -116,32 +117,50 @@ class PapierPeronnelController extends Controller
             $papier->update($validatedData);
 
             // Handle related notifications
-            $user = $papier->user; // Adjust based on your relationship
-            if ($user) {
-                $notification = $user->notifications()
-                    ->where('data->document_id', $papier->id)
-                    ->first();
-                if ($notification) {
-                    if (Carbon::parse($papier->date_fin)->gt(Carbon::now()->addDays(7))) {
-                        // Delete notification if document is no longer expiring soon
-                        $notification->delete();
-                    } else {
-                        // Mark notification as unread and update its message
-                        $daysLeft = Carbon::now()->diffInDays(Carbon::parse($papier->date_fin), false);
-                        $message = $daysLeft === 0
-                            ? "Le document '{$papier->type}' expire aujourd'hui."
-                            : ($daysLeft < 0
-                                ? "Le document '{$papier->type}' a expiré il y a " . abs($daysLeft) . " jour(s)."
-                                : "Le document '{$papier->type}' expirera dans {$daysLeft} jour(s).");
+            // Handle related notifications
+            $user = $papier->user; // Ensure this relationship exists in your UserPapier model
 
+            if ($user) {
+                // Generate unique key for the notification
+                $uniqueKey = "user-{$papier->id}";
+
+                // Check if a notification already exists
+                $notification = $user->notifications()
+                    ->where('data->unique_key', $uniqueKey)
+                    ->first();
+
+                $daysLeft = Carbon::now()->diffInDays(Carbon::parse($papier->date_fin), false);
+
+                if ($daysLeft > 7) {
+                    // Delete notification if document is no longer expiring soon
+                    if ($notification) {
+                        $notification->delete();
+                    }
+                } else {
+                    // Generate the notification message
+                    $message = $daysLeft === 0
+                        ? "Le document '{$papier->type}' expire aujourd'hui."
+                        : ($daysLeft < 0
+                            ? "Le document '{$papier->type}' a expiré il y a " . abs($daysLeft) . " jour(s)."
+                            : "Le document '{$papier->type}' expirera dans {$daysLeft} jour(s).");
+
+                    if ($notification) {
+                        // Update existing notification
                         $notification->update([
                             'read_at' => null, // Mark as unread
-                            'data' => array_merge($notification->data, ['message' => $message]),
+                            'data' => array_merge($notification->data, [
+                                'message' => $message,
+                                'document_id' => $papier->id,
+                                'type' => $papier->type,
+                                'unique_key' => $uniqueKey,
+                            ]),
                         ]);
+                    } else {
+                        // Create a new notification
+                        $user->notify(new DocumentExpiryNotification($papier, $message, $uniqueKey, false));
                     }
                 }
             }
-
             session()->flash('success', 'Document mis à jour');
             session()->flash('subtitle', 'Votre document a été mis à jour avec succès.');
         } else {
@@ -158,12 +177,6 @@ class PapierPeronnelController extends Controller
     {
         $papier = UserPapier::find($id);
         if ($papier) {
-            $user = $papier->user; // Adjust if necessary to match your user relationship
-            if ($user) {
-                $user->notifications()
-                    ->where('data->document_id', $papier->id)
-                    ->delete();
-            }
             $papier->delete();
         }
         session()->flash('success', 'Document supprimée');
