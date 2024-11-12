@@ -14,20 +14,30 @@ class MechanicOperatioController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
+
+        // Get the search query
+        $search = $request->input('search');
 
         // Fetch the authenticated mechanic's operations and include necessary relationships
         $operations = Operation::whereHas('garage', function ($query) use ($user) {
             $query->where('id', $user->garage_id);
         })
         ->with('voiture')
+        ->when($search, function ($query, $search) {
+            // Filter by numero_immatriculation
+            $query->whereHas('voiture', function ($query) use ($search) {
+                $query->where('numero_immatriculation', 'like', '%' . $search . '%');
+            });
+        })
         ->get();
+
         $ope = nom_operation::all();
         $categories = nom_categorie::all();
         // dd($operations);
-        return view('mechanic.operations.index',compact('operations','categories','ope'));
+        return view('mechanic.operations.index', compact('operations', 'categories', 'ope','search'));
     }
 
     /**

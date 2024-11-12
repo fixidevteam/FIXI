@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Closure;
@@ -24,7 +23,7 @@ class CheckUserDocuments
 
             // Check user documents
             $userDocuments = $user->papiersUsers()->where('date_fin', '<=', $now->copy()->addDays(7))->get();
-            $this->processDocuments($userDocuments, $user, $now);
+            $this->processDocuments($userDocuments, $user, $now, false);
 
             // Check car documents
             $carDocuments = $user->voitures()
@@ -55,9 +54,13 @@ class CheckUserDocuments
             } else {
                 $message = "Le document '{$document->type}' expirera dans {$daysLeft} jour(s).";
             }
+
+            // Create a unique notification key
+            $uniqueKey = $isCar ? "car-{$document->id}" : "user-{$document->id}";
+
             // Check for existing notification
             $existingNotification = $user->notifications()
-                ->where('data->document_id', $document->id)
+                ->where('data->unique_key', $uniqueKey)
                 ->first();
 
             if ($daysLeft > 7) {
@@ -70,6 +73,7 @@ class CheckUserDocuments
                 if ($existingNotification) {
                     $existingNotification->update([
                         'data' => [
+                            'unique_key' => $uniqueKey,
                             'document_id' => $document->id,
                             'type' => $document->type,
                             'message' => $message,
@@ -78,7 +82,7 @@ class CheckUserDocuments
                         ],
                     ]);
                 } else {
-                    $user->notify(new DocumentExpiryNotification($document, $message));
+                    $user->notify(new DocumentExpiryNotification($document, $message, $uniqueKey, $isCar));
                 }
             }
         }

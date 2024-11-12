@@ -159,14 +159,9 @@ class PapierVoitureController extends Controller
         $voiture_id = $papier->voiture_id;
         // dd($voiture_id);
         if ($papier) {
-            $user = $papier->voiture->user; // Adjust if necessary to match your user relationship
-            if ($user) {
-                $user->notifications()
-                    ->where('data->document_id', $papier->id)
-                    ->delete();
-            }
             $papier->delete();
         }
+
         session()->flash('success', 'Document supprimée');
         session()->flash('subtitle', 'Votre document a été supprimée avec succès.');
         return redirect()->route('voiture.show', $voiture_id);
