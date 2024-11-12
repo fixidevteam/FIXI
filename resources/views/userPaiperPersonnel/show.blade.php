@@ -160,19 +160,19 @@
         <div class="grid grid-cols-1 md:grid-cols-2">
           {{-- date debut --}}
           <div class="mb-4">
-            <p class="capitalize text-sm font-medium text-gray-900 truncate">
+            <p class="capitalize text-sm font-medium text-gray-900 ">
               date debut
             </p>
-            <p class="text-sm text-gray-500 truncate">
+            <p class="text-sm text-gray-500 ">
             {{$papier->date_debut}}
             </p>
           </div>
           {{-- date fin --}}
           <div>
-            <p class="capitalize text-sm font-medium text-gray-900 truncate">
+            <p class="capitalize text-sm font-medium text-gray-900 ">
               date fin
             </p>
-            <p class="text-sm text-gray-500 truncate">
+            <p class="text-sm text-gray-500 ">
             {{$papier->date_fin}}
             </p>
           </div>
@@ -180,10 +180,10 @@
         {{-- note --}}
         @if($papier->note !== NULL)
         <div class="my-4">
-          <p class="capitalize text-sm font-medium text-gray-900 truncate">
+          <p class="capitalize text-sm font-medium text-gray-900">
             note
           </p>
-          <p class="text-sm text-gray-500 truncate">
+          <p class="text-sm text-gray-500">
           {{$papier->note}}
            </p>
         </div>

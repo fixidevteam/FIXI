@@ -229,10 +229,10 @@
         {{-- description --}}
         @if($operation->description !== NULL)
         <div class="my-4">
-          <p class="capitalize text-sm font-medium text-gray-900 truncate">
+          <p class="capitalize text-sm font-medium text-gray-900">
             description
           </p>
-          <p class="text-sm text-gray-500 truncate">
+          <p class="text-sm text-gray-500">
             {{ $operation->description }}
           </p>
         </div>

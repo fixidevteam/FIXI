@@ -7,7 +7,7 @@
                   <div class="flex flex-col md:flex-row md:justify-between md:items-center">
                     <h1 class="text-lg font-medium text-gray-900">Bonjour, {{ Auth::user()->name }} </h1>
                     <div>
-                      <h2 class="text-lg font-medium text-gray-900">REF : AA1100</h2>
+                      <h2 class="text-lg font-medium text-gray-900">REF : {{ Auth::user()->garage?->ref }}</h2>
                     </div>
                   </div>
                     <p class="mt-1 text-sm text-gray-600">Ajoutez vos informations en quelques clics,et accédez <br> à une vue d’ensemble claire et sécurisée de toutes vos <br> données importantes.</p>
