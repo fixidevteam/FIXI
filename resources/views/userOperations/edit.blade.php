@@ -109,9 +109,9 @@
                     <div>
                         <x-input-label for="garage" :value="__('Garage')" />
                         <select id="garage" name="garage_id" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            <option value="">Select garage</option>
+                            <option value="">Select Garage</option>
                             @foreach ($garages as $garage)
-                            <option value="{{ $garage->id }}" @if(old('garage_id')==$garage->id || $operation->garage_id == $garage->id) selected @endif>{{ $garage->nom }}</option>
+                            <option value="{{ $garage->id }}" @if(old('garage_id')==$garage->id || $operation->garage_id == $garage->id) selected @endif>{{ $garage->name }}</option>
                             @endforeach
                         </select>
                         <x-input-error :messages="$errors->get('garage_id')" class="mt-2" />

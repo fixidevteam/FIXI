@@ -121,6 +121,12 @@ return [
         'password' => [
             'required' => 'Le champ mot de passe est obligatoire.',
         ],
+        'name' => [
+            'required' => 'Le champ nom complet est obligatoire.',
+        ],
+        'garage_id' => [
+            'required' => 'Le champ garage est obligatoire.',
+        ],
     ],
 
     /*

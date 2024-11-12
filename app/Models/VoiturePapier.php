@@ -17,7 +17,7 @@ class VoiturePapier extends Model
         'note',
         'date_debut',
         'date_fin',
-        'voiture_id'
+        'voiture_id',
     ];
     public function voiture():BelongsTo
     {

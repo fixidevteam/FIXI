@@ -116,6 +116,7 @@ class PapierPeronnelController extends Controller
             // Update the document
             $papier->update($validatedData);
 
+
             // Handle related notifications
             // Handle related notifications
             $user = $papier->user; // Ensure this relationship exists in your UserPapier model
