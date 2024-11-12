@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Mechanic;
 
 use App\Http\Controllers\Controller;
+use App\Models\Operation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MechanicOperatioController extends Controller
 {
@@ -12,7 +14,16 @@ class MechanicOperatioController extends Controller
      */
     public function index()
     {
-        return view('mechanic.operations.index');
+        $user = Auth::user();
+
+        // Fetch the authenticated mechanic's operations via their garage
+        $operations = Operation::whereHas('garage', function ($query) use ($user) {
+            $query->where('id', $user->garage_id);
+        })
+        ->with('voiture')
+        ->get();
+        // dd($operations);
+        return view('mechanic.operations.index',compact('operations'));
     }
 
     /**
