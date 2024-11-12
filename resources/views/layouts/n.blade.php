@@ -57,7 +57,7 @@
                                     <p class="px-4 py-2 text-sm font-bold text-gray-700 border-b ">
                                         Notifications
                                     </p>
-                                    <div class="py-2 max-h-64 overflow-y-auto">
+                                    <div class="py-2  overflow-y-auto">
                                         @foreach(Auth::user()->notifications->take(3) as $notification)
                                         <div class="flex items-center gap-4  px-6 py-4 text-sm border-b {{ $notification->read_at ? 'bg-gray-100' : 'bg-white' }}">
                                             <!-- Icon -->
@@ -72,6 +72,7 @@
                                             <!-- Notification Message -->
                                             <div class="flex-1 text-gray-800">
                                                 {{ $notification->data['message'] }}
+                                                <small class="text-gray-500 block">{{ $notification->created_at->diffForHumans() }}</small>
                                             </div>
                                             <!-- Mark as Read Link -->
                                             @if(is_null($notification->read_at))
