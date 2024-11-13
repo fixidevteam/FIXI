@@ -122,13 +122,13 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         @if($voiture->photo !== NULL)
-                                        <img class="rounded-full w-8 h-8 object-cover" src="{{asset('storage/'.$operation->voiture->photo)}}" alt="image description">
+                                        <img class="rounded-full w-8 h-8 object-cover" src="{{asset('storage/'.$voiture->photo)}}" alt="image description">
                                         @else
                                         <img class="rounded-full w-8 h-8 object-cover" src="../images/defaultimage.jpg" alt="image description">
                                         @endif
                                     </td>
                                     <td class="px-6 py-4">
-                                        <a href="" class="font-medium capitalize text-blue-600 dark:text-blue-500 hover:underline">details</a>
+                                        <a href="{{route('mechanic.voitures.show',$voiture->id)}}" class="font-medium capitalize text-blue-600 dark:text-blue-500 hover:underline">details</a>
                                     </td>
                                 </tr>
                                 @endforeach

@@ -124,7 +124,7 @@
         </div>
         {{-- @endif --}}
         {{-- operation description close  --}}
-        <div class="flex justify-center my-8">
+        <div class="flex justify-center my-8 ">
           {{-- @if($operation->photo !== NULL) --}}
           {{-- <img class="" src="{{asset('storage/'.$operation->photo)}}" alt="image description"> --}}
           {{-- @else --}}
