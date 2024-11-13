@@ -9,7 +9,8 @@ use App\Models\Operation;
 use App\Models\Voiture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PhpParser\Node\Stmt\Foreach_;
+use Illuminate\Support\Facades\Session;
+
 
 class MechanicVoitureController extends Controller
 {
@@ -66,6 +67,7 @@ class MechanicVoitureController extends Controller
      */
     public function show(string $id)
     {
+
         $user = Auth::user();
         $voitures = collect(); // Initialize an empty collection for voitures
 
@@ -79,6 +81,7 @@ class MechanicVoitureController extends Controller
 
         $voiture = $voitures->firstWhere('id', $id); // Use firstWhere to find voiture by ID
         if ($voiture) {
+            Session::put('voiture_id', $id);
             $operations = Operation::where('voiture_id', $voiture->id)
                 ->where('garage_id', $user->garage_id)
                 ->get();

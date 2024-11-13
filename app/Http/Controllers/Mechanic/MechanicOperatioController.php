@@ -8,8 +8,10 @@ use App\Models\nom_categorie;
 use App\Models\nom_operation;
 use App\Models\nom_sous_operation;
 use App\Models\Operation;
+use App\Models\SousOperation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class MechanicOperatioController extends Controller
 {
@@ -57,7 +59,44 @@ class MechanicOperatioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $garage = Auth::user()->garage_id;
+        $voiture = Session::get('voiture_id');
+        $data = $request->validate([
+            'categorie' => [
+                'required',
+            ],
+            'nom' => ['required'],
+            'description' => ['max:255'],
+            'photo' => ['image'],
+            'date_operation' => ['required', 'date'],
+        ]);
+        if ($request->hasFile('photo')) {
+            $imagePath = $request->file('photo')->store('user/operations', 'public');
+            $data['photo'] = $imagePath;
+        }
+
+        $data['voiture_id'] = $voiture;
+        $data['garage_id'] = $garage;
+        $operation = Operation::create($data);
+
+        // add sous operation 
+        if ($request->filled('sousOperations')) {
+            // If sousOperations is not empty, dump and display the data
+            foreach ($request->input('sousOperations') as $idSous) {
+                $name = nom_sous_operation::find($idSous);
+                SousOperation::create(
+                    [
+                        'nom' => $name->id,
+                        'operation_id' => $operation->id
+                    ]
+                );
+            }
+        }
+
+        // Flash message to the session
+        session()->flash('success', 'Operation ajoutée');
+        session()->flash('subtitle', 'Votre Operation a été ajoutée avec succès à la liste.');
+        return redirect()->route('mechanic.voitures.show', $voiture);
     }
 
     /**
