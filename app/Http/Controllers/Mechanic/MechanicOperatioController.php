@@ -72,8 +72,7 @@ class MechanicOperatioController extends Controller
             $query->where('id', $user->garage_id);
         })
             ->with(['voiture', 'garage'])
-            ->findOrFail($id);
-        dd($operation);
+            ->find($id);
         if ($operation) {
             $ope = nom_operation::all();
             $categories = nom_categorie::all();
