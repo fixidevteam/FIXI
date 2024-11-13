@@ -28,7 +28,7 @@
                         {{-- box 1 --}}
                         <div class="flex items-center bg-white p-8 rounded-lg shadow">
                             <div class="flex-shrink-0">
-                              <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">5</span>
+                              <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{ Auth::user()->garage->operations()->count() }}</span>
                               <h3 class="text-base font-normal text-gray-500 capitalize">nombre des operations</h3>
                             </div>
                             <div class="ml-5 w-0 flex items-center justify-end flex-1 text-gray-600 text-base font-bold">
@@ -46,7 +46,7 @@
                           {{-- box 2 --}}
                           <div class="flex items-center bg-white p-8 rounded-lg shadow">
                             <div class="flex-shrink-0">
-                              <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">5</span>
+                              <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">12</span>
                               <h3 class="text-base font-normal text-gray-500 capitalize">nombre des Véhicule</h3>
                             </div>
                             <div class="ml-5 w-0 flex items-center justify-end flex-1 text-gray-600 text-base font-bold">
@@ -58,7 +58,7 @@
                           {{-- box 3 --}}
                           <div class="flex items-center bg-white p-8 rounded-lg shadow">
                             <div class="flex-shrink-0">
-                              <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">15</span>
+                              <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">12</span>
                               <h3 class="text-base font-normal text-gray-500 capitalize">nombre des clients</h3>
                             </div>
                             <div class="ml-5 w-0 flex items-center justify-end flex-1 text-gray-600 text-base font-bold">
