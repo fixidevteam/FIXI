@@ -148,11 +148,11 @@
           </div>
         </div>
         {{-- paipe image  --}}
-        <div class="flex justify-center my-8">
+        <div class="flex justify-center my-8 overflow-hidden">
           @if($papier->photo !== NULL)
-          <img class="" src="{{asset('storage/'.$papier->photo)}}" alt="image description">
+          <img class="w-full h-96 object-cover" src="{{asset('storage/'.$papier->photo)}}" alt="image description">
           @else
-          <img class="" src="../images/defaultimage.jpg" alt="image description">
+          <img class="w-full h-96 object-cover" src="../images/defaultimage.jpg" alt="image description">
           @endif
         </div>
         {{-- paipe close  --}}

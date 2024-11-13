@@ -172,11 +172,11 @@
             </button>
           </div>
         </div>
-        <div class="flex justify-center my-8">
+        <div class="flex justify-center my-8 overflow-hidden">
           @if($operation->photo !== NULL)
-          <img class="" src="{{asset('storage/'.$operation->photo)}}" alt="image description">
+          <img class="w-full h-96 object-cover" src="{{asset('storage/'.$operation->photo)}}" alt="image description">
           @else
-          <img class="" src="../images/defaultimage.jpg" alt="image description">
+          <img class="w-full h-96 object-cover" src="../images/defaultimage.jpg" alt="image description">
           @endif
         </div>
         {{-- content of details  --}}
@@ -199,7 +199,7 @@
               Gagare
             </p>
             <p class="text-sm text-gray-500 truncate">
-              {{$operation->garage->nom}}
+              {{$operation->garage->name}}
             </p>
           </div>
           {{-- Date --}}
