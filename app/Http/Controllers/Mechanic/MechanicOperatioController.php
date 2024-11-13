@@ -49,7 +49,7 @@ class MechanicOperatioController extends Controller
     {
         $garages = garage::all();
         $categories = nom_categorie::all();
-        return view('mechanic.operations.create',compact('garages','categories'));
+        return view('mechanic.operations.create', compact('garages', 'categories'));
     }
 
     /**
@@ -73,10 +73,14 @@ class MechanicOperatioController extends Controller
         })
             ->with(['voiture', 'garage'])
             ->findOrFail($id);
-        $ope = nom_operation::all();
-        $categories = nom_categorie::all();
-        $sousOperation = nom_sous_operation::all();
-        return view('mechanic.operations.show', compact('operation', 'categories', 'ope','sousOperation'));
+        dd($operation);
+        if ($operation) {
+            $ope = nom_operation::all();
+            $categories = nom_categorie::all();
+            $sousOperation = nom_sous_operation::all();
+            return view('mechanic.operations.show', compact('operation', 'categories', 'ope', 'sousOperation'));
+        }
+        return back();
     }
 
     /**

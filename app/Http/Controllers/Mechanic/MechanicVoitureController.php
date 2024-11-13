@@ -87,7 +87,7 @@ class MechanicVoitureController extends Controller
             $nom_operations = nom_operation::all();
             return view('mechanic.voitures.show', compact('voiture', 'operations', 'nom_categories', 'nom_operations'));
         }
-        return abort(403);
+        return back();
     }
 
     /**
