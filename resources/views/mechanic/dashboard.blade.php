@@ -83,103 +83,41 @@ j<x-mechanic-app-layout>
                         <div class="bg-white shadow rounded-lg mb-4 p-4 sm:p-6 h-full">
                             <div class="flex items-center justify-between mb-4">
                               <h3 class="text-xl font-bold leading-none text-gray-900 capitalize">la Liste des operation</h3>
-                              <a href="#" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">
+                              <a href="{{ route('mechanic.operations.index') }}" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">
                                 afficher tout
                               </a>
                             </div>
                             <div class="flow-root">
+                              @if(Auth::user()->garage->operations->isEmpty())
+                              <p class="p-4 text-gray-500 text-center">Aucune operation disponible.</p>
+                              @else
                               <ul role="list" class="divide-y divide-gray-200">
+                                @foreach (Auth::user()->garage->operations->take(5) as $operation)
                                 <li class="py-3 sm:py-4">
                                   <div class="flex items-center space-x-4">
                                     <div class="flex-shrink-0">
-                                      <img class="h-8 w-8 rounded-full" src="/images/users/neil-sims.png" alt="Neil image">
+                                    @if($operation->photo !== NULL)
+                                      <img class="h-8 w-8 rounded-full object-cover" src="{{asset('storage/'.$operation->photo)}}" alt="Neil image">
+                                      @else
+                                      <img class="rounded-full w-8 h-8 object-cover" src="../images/defaultimage.jpg" alt="image description">
+                                      @endif
                                     </div>
                                     <div class="flex-1 min-w-0">
                                       <p class="text-sm font-medium text-gray-900 truncate">
-                                        Neil Sims
+                                        {{$operation->nom}}
                                       </p>
                                       <p class="text-sm text-gray-500 truncate">
-                                        email@windster.com
+                                        {{$operation->id}}
                                       </p>
                                     </div>
                                     <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                      $320
+                                      <a href="{{ route('mechanic.operations.show',$operation->id) }}" class="text-sm font-medium text-blue-600  inline-flex items-center p-2 capitalize hover:underline">details</a>
                                     </div>
                                   </div>
                                 </li>
-                                <li class="py-3 sm:py-4">
-                                  <div class="flex items-center space-x-4">
-                                    <div class="flex-shrink-0">
-                                      <img class="h-8 w-8 rounded-full" src="/images/users/bonnie-green.png" alt="Neil image">
-                                    </div>
-                                    <div class="flex-1 min-w-0">
-                                      <p class="text-sm font-medium text-gray-900 truncate">
-                                        Bonnie Green
-                                      </p>
-                                      <p class="text-sm text-gray-500 truncate">
-                                        email@windster.com
-                                      </p>
-                                    </div>
-                                    <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                      $3467
-                                    </div>
-                                  </div>
-                                </li>
-                                <li class="py-3 sm:py-4">
-                                  <div class="flex items-center space-x-4">
-                                    <div class="flex-shrink-0">
-                                      <img class="h-8 w-8 rounded-full" src="/images/users/michael-gough.png" alt="Neil image">
-                                    </div>
-                                    <div class="flex-1 min-w-0">
-                                      <p class="text-sm font-medium text-gray-900 truncate">
-                                        Michael Gough
-                                      </p>
-                                      <p class="text-sm text-gray-500 truncate">
-                                        email@windster.com
-                                      </p>
-                                    </div>
-                                    <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                      $67
-                                    </div>
-                                  </div>
-                                </li>
-                                <li class="py-3 sm:py-4">
-                                  <div class="flex items-center space-x-4">
-                                    <div class="flex-shrink-0">
-                                      <img class="h-8 w-8 rounded-full" src="/images/users/thomas-lean.png" alt="Neil image">
-                                    </div>
-                                    <div class="flex-1 min-w-0">
-                                      <p class="text-sm font-medium text-gray-900 truncate">
-                                        Thomes Lean
-                                      </p>
-                                      <p class="text-sm text-gray-500 truncate">
-                                        email@windster.com
-                                      </p>
-                                    </div>
-                                    <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                      $2367
-                                    </div>
-                                  </div>
-                                </li>
-                                <li class="pt-3 sm:pt-4 pb-0">
-                                  <div class="flex items-center space-x-4">
-                                    <div class="flex-shrink-0">
-                                      <img class="h-8 w-8 rounded-full" src="/images/users/lana-byrd.png" alt="Neil image">
-                                    </div>
-                                    <div class="flex-1 min-w-0">
-                                      <p class="text-sm font-medium text-gray-900 truncate">
-                                        Lana Byrd
-                                      </p>
-                                      <p class="text-sm text-gray-500 truncate">
-                                        email@windster.com
-                                      </p>
-                                    </div>
-                                    <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                      $367
-                                    </div>
-                                  </div>
-                                </li>
+                                @endforeach
                               </ul>
+                              @endif
                             </div>
                           </div>
                         {{-- box 1 close --}}
@@ -187,103 +125,41 @@ j<x-mechanic-app-layout>
                         <div class="bg-white shadow rounded-lg mb-4 p-4 sm:p-6 h-full">
                             <div class="flex items-center justify-between mb-4">
                               <h3 class="text-xl font-bold leading-none text-gray-900 capitalize">la Liste des Véhicule</h3>
-                              <a href="#" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">
+                              <a href="{{ route('mechanic.voitures.index') }}" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">
                                 afficher tout
                               </a>
                             </div>
                             <div class="flow-root">
+                              @if(Auth::user()->garage->operations->isEmpty())
+                              <p class="p-4 text-gray-500 text-center">Aucune voiture disponible.</p>
+                              @else
                               <ul role="list" class="divide-y divide-gray-200">
+                                @foreach (Auth::user()->garage->operations->take(5) as $operation)
                                 <li class="py-3 sm:py-4">
                                   <div class="flex items-center space-x-4">
                                     <div class="flex-shrink-0">
-                                      <img class="h-8 w-8 rounded-full" src="/images/users/neil-sims.png" alt="Neil image">
+                                      @if($operation->voiture->photo !== NULL)
+                                      <img class="h-8 w-8 rounded-full object-cover" src="{{asset('storage/'.$operation->voiture->photo)}}" alt="Neil image">
+                                      @else
+                                      <img class="rounded-full w-8 h-8 object-cover" src="../images/defaultimage.jpg" alt="image description">
+                                      @endif
                                     </div>
                                     <div class="flex-1 min-w-0">
                                       <p class="text-sm font-medium text-gray-900 truncate">
-                                        Neil Sims
+                                        {{$operation->voiture->marque ." ". $operation->voiture->modele}}
                                       </p>
                                       <p class="text-sm text-gray-500 truncate">
-                                        email@windster.com
+                                        {{$operation->voiture->numero_immatriculation}}
                                       </p>
                                     </div>
                                     <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                      $320
+                                      <a href="{{ route('mechanic.voitures.show',$operation->voiture->id) }}" class="text-sm font-medium text-blue-600  inline-flex items-center p-2 capitalize hover:underline">details</a>
                                     </div>
                                   </div>
                                 </li>
-                                <li class="py-3 sm:py-4">
-                                  <div class="flex items-center space-x-4">
-                                    <div class="flex-shrink-0">
-                                      <img class="h-8 w-8 rounded-full" src="/images/users/bonnie-green.png" alt="Neil image">
-                                    </div>
-                                    <div class="flex-1 min-w-0">
-                                      <p class="text-sm font-medium text-gray-900 truncate">
-                                        Bonnie Green
-                                      </p>
-                                      <p class="text-sm text-gray-500 truncate">
-                                        email@windster.com
-                                      </p>
-                                    </div>
-                                    <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                      $3467
-                                    </div>
-                                  </div>
-                                </li>
-                                <li class="py-3 sm:py-4">
-                                  <div class="flex items-center space-x-4">
-                                    <div class="flex-shrink-0">
-                                      <img class="h-8 w-8 rounded-full" src="/images/users/michael-gough.png" alt="Neil image">
-                                    </div>
-                                    <div class="flex-1 min-w-0">
-                                      <p class="text-sm font-medium text-gray-900 truncate">
-                                        Michael Gough
-                                      </p>
-                                      <p class="text-sm text-gray-500 truncate">
-                                        email@windster.com
-                                      </p>
-                                    </div>
-                                    <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                      $67
-                                    </div>
-                                  </div>
-                                </li>
-                                <li class="py-3 sm:py-4">
-                                  <div class="flex items-center space-x-4">
-                                    <div class="flex-shrink-0">
-                                      <img class="h-8 w-8 rounded-full" src="/images/users/thomas-lean.png" alt="Neil image">
-                                    </div>
-                                    <div class="flex-1 min-w-0">
-                                      <p class="text-sm font-medium text-gray-900 truncate">
-                                        Thomes Lean
-                                      </p>
-                                      <p class="text-sm text-gray-500 truncate">
-                                        email@windster.com
-                                      </p>
-                                    </div>
-                                    <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                      $2367
-                                    </div>
-                                  </div>
-                                </li>
-                                <li class="pt-3 sm:pt-4 pb-0">
-                                  <div class="flex items-center space-x-4">
-                                    <div class="flex-shrink-0">
-                                      <img class="h-8 w-8 rounded-full" src="/images/users/lana-byrd.png" alt="Neil image">
-                                    </div>
-                                    <div class="flex-1 min-w-0">
-                                      <p class="text-sm font-medium text-gray-900 truncate">
-                                        Lana Byrd
-                                      </p>
-                                      <p class="text-sm text-gray-500 truncate">
-                                        email@windster.com
-                                      </p>
-                                    </div>
-                                    <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                      $367
-                                    </div>
-                                  </div>
-                                </li>
+                                @endforeach
                               </ul>
+                              @endif
                             </div>
                           </div>
                         {{-- box 2 close --}}
