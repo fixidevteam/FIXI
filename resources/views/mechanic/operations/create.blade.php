@@ -67,14 +67,15 @@
             {{-- content (slot on layouts/app.blade.php)--}}
             <div class=" px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <h2 class="mt-10  text-2xl font-bold leading-9 tracking-tight text-gray-900">Ajouter une operation</h2>
-                <form method="POST" action="{{ route('mechanic.operations.store') }}" class="space-y-6" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('operation.store') }}" class="space-y-6" enctype="multipart/form-data">
                     @csrf
                     <div>
                         <x-input-label for="categorie" :value="__('Categorie de l\'opération')" />
+                        <!-- <x-text-input id="categorie" class="block mt-1 w-full" type="text" name="categorie" :value="old('categorie')" autofocus autocomplete="categorie" /> -->
                         <select id="categorie" name="categorie" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            {{-- @foreach ($categories as $categorie)
+                            @foreach ($categories as $categorie)
                             <option value="{{ $categorie->id }}" @if(old('categorie')==$categorie->id) selected @endif>{{ $categorie->nom_categorie }}</option>
-                            @endforeach --}}
+                            @endforeach
                         </select>
                         <x-input-error :messages="$errors->get('categorie')" class="mt-2" />
                     </div>
@@ -105,10 +106,10 @@
                     <div>
                         <x-input-label for="garage" :value="__('Garage')" />
                         <select id="garage" name="garage_id" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            <option value="">Select garage</option>
-                            {{-- @foreach ($garages as $garage)
-                            <option value="{{ $garage->id }}" @if(old('garage_id')==$garage->id) selected @endif>{{ $garage->nom }}</option>
-                            @endforeach --}}
+                            <option value="">Select Garage</option>
+                            @foreach ($garages as $garage)
+                            <option value="{{ $garage->id }}" @if(old('garage_id')==$garage->id) selected @endif>{{ $garage->name }}</option>
+                            @endforeach
                         </select>
                         <x-input-error :messages="$errors->get('garage_id')" class="mt-2" />
                     </div>

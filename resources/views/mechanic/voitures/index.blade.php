@@ -132,7 +132,7 @@
                                         @endif
                                     </td>
                                     <td class="px-6 py-4">
-                                        <a href="" class="font-medium capitalize text-blue-600 dark:text-blue-500 hover:underline">details</a>
+                                        <a href="{{route('mechanic.voitures.show',$voiture->id)}}" class="font-medium capitalize text-blue-600 dark:text-blue-500 hover:underline">details</a>
                                     </td>
                                 </tr>
                                 @endforeach

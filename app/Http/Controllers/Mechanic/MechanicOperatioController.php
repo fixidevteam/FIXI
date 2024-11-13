@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Mechanic;
 
 use App\Http\Controllers\Controller;
+use App\Models\garage;
 use App\Models\nom_categorie;
 use App\Models\nom_operation;
 use App\Models\nom_sous_operation;
@@ -46,7 +47,9 @@ class MechanicOperatioController extends Controller
      */
     public function create()
     {
-        return view('mechanic.operations.create');
+        $garages = garage::all();
+        $categories = nom_categorie::all();
+        return view('mechanic.operations.create',compact('garages','categories'));
     }
 
     /**

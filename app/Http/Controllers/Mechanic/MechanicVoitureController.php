@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Mechanic;
 
 use App\Http\Controllers\Controller;
+use App\Models\nom_categorie;
+use App\Models\nom_operation;
+use App\Models\Operation;
 use App\Models\Voiture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,7 +66,28 @@ class MechanicVoitureController extends Controller
      */
     public function show(string $id)
     {
-        return view('mechanic.voitures.show');
+        $user = Auth::user();
+        $voitures = collect(); // Initialize an empty collection for voitures
+
+        $operations = $user->garage->operations()->with('voiture')->get();
+
+        foreach ($operations as $operation) {
+            if ($operation->voiture) {
+                $voitures->push($operation->voiture);
+            }
+        }
+
+        $voiture = $voitures->firstWhere('id', $id); // Use firstWhere to find voiture by ID
+        if ($voiture) {
+            $operations = Operation::where('voiture_id', $voiture->id)
+                ->where('garage_id', $user->garage_id)
+                ->get();
+            // dd($operations); // Debug: Check if the operations are found
+            $nom_categories = nom_categorie::all();
+            $nom_operations = nom_operation::all();
+            return view('mechanic.voitures.show', compact('voiture', 'operations', 'nom_categories', 'nom_operations'));
+        }
+        return abort(403);
     }
 
     /**
