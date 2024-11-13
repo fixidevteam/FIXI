@@ -48,7 +48,7 @@
                     </button>
                     {{-- Reset Button --}}
                     <a href="{{ route('mechanic.operations.index') }}" class="p-2.5 ms-2 bg-gray-200 text-gray-900 rounded-lg hover:bg-gray-300">
-                        Reset
+                        Réinitialiser
                     </a>
                 </form>
 
@@ -98,7 +98,7 @@
                                             @endif
                                         </td>
                                         <td class="px-6 py-4">
-                                            <a href="#" class="text-blue-600 hover:underline">Details</a>
+                                            <a href="{{ route('mechanic.operations.show',$operation->id) }}" class="text-blue-600 hover:underline">Details</a>
                                         </td>
                                     </tr>
                                 @endforeach
