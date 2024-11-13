@@ -126,7 +126,7 @@
               <div>
                 <p class="capitalize text-sm font-medium text-gray-900">Date d'achat</p>
                 <p class="text-sm text-gray-500">
-                  {{-- {{$voiture->date_achat}} --}}
+                  {{$voiture->date_achat}}
                   
                 </p>
               </div>
