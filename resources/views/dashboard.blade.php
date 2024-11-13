@@ -112,7 +112,6 @@
                       </div>
                       <div class="inline-flex items-center text-base font-semibold text-gray-900">
                         <a href="{{ route('voiture.show',$voiture->id) }}" class="text-sm font-medium text-blue-600  inline-flex items-center p-2 capitalize hover:underline">details</a>
-
                       </div>
                     </div>
                   </li>
