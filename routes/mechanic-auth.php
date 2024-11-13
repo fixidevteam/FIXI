@@ -25,6 +25,7 @@ Route::middleware('auth:mechanic')->prefix('mechanic')->name('mechanic.')->group
     Route::get('/dashboard', function () {
         return view('mechanic.dashboard');
     })->middleware(['auth', 'verified'])->name('dashboard');
+    
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -32,10 +33,10 @@ Route::middleware('auth:mechanic')->prefix('mechanic')->name('mechanic.')->group
     Route::resource('/operations', MechanicOperatioController::class);
     Route::resource('/voitures', MechanicVoitureController::class);
     Route::resource('/clients', MechanicClientController::class);
-    
+
 
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
-    
+
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 });

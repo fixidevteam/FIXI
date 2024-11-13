@@ -50,7 +50,6 @@ class RegisteredUserController extends Controller
         event(new Registered($mechanic));
 
         Auth::guard('mechanic')->login($mechanic);
-
         return redirect(route('mechanic.dashboard',absolute:false));
     }
 }
