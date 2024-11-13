@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fixi</title>
+    <title>Vérifier address email</title>
     <style>
         body {
             margin: 0;
@@ -26,38 +26,21 @@
             box-sizing: border-box; /* Ensure padding is included in width */
         }
 
-        .header img {
-            display: block;
-            margin: 0 auto;
-            width: 150px;
-            height: 50px;
-        }
-
-        .header h1 {
-            text-align: center;
-            font-size: 1.5em;
-            color: #1f2937;
-        }
-
         p {
             margin: 1em 0;
         }
 
         a.button {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.5rem 1rem;
-            background-color: #1f2937;
-            border: 1px solid transparent;
-            border-radius: 24px;
-            font-weight: 600;
-            font-size: 0.75rem;
+            display: inline-block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #1f2937; /* Gris foncé */
             color: #ffffff;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
             text-decoration: none;
-            transition: all 0.15s ease-in-out;
+            border-radius: 24px;
             text-align: center;
+            font-weight: bold;
+            transition: background-color 0.3s;
         }
 
         a.button:hover {
@@ -88,10 +71,6 @@
 
 <body>
     <div class="container">
-        <header class="header">
-            <img src="http://127.0.0.1:8000/images/fixi.png" alt="Fixi">
-            <h1>Fixi</h1>
-        </header>
         <main>
             <p>Bonjour, {{ $user->name }}</p>
             <p>Merci de vous être inscrit sur Fixi ! Pour déverrouiller toutes les fonctionnalités de votre compte, veuillez vérifier votre adresse email en cliquant sur le bouton ci-dessous.</p>

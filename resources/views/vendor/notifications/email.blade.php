@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -33,7 +33,7 @@
             color: #333333;
         }
 
-        .button {
+        a.button {
             display: inline-block;
             margin: 20px auto;
             padding: 10px 20px;
@@ -46,7 +46,7 @@
             transition: background-color 0.3s;
         }
 
-        .button:hover {
+        a.button:hover {
             background-color: #374151; /* Couleur de survol */
         }
 
