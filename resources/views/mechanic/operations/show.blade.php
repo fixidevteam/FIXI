@@ -75,7 +75,7 @@
               Categorie
             </p>
             <p class="text-sm text-gray-500 truncate">
-              Categorie operation
+              {{ $categories->where('id', $operation->categorie)->first()->nom_categorie ?? 'N/A' }}
             </p>
           </div>
           {{-- Operation --}}
@@ -84,7 +84,7 @@
               Operation
             </p>
             <p class="text-sm text-gray-500 truncate">
-              Operation nom
+              {{ $ope->where('id', $operation->nom)->first()->nom_operation ?? 'N/A' }}
             </p>
           </div>
           {{-- Date --}}
@@ -93,27 +93,29 @@
               Date
             </p>
             <p class="text-sm text-gray-500 truncate">
-              Date operation
+              {{ $operation->date_operation }}
             </p>
           </div>
           {{-- Sous operation --}}
-          {{-- @if(!$operation->sousoperations->isEmpty()) --}}
           <div>
             <p class="capitalize text-sm font-medium text-gray-900 truncate">
               Sous operation
             </p>
-
-            {{-- @foreach ($operation->sousoperations as $sousOp) --}}
+            @if($operation->sousoperations->isEmpty())
             <p class="text-sm text-gray-500 truncate">
-              {{-- {{$sousOperation->where('id', $sousOp->nom)->first()->nom_sous_operation }} --}}
-              Sous operation
+              N/A
             </p>
-            {{-- @endforeach --}}
+            @else
+            @foreach ($operation->sousoperations as $sousOp)
+            <p class="text-sm text-gray-500 truncate">
+              {{$sousOperation->where('id', $sousOp->nom)->first()->nom_sous_operation}}
+            </p>
+            @endforeach
+            @endif
           </div>
-          {{-- @endif --}}
         </div>
         {{-- description --}}
-        {{-- @if($operation->description !== NULL) --}}
+        @if($operation->description !== NULL)
         <div class="my-4">
           <p class="capitalize text-sm font-medium text-gray-900 truncate">
             description
@@ -122,14 +124,14 @@
             operation description 
           </p>
         </div>
-        {{-- @endif --}}
+        @endif
         {{-- operation description close  --}}
         <div class="flex justify-center my-8">
-          {{-- @if($operation->photo !== NULL) --}}
-          {{-- <img class="" src="{{asset('storage/'.$operation->photo)}}" alt="image description"> --}}
-          {{-- @else --}}
+          @if($operation->photo !== NULL)
+          <img class="" src="{{asset('storage/'.$operation->photo)}}" alt="image description">
+          @else
           <img class="" src="../../images/defaultimage.jpg" alt="image description">
-          {{-- @endif --}}
+          @endif
         </div>
         {{-- content of details  --}}
         <div class="grid grid-cols-1 md:grid-cols-2">
@@ -139,7 +141,7 @@
               Matricule
             </p>
             <p class="text-sm text-gray-500 truncate">
-              Voiture Matricule
+              {{ $operation->voiture->numero_immatriculation }}
             </p>
           </div>
           {{-- Marque --}}
@@ -148,7 +150,7 @@
               Marque
             </p>
             <p class="text-sm text-gray-500 truncate">
-              Voiture Marque
+              {{ $operation->voiture->marque }}
             </p>
           </div>
           {{-- Modèle --}}
@@ -157,7 +159,7 @@
               Modèle
             </p>
             <p class="text-sm text-gray-500 truncate">
-              Voiture Modèle
+              {{ $operation->voiture->modele }}
             </p>
           </div>
           {{-- Date d'achat --}}
@@ -166,7 +168,7 @@
               Date d'achat
             </p>
             <p class="text-sm text-gray-500 truncate">
-              Voiture Date d'achat
+              {{ $operation->voiture->date_achat }}
             </p>
           </div>
           {{-- Date de première mise en circulation --}}
@@ -175,7 +177,7 @@
               Date de première mise en circulation
             </p>
             <p class="text-sm text-gray-500 truncate">
-              Voiture Date de première mise en circulation
+              {{ $operation->voiture->date_de_première_mise_en_circulation }}
             </p>
           </div>
           {{-- La date de dédouanement --}}
@@ -184,12 +186,12 @@
               La date de dédouanement
             </p>
             <p class="text-sm text-gray-500 truncate">
-              Voiture La date de dédouanement
+              {{ $operation->voiture->date_de_dédouanement }}
             </p>
           </div>
           {{-- details du voiture --}}
           <div class="mb-4">
-            <a href="">
+            <a href="{{ route('mechanic.voitures.show',$operation->voiture->id) }}">
                 <x-primary-button>details du voiture</x-primary-button>
             </a>
           </div>

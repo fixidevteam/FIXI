@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Mechanic;
 use App\Http\Controllers\Controller;
 use App\Models\nom_categorie;
 use App\Models\nom_operation;
+use App\Models\nom_sous_operation;
 use App\Models\Operation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,19 +26,19 @@ class MechanicOperatioController extends Controller
         $operations = Operation::whereHas('garage', function ($query) use ($user) {
             $query->where('id', $user->garage_id);
         })
-        ->with('voiture')
-        ->when($search, function ($query, $search) {
-            // Filter by numero_immatriculation
-            $query->whereHas('voiture', function ($query) use ($search) {
-                $query->where('numero_immatriculation', 'like', '%' . $search . '%');
-            });
-        })
-        ->get();
+            ->with('voiture')
+            ->when($search, function ($query, $search) {
+                // Filter by numero_immatriculation
+                $query->whereHas('voiture', function ($query) use ($search) {
+                    $query->where('numero_immatriculation', 'like', '%' . $search . '%');
+                });
+            })
+            ->get();
 
         $ope = nom_operation::all();
         $categories = nom_categorie::all();
         // dd($operations);
-        return view('mechanic.operations.index', compact('operations', 'categories', 'ope','search'));
+        return view('mechanic.operations.index', compact('operations', 'categories', 'ope', 'search'));
     }
 
     /**
@@ -61,7 +62,18 @@ class MechanicOperatioController extends Controller
      */
     public function show(string $id)
     {
-        return view('mechanic.operations.show');
+        $user = Auth::user();
+
+        // Find the operation that belongs to the mechanic's garage
+        $operation = Operation::whereHas('garage', function ($query) use ($user) {
+            $query->where('id', $user->garage_id);
+        })
+            ->with(['voiture', 'garage'])
+            ->findOrFail($id);
+        $ope = nom_operation::all();
+        $categories = nom_categorie::all();
+        $sousOperation = nom_sous_operation::all();
+        return view('mechanic.operations.show', compact('operation', 'categories', 'ope','sousOperation'));
     }
 
     /**

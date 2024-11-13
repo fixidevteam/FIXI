@@ -98,7 +98,7 @@
                                             @endif
                                         </td>
                                         <td class="px-6 py-4">
-                                            <a href="#" class="text-blue-600 hover:underline">Details</a>
+                                            <a href="{{ route('mechanic.operations.show',$operation->id) }}" class="text-blue-600 hover:underline">Details</a>
                                         </td>
                                     </tr>
                                 @endforeach
