@@ -67,7 +67,7 @@
             {{-- content (slot on layouts/app.blade.php)--}}
             <div class=" px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <h2 class="mt-10  text-2xl font-bold leading-9 tracking-tight text-gray-900">Ajouter une operation</h2>
-                <form method="POST" action="{{ route('operation.store') }}" class="space-y-6" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('mechanic.operations.store') }}" class="space-y-6" enctype="multipart/form-data">
                     @csrf
                     <div>
                         <x-input-label for="categorie" :value="__('Categorie de l\'opération')" />
