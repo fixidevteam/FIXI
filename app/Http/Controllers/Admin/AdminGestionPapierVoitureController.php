@@ -32,9 +32,11 @@ class AdminGestionPapierVoitureController extends Controller
     public function store(Request $request)
     {
         $type = $request->validate(['type'=>['required']]);
-        type_papierv::create($type);
-        return redirect()->route('admin.gestionPapierVoiture.index');
-
+        if($type){
+            type_papierv::create($type);
+            return redirect()->route('admin.gestionPapierVoiture.index');
+    
+        }
     }
 
     /**

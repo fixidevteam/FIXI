@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-admin-app-layout>
     <div class="p-4 sm:ml-64">
         <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-14">
             {{-- content (slot on layouts/app.blade.php)--}}
@@ -70,4 +70,4 @@
             @include('layouts.footer')
         </div>
     </div>
-</x-app-layout>
+</x-admin-app-layout>
