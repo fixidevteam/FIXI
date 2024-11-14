@@ -22,7 +22,7 @@ class CheckUserDocuments
             $now = Carbon::now();
 
             // Check user documents
-            $userDocuments = $user->papiersUsers()->where('date_fin', '<=', $now->copy()->addDays(7))->get();
+            $userDocuments = $user->papiersUsers()->where('date_fin', '<=', $now->copy()->addDays(90))->get();
             $this->processDocuments($userDocuments, $user, $now, false);
 
             // Check car documents
@@ -31,7 +31,7 @@ class CheckUserDocuments
                 ->get()
                 ->pluck('papiersVoiture')
                 ->flatten()
-                ->where('date_fin', '<=', $now->copy()->addDays(7));
+                ->where('date_fin', '<=', $now->copy()->addDays(90));
             $this->processDocuments($carDocuments, $user, $now, true);
         }
 
@@ -63,7 +63,7 @@ class CheckUserDocuments
                 ->where('data->unique_key', $uniqueKey)
                 ->first();
 
-            if ($daysLeft > 7) {
+            if ($daysLeft > 90) {
                 // Delete notification if not expiring soon
                 if ($existingNotification) {
                     $existingNotification->delete();

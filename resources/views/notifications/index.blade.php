@@ -89,7 +89,7 @@
 
                     <div class="bg-white shadow rounded-lg">
                         @foreach($notifications as $notification)
-                        <div class="flex items-center px-4 py-2 border-b {{ $notification->read_at ? 'bg-gray-100' : 'bg-white' }}">
+                        <a href="{{route('notifications.markAsRead',$notification->id)}}" class="flex items-center px-4 py-2 border-b {{ $notification->read_at ? 'bg-gray-100' : 'bg-white' }}">
                             <!-- Icon -->
                             <div class="flex-shrink-0">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -106,7 +106,7 @@
                                 </p>
                                 <small class="text-gray-500 block">{{ $notification->created_at->diffForHumans() }}</small>
                             </div>
-                        </div>
+                        </a>
                         @endforeach
                     </div>
                     <div class="mt-4">
