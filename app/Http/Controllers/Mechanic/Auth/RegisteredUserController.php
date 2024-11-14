@@ -38,6 +38,12 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Mechanic::class],
             'garage_id' => ['required'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'telephone' => [
+                'required',
+                'string',
+                'max:20',
+                'regex:/^(\+2126\d{8}|\+2127\d{8}|06\d{8}|07\d{8})$/',
+            ],
         ]);
 
         $mechanic = Mechanic::create([
@@ -45,6 +51,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'garage_id' => $request->garage_id,
             'password' => Hash::make($request->password),
+            'telephone' => $request->telephone,
         ]);
 
         event(new Registered($mechanic));

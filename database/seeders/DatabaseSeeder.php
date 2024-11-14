@@ -108,22 +108,26 @@ class DatabaseSeeder extends Seeder
         garage::create([
             'id' => 1,
             'name'=>'Auto Atlas',
-            'ref'=>'AA11'
+            'ref'=>'AA11',
+            'localisation' => 'marrakech, cherifia'
         ]);
         garage::create([
             'id' => 2,
             'name'=>'Auto Madina',
-            'ref'=>'AA22'
+            'ref'=>'AA22',
+            'localisation' => 'marrakech, Madina'
         ]);
         garage::create([
             'id' => 3,
             'name'=>'Auto Nassim',
-            'ref'=>'AA33'
+            'ref'=>'AA33',
+            'localisation' => 'marrakech, Nassim'
         ]);
         garage::create([
             'id' => 4,
             'name'=>'Auto Tari9',
-            'ref'=>'AA44'
+            'ref'=>'AA44',
+            'localisation' => 'marrakech, Mhamid'
         ]);
         // $this->call([
         //     VoitureSeeder::class,

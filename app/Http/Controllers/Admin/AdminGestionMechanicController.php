@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\garage;
+use App\Models\Mechanic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminGestionMechanicController extends Controller
 {
@@ -12,7 +15,19 @@ class AdminGestionMechanicController extends Controller
      */
     public function index()
     {
-        return view('admin.gestionMechanics.index');
+        $mechanics = Mechanic::all();
+        return view('admin.gestionMechanics.index', compact('mechanics'));
+    }
+    /**
+     * Edit the status of account 
+     */
+    public function toggleStatus($id)
+    {
+        $mechanic = Mechanic::findOrFail($id);
+        $mechanic->status = !$mechanic->status; // Toggle the status
+        $mechanic->save();
+
+        return redirect()->route('admin.gestionGaragistes.index')->with('success', 'Statut de l\'utilisateur mis à jour avec succès.');
     }
 
     /**
@@ -20,7 +35,8 @@ class AdminGestionMechanicController extends Controller
      */
     public function create()
     {
-        //
+        $garages = garage::all();
+        return view('admin.gestionMechanics.create', compact('garages'));
     }
 
     /**
@@ -28,7 +44,30 @@ class AdminGestionMechanicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:mechanics',
+            'password' => 'required|string|min:8|confirmed',
+            'garage_id' => 'required|exists:garages,id',
+            'telephone' => [
+                'required',
+                'string',
+                'max:20',
+                'regex:/^(\+2126\d{8}|\+2127\d{8}|06\d{8}|07\d{8})$/',
+            ],
+        ]);
+
+        Mechanic::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'garage_id' => $request->garage_id,
+            'telephone' => $request->telephone,
+            'status' => 1,
+        ]);
+        
+        return redirect()->route('admin.gestionGaragistes.index')->with('success', 'Compte mécanicien créé avec succès!');
+
     }
 
     /**

@@ -31,7 +31,11 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     // route admin : 
     Route::resource('/gestionUtilisateurs', AdminGestionUserController::class);
+    // active :
+    Route::post('/users/{id}/toggle-status', [AdminGestionUserController::class, 'toggleStatus'])->name('users.toggleStatus');
     Route::resource('/gestionGaragistes', AdminGestionMechanicController::class);
+    // active :
+    Route::post('/garagiste/{id}/toggle-status', [AdminGestionMechanicController::class, 'toggleStatus'])->name('garagiste.toggleStatus');
     Route::resource('/gestionGarages', AdminGestionGarageController::class);
 
     

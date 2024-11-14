@@ -2,7 +2,9 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckMechanicStatus;
 use App\Http\Middleware\CheckUserDocuments;
+use App\Http\Middleware\CheckUserStatus;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -65,5 +67,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'checkdocuments' => CheckUserDocuments::class,
+        'checkUserStatus' => CheckUserStatus::class,
+        'checkMechanicStatus' => CheckMechanicStatus::class,
     ];
 }

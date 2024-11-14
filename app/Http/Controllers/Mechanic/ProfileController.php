@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Mechanic;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\ProfileUpdateRequestMechanic;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +24,7 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(ProfileUpdateRequestMechanic $request): RedirectResponse
     {
         $request->user()->fill($request->validated());
 

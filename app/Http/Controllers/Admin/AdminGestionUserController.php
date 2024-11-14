@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminGestionUserController extends Controller
@@ -12,9 +13,20 @@ class AdminGestionUserController extends Controller
      */
     public function index()
     {
-        return view('admin.gestionUtilisateurs.index');
+        $users = User::all();
+        return view('admin.gestionUtilisateurs.index',compact('users'));
     }
+    /**
+     * Edit the status of account 
+     */
+    public function toggleStatus($id)
+    {
+        $user = User::findOrFail($id);
+        $user->status = !$user->status; // Toggle the status
+        $user->save();
 
+        return redirect()->route('admin.gestionUtilisateurs.index')->with('success', 'Statut de l\'utilisateur mis à jour avec succès.');
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -36,7 +48,8 @@ class AdminGestionUserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('admin.gestionUtilisateurs.show',compact('user'));
     }
 
     /**

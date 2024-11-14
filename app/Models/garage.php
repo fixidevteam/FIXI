@@ -12,6 +12,7 @@ class garage extends Model
     protected $fillable = [
         'name',
         'ref',
+        'localisation',
     ];
     public function mechanics(): HasMany
     {
