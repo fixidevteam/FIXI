@@ -29,11 +29,12 @@
     </header>
     @endif --}}
 
-    <!-- Page Content -->
-    <main>
-        {{ $slot }}
-    </main>
-    </div>
+            <!-- Page Content -->
+            <main>
+                {{ $slot }}
+            </main>
+        </div>
+    </body>
     <script>
         function toggleModal(show) {
             const modal = document.getElementById('confirmationModal');
@@ -44,6 +45,4 @@
             }
         }
     </script>
-</body>
-
 </html>

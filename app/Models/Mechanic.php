@@ -22,11 +22,18 @@ class Mechanic extends Authenticatable
         'name',
         'email',
         'password',
-        'garage_id'
+        'garage_id',
+        'telephone',
+        'status',
     ];
     public function garage(): BelongsTo
     {
         return $this->belongsTo(garage::class);
+    }
+    // check the status of the user account : 
+    public function isActive()
+    {
+        return $this->status === true; // Check if the status is active
     }
     /**
      * The attributes that should be hidden for serialization.

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\garage;
 use Illuminate\Http\Request;
 
 class AdminGestionGarageController extends Controller
@@ -12,7 +13,8 @@ class AdminGestionGarageController extends Controller
      */
     public function index()
     {
-        return view('admin.gestionGarages.index');
+        $garages = garage::all();
+        return view('admin.gestionGarages.index', compact('garages'));
     }
 
     /**
@@ -20,7 +22,7 @@ class AdminGestionGarageController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.gestionGarages.create');
     }
 
     /**
@@ -28,7 +30,17 @@ class AdminGestionGarageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'ref' => ['required', 'unique:garages'],
+            'localisation' => ['nullable', 'string'],
+        ]);
+        $garage = garage::create($data);
+        // Flash message to the session
+        session()->flash('success', 'Garage ajoutée');
+        session()->flash('subtitle', 'Garage a été ajoutée avec succès à la liste.');
+
+        return redirect()->route('admin.gestionGarages.index');
     }
 
     /**
@@ -36,7 +48,11 @@ class AdminGestionGarageController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $garage = garage::find($id);
+        if ($garage) {
+            return view('admin.gestionGarages.show', compact('garage'));
+        }
+        return back()->with('error', 'Garage introuvable');
     }
 
     /**
@@ -44,7 +60,8 @@ class AdminGestionGarageController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $garage = garage::findOrFail($id);
+        return view('admin.gestionGarages.edit', compact('garage'));
     }
 
     /**
@@ -52,7 +69,17 @@ class AdminGestionGarageController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $garage = garage::findOrFail($id);
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'ref' => ['required'],
+            'localisation' => ['nullable', 'string'],
+        ]);
+        $garage->update($data);
+        // Flash message to the session
+        session()->flash('success', 'Garage modifiée');
+        session()->flash('subtitle', 'Garage a été modifiée avec succès à la liste.');
+        return redirect()->route('admin.gestionGarages.show', $garage);
     }
 
     /**
@@ -60,6 +87,25 @@ class AdminGestionGarageController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $garage = Garage::find($id);
+
+        if ($garage) {
+            // Check if the garage has associated mechanics
+            if ($garage->mechanics()->exists()) {
+                session()->flash('error', 'Impossible de supprimer le garage');
+                session()->flash('subtitle', 'Ce garage contient encore des mécaniciens.');
+                return redirect()->route('admin.gestionGarages.index');
+            }
+
+            // Delete the garage if it has no mechanics
+            $garage->delete();
+            session()->flash('success', 'Garage supprimé');
+            session()->flash('subtitle', 'Garage a été supprimé avec succès.');
+            return redirect()->route('admin.gestionGarages.index');
+        }
+
+        session()->flash('error', 'Garage introuvable');
+        session()->flash('subtitle', 'Le garage que vous essayez de supprimer n\'existe pas.');
+        return redirect()->route('admin.gestionGarages.index');
     }
 }

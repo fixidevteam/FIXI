@@ -25,10 +25,21 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(MechanicLoginRequest $request): RedirectResponse
     {
+        // Get the mechanic attempting to log in
+        $mechanic = \App\Models\Mechanic::where('email', $request->email)->first();
+
+        // Check if the mechanic exists and if their account is inactive
+        if ($mechanic && !$mechanic->status) {
+            return back()->withErrors([
+                'email' => 'Votre compte est inactif. Veuillez contacter l\'administrateur.',
+            ]);
+        }
+        
         $request->authenticate();
 
         $request->session()->regenerate();
-        return redirect()->intended(route('mechanic.dashboard',absolute:false));
+
+        return redirect()->intended(route('mechanic.dashboard', absolute: false));
     }
 
     /**

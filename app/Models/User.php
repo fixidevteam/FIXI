@@ -12,7 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable 
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -29,7 +29,8 @@ class User extends Authenticatable
         'provider',
         'provider_id',
         'provider_token',
-        'telephone'
+        'telephone',
+        'status'
     ];
 
     /**
@@ -58,6 +59,11 @@ class User extends Authenticatable
     public function voitures(): HasMany
     {
         return $this->hasMany(Voiture::class);
+    }
+    // check the status of the user account : 
+    public function isActive()
+    {
+        return $this->status === true; // Check if the status is active
     }
 
 

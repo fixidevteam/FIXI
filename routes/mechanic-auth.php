@@ -21,7 +21,7 @@ Route::middleware('guest:mechanic')->prefix('mechanic')->name('mechanic.')->grou
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 });
 
-Route::middleware('auth:mechanic')->prefix('mechanic')->name('mechanic.')->group(function () {
+Route::middleware(['auth:mechanic','checkMechanicStatus'])->prefix('mechanic')->name('mechanic.')->group(function () {
     Route::get('/dashboard', function () {
         return view('mechanic.dashboard');
     })->middleware(['auth', 'verified'])->name('dashboard');
