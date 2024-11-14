@@ -30,9 +30,9 @@
                                     d="m1 9 4-4-4-4" />
                             </svg>
                             <a
-                                href="{{ route('admin.gestionUtilisateurs.index') }}"
+                                href="{{ route('admin.gestionPapierVoiture.index') }}"
                                 class="inline-flex items-center text-sm font-medium text-gray-700   ">
-                                Gestion des Papiers du Voiture
+                                Gestion des papiers voiture
                             </a>
                         </div>
                     </li>
@@ -44,10 +44,10 @@
             {{-- content (slot on layouts/app.blade.php)--}}
             <div class=" px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex justify-between items-center my-6">
-                    <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Liste des Papiers du Voiture</h2>
+                    <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Liste des papiers du voiture</h2>
                     <div>
                         <a href="{{ route('admin.gestionPapierVoiture.create') }}">
-                            <x-primary-button class="hidden md:block">Ajouter Papiers du Voiture</x-primary-button>
+                            <x-primary-button class="hidden md:block">Ajouter Papiers voiture</x-primary-button>
                             <x-primary-button class="sm:hidden">
                                 <svg class="w-5 h-5 text-white" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12.75 9C12.75 8.58579 12.4142 8.25 12 8.25C11.5858 8.25 11.25 8.58579 11.25 9L11.25 11.25H9C8.58579 11.25 8.25 11.5858 8.25 12C8.25 12.4142 8.58579 12.75 9 12.75H11.25V15C11.25 15.4142 11.5858 15.75 12 15.75C12.4142 15.75 12.75 15.4142 12.75 15L12.75 12.75H15C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25H12.75V9Z" fill="currentColor" />
@@ -59,6 +59,43 @@
                 </div>
                 {{-- table --}}
                 <div class="my-5">
+                    {{-- alert --}}
+                    @if (session('success'))
+                        <div class="fixed top-20 right-4 mb-5 flex justify-end z-10"
+                        x-data="{ show: true }" 
+                        x-show="show" 
+                        x-transition:leave="transition ease-in duration-1000" 
+                        x-transition:leave-start="opacity-100" 
+                        x-transition:leave-end="opacity-0" 
+                        x-init="setTimeout(() => show = false, 3000)" 
+                        >
+                            <div role="alert" class="rounded-xl border border-gray-100 bg-white p-4">
+                                <div class="flex items-start gap-4">
+                                <span class="text-green-600">
+                                    <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="size-6"
+                                    >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    />
+                                    </svg>
+                                </span>
+                                <div class="flex-1">
+                                    <strong class="block font-medium text-gray-900"> {{ session('success') }} </strong>
+                                    <p class="mt-1 text-sm text-gray-700">{{ session('subtitle') }}</p>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                    {{-- alert close --}}
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         @if($type_papierVoitures->isEmpty())
                         <p class="p-4 text-gray-500 text-center">Aucune papier disponible.</p>
@@ -78,7 +115,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-
                                 @foreach($type_papierVoitures as $type)
                                 <tr class="bg-white border-b">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
@@ -103,29 +139,28 @@
                                                 </svg>
                                             </button>
                                         </div>
+                                        <!-- Confirmation Modal (Hidden by default) -->
+                                        <div id="confirmationModal" class="fixed inset-0 bg-white bg-opacity-30 backdrop-blur-[2px] flex items-center justify-center hidden">
+                                            <div class="bg-white rounded-lg p-6 w-96 shadow-lg ">
+                                                <h2 class="text-lg font-bold text-gray-800">Confirmation de suppression</h2>
+                                                <p class="text-gray-600 mt-2">Êtes-vous sûr de vouloir supprimer cette document ? Cette action ne peut pas être annulée.</p>
+                                                <!-- Action Buttons -->
+                                                <div class="flex justify-end mt-4">
+                                                    <button onclick="toggleModal(false)" class="px-4 py-2 bg-gray-300 text-gray-800 rounded mr-2">
+                                                        Annuler
+                                                    </button>
+                                                    <form id="deleteForm" action="{{route('admin.gestionPapierVoiture.destroy',$type->id)}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                                                            confirmer
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
-                                <!-- Confirmation Modal (Hidden by default) -->
-                                <div id="confirmationModal" class="fixed inset-0 bg-white bg-opacity-30 backdrop-blur-[2px] flex items-center justify-center hidden">
-                                    <div class="bg-white rounded-lg p-6 w-96 shadow-lg ">
-                                        <h2 class="text-lg font-bold text-gray-800">Confirmation de suppression</h2>
-                                        <p class="text-gray-600 mt-2">Êtes-vous sûr de vouloir supprimer cette voiture ? Cette action ne peut pas être annulée.</p>
-
-                                        <!-- Action Buttons -->
-                                        <div class="flex justify-end mt-4">
-                                            <button onclick="toggleModal(false)" class="px-4 py-2 bg-gray-300 text-gray-800 rounded mr-2">
-                                                Annuler
-                                            </button>
-                                            <form id="deleteForm" action="{{route('admin.gestionPapierVoiture.destroy',$type->id)}}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
-                                                    confirmer
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-
                                     @endforeach
                             </tbody>
                         </table>
@@ -133,8 +168,6 @@
                     @endif
                 </div>
                 {{-- table close --}}
-
-            </div>
         </div>
     </div>
     {{-- contet close colse --}}

@@ -30,9 +30,9 @@
                                     d="m1 9 4-4-4-4" />
                             </svg>
                             <a
-                                href="{{ route('admin.gestionUtilisateurs.index') }}"
+                                href="{{ route('admin.gestionPapierPerso.index') }}"
                                 class="inline-flex items-center text-sm font-medium text-gray-700   ">
-                                Gestion des Papiers personnel
+                                Gestion des papiers personnel
                             </a>
                         </div>
                     </li>
@@ -59,6 +59,43 @@
                 </div>
                 {{-- table --}}
                 <div class="my-5">
+                    {{-- alert --}}
+                    @if (session('success'))
+                        <div class="fixed top-20 right-4 mb-5 flex justify-end z-10"
+                        x-data="{ show: true }" 
+                        x-show="show" 
+                        x-transition:leave="transition ease-in duration-1000" 
+                        x-transition:leave-start="opacity-100" 
+                        x-transition:leave-end="opacity-0" 
+                        x-init="setTimeout(() => show = false, 3000)" 
+                        >
+                            <div role="alert" class="rounded-xl border border-gray-100 bg-white p-4">
+                                <div class="flex items-start gap-4">
+                                <span class="text-green-600">
+                                    <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="size-6"
+                                    >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    />
+                                    </svg>
+                                </span>
+                                <div class="flex-1">
+                                    <strong class="block font-medium text-gray-900"> {{ session('success') }} </strong>
+                                    <p class="mt-1 text-sm text-gray-700">{{ session('subtitle') }}</p>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                    {{-- alert close --}}
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         @if($type_papierps->isEmpty())
                         <p class="p-4 text-gray-500 text-center">Aucune papier disponible.</p>
@@ -78,7 +115,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-
                                 @foreach($type_papierps as $type)
                                 <tr class="bg-white border-b">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
@@ -103,40 +139,39 @@
                                                 </svg>
                                             </button>
                                         </div>
+                                        <!-- Confirmation Modal (Hidden by default) -->
+                                        <div id="confirmationModal" class="fixed inset-0 bg-white bg-opacity-30 backdrop-blur-[2px] flex items-center justify-center hidden">
+                                            <div class="bg-white rounded-lg p-6 w-96 shadow-lg ">
+                                                <h2 class="text-lg font-bold text-gray-800">Confirmation de suppression</h2>
+                                                <p class="text-gray-600 mt-2">Êtes-vous sûr de vouloir supprimer cette voiture ? Cette action ne peut pas être annulée.</p>
+
+                                                <!-- Action Buttons -->
+                                                <div class="flex justify-end mt-4">
+                                                    <button onclick="toggleModal(false)" class="px-4 py-2 bg-gray-300 text-gray-800 rounded mr-2">
+                                                        Annuler
+                                                    </button>
+                                                    <form id="deleteForm" action="{{route('admin.gestionPapierPerso.destroy',$type->id)}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                                                            confirmer
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
-                                <!-- Confirmation Modal (Hidden by default) -->
-                                <div id="confirmationModal" class="fixed inset-0 bg-white bg-opacity-30 backdrop-blur-[2px] flex items-center justify-center hidden">
-                                    <div class="bg-white rounded-lg p-6 w-96 shadow-lg ">
-                                        <h2 class="text-lg font-bold text-gray-800">Confirmation de suppression</h2>
-                                        <p class="text-gray-600 mt-2">Êtes-vous sûr de vouloir supprimer cette voiture ? Cette action ne peut pas être annulée.</p>
-
-                                        <!-- Action Buttons -->
-                                        <div class="flex justify-end mt-4">
-                                            <button onclick="toggleModal(false)" class="px-4 py-2 bg-gray-300 text-gray-800 rounded mr-2">
-                                                Annuler
-                                            </button>
-                                            <form id="deleteForm" action="{{route('admin.gestionPapierPerso.destroy',$type->id)}}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
-                                                    confirmer
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-
-                                    @endforeach
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                     @endif
                 </div>
                 {{-- table close --}}
-
-            </div>
         </div>
     </div>
+    
     {{-- contet close colse --}}
     {{-- footer --}}
     <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
