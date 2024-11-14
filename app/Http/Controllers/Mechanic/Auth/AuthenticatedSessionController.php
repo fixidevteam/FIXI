@@ -28,8 +28,7 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-        $t = 'ss';
-        return redirect()->intended(route('mechanic.dashboard',compact('t'),absolute:false));
+        return redirect()->intended(route('mechanic.dashboard',absolute:false));
     }
 
     /**
