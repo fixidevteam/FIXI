@@ -30,7 +30,7 @@
                   d="m1 9 4-4-4-4" />
               </svg>
               <a
-                href="#"
+                href=""
                 class="inline-flex items-center text-sm font-medium text-gray-700   ">
                 Details des papier du véhicule
               </a>
