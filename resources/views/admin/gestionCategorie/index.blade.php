@@ -6,10 +6,6 @@
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                     <li class="inline-flex items-center">
                         <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center text-sm font-medium text-gray-700">
-                            <!-- Home SVG -->
-                            <svg class="w-4 h-4 mr-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                <path d="M10 2L2 9h3v8h4V13h2v4h4V9h3L10 2z" />
-                            </svg>
                             Accueil
                         </a>
                     </li>
@@ -231,7 +227,7 @@
         <div id="confirmationModalO-{{ $operation->id }}" class="fixed inset-0 bg-white bg-opacity-30 backdrop-blur-[2px] flex items-center justify-center hidden">
             <div class="bg-white rounded-lg p-6 w-96 shadow-lg">
                 <h2 class="text-lg font-bold text-gray-800">Confirmation de suppression</h2>
-                <p class="text-gray-600 mt-2">Êtes-vous sûr de vouloir supprimer cette catégorie ? Cette action ne peut pas être annulée.</p>
+                <p class="text-gray-600 mt-2">Êtes-vous sûr de vouloir supprimer cette operation ? Cette action ne peut pas être annulée.</p>
                 <div class="flex justify-end mt-4">
                     <button onclick="toggleModal(false, 'confirmationModalO-{{ $operation->id }}')" class="px-4 py-2 bg-gray-300 text-gray-800 rounded mr-2">
                         Annuler
@@ -251,7 +247,7 @@
         <div id="confirmationModalS-{{ $sous->id }}" class="fixed inset-0 bg-white bg-opacity-30 backdrop-blur-[2px] flex items-center justify-center hidden">
             <div class="bg-white rounded-lg p-6 w-96 shadow-lg">
                 <h2 class="text-lg font-bold text-gray-800">Confirmation de suppression</h2>
-                <p class="text-gray-600 mt-2">Êtes-vous sûr de vouloir supprimer cette catégorie ? Cette action ne peut pas être annulée.</p>
+                <p class="text-gray-600 mt-2">Êtes-vous sûr de vouloir supprimer cette sous operation ? Cette action ne peut pas être annulée.</p>
                 <div class="flex justify-end mt-4">
                     <button onclick="toggleModal(false, 'confirmationModalS-{{ $sous->id }}')" class="px-4 py-2 bg-gray-300 text-gray-800 rounded mr-2">
                         Annuler

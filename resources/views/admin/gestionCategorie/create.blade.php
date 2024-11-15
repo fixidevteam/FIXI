@@ -9,7 +9,7 @@
                     class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                     <li class="inline-flex items-center">
                         <a
-                            href="{{ route('dashboard') }}"
+                            href="{{ route('admin.dashboard') }}"
                             class="inline-flex items-center text-sm font-medium text-gray-700">
                             Accueil
                         </a>
@@ -30,13 +30,34 @@
                                     d="m1 9 4-4-4-4" />
                             </svg>
                             <a
-                                href="{{ route('voiture.index') }}"
+                                href="{{ route('admin.gestionCategorie.index') }}"
+                                class="inline-flex items-center text-sm font-medium text-gray-700   ">
+                                Gestion des operation
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg
+                                class="rtl:rotate-180 block w-3 h-3 mx-1 text-gray-400"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 6 10">
+                                <path
+                                    stroke="currentColor"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="m1 9 4-4-4-4" />
+                            </svg>
+                            <a
+                                href="{{ route('admin.gestionCategorie.create') }}"
                                 class="inline-flex items-center text-sm font-medium text-gray-700   ">
                                 Ajouter une categorie
                             </a>
                         </div>
                     </li>
-                   
                 </ol>
             </nav>
 
@@ -46,7 +67,7 @@
             {{-- content (slot on layouts/app.blade.php)--}}
             <div class=" px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <h2 class="mt-10  text-2xl font-bold leading-9 tracking-tight text-gray-900">Ajouter une categoie </h2>
-            <form  action="{{ route('admin.gestionOperation.store') }}" method="POST" class="space-y-6">
+            <form  action="{{ route('admin.gestionCategorie.store') }}" method="POST" class="space-y-6">
                 @csrf
                 <div>
                     <x-input-label for="nom_categorie" :value="__('Categorie')" />

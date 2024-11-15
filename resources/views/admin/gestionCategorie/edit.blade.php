@@ -58,7 +58,6 @@
                             </a>
                         </div>
                     </li>
-                   
                 </ol>
             </nav>
 
@@ -67,7 +66,7 @@
         <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
             {{-- content (slot on layouts/app.blade.php)--}}
             <div class=" px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <h2 class="mt-10  text-2xl font-bold leading-9 tracking-tight text-gray-900">Modifier un papier personnel </h2>
+            <h2 class="mt-10  text-2xl font-bold leading-9 tracking-tight text-gray-900">Modifier une categorie </h2>
             <form method="POST" action="{{ route('admin.gestionCategorie.update',$categorie->id) }}" class="space-y-6">
                 @csrf
                 @method('PUT')
@@ -79,7 +78,7 @@
             
                 <div class="flex items-center justify-end mt-4">
                     <x-primary-button class="flex justify-center rounded-[20px] bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
-                        {{ __('Modifier') }}
+                        {{ __('Modifier categorie') }}
                     </x-primary-button>
                 </div>
             </form>
