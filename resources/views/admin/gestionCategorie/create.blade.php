@@ -46,7 +46,7 @@
             {{-- content (slot on layouts/app.blade.php)--}}
             <div class=" px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <h2 class="mt-10  text-2xl font-bold leading-9 tracking-tight text-gray-900">Ajouter une categoie </h2>
-            <form  action="{{ route('admin.gestionOperation.store') }}" method="POST" class="space-y-6">
+            <form  action="{{ route('admin.gestionCategorie.store') }}" method="POST" class="space-y-6">
                 @csrf
                 <div>
                     <x-input-label for="nom_categorie" :value="__('Categorie')" />

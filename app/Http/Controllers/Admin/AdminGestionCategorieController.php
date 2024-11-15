@@ -35,10 +35,10 @@ class AdminGestionCategorieController extends Controller
      */
     public function store(Request $request)
     {
-        $type = $request->validate(['type' => ['required']]);
+        $nom_categorie = $request->validate(['nom_categorie' => ['required']]);
 
-        if ($type) {
-            type_papierv::create($type);
+        if ($nom_categorie) {
+            nom_categorie::create($nom_categorie);
             return redirect()->route('admin.gestionCategorie.index');
         }
     }

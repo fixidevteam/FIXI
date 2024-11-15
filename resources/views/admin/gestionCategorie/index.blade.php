@@ -147,13 +147,13 @@
         <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4"> 
             <div class="px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex justify-between items-center my-6">
-                    <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Liste des operations</h2>
+                    <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Liste des sous operations</h2>
                     <a href="{{ route('admin.gestionSousOperation.create') }}">
                         <x-primary-button class="hidden md:block">
                             <svg class="w-5 h-5 inline mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <path d="M12 4.5v7.5H4.5a.5.5 0 0 0 0 1H12v7.5a.5.5 0 0 0 1 0V13h7.5a.5.5 0 0 0 0-1H13V4.5a.5.5 0 0 0-1 0Z" />
                             </svg>
-                            Ajouter une operation
+                            Ajouter une sous operation
                         </x-primary-button>
                     </a>
                 </div>
