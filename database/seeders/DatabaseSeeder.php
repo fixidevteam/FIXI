@@ -130,6 +130,10 @@ class DatabaseSeeder extends Seeder
             'localisation' => 'marrakech, Mhamid'
         ]);
         // $this->call([
+        //     TypePapierpSeeder::class,
+        //     TypePapiervSeeder::class,
+        // ]);
+        // $this->call([
         //     VoitureSeeder::class,
         //     PapierVoitureSeeder::class,
         //     PapierUserSeeder::class,

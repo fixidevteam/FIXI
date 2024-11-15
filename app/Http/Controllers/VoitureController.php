@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\nom_categorie;
@@ -35,12 +36,9 @@ class VoitureController extends Controller
 
         $user_id = Auth::user()->id;
         $data = $request->validate([
-            'numero_immatriculation' => [
-                'required',
-                'regex:/^\d{1,6}-[A-Za-z]{1}-\d+$/',
-                Rule::unique('voitures', 'numero_immatriculation')->whereNull('deleted_at')
-
-            ],
+            'part1' => ['required', 'digits_between:1,6'], // 1 to 6 digits
+            'part2' => ['required', 'string', 'size:1'], // Single Arabic letter
+            'part3' => ['required', 'digits_between:1,2'], // 1 to 2 digits
             'marque' => ['required', 'max:30'],
             'modele' => ['required', 'max:30'],
             'photo' => ['image'],
@@ -48,11 +46,22 @@ class VoitureController extends Controller
             'date_achat' => ['required', 'date'],
             'date_de_dédouanement' => ['required', 'date'],
         ]);
+        // Combine the parts into the `numero_immatriculation`
+        $numeroImmatriculation = $data['part1'] . '-' . $data['part2'] . '-' . $data['part3'];
+        $request->validate([
+            'numero_immatriculation' => [
+                'regex:/^\d{1,6}-[أ-ي]{1}-\d{1,2}$/', // Ensure it matches the pattern
+                Rule::unique('voitures', 'numero_immatriculation')->whereNull('deleted_at'), // Check uniqueness
+            ],
+        ]);
         if ($request->hasFile('photo')) {
             $imagePath = $request->file('photo')->store('user/voitures', 'public');
             $data['photo'] = $imagePath;
         }
         $data['user_id'] = $user_id;
+        $data['numero_immatriculation'] = $numeroImmatriculation;
+        // Remove temporary fields to avoid unnecessary database columns
+        unset($data['part1'], $data['part2'], $data['part3']);
         Voiture::create($data);
         // Flash message to the session
         session()->flash('success', 'Voiture ajoutée');
@@ -74,7 +83,7 @@ class VoitureController extends Controller
             abort(403);
         }
 
-        return view('userCars.show', compact('voiture','operations','categories'));
+        return view('userCars.show', compact('voiture', 'operations', 'categories'));
     }
 
     /**
@@ -97,12 +106,9 @@ class VoitureController extends Controller
         $voiture = Voiture::find($id);
         $user_id = Auth::user()->id;
         $data = $request->validate([
-            'numero_immatriculation' => [
-                'required',
-                'regex:/^\d{1,6}-[A-Za-z]{1}-\d+$/',
-                Rule::unique('voitures', 'numero_immatriculation')->ignore($voiture->id)->withoutTrashed()
-
-            ],
+            'part1' => ['required', 'digits_between:1,6'], // 1 to 6 digits
+            'part2' => ['required', 'string', 'size:1'], // Single Arabic letter
+            'part3' => ['required', 'digits_between:1,2'], // 1 to 2 digits
             'marque' => ['required', 'max:30'],
             'modele' => ['required', 'max:30'],
             'photo' => ['image'],
@@ -110,11 +116,24 @@ class VoitureController extends Controller
             'date_achat' => ['required', 'date'],
             'date_de_dédouanement' => ['required', 'date'],
         ]);
+        // Combine the parts into the `numero_immatriculation`
+        $numeroImmatriculation = $data['part1'] . '-' . $data['part2'] . '-' . $data['part3'];
+        // Validate the uniqueness of the combined `numero_immatriculation`, ignoring the current voiture record
+        $request->validate([
+            'numero_immatriculation' => [
+                'regex:/^\d{1,6}-[أ-ي]{1}-\d{1,2}$/', // Ensure it matches the pattern
+                Rule::unique('voitures', 'numero_immatriculation')->ignore($voiture->id)->whereNull('deleted_at'), // Check uniqueness while ignoring current record
+            ],
+        ]);
         if ($request->hasFile('photo')) {
             $imagePath = $request->file('photo')->store('user/voitures', 'public');
             $data['photo'] = $imagePath;
         }
+        // Add user ID and combined numero_immatriculation
         $data['user_id'] = $user_id;
+        $data['numero_immatriculation'] = $numeroImmatriculation;
+        // Remove temporary fields to avoid unnecessary database columns
+        unset($data['part1'], $data['part2'], $data['part3']);
         $voiture->update($data);
         // Flash message to the session
         session()->flash('success', 'Voiture mise à jour');

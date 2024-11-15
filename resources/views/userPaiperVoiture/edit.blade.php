@@ -72,7 +72,16 @@
                 @method('PUT')
                 <div>
                     <x-input-label for="type" :value="__('Type')" />
-                    <x-text-input id="type" class="block mt-1 w-full" type="text" name="type" :value="old('type') ?? $papier->type" autofocus autocomplete="type" />
+                    <!-- Select Dropdown -->
+                    <select id="type" name="type" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <option value="" disabled selected>{{ __('Choisissez un type') }}</option>
+                        @foreach($types as $type)
+                            <option value="{{ $type->type }}" {{ $type->type == $papier->type ? 'selected' : '' }}>
+                                {{ $type->type }}
+                            </option>
+                        @endforeach
+                    </select>
+                
                     <x-input-error :messages="$errors->get('type')" class="mt-2" />
                 </div>
                 <div>
@@ -86,16 +95,16 @@
                     <x-input-error :messages="$errors->get('date_fin')" class="mt-2" />
                 </div>
                 <div>
-                    <x-input-label for="file_input" :value="__('Photo')" />
-                    <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')  ?? $papier->photo" autofocus autocomplete="photo" />
-                    <x-input-error :messages="$errors->get('photo')" class="mt-2" />
-                </div>
-                <div>
                     <x-input-label for="note" :value="__('Note')" />
                     <x-text-textarea id="note" class="block mt-1 w-full" name="note" autofocus autocomplete="note">
                         {{ old('note', $papier->note) }}
                     </x-text-textarea>
                     <x-input-error :messages="$errors->get('note')" class="mt-2" />
+                </div>
+                <div>
+                    <x-input-label for="file_input" :value="__('Photo')" />
+                    <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')  ?? $papier->photo" autofocus autocomplete="photo" />
+                    <x-input-error :messages="$errors->get('photo')" class="mt-2" />
                 </div>
 
                 <div class="flex items-center justify-end mt-4">

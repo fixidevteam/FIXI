@@ -88,8 +88,7 @@
               <div>
                 <p class="capitalize text-sm font-medium text-gray-900">Matricule</p>
                 <p class="text-sm text-gray-500">
-                  {{$voiture->numero_immatriculation}} 
-                  
+                  <span>{{ explode('-', $voiture->numero_immatriculation)[0] }}</span>-<span dir="rtl">{{ explode('-', $voiture->numero_immatriculation)[1] }}</span>-<span>{{ explode('-', $voiture->numero_immatriculation)[2] }}</span>
                 </p>
               </div>
 

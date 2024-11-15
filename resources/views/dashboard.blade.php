@@ -107,7 +107,7 @@
                           {{$voiture->marque ." ". $voiture->modele}}
                         </p>
                         <p class="text-sm text-gray-500 truncate">
-                          {{$voiture->numero_immatriculation}}
+                          <span>{{ explode('-', $voiture->numero_immatriculation)[0] }}</span>-<span dir="rtl">{{ explode('-', $voiture->numero_immatriculation)[1] }}</span>-<span>{{ explode('-', $voiture->numero_immatriculation)[2] }}</span>
                         </p>
                       </div>
                       <div class="inline-flex items-center text-base font-semibold text-gray-900">
@@ -154,7 +154,6 @@
                       </div>
                       <div class="inline-flex items-center text-base font-semibold text-gray-900">
                         <a href="{{route('paiperPersonnel.show',$papier->id)}}" class="text-sm font-medium text-blue-600 inline-flex items-center p-2 capitalize hover:underline">Details</a>
-
                       </div>
                     </div>
                   </li>

@@ -141,7 +141,7 @@
               Matricule
             </p>
             <p class="text-sm text-gray-500 truncate">
-              {{ $operation->voiture->numero_immatriculation }}
+              <span>{{ explode('-', $operation->voiture->numero_immatriculation)[0] }}</span>-<span dir="rtl">{{ explode('-', $operation->voiture->numero_immatriculation)[1] }}</span>-<span>{{ explode('-', $operation->voiture->numero_immatriculation)[2] }}</span>
             </p>
           </div>
           {{-- Marque --}}

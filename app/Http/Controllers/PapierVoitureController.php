@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\type_papierv;
 use App\Models\VoiturePapier;
 use App\Notifications\DocumentExpiryNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\Rule;
 
 use function PHPSTORM_META\type;
 
@@ -25,7 +27,8 @@ class PapierVoitureController extends Controller
      */
     public function create()
     {
-        return view("userPaiperVoiture.create");
+        $types = type_papierv::all();
+        return view("userPaiperVoiture.create", compact('types'));
     }
 
     /**
@@ -34,10 +37,12 @@ class PapierVoitureController extends Controller
     public function store(Request $request)
     {
         $voiture_id = Session::get('voiture_id');
+        // Fetch the valid types from the database
+        $validTypes = type_papierv::pluck('type')->toArray();
         $data = $request->validate([
-            'type' => ['required', 'max:30'],
-            'note' => ['max:255'],
-            'photo' => ['image'],
+            'type' => ['required', 'string', Rule::in($validTypes)], // Ensure type is valid
+            'note' => ['nullable', 'max:255'],
+            'photo' => ['nullable', 'image'],
             'date_debut' => ['required', 'date'],
             'date_fin' => ['required', 'date'],
 
@@ -78,11 +83,12 @@ class PapierVoitureController extends Controller
      */
     public function edit(string $id)
     {
+        $types = type_papierv::all();
         $papier = VoiturePapier::find($id);
         if (!$papier || $papier->voiture_id != Session::get('voiture_id')) {
             abort(403);
         }
-        return view('userPaiperVoiture.edit', compact('papier'));
+        return view('userPaiperVoiture.edit', compact('papier','types'));
     }
 
     /**
@@ -95,7 +101,7 @@ class PapierVoitureController extends Controller
 
         // Validate the request data
         $data = $request->validate([
-            'type' => ['required', 'max:30'],
+            'type' => ['required'],
             'note' => ['max:255'],
             'photo' => ['image'],
             'date_debut' => ['required', 'date'],
