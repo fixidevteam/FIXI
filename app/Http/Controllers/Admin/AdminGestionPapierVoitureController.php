@@ -35,6 +35,8 @@ class AdminGestionPapierVoitureController extends Controller
             
         if($type){
             type_papierv::create($type);
+            session()->flash('success', 'Document ajouté');
+            session()->flash('subtitle', 'document a été ajouté avec succès à la liste.');    
             return redirect()->route('admin.gestionPapierVoiture.index');
 
         }
@@ -71,6 +73,8 @@ class AdminGestionPapierVoitureController extends Controller
         if($type){
                 $type->update($papier);
         }
+        session()->flash('success', 'Document mis à jour');
+        session()->flash('subtitle', 'document a été mis à jour avec succès.');
         return redirect()->route('admin.gestionPapierVoiture.index');
 
     }
@@ -85,6 +89,8 @@ class AdminGestionPapierVoitureController extends Controller
         if($type){
                 $type->delete();
         }
+        session()->flash('success', 'Document supprimée');
+        session()->flash('subtitle', 'document a été supprimée avec succès.');
         return redirect()->route('admin.gestionPapierVoiture.index');
     }
 }

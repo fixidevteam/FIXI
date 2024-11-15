@@ -13,5 +13,4 @@ class type_papierv extends Model
     protected $fillable = [
         'type',
     ];
-
 }

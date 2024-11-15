@@ -136,6 +136,10 @@ class DatabaseSeeder extends Seeder
             'password' => 'admin123'
         ]);
         // $this->call([
+        //     TypePapierpSeeder::class,
+        //     TypePapiervSeeder::class,
+        // ]);
+        // $this->call([
         //     VoitureSeeder::class,
         //     PapierVoitureSeeder::class,
         //     PapierUserSeeder::class,

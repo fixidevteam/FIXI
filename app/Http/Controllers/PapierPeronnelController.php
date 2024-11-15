@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\type_papierp;
 use App\Models\UserPapier;
 use App\Notifications\DocumentExpiryNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Validation\Rule;
 
 class PapierPeronnelController extends Controller
 {
@@ -29,7 +31,8 @@ class PapierPeronnelController extends Controller
      */
     public function create()
     {
-        return view("userPaiperPersonnel.create");
+        $types = type_papierp::all();
+        return view("userPaiperPersonnel.create", compact('types'));
     }
 
     /**
@@ -38,13 +41,14 @@ class PapierPeronnelController extends Controller
     public function store(Request $request)
     {
         $user_id = Auth::user()->id;
+        // Fetch the valid types from the database
+        $validTypes = type_papierp::pluck('type')->toArray();
         $data = $request->validate([
-            'type' => ['required', 'max:30'],
-            'note' => ['max:255'],
-            'photo' => ['image'],
+            'type' => ['required', 'string', Rule::in($validTypes)], // Ensure type is valid
+            'note' => ['nullable', 'max:255'],
+            'photo' => ['nullable', 'image'],
             'date_debut' => ['required', 'date'],
             'date_fin' => ['required', 'date'],
-
         ]);
         // dd($data['note']);
         if ($request->hasFile('photo')) {
@@ -83,11 +87,12 @@ class PapierPeronnelController extends Controller
      */
     public function edit(string $id)
     {
+        $types = type_papierp::all();
         $papier = UserPapier::find($id);
         if (!$papier || $papier->user_id != auth()->id()) {
             abort(403);
         }
-        return view('userPaiperPersonnel.edit', compact('papier'));
+        return view('userPaiperPersonnel.edit', compact('papier','types'));
     }
 
     /**
@@ -100,7 +105,7 @@ class PapierPeronnelController extends Controller
         if ($papier) {
             // Validate the request data
             $validatedData = $request->validate([
-                'type' => ['required', 'max:30'],
+                'type' => ['required'],
                 'note' => ['nullable', 'max:255'],
                 'photo' => ['nullable', 'image'],
                 'date_debut' => ['required', 'date'],

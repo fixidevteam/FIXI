@@ -106,7 +106,7 @@
                                 @foreach($voitures as $voiture)
                                 <tr class="bg-white border-b">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                        {{$voiture->numero_immatriculation}}
+                                        <span>{{ explode('-', $voiture->numero_immatriculation)[0] }}</span>-<span dir="rtl">{{ explode('-', $voiture->numero_immatriculation)[1] }}</span>-<span>{{ explode('-', $voiture->numero_immatriculation)[2] }}</span>
                                     </th>
                                     <td class="px-6 py-4">
                                         {{$voiture->marque}}

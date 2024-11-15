@@ -73,7 +73,7 @@
                                 @foreach($operations as $operation)
                                     <tr class="bg-white border-b">
                                         <td class="px-6 py-4 font-medium text-gray-900">
-                                            {{ $operation->voiture->numero_immatriculation }}
+                                            <span>{{ explode('-', $operation->voiture->numero_immatriculation)[0] }}</span>-<span dir="rtl">{{ explode('-', $operation->voiture->numero_immatriculation)[1] }}</span>-<span>{{ explode('-', $operation->voiture->numero_immatriculation)[2] }}</span>
                                         </td>
                                         <td class="px-6 py-4">
                                             {{ $categories->where('id', $operation->categorie)->first()->nom_categorie ?? 'N/A' }}
