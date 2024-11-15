@@ -1,0 +1,97 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\nom_categorie;
+use App\Models\nom_operation;
+use App\Models\nom_sous_operation;
+use App\Models\type_papierv;
+use Illuminate\Http\Request;
+
+class AdminGestionCategorieController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $categories = nom_categorie::all();
+        $operations = nom_operation::all();
+        $sousOperations = nom_sous_operation::all();
+        return view('admin.gestionCategorie.index', compact('categories', 'operations', 'sousOperations'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('admin.gestionCategorie.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $type = $request->validate(['type' => ['required']]);
+
+        if ($type) {
+            type_papierv::create($type);
+            return redirect()->route('admin.gestionCategorie.index');
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        return back();
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $categorie = nom_categorie::find($id);
+        if ($categorie) {
+            return view('admin.gestionCategorie.edit', compact('categorie'));
+        }
+        return back();
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        $nom_categorie = $request->validate(['nom_categorie' => ['required']]);
+        $categorie = nom_categorie::find($id);
+
+        if ($categorie) {
+            $categorie->update($nom_categorie);
+        }
+        return redirect()->route('admin.gestionCategorie.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+
+        $categorie = nom_categorie::find($id);
+        // dd($categorie);
+        if ($categorie) {
+            foreach ($categorie->operations as $operation) {
+                $operation->sousOperations()->delete();
+            }
+            $categorie->operations()->delete();
+            $categorie->delete();
+        }
+        return redirect()->route('admin.gestionCategorie.index');
+    }
+}

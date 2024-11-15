@@ -60,8 +60,13 @@ class AdminGestionGarageController extends Controller
      */
     public function edit(string $id)
     {
-        $garage = garage::findOrFail($id);
-        return view('admin.gestionGarages.edit', compact('garage'));
+        $garage = garage::find($id);
+        
+        if($garage){
+                return view('admin.gestionGarages.edit', compact('garage'));
+        }
+        return back()->with('error', 'Garage introuvable');
+        
     }
 
     /**

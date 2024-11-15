@@ -32,10 +32,11 @@ class AdminGestionPapierVoitureController extends Controller
     public function store(Request $request)
     {
         $type = $request->validate(['type'=>['required']]);
+            
         if($type){
             type_papierv::create($type);
             return redirect()->route('admin.gestionPapierVoiture.index');
-    
+
         }
     }
 
@@ -44,7 +45,7 @@ class AdminGestionPapierVoitureController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return back();
     }
 
     /**
@@ -53,7 +54,10 @@ class AdminGestionPapierVoitureController extends Controller
     public function edit(string $id)
     {
         $type = type_papierv::find($id);
+        if($type){
         return view('admin.gestionPapierVoiture.edit',compact('type'));
+        }
+        return back();
     }
 
     /**
@@ -63,7 +67,7 @@ class AdminGestionPapierVoitureController extends Controller
     {
         $papier = $request->validate(['type'=>['required']]);
         $type = type_papierv::find($id);
-        // dd($type);
+        
         if($type){
                 $type->update($papier);
         }

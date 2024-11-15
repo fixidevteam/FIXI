@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Admin;
 use App\Models\garage;
 use App\Models\nom_categorie;
 use App\Models\nom_operation;
@@ -128,6 +129,11 @@ class DatabaseSeeder extends Seeder
             'name'=>'Auto Tari9',
             'ref'=>'AA44',
             'localisation' => 'marrakech, Mhamid'
+        ]);
+        Admin::create([
+            'name'=>'admin',
+            'email'=>'admin@gmail.com',
+            'password' => 'admin123'
         ]);
         // $this->call([
         //     VoitureSeeder::class,

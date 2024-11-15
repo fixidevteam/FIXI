@@ -42,7 +42,7 @@ class AdminGestionPapierPersoController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return back();
     }
 
     /**
@@ -51,7 +51,10 @@ class AdminGestionPapierPersoController extends Controller
     public function edit(string $id)
     {
         $type = type_papierp::find($id);
+        if($type){
         return view('admin.gestionPapierPerso.edit',compact('type'));
+        }
+        return back();
     }
 
     /**

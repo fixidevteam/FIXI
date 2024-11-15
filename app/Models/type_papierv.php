@@ -11,7 +11,7 @@ class type_papierv extends Model
     use HasFactory;
     use SoftDeletes;
     protected $fillable = [
-        'type ',
+        'type',
     ];
 
 }

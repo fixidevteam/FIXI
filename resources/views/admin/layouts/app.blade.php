@@ -29,20 +29,21 @@
     </header>
     @endif --}}
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
-    </body>
-    <script>
-        function toggleModal(show) {
-            const modal = document.getElementById('confirmationModal');
-            if (show) {
-                modal.classList.remove('hidden');
-            } else {
-                modal.classList.add('hidden');
-            }
+    <!-- Page Content -->
+    <main>
+        {{ $slot }}
+    </main>
+    </div>
+</body>
+<script>
+    function toggleModal(show, form) {
+        const modal = document.getElementById(form); // Get the modal element by ID
+        if (show) {
+            modal.classList.remove('hidden'); // Remove 'hidden' to show the modal
+        } else {
+            modal.classList.add('hidden'); // Add 'hidden' to hide the modal
         }
-    </script>
+    }
+</script>
+
 </html>

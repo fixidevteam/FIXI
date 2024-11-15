@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminGestionCategorieController;
 use App\Http\Controllers\Admin\AdminGestionGarageController;
 use App\Http\Controllers\Admin\AdminGestionMechanicController;
+use App\Http\Controllers\Admin\AdminGestionOperationController;
 use App\Http\Controllers\Admin\AdminGestionPapierPersoController;
 use App\Http\Controllers\Admin\AdminGestionPapierVoitureController;
+use App\Http\Controllers\Admin\AdminGestionSousOperationController;
 use App\Http\Controllers\Admin\AdminGestionUserController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
@@ -41,6 +44,9 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::resource('/gestionGarages', AdminGestionGarageController::class);
     Route::resource('/gestionPapierPerso', AdminGestionPapierPersoController::class);
     Route::resource('/gestionPapierVoiture', AdminGestionPapierVoitureController::class);
+    Route::resource('/gestionOperation', AdminGestionOperationController::class);
+    Route::resource('/gestionSousOperation', AdminGestionSousOperationController::class);
+    Route::resource('/gestionCategorie', AdminGestionCategorieController::class);
 
     
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
