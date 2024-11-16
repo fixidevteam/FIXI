@@ -6,9 +6,7 @@ use App\Http\Controllers\OperationController;
 use App\Http\Controllers\PapierPeronnelController;
 use App\Http\Controllers\PapierVoitureController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoitureController;
-use App\Models\nom_categorie;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,9 +31,9 @@ Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback'])
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified', 'checkdocuments','checkUserStatus'])->name('dashboard');
+})->middleware(['auth', 'verified', 'checkdocuments', 'checkUserStatus'])->name('dashboard');
 
-Route::middleware(['auth', 'checkdocuments','checkUserStatus'])->group(function () {
+Route::middleware(['auth', 'checkdocuments', 'checkUserStatus'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -46,7 +44,6 @@ Route::middleware(['auth', 'checkdocuments','checkUserStatus'])->group(function 
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::get('/notifications/{id}/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
     Route::get('/notifications/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.markAllAsRead');
-
 });
 Route::get('/api/operations/{categorieId}', [App\Http\Controllers\DataController::class, 'getOperations']);
 Route::get('/api/sous-operations/{operationId}', [App\Http\Controllers\DataController::class, 'getSousOperations']);
