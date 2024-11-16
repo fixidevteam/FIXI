@@ -20,13 +20,11 @@ class NotificationController extends Controller
         if (is_null($notification->read_at)) {
             $notification->markAsRead();
         }
-        if( $notification->data['is_car_document']){
+        if ($notification->data['is_car_document']) {
             return redirect()->route('paiperVoiture.show', $notification->data['document_id']);
-        }
-        else{
+        } else {
             return  redirect()->route('paiperPersonnel.show', $notification->data['document_id']);
         }
-        
     }
     public function markAllAsRead()
     {

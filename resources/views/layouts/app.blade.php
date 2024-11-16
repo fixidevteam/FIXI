@@ -16,7 +16,7 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-[#F9FAFB]">
+    <div class="min-h-screen bg-[#F1F1F1]">
         @include('layouts.n')
 
     <!-- Page Content -->

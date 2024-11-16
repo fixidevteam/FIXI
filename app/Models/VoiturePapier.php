@@ -19,7 +19,7 @@ class VoiturePapier extends Model
         'date_fin',
         'voiture_id',
     ];
-    public function voiture():BelongsTo
+    public function voiture(): BelongsTo
     {
         return $this->belongsTo(Voiture::class);
     }

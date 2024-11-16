@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Mechanic;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUpdateRequestMechanic;
 use Illuminate\Http\RedirectResponse;

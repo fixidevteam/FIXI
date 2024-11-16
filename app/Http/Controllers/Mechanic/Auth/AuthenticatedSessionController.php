@@ -34,7 +34,7 @@ class AuthenticatedSessionController extends Controller
                 'email' => 'Votre compte est inactif. Veuillez contacter l\'administrateur.',
             ]);
         }
-        
+
         $request->authenticate();
 
         $request->session()->regenerate();

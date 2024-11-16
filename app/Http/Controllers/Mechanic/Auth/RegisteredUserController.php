@@ -23,7 +23,7 @@ class RegisteredUserController extends Controller
     {
         $garages = garage::all();
 
-        return view('mechanic.auth.register',compact('garages'));
+        return view('mechanic.auth.register', compact('garages'));
     }
 
     /**
@@ -35,7 +35,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Mechanic::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . Mechanic::class],
             'garage_id' => ['required'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'telephone' => [
@@ -57,6 +57,6 @@ class RegisteredUserController extends Controller
         event(new Registered($mechanic));
 
         Auth::guard('mechanic')->login($mechanic);
-        return redirect(route('mechanic.dashboard',absolute:false));
+        return redirect(route('mechanic.dashboard', absolute: false));
     }
 }

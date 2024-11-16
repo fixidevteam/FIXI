@@ -24,5 +24,6 @@ class CheckMechanicStatus
             ]);
         }
 
-        return $next($request);    }
+        return $next($request);
+    }
 }

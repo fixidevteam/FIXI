@@ -65,9 +65,8 @@ class AdminGestionMechanicController extends Controller
             'telephone' => $request->telephone,
             'status' => 1,
         ]);
-        
-        return redirect()->route('admin.gestionGaragistes.index')->with('success', 'Compte mécanicien créé avec succès!');
 
+        return redirect()->route('admin.gestionGaragistes.index')->with('success', 'Compte mécanicien créé avec succès!');
     }
 
     /**
@@ -75,7 +74,7 @@ class AdminGestionMechanicController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return back();
     }
 
     /**
@@ -99,6 +98,6 @@ class AdminGestionMechanicController extends Controller
      */
     public function destroy(string $id)
     {
-    return back();
+        return back();
     }
 }

@@ -14,7 +14,10 @@ class AdminGestionSousOperationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() {}
+    public function index()
+    {
+        return back();
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -93,7 +96,6 @@ class AdminGestionSousOperationController extends Controller
     public function destroy(string $id)
     {
         $Sous = nom_sous_operation::find($id);
-        // dd($type);
         if ($Sous) {
             $Sous->delete();
         }

@@ -50,7 +50,6 @@ class PapierPeronnelController extends Controller
             'date_debut' => ['required', 'date'],
             'date_fin' => ['required', 'date'],
         ]);
-        // dd($data['note']);
         if ($request->hasFile('photo')) {
             $imagePath = $request->file('photo')->store('user/papierperso', 'public');
             $data['photo'] = $imagePath;
@@ -92,7 +91,7 @@ class PapierPeronnelController extends Controller
         if (!$papier || $papier->user_id != auth()->id()) {
             abort(403);
         }
-        return view('userPaiperPersonnel.edit', compact('papier','types'));
+        return view('userPaiperPersonnel.edit', compact('papier', 'types'));
     }
 
     /**
@@ -122,7 +121,6 @@ class PapierPeronnelController extends Controller
             $papier->update($validatedData);
 
 
-            // Handle related notifications
             // Handle related notifications
             $user = $papier->user; // Ensure this relationship exists in your UserPapier model
 

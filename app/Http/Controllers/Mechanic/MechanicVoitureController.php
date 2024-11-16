@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\nom_categorie;
 use App\Models\nom_operation;
 use App\Models\Operation;
-use App\Models\Voiture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -52,14 +51,17 @@ class MechanicVoitureController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {}
+    public function create()
+    {
+        return back();
+    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        return back();
     }
 
     /**
@@ -98,7 +100,7 @@ class MechanicVoitureController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return back();
     }
 
     /**
@@ -106,7 +108,7 @@ class MechanicVoitureController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        return back();
     }
 
     /**
@@ -114,6 +116,6 @@ class MechanicVoitureController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return back();
     }
 }

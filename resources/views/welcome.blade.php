@@ -82,9 +82,6 @@
                                 @endauth
                             </div>
                         @endif
-                        {{-- space for user --}}
-                        {{-- space for mechanic --}}
-                        {{-- space for admin --}}
                     </div>
                 </div>
                     <div class="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">

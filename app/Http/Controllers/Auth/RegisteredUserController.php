@@ -32,7 +32,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'telephone' => [
                 'required',
@@ -53,7 +53,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
         // Send email verification notification
-        // $request->user()->sendEmailVerificationNotification();
+        $request->user()->sendEmailVerificationNotification();
 
         return redirect(RouteServiceProvider::HOME);
     }

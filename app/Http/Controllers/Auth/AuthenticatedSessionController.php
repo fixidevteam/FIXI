@@ -27,12 +27,12 @@ class AuthenticatedSessionController extends Controller
     {
         // Get the user attempting to log in
         $user = \App\Models\User::where('email', $request->email)->first();
-        
+
         // Check if the user exists and if their account is inactive
         if ($user && !$user->status) {
-        return back()->withErrors([
-            'email' => 'Votre compte est inactif. Veuillez contacter l\'administrateur.',
-        ]);
+            return back()->withErrors([
+                'email' => 'Votre compte est inactif. Veuillez contacter l\'administrateur.',
+            ]);
         }
         // Proceed with authentication
         $request->authenticate();

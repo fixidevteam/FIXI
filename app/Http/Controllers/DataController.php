@@ -18,4 +18,3 @@ class DataController extends Controller
         return nom_sous_operation::where('nom_operation_id', $operationId)->get();
     }
 }
-

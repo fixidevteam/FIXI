@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\nom_categorie;
 use App\Models\nom_operation;
 use App\Models\nom_sous_operation;
-use App\Models\type_papierv;
 use Illuminate\Http\Request;
 
 class AdminGestionCategorieController extends Controller
