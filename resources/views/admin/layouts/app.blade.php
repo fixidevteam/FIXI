@@ -44,6 +44,14 @@
             modal.classList.add('hidden'); // Add 'hidden' to hide the modal
         }
     }
+    function toggleModalDelete(show) {
+            const modal = document.getElementById('confirmationModal');
+            if (show) {
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
+    }
 </script>
 
 </html>

@@ -37,6 +37,8 @@ class AdminGestionOperationController extends Controller
         ]);
         if ($nom_operation) {
             nom_operation::create($nom_operation);
+            session()->flash('success', 'Operation ajouté');
+            session()->flash('subtitle', 'Operation a été ajouté avec succès.');
             return redirect()->route('admin.gestionCategorie.index');
         }
     }
@@ -75,6 +77,8 @@ class AdminGestionOperationController extends Controller
 
         if ($operation) {
             $operation->update($newoperation);
+            session()->flash('success', 'Operation mise à jour');
+            session()->flash('subtitle', 'Operation a été mis à jour avec succès.');
         }
         return redirect()->route('admin.gestionCategorie.index');
     }
@@ -91,6 +95,8 @@ class AdminGestionOperationController extends Controller
             $operation->sousOperations()->delete();
             $operation->delete();
         }
+        session()->flash('success', 'Operation supprimée');
+        session()->flash('subtitle', 'Operation a été supprimée avec succès.');
         return redirect()->route('admin.gestionCategorie.index');
     }
 }

@@ -39,6 +39,8 @@ class AdminGestionSousOperationController extends Controller
 
         if ($Sous) {
             nom_sous_operation::create($Sous);
+            session()->flash('success', 'Sous operation ajouté');
+            session()->flash('subtitle', 'Sous operation a été ajouté avec succès.');
             return redirect()->route('admin.gestionCategorie.index');
         }
     }
@@ -78,6 +80,8 @@ class AdminGestionSousOperationController extends Controller
         $sous = nom_sous_operation::find($id);
         if ($sous) {
             $sous->update($newsous);
+            session()->flash('success', 'Sous Operation mise à jour');
+            session()->flash('subtitle', 'Sous Operation a été mis à jour avec succès.');
             return redirect()->route('admin.gestionCategorie.index');
         }
         return back();
@@ -93,6 +97,8 @@ class AdminGestionSousOperationController extends Controller
         if ($Sous) {
             $Sous->delete();
         }
+        session()->flash('success', 'Sous operation supprimée');
+        session()->flash('subtitle', 'Sous operation a été supprimée avec succès.');
         return redirect()->route('admin.gestionCategorie.index');
     }
 }
