@@ -27,7 +27,7 @@
         <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
             <div class="px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex justify-between items-center my-6">
-                    <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Liste des categories</h2>
+                    <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Liste des catégories</h2>
                     <a href="{{ route('admin.gestionCategorie.create') }}">
                         <x-primary-button class="hidden md:block">Ajouter une catégorie</x-primary-button>
                         <x-primary-button class="sm:hidden">
@@ -44,17 +44,18 @@
                         <p class="p-4 text-gray-500 text-center">Aucune catégorie disponible.</p>
                         @else
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                            <caption class="sr-only">Liste des catégories</caption>
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr>
-                                    <th class="px-6 py-3">ID</th>
-                                    <th class="px-6 py-3">Catégorie</th>
-                                    <th class="px-6 py-3">Action</th>
+                                    <th scope="col" class="px-6 py-3">ID</th>
+                                    <th scope="col" class="px-6 py-3">Catégorie</th>
+                                    <th scope="col" class="px-6 py-3">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($categories as $categorie)
                                 <tr class="bg-white border-b">
-                                    <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $categorie->id }}</th>
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $categorie->id }}</th>
                                     <td class="px-6 py-4">{{ $categorie->nom_categorie }}</td>
                                     <td class="px-6 py-4">
                                         <div class="flex items-center">
@@ -139,18 +140,19 @@
                         <p class="p-4 text-gray-500 text-center">Aucune operation disponible.</p>
                         @else
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                            <caption class="sr-only">Liste des operations</caption>
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr>
-                                    <th class="px-6 py-3">ID</th>
-                                    <th class="px-6 py-3">Catégorie</th>
-                                    <th class="px-6 py-3">Operation</th>
-                                    <th class="px-6 py-3">Action</th>
+                                    <th scope="col" class="px-6 py-3">ID</th>
+                                    <th scope="col" class="px-6 py-3">Catégorie</th>
+                                    <th scope="col" class="px-6 py-3">Operation</th>
+                                    <th scope="col" class="px-6 py-3">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($operations as $operation)
                                 <tr class="bg-white border-b">
-                                    <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $operation->id }}</th>
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $operation->id }}</th>
                                     <td class="px-6 py-4">{{ $operation->categorie->nom_categorie }}</td>
                                     <td class="px-6 py-4">{{ $operation->nom_operation }}</td>
                                     <td class="px-6 py-4">
@@ -199,18 +201,19 @@
                         <p class="p-4 text-gray-500 text-center">Aucune sous operation disponible.</p>
                         @else
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                            <caption class="sr-only">Liste des sous operations</caption>
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr>
-                                    <th class="px-6 py-3">ID</th>
-                                    <th class="px-6 py-3">Operation</th>
-                                    <th class="px-6 py-3">Sous Operation</th>
-                                    <th class="px-6 py-3">Action</th>
+                                    <th scope="col" class="px-6 py-3">ID</th>
+                                    <th scope="col" class="px-6 py-3">Operation</th>
+                                    <th scope="col" class="px-6 py-3">Sous Operation</th>
+                                    <th scope="col" class="px-6 py-3">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($sousOperations as $sous)
                                 <tr class="bg-white border-b">
-                                    <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $sous->id }}</th>
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $sous->id }}</th>
                                     <td class="px-6 py-4">{{ $sous->operation->nom_operation }}</td>
                                     <td class="px-6 py-4">{{ $sous->nom_sous_operation }}</td>
                                     <td class="px-6 py-4">

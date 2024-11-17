@@ -47,6 +47,11 @@ Route::middleware(['auth', 'checkdocuments', 'checkUserStatus'])->group(function
 });
 Route::get('/api/operations/{categorieId}', [App\Http\Controllers\DataController::class, 'getOperations']);
 Route::get('/api/sous-operations/{operationId}', [App\Http\Controllers\DataController::class, 'getSousOperations']);
-require __DIR__ . '/auth.php';
-require __DIR__ . '/admin-auth.php';
-require __DIR__ . '/mechanic-auth.php';
+// General Authentication Routes
+require_once __DIR__ . '/auth.php';
+
+// Admin-Specific Authentication Routes
+require_once __DIR__ . '/admin-auth.php';
+
+// Mechanic-Specific Authentication Routes
+require_once __DIR__ . '/mechanic-auth.php';

@@ -1,6 +1,6 @@
-projectKey=Fixi_ma
+projectKey=fixi_final_test
 serverUrl=http://localhost:9000
 serverVersion=10.3.0.82913
-dashboardUrl=http://localhost:9000/dashboard?id=Fixi_ma
-ceTaskId=AZM1w4Hl7jUoxlD116sx
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AZM1w4Hl7jUoxlD116sx
+dashboardUrl=http://localhost:9000/dashboard?id=fixi_final_test
+ceTaskId=AZM5lvhRVZG5RMNnitt9
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AZM5lvhRVZG5RMNnitt9

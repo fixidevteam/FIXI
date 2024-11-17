@@ -75,11 +75,12 @@
                         <p class="p-4 text-gray-500 text-center">Aucune papier disponible.</p>
                         @else
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                            <caption class="sr-only">Liste des papiers personnel</caption>
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr>
-                                    <th class="px-6 py-3">ID</th>
-                                    <th class="px-6 py-3">Type</th>
-                                    <th class="px-6 py-3">Action</th>
+                                    <th scope="col" class="px-6 py-3">ID</th>
+                                    <th scope="col" class="px-6 py-3">Type</th>
+                                    <th scope="col" class="px-6 py-3">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
