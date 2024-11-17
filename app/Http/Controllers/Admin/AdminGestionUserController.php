@@ -14,7 +14,7 @@ class AdminGestionUserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('admin.gestionUtilisateurs.index',compact('users'));
+        return view('admin.gestionUtilisateurs.index', compact('users'));
     }
     /**
      * Edit the status of account 
@@ -49,7 +49,7 @@ class AdminGestionUserController extends Controller
     public function show(string $id)
     {
         $user = User::findOrFail($id);
-        return view('admin.gestionUtilisateurs.show',compact('user'));
+        return view('admin.gestionUtilisateurs.show', compact('user'));
     }
 
     /**
@@ -66,7 +66,6 @@ class AdminGestionUserController extends Controller
     public function update(Request $request, string $id)
     {
         return back();
-        
     }
 
     /**
@@ -75,6 +74,5 @@ class AdminGestionUserController extends Controller
     public function destroy(string $id)
     {
         return back();
-        
     }
 }

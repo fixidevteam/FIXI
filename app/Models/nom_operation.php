@@ -17,7 +17,7 @@ class nom_operation extends Model
         'nom_operation',
         'nom_categorie_id'
     ];
-    public function operations():HasMany
+    public function operations(): HasMany
     {
         return $this->HasMany(Operation::class);
     }

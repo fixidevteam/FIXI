@@ -126,7 +126,7 @@ class MechanicOperatioController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return back();
     }
 
     /**
@@ -134,7 +134,7 @@ class MechanicOperatioController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        return back();
     }
 
     /**
@@ -142,6 +142,6 @@ class MechanicOperatioController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return back();
     }
 }

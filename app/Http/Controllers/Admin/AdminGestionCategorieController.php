@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\nom_categorie;
 use App\Models\nom_operation;
 use App\Models\nom_sous_operation;
-use App\Models\type_papierv;
 use Illuminate\Http\Request;
 
 class AdminGestionCategorieController extends Controller
@@ -39,6 +38,8 @@ class AdminGestionCategorieController extends Controller
 
         if ($nom_categorie) {
             nom_categorie::create($nom_categorie);
+            session()->flash('success', 'Categorie ajouté');
+            session()->flash('subtitle', 'Categorie a été ajouté avec succès.');    
             return redirect()->route('admin.gestionCategorie.index');
         }
     }
@@ -73,6 +74,8 @@ class AdminGestionCategorieController extends Controller
 
         if ($categorie) {
             $categorie->update($nom_categorie);
+            session()->flash('success', 'Categorie mise à jour');
+            session()->flash('subtitle', 'Categorie a été mis à jour avec succès.');    
         }
         return redirect()->route('admin.gestionCategorie.index');
     }
@@ -92,6 +95,8 @@ class AdminGestionCategorieController extends Controller
             $categorie->operations()->delete();
             $categorie->delete();
         }
+        session()->flash('success', 'Categorie supprimée');
+        session()->flash('subtitle', 'Categorie a été supprimée avec succès.');
         return redirect()->route('admin.gestionCategorie.index');
     }
 }

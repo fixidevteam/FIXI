@@ -65,6 +65,4 @@ class User extends Authenticatable
     {
         return $this->status === true; // Check if the status is active
     }
-
-
 }

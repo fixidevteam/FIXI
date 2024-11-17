@@ -127,6 +127,15 @@ return [
         'garage_id' => [
             'required' => 'Le champ garage est obligatoire.',
         ],
+        'part1' => [
+            'required' => 'Le champ Numero d\'immatriculation (6 chiffres) est obligatoire.',
+        ],
+        'part2' => [
+            'required' => 'Le champ Numero d\'immatriculation (Lettre en Arabe) est obligatoire.',
+        ],
+        'part3' => [
+            'required' => 'Le champ Numero d\'immatriculation (2 chiffres) est obligatoire.',
+        ],
     ],
 
     /*

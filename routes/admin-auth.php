@@ -48,7 +48,7 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::resource('/gestionSousOperation', AdminGestionSousOperationController::class);
     Route::resource('/gestionCategorie', AdminGestionCategorieController::class);
 
-    
+
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])

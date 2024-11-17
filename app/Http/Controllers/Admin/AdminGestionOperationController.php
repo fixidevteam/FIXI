@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\nom_categorie;
 use App\Models\nom_operation;
-use App\Models\nom_sous_operation;
-use App\Models\type_papierv;
 use Illuminate\Http\Request;
 
 class AdminGestionOperationController extends Controller
@@ -14,7 +12,10 @@ class AdminGestionOperationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() {}
+    public function index()
+    {
+        return back();
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -37,6 +38,8 @@ class AdminGestionOperationController extends Controller
         ]);
         if ($nom_operation) {
             nom_operation::create($nom_operation);
+            session()->flash('success', 'Operation ajouté');
+            session()->flash('subtitle', 'Operation a été ajouté avec succès.');
             return redirect()->route('admin.gestionCategorie.index');
         }
     }
@@ -75,6 +78,8 @@ class AdminGestionOperationController extends Controller
 
         if ($operation) {
             $operation->update($newoperation);
+            session()->flash('success', 'Operation mise à jour');
+            session()->flash('subtitle', 'Operation a été mis à jour avec succès.');
         }
         return redirect()->route('admin.gestionCategorie.index');
     }
@@ -84,13 +89,13 @@ class AdminGestionOperationController extends Controller
      */
     public function destroy(string $id)
     {
-        // dd($id);
         $operation = nom_operation::find($id);
-        // dd($operation);
         if ($operation) {
             $operation->sousOperations()->delete();
             $operation->delete();
         }
+        session()->flash('success', 'Operation supprimée');
+        session()->flash('subtitle', 'Operation a été supprimée avec succès.');
         return redirect()->route('admin.gestionCategorie.index');
     }
 }

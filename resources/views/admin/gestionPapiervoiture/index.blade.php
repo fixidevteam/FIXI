@@ -15,7 +15,7 @@
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
                             </svg>
                             <a href="" class="inline-flex items-center text-sm font-medium text-gray-700">
-                                Gestion des Papiers du Voiture
+                                Gestion des papiers du voiture
                             </a>
                         </div>
                     </li>
@@ -27,7 +27,7 @@
         <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
             <div class="px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex justify-between items-center my-6">
-                    <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Liste des Papiers du Voiture</h2>
+                    <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Liste des papiers du voiture</h2>
                     <a href="{{ route('admin.gestionPapierVoiture.create') }}">
                         <x-primary-button class="hidden md:block">Ajouter Papiers du Voiture</x-primary-button>
                     </a>
@@ -35,11 +35,49 @@
 
                 <!-- Table Section -->
                 <div class="my-5">
+                    {{-- alert --}}
+                    @if (session('success'))
+                        <div class="fixed top-20 right-4 mb-5 flex justify-end z-10"
+                        x-data="{ show: true }" 
+                        x-show="show" 
+                        x-transition:leave="transition ease-in duration-1000" 
+                        x-transition:leave-start="opacity-100" 
+                        x-transition:leave-end="opacity-0" 
+                        x-init="setTimeout(() => show = false, 3000)" 
+                        >
+                            <div role="alert" class="rounded-xl border border-gray-100 bg-white p-4">
+                                <div class="flex items-start gap-4">
+                                <span class="text-green-600">
+                                    <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="size-6"
+                                    >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    />
+                                    </svg>
+                                </span>
+                                <div class="flex-1">
+                                    <strong class="block font-medium text-gray-900"> {{ session('success') }} </strong>
+                                    <p class="mt-1 text-sm text-gray-700">{{ session('subtitle') }}</p>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                    {{-- alert close --}}
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         @if($type_papierVoitures->isEmpty())
                             <p class="p-4 text-gray-500 text-center">Aucun papier disponible.</p>
                         @else
                             <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                                <caption class="sr-only">Liste des papiers voiture</caption>
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">ID</th>

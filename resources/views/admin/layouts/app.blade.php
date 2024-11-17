@@ -17,18 +17,8 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-[#F9FAFB]">
+    <div class="min-h-screen bg-[#F1F1F1]">
         @include('admin.layouts.n')
-
-        <!-- Page Heading -->
-        {{-- @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-    </div>
-    </header>
-    @endif --}}
-
     <!-- Page Content -->
     <main>
         {{ $slot }}
@@ -43,6 +33,14 @@
         } else {
             modal.classList.add('hidden'); // Add 'hidden' to hide the modal
         }
+    }
+    function toggleModalDelete(show) {
+            const modal = document.getElementById('confirmationModal');
+            if (show) {
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
     }
 </script>
 

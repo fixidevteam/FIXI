@@ -30,7 +30,6 @@ class OperationController extends Controller
      */
     public function create()
     {
-        // dd(Session::get('voiture_id'));
         $garages = garage::all();
         $categories = nom_categorie::all();
         return view('userOperations.create', compact('categories', 'garages'));

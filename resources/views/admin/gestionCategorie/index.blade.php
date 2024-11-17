@@ -6,10 +6,6 @@
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                     <li class="inline-flex items-center">
                         <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center text-sm font-medium text-gray-700">
-                            <!-- Home SVG -->
-                            <svg class="w-4 h-4 mr-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                <path d="M10 2L2 9h3v8h4V13h2v4h4V9h3L10 2z" />
-                            </svg>
                             Accueil
                         </a>
                     </li>
@@ -18,8 +14,8 @@
                             <svg class="rtl:rotate-180 block w-3 h-3 mx-1 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
                             </svg>
-                            <a href="{{ route('admin.gestionUtilisateurs.index') }}" class="inline-flex items-center text-sm font-medium text-gray-700">
-                                Gestion des Operations
+                            <a href="{{ route('admin.gestionCategorie.index') }}" class="inline-flex items-center text-sm font-medium text-gray-700">
+                                Gestion des operations
                             </a>
                         </div>
                     </li>
@@ -31,13 +27,14 @@
         <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
             <div class="px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex justify-between items-center my-6">
-                    <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Liste des Categories</h2>
+                    <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Liste des catégories</h2>
                     <a href="{{ route('admin.gestionCategorie.create') }}">
-                        <x-primary-button class="hidden md:block">
-                            <svg class="w-5 h-5 inline mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path d="M12 4.5v7.5H4.5a.5.5 0 0 0 0 1H12v7.5a.5.5 0 0 0 1 0V13h7.5a.5.5 0 0 0 0-1H13V4.5a.5.5 0 0 0-1 0Z" />
-                            </svg>
-                            Ajouter une catégorie
+                        <x-primary-button class="hidden md:block">Ajouter une catégorie</x-primary-button>
+                        <x-primary-button class="sm:hidden">
+                                <svg class="w-5 h-5 text-white" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12.75 9C12.75 8.58579 12.4142 8.25 12 8.25C11.5858 8.25 11.25 8.58579 11.25 9L11.25 11.25H9C8.58579 11.25 8.25 11.5858 8.25 12C8.25 12.4142 8.58579 12.75 9 12.75H11.25V15C11.25 15.4142 11.5858 15.75 12 15.75C12.4142 15.75 12.75 15.4142 12.75 15L12.75 12.75H15C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25H12.75V9Z" fill="currentColor" />
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25C6.06294 1.25 1.25 6.06294 1.25 12C1.25 17.9371 6.06294 22.75 12 22.75C17.9371 22.75 22.75 17.9371 22.75 12C22.75 6.06294 17.9371 1.25 12 1.25ZM2.75 12C2.75 6.89137 6.89137 2.75 12 2.75C17.1086 2.75 21.25 6.89137 21.25 12C21.25 17.1086 17.1086 21.25 12 21.25C6.89137 21.25 2.75 17.1086 2.75 12Z" fill="currentColor" />
+                                </svg>
                         </x-primary-button>
                     </a>
                 </div>
@@ -47,17 +44,18 @@
                         <p class="p-4 text-gray-500 text-center">Aucune catégorie disponible.</p>
                         @else
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                            <caption class="sr-only">Liste des catégories</caption>
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr>
-                                    <th class="px-6 py-3">ID</th>
-                                    <th class="px-6 py-3">Catégorie</th>
-                                    <th class="px-6 py-3">Action</th>
+                                    <th scope="col" class="px-6 py-3">ID</th>
+                                    <th scope="col" class="px-6 py-3">Catégorie</th>
+                                    <th scope="col" class="px-6 py-3">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($categories as $categorie)
                                 <tr class="bg-white border-b">
-                                    <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $categorie->id }}</th>
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $categorie->id }}</th>
                                     <td class="px-6 py-4">{{ $categorie->nom_categorie }}</td>
                                     <td class="px-6 py-4">
                                         <div class="flex items-center">
@@ -90,32 +88,71 @@
                 <div class="flex justify-between items-center my-6">
                     <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Liste des operations</h2>
                     <a href="{{ route('admin.gestionOperation.create') }}">
-                        <x-primary-button class="hidden md:block">
-                            <svg class="w-5 h-5 inline mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path d="M12 4.5v7.5H4.5a.5.5 0 0 0 0 1H12v7.5a.5.5 0 0 0 1 0V13h7.5a.5.5 0 0 0 0-1H13V4.5a.5.5 0 0 0-1 0Z" />
-                            </svg>
-                            Ajouter une operation
+                        <x-primary-button class="hidden md:block">Ajouter une operation</x-primary-button>
+                        <x-primary-button class="sm:hidden">
+                                <svg class="w-5 h-5 text-white" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12.75 9C12.75 8.58579 12.4142 8.25 12 8.25C11.5858 8.25 11.25 8.58579 11.25 9L11.25 11.25H9C8.58579 11.25 8.25 11.5858 8.25 12C8.25 12.4142 8.58579 12.75 9 12.75H11.25V15C11.25 15.4142 11.5858 15.75 12 15.75C12.4142 15.75 12.75 15.4142 12.75 15L12.75 12.75H15C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25H12.75V9Z" fill="currentColor" />
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25C6.06294 1.25 1.25 6.06294 1.25 12C1.25 17.9371 6.06294 22.75 12 22.75C17.9371 22.75 22.75 17.9371 22.75 12C22.75 6.06294 17.9371 1.25 12 1.25ZM2.75 12C2.75 6.89137 6.89137 2.75 12 2.75C17.1086 2.75 21.25 6.89137 21.25 12C21.25 17.1086 17.1086 21.25 12 21.25C6.89137 21.25 2.75 17.1086 2.75 12Z" fill="currentColor" />
+                                </svg>
                         </x-primary-button>
                     </a>
                 </div>
                 <div class="my-5">
+                    {{-- alert --}}
+                    @if (session('success'))
+                        <div class="fixed top-20 right-4 mb-5 flex justify-end z-10"
+                        x-data="{ show: true }" 
+                        x-show="show" 
+                        x-transition:leave="transition ease-in duration-1000" 
+                        x-transition:leave-start="opacity-100" 
+                        x-transition:leave-end="opacity-0" 
+                        x-init="setTimeout(() => show = false, 3000)" 
+                        >
+                            <div role="alert" class="rounded-xl border border-gray-100 bg-white p-4">
+                                <div class="flex items-start gap-4">
+                                <span class="text-green-600">
+                                    <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="size-6"
+                                    >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    />
+                                    </svg>
+                                </span>
+                                <div class="flex-1">
+                                    <strong class="block font-medium text-gray-900"> {{ session('success') }} </strong>
+                                    <p class="mt-1 text-sm text-gray-700">{{ session('subtitle') }}</p>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                    {{-- alert close --}}
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         @if($operations->isEmpty())
                         <p class="p-4 text-gray-500 text-center">Aucune operation disponible.</p>
                         @else
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                            <caption class="sr-only">Liste des operations</caption>
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr>
-                                    <th class="px-6 py-3">ID</th>
-                                    <th class="px-6 py-3">Catégorie</th>
-                                    <th class="px-6 py-3">Operation</th>
-                                    <th class="px-6 py-3">Action</th>
+                                    <th scope="col" class="px-6 py-3">ID</th>
+                                    <th scope="col" class="px-6 py-3">Catégorie</th>
+                                    <th scope="col" class="px-6 py-3">Operation</th>
+                                    <th scope="col" class="px-6 py-3">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($operations as $operation)
                                 <tr class="bg-white border-b">
-                                    <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $operation->id }}</th>
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $operation->id }}</th>
                                     <td class="px-6 py-4">{{ $operation->categorie->nom_categorie }}</td>
                                     <td class="px-6 py-4">{{ $operation->nom_operation }}</td>
                                     <td class="px-6 py-4">
@@ -149,11 +186,12 @@
                 <div class="flex justify-between items-center my-6">
                     <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Liste des sous operations</h2>
                     <a href="{{ route('admin.gestionSousOperation.create') }}">
-                        <x-primary-button class="hidden md:block">
-                            <svg class="w-5 h-5 inline mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path d="M12 4.5v7.5H4.5a.5.5 0 0 0 0 1H12v7.5a.5.5 0 0 0 1 0V13h7.5a.5.5 0 0 0 0-1H13V4.5a.5.5 0 0 0-1 0Z" />
-                            </svg>
-                            Ajouter une sous operation
+                        <x-primary-button class="hidden md:block">Ajouter une sous operation</x-primary-button>
+                        <x-primary-button class="sm:hidden">
+                                <svg class="w-5 h-5 text-white" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12.75 9C12.75 8.58579 12.4142 8.25 12 8.25C11.5858 8.25 11.25 8.58579 11.25 9L11.25 11.25H9C8.58579 11.25 8.25 11.5858 8.25 12C8.25 12.4142 8.58579 12.75 9 12.75H11.25V15C11.25 15.4142 11.5858 15.75 12 15.75C12.4142 15.75 12.75 15.4142 12.75 15L12.75 12.75H15C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25H12.75V9Z" fill="currentColor" />
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25C6.06294 1.25 1.25 6.06294 1.25 12C1.25 17.9371 6.06294 22.75 12 22.75C17.9371 22.75 22.75 17.9371 22.75 12C22.75 6.06294 17.9371 1.25 12 1.25ZM2.75 12C2.75 6.89137 6.89137 2.75 12 2.75C17.1086 2.75 21.25 6.89137 21.25 12C21.25 17.1086 17.1086 21.25 12 21.25C6.89137 21.25 2.75 17.1086 2.75 12Z" fill="currentColor" />
+                                </svg>
                         </x-primary-button>
                     </a>
                 </div>
@@ -163,18 +201,19 @@
                         <p class="p-4 text-gray-500 text-center">Aucune sous operation disponible.</p>
                         @else
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                            <caption class="sr-only">Liste des sous operations</caption>
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr>
-                                    <th class="px-6 py-3">ID</th>
-                                    <th class="px-6 py-3">Operation</th>
-                                    <th class="px-6 py-3">Sous Operation</th>
-                                    <th class="px-6 py-3">Action</th>
+                                    <th scope="col" class="px-6 py-3">ID</th>
+                                    <th scope="col" class="px-6 py-3">Operation</th>
+                                    <th scope="col" class="px-6 py-3">Sous Operation</th>
+                                    <th scope="col" class="px-6 py-3">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($sousOperations as $sous)
                                 <tr class="bg-white border-b">
-                                    <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $sous->id }}</th>
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $sous->id }}</th>
                                     <td class="px-6 py-4">{{ $sous->operation->nom_operation }}</td>
                                     <td class="px-6 py-4">{{ $sous->nom_sous_operation }}</td>
                                     <td class="px-6 py-4">
@@ -228,7 +267,7 @@
         <div id="confirmationModalO-{{ $operation->id }}" class="fixed inset-0 bg-white bg-opacity-30 backdrop-blur-[2px] flex items-center justify-center hidden">
             <div class="bg-white rounded-lg p-6 w-96 shadow-lg">
                 <h2 class="text-lg font-bold text-gray-800">Confirmation de suppression</h2>
-                <p class="text-gray-600 mt-2">Êtes-vous sûr de vouloir supprimer cette catégorie ? Cette action ne peut pas être annulée.</p>
+                <p class="text-gray-600 mt-2">Êtes-vous sûr de vouloir supprimer cette operation ? Cette action ne peut pas être annulée.</p>
                 <div class="flex justify-end mt-4">
                     <button onclick="toggleModal(false, 'confirmationModalO-{{ $operation->id }}')" class="px-4 py-2 bg-gray-300 text-gray-800 rounded mr-2">
                         Annuler
@@ -248,7 +287,7 @@
         <div id="confirmationModalS-{{ $sous->id }}" class="fixed inset-0 bg-white bg-opacity-30 backdrop-blur-[2px] flex items-center justify-center hidden">
             <div class="bg-white rounded-lg p-6 w-96 shadow-lg">
                 <h2 class="text-lg font-bold text-gray-800">Confirmation de suppression</h2>
-                <p class="text-gray-600 mt-2">Êtes-vous sûr de vouloir supprimer cette catégorie ? Cette action ne peut pas être annulée.</p>
+                <p class="text-gray-600 mt-2">Êtes-vous sûr de vouloir supprimer cette sous operation ? Cette action ne peut pas être annulée.</p>
                 <div class="flex justify-end mt-4">
                     <button onclick="toggleModal(false, 'confirmationModalS-{{ $sous->id }}')" class="px-4 py-2 bg-gray-300 text-gray-800 rounded mr-2">
                         Annuler

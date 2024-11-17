@@ -74,7 +74,6 @@ class VoitureController extends Controller
      */
     public function show(string $id)
     {
-        // dd(Voiture::find(11)->operations);
         Session::put('voiture_id', $id);
         $operations = nom_operation::all();
         $categories = nom_categorie::all();

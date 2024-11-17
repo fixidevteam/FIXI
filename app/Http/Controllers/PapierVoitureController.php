@@ -88,7 +88,7 @@ class PapierVoitureController extends Controller
         if (!$papier || $papier->voiture_id != Session::get('voiture_id')) {
             abort(403);
         }
-        return view('userPaiperVoiture.edit', compact('papier','types'));
+        return view('userPaiperVoiture.edit', compact('papier', 'types'));
     }
 
     /**
@@ -183,7 +183,6 @@ class PapierVoitureController extends Controller
     {
         $papier = VoiturePapier::find($id);
         $voiture_id = $papier->voiture_id;
-        // dd($voiture_id);
         if ($papier) {
             $papier->delete();
         }

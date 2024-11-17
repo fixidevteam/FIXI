@@ -27,15 +27,13 @@ class MechanicClientController extends Controller
                 });
             });
         })
-        ->when($search, function ($query, $search) {
-            $query->where('name', 'like', '%' . $search . '%'); // Search by client name
-        })
-        ->with('voitures.operations')
-        ->get();
-        
-        // dd($clients);
-        
-        return view('mechanic.clients.index',compact('clients','search'));
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'like', '%' . $search . '%'); // Search by client name
+            })
+            ->with('voitures.operations')
+            ->get();
+
+        return view('mechanic.clients.index', compact('clients', 'search'));
     }
 
     /**
@@ -43,7 +41,7 @@ class MechanicClientController extends Controller
      */
     public function create()
     {
-        //
+        return back();
     }
 
     /**
@@ -51,7 +49,7 @@ class MechanicClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return back();
     }
 
     /**
@@ -59,7 +57,7 @@ class MechanicClientController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return back();
     }
 
     /**
@@ -67,7 +65,7 @@ class MechanicClientController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return back();
     }
 
     /**
@@ -75,7 +73,7 @@ class MechanicClientController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        return back();
     }
 
     /**
@@ -83,6 +81,6 @@ class MechanicClientController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return back();
     }
 }
