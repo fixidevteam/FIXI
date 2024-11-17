@@ -9,6 +9,8 @@ use App\Models\garage;
 use App\Models\nom_categorie;
 use App\Models\nom_operation;
 use App\Models\nom_sous_operation;
+use App\Models\type_papierp;
+use App\Models\type_papierv;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
