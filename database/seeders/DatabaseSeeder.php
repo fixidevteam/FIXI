@@ -132,11 +132,11 @@ class DatabaseSeeder extends Seeder
             'ref'=>'AA44',
             'localisation' => 'marrakech, Mhamid'
         ]);
-        Admin::create([
-            'name'=>'admin',
-            'email'=>'admin@gmail.com',
-            'password' => 'admin123'
-        ]);
+        // Admin::create([
+        //     'name'=>'admin',
+        //     'email'=>'admin@gmail.com',
+        //     'password' => 'admin123'
+        // ]);
         // $this->call([
         //     TypePapierpSeeder::class,
         //     TypePapiervSeeder::class,
