@@ -51,7 +51,7 @@ class VoitureController extends Controller
             'part3' => ['required', 'digits_between:1,2'], // 1 to 2 digits
             'marque' => ['required', 'max:30'],
             'modele' => ['required', 'max:30'],
-            'photo' => ['image'],
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
             'date_de_première_mise_en_circulation' => ['nullable', 'date'],
             'date_achat' => ['nullable', 'date'],
             'date_de_dédouanement' => ['nullable', 'date'],
@@ -120,7 +120,7 @@ class VoitureController extends Controller
             'part3' => ['required', 'digits_between:1,2'], // 1 to 2 digits
             'marque' => ['required', 'max:30'],
             'modele' => ['required', 'max:30'],
-            'photo' => ['image'],
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
             'date_de_première_mise_en_circulation' => ['nullable', 'date'],
             'date_achat' => ['nullable', 'date'],
             'date_de_dédouanement' => ['nullable', 'date'],
