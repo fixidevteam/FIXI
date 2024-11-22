@@ -67,7 +67,7 @@ class MechanicOperatioController extends Controller
             ],
             'nom' => ['required'],
             'description' => ['max:255'],
-            'photo' => ['image'],
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
             'date_operation' => ['required', 'date'],
         ]);
         if ($request->hasFile('photo')) {

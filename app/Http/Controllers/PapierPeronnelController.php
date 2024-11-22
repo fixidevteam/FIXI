@@ -41,13 +41,21 @@ class PapierPeronnelController extends Controller
     public function store(Request $request)
     {
         $user_id = Auth::user()->id;
+
+        // Check if the user already has 3 documents
+        $existingDocumentsCount = UserPapier::where('user_id', $user_id)->count();
+        if ($existingDocumentsCount >= 3) {
+            session()->flash('error', 'Limite atteinte');
+            session()->flash('subtitle', 'Vous ne pouvez ajouter que 3 documents personnels.');
+            return redirect()->route('paiperPersonnel.index');
+        }
+
         // Fetch the valid types from the database
         $validTypes = type_papierp::pluck('type')->toArray();
         $data = $request->validate([
             'type' => ['required', 'string', Rule::in($validTypes)], // Ensure type is valid
             'note' => ['nullable', 'max:255'],
-            'photo' => ['nullable', 'image'],
-            'date_debut' => ['required', 'date'],
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB            'date_debut' => ['required', 'date'],
             'date_fin' => ['required', 'date'],
         ]);
         if ($request->hasFile('photo')) {
@@ -72,13 +80,15 @@ class PapierPeronnelController extends Controller
         if (!$papier || $papier->user_id != auth()->id()) {
             abort(403);
         }
+        // Add the file extension to the view
+        $fileExtension = pathinfo($papier->photo, PATHINFO_EXTENSION);
         // Calculate days remaining until expiration
         $dateFin = Carbon::parse($papier->date_fin);
         $today = Carbon::now();
         $daysRemaining = $today->diffInDays($dateFin, false); // false makes it negative if date_fin is in the past
         // Determine if it's close to expiring, e.g., less than 7 days left
         $isCloseToExpiry = $daysRemaining <= 7 && $daysRemaining > 0;
-        return view('userPaiperPersonnel.show', compact('papier', 'daysRemaining', 'isCloseToExpiry'));
+        return view('userPaiperPersonnel.show', compact('papier', 'daysRemaining', 'isCloseToExpiry', 'fileExtension'));
     }
 
     /**
@@ -106,8 +116,7 @@ class PapierPeronnelController extends Controller
             $validatedData = $request->validate([
                 'type' => ['required'],
                 'note' => ['nullable', 'max:255'],
-                'photo' => ['nullable', 'image'],
-                'date_debut' => ['required', 'date'],
+                'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
                 'date_fin' => ['required', 'date'],
             ]);
 
@@ -167,7 +176,7 @@ class PapierPeronnelController extends Controller
                 }
             }
             session()->flash('success', 'Document mis à jour');
-            session()->flash('subtitle', 'Votre document a été mis à jour avec succès.');
+            session()->flash('subtitle', 'Votre document a été mise à jour avec succès.');
         } else {
             session()->flash('error', 'Document introuvable');
         }

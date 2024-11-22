@@ -136,6 +136,12 @@ return [
         'part3' => [
             'required' => 'Le champ Numero d\'immatriculation (2 chiffres) est obligatoire.',
         ],
+        'photo' => [
+            'required' => 'Veuillez ajouter un fichier.',
+            'file' => 'Le fichier doit être valide.',
+            'mimes' => 'Le fichier doit être au format JPG, PNG ou PDF.',
+            'max' => 'La taille du fichier ne peut pas dépasser 2 Mo.',
+        ],
     ],
 
     /*

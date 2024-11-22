@@ -35,16 +35,26 @@ class VoitureController extends Controller
     {
 
         $user_id = Auth::user()->id;
+
+        // Vérifiez si l'utilisateur a déjà atteint la limite
+        $existingVoituresCount = Voiture::where('user_id', $user_id)->count();
+        if ($existingVoituresCount >= 1) {
+            // Redirection avec un message d'assistance
+            session()->flash('error', 'Vous avez atteint la limite autorisée.');
+            session()->flash('subtitle', 'Pour ajouter davantage, merci de nous contacter.');
+            return redirect()->route('voiture.index');
+        }
+
         $data = $request->validate([
             'part1' => ['required', 'digits_between:1,6'], // 1 to 6 digits
             'part2' => ['required', 'string', 'size:1'], // Single Arabic letter
             'part3' => ['required', 'digits_between:1,2'], // 1 to 2 digits
             'marque' => ['required', 'max:30'],
             'modele' => ['required', 'max:30'],
-            'photo' => ['image'],
-            'date_de_première_mise_en_circulation' => ['nullable','date'],
-            'date_achat' => ['nullable','date'],
-            'date_de_dédouanement' => ['nullable','date'],
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
+            'date_de_première_mise_en_circulation' => ['nullable', 'date'],
+            'date_achat' => ['nullable', 'date'],
+            'date_de_dédouanement' => ['nullable', 'date'],
         ]);
         // Combine the parts into the `numero_immatriculation`
         $numeroImmatriculation = $data['part1'] . '-' . $data['part2'] . '-' . $data['part3'];
@@ -110,10 +120,10 @@ class VoitureController extends Controller
             'part3' => ['required', 'digits_between:1,2'], // 1 to 2 digits
             'marque' => ['required', 'max:30'],
             'modele' => ['required', 'max:30'],
-            'photo' => ['image'],
-            'date_de_première_mise_en_circulation' => ['nullable','date'],
-            'date_achat' => ['nullable','date'],
-            'date_de_dédouanement' => ['nullable','date'],
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
+            'date_de_première_mise_en_circulation' => ['nullable', 'date'],
+            'date_achat' => ['nullable', 'date'],
+            'date_de_dédouanement' => ['nullable', 'date'],
         ]);
         // Combine the parts into the `numero_immatriculation`
         $numeroImmatriculation = $data['part1'] . '-' . $data['part2'] . '-' . $data['part3'];
