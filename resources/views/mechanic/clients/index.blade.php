@@ -113,9 +113,7 @@
                   @endif
               </div>
               {{-- table close --}}
-
           </div>
-
       </div>
       {{-- contet close colse --}}
       {{-- footer --}}

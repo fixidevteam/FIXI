@@ -100,7 +100,7 @@
                 </div>
                 <div>
                     <x-input-label for="file_input" :value="__('Photo')" />
-                    <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" accept="image/*" />
+                    <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" />
                     <x-input-error :messages="$errors->get('photo')" class="mt-2" />
                 </div>
 

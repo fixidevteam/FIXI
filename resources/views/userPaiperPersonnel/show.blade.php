@@ -154,9 +154,37 @@
           </div>
         </div>
         {{-- paipe image  --}}
-        <div class="flex justify-center my-8 overflow-hidden">
+        {{-- <div class="flex justify-center my-8 overflow-hidden">
           @if($papier->photo !== NULL)
           <img class="w-50 h-96 object-cover" src="{{asset('storage/'.$papier->photo)}}" alt="image description">
+          @else
+          <img class="w-50 h-96 object-cover" src="../images/defaultimage.jpg" alt="image description">
+          @endif
+        </div> --}}
+        <div class="flex flex-col justify-center gap-4 my-8 overflow-hidden">
+          @if($papier->photo)
+          @php
+              $fileExtension = pathinfo($papier->photo, PATHINFO_EXTENSION);
+          @endphp
+      
+          @if(in_array(strtolower($fileExtension), ['jpg', 'jpeg', 'png']))
+              <!-- Display image -->
+              <img class="w-50 h-96 object-cover" src="{{ asset('storage/' . $papier->photo) }}" alt="Document Image">
+          @elseif(strtolower($fileExtension) === 'pdf')
+              <!-- Display PDF -->
+                <iframe src="{{ asset('storage/' . $papier->photo) }}" 
+                  width="100%" 
+                  height="384px" 
+                  style="border: none;">
+                </iframe>
+                <p>
+                    <a href="{{ asset('storage/' . $papier->photo) }}" download>
+                      <x-primary-button>Télécharger le PDF</x-primary-button>
+                    </a>
+                </p>
+          @else
+              <p>Fichier non supporté.</p>
+          @endif
           @else
           <img class="w-50 h-96 object-cover" src="../images/defaultimage.jpg" alt="image description">
           @endif

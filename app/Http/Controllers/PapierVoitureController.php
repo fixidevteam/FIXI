@@ -37,12 +37,21 @@ class PapierVoitureController extends Controller
     public function store(Request $request)
     {
         $voiture_id = Session::get('voiture_id');
+
+        // Check if the vehicle already has 3 documents
+        $existingDocumentsCount = VoiturePapier::where('voiture_id', $voiture_id)->count();
+        if ($existingDocumentsCount >= 3) {
+            session()->flash('error', 'Limite atteinte');
+            session()->flash('subtitle', 'Vous ne pouvez ajouter que 3 documents par véhicule.');
+            return redirect()->route('voiture.show', $voiture_id);
+        }
+
         // Fetch the valid types from the database
         $validTypes = type_papierv::pluck('type')->toArray();
         $data = $request->validate([
             'type' => ['required', 'string', Rule::in($validTypes)], // Ensure type is valid
             'note' => ['nullable', 'max:255'],
-            'photo' => ['nullable', 'image'],
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
             'date_debut' => ['required', 'date'],
             'date_fin' => ['required', 'date'],
 
@@ -69,13 +78,15 @@ class PapierVoitureController extends Controller
         if (!$papier || $papier->voiture_id != Session::get('voiture_id')) {
             abort(403);
         }
+        // Add the file extension to the view
+        $fileExtension = pathinfo($papier->photo, PATHINFO_EXTENSION);
         // Calculate days remaining until expiration
         $dateFin = Carbon::parse($papier->date_fin);
         $today = Carbon::now();
         $daysRemaining = $today->diffInDays($dateFin, false); // false makes it negative if date_fin is in the past
         // Determine if it's close to expiring, e.g., less than 7 days left
         $isCloseToExpiry = $daysRemaining <= 7 && $daysRemaining > 0;
-        return view('userPaiperVoiture.show', compact('papier', 'daysRemaining', 'isCloseToExpiry'));
+        return view('userPaiperVoiture.show', compact('papier', 'daysRemaining', 'isCloseToExpiry','fileExtension'));
     }
 
     /**
@@ -103,7 +114,7 @@ class PapierVoitureController extends Controller
         $data = $request->validate([
             'type' => ['required'],
             'note' => ['max:255'],
-            'photo' => ['image'],
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
             'date_debut' => ['required', 'date'],
             'date_fin' => ['required', 'date'],
         ]);
