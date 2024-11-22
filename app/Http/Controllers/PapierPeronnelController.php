@@ -56,6 +56,7 @@ class PapierPeronnelController extends Controller
             'type' => ['required', 'string', Rule::in($validTypes)], // Ensure type is valid
             'note' => ['nullable', 'max:255'],
             'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB            'date_debut' => ['required', 'date'],
+            'date_debut' => ['required', 'date'],
             'date_fin' => ['required', 'date'],
         ]);
         if ($request->hasFile('photo')) {
@@ -117,6 +118,7 @@ class PapierPeronnelController extends Controller
                 'type' => ['required'],
                 'note' => ['nullable', 'max:255'],
                 'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
+                'date_debut' => ['required', 'date'],
                 'date_fin' => ['required', 'date'],
             ]);
 
