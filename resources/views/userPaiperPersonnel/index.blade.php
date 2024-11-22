@@ -99,7 +99,7 @@
                 {{-- alert close --}}
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         @if($papiers->isEmpty())
-                        <p class="p-4 text-gray-500 text-center">Aucune papier disponible.</p>
+                        <p class="p-4 text-gray-500 text-center">Aucun papier disponible.</p>
                         @else
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                             <caption class="sr-only">Liste des papier personnels</caption>
@@ -145,7 +145,7 @@
                                         @endif
                                     </td>
                                     <td class="px-6 py-4">
-                                        <a href="{{route('paiperPersonnel.show',$papier->id)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Details</a>
+                                        <a href="{{route('paiperPersonnel.show',$papier->id)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Détails</a>
                                     </td>
                                     <td class="px-6 py-4">
                                         @php

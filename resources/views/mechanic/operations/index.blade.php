@@ -55,7 +55,7 @@
                 {{-- Table --}}
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg my-5">
                     @if($operations->isEmpty())
-                        <p class="p-4 text-gray-500 text-center">Aucune opération disponible.</p>
+                        <p class="p-4 text-gray-500 text-center">Aucun opération disponible.</p>
                     @else
                         <table class="w-full text-sm text-left text-gray-500">
                             <caption class="sr-only">Liste des opérations</caption>
@@ -99,7 +99,7 @@
                                             @endif
                                         </td>
                                         <td class="px-6 py-4">
-                                            <a href="{{ route('mechanic.operations.show',$operation->id) }}" class="text-blue-600 hover:underline">Details</a>
+                                            <a href="{{ route('mechanic.operations.show',$operation->id) }}" class="text-blue-600 hover:underline">Détails</a>
                                         </td>
                                     </tr>
                                 @endforeach

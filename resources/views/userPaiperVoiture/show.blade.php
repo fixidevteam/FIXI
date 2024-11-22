@@ -32,7 +32,7 @@
               <a
                 href=""
                 class="inline-flex items-center text-sm font-medium text-gray-700   ">
-                Details des papier du véhicule
+                Détails des papier du véhicule
               </a>
             </div>
           </li>
@@ -111,7 +111,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2">
           {{-- date debut --}}
           <div class="mb-4">
-            <p class="capitalize text-sm font-medium text-gray-900 ">
+            <p class="first-letter:capitalize text-sm font-medium text-gray-900 ">
               date debut
             </p>
             <p class="text-sm text-gray-500 ">
@@ -120,7 +120,7 @@
           </div>
           {{-- date fin --}}
           <div>
-            <p class="capitalize text-sm font-medium text-gray-900 ">
+            <p class="first-letter:capitalize text-sm font-medium text-gray-900 ">
               date fin
             </p>
             <p class="text-sm text-gray-500 ">

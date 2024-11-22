@@ -24,7 +24,7 @@
                         <div class="flex items-center bg-white p-8 rounded-lg shadow">
                             <div class="flex-shrink-0">
                               <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{ \App\Models\User::count() }}</span>
-                              <h3 class="text-base font-normal text-gray-500 capitalize">nombre d'utilisateurs</h3>
+                              <h3 class="text-base font-normal text-gray-500 first-letter:capitalize">nombre d'utilisateurs</h3>
                             </div>
                             <div class="ml-5 w-0 flex items-center justify-end flex-1 text-gray-600 text-base font-bold">
                               <svg class="w-5 h-5" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -39,7 +39,7 @@
                           <div class="flex items-center bg-white p-8 rounded-lg shadow">
                             <div class="flex-shrink-0">
                               <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{ \App\Models\garage::count() }}</span>
-                              <h3 class="text-base font-normal text-gray-500 capitalize">nombre des garages</h3>
+                              <h3 class="text-base font-normal text-gray-500 first-letter:capitalize">nombre des garages</h3>
                             </div>
                             <div class="ml-5 w-0 flex items-center justify-end flex-1 text-gray-600 text-base font-bold">
                               <svg class="w-5 h-5" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -51,7 +51,7 @@
                           <div class="flex items-center bg-white p-8 rounded-lg shadow">
                             <div class="flex-shrink-0">
                               <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{ \App\Models\Mechanic::count() }}</span>
-                              <h3 class="text-base font-normal text-gray-500 capitalize">nombre des mécaniciens</h3>
+                              <h3 class="text-base font-normal text-gray-500 first-letter:capitalize">nombre des mécaniciens</h3>
                             </div>
                             <div class="ml-5 w-0 flex items-center justify-end flex-1 text-gray-600 text-base font-bold">
                               <svg class="w-5 h-5" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -71,9 +71,9 @@
                         {{-- box 1 --}}
                         <div class="bg-white shadow rounded-lg mb-4 p-4 sm:p-6 h-full">
                             <div class="flex items-center justify-between mb-4">
-                              <h3 class="text-xl font-bold leading-none text-gray-900 capitalize">la Liste d'utilisateurs</h3>
-                              <a href="{{ route('admin.gestionUtilisateurs.index') }}" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">
-                                afficher tout
+                              <h3 class="text-xl font-bold leading-none text-gray-900 first-letter:capitalize">la liste d'utilisateurs</h3>
+                              <a href="{{ route('admin.gestionUtilisateurs.index') }}" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2">
+                                Afficher tout
                               </a>
                             </div>
                             <div class="flow-root">
@@ -103,9 +103,9 @@
                         {{-- box 2 --}}
                         <div class="bg-white shadow rounded-lg mb-4 p-4 sm:p-6 h-full">
                             <div class="flex items-center justify-between mb-4">
-                              <h3 class="text-xl font-bold leading-none text-gray-900 capitalize">la Liste des garage</h3>
-                              <a href="{{ route('admin.gestionGarages.index') }}" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">
-                                afficher tout
+                              <h3 class="text-xl font-bold leading-none text-gray-900 first-letter:capitalize">la liste des garage</h3>
+                              <a href="{{ route('admin.gestionGarages.index') }}" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2">
+                                Afficher tout
                               </a>
                             </div>
                             <div class="flow-root">
@@ -125,7 +125,7 @@
                                       </p>
                                     </div>
                                     <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                      <a href="{{route('admin.gestionGarages.show',$garage->id)}}" class="text-sm font-medium text-blue-600 inline-flex items-center p-2 capitalize hover:underline">Details</a>
+                                      <a href="{{route('admin.gestionGarages.show',$garage->id)}}" class="text-sm font-medium text-blue-600 inline-flex items-center p-2 capitalize hover:underline">Détails</a>
                                     </div>
                                   </div>
                                 </li>

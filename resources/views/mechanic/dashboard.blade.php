@@ -29,7 +29,7 @@
             <div class="flex items-center bg-white p-8 rounded-lg shadow">
               <div class="flex-shrink-0">
                 <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{ Auth::user()->garage->operations()->count() }}</span>
-                <h3 class="text-base font-normal text-gray-500 capitalize">nombre des operations</h3>
+                <h3 class="text-base font-normal text-gray-500 first-letter:capitalize">nombre des operations</h3>
               </div>
               <div class="ml-5 w-0 flex items-center justify-end flex-1 text-gray-600 text-base font-bold">
                 <svg class="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,7 +54,7 @@
                                     ->count('voiture_id')
                                 }}
                 </span>
-                <h3 class="text-base font-normal text-gray-500 capitalize">nombre des Véhicule</h3>
+                <h3 class="text-base font-normal text-gray-500 first-letter:capitalize">nombre des véhicule</h3>
               </div>
               <div class="ml-5 w-0 flex items-center justify-end flex-1 text-gray-600 text-base font-bold">
                 <svg class="w-5 h-5" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -76,7 +76,7 @@
                   })->distinct('id')->count('id');
                   @endphp
                   {{$clientsCount}} </span>
-                <h3 class="text-base font-normal text-gray-500 capitalize">nombre des clients</h3>
+                <h3 class="text-base font-normal text-gray-500 first-letter:capitalize">nombre des clients</h3>
               </div>
               <div class="ml-5 w-0 flex items-center justify-end flex-1 text-gray-600 text-base font-bold">
                 <svg class="w-5 h-5" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -99,14 +99,14 @@
             {{-- box 1 --}}
             <div class="bg-white shadow rounded-lg mb-4 p-4 sm:p-6 h-full">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-xl font-bold leading-none text-gray-900 capitalize">la Liste des operation</h3>
-                <a href="{{ route('mechanic.operations.index') }}" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">
-                  afficher tout
+                <h3 class="text-xl font-bold leading-none text-gray-900 first-letter:capitalize">la liste des operation</h3>
+                <a href="{{ route('mechanic.operations.index') }}" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2">
+                  Afficher tout
                 </a>
               </div>
               <div class="flow-root">
                 @if(Auth::user()->garage->operations->isEmpty())
-                <p class="p-4 text-gray-500 text-center">Aucune operation disponible.</p>
+                <p class="p-4 text-gray-500 text-center">Aucun operation disponible.</p>
                 @else
                 <ul role="list" class="divide-y divide-gray-200">
                   @foreach (Auth::user()->garage->operations->take(5) as $operation)
@@ -134,7 +134,7 @@
                         </p>
                       </div>
                       <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                        <a href="{{ route('mechanic.operations.show',$operation->id) }}" class="text-sm font-medium text-blue-600  inline-flex items-center p-2 capitalize hover:underline">details</a>
+                        <a href="{{ route('mechanic.operations.show',$operation->id) }}" class="text-sm font-medium text-blue-600  inline-flex items-center p-2 capitalize hover:underline">Détails</a>
                       </div>
                     </div>
                   </li>
@@ -147,14 +147,14 @@
             {{-- box 2 --}}
             <div class="bg-white shadow rounded-lg mb-4 p-4 sm:p-6 h-full">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-xl font-bold leading-none text-gray-900 capitalize">la Liste des Véhicule</h3>
-                <a href="{{ route('mechanic.voitures.index') }}" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">
-                  afficher tout
+                <h3 class="text-xl font-bold leading-none text-gray-900 first-letter:capitalize">la liste des véhicule</h3>
+                <a href="{{ route('mechanic.voitures.index') }}" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2">
+                  Afficher tout
                 </a>
               </div>
               <div class="flow-root">
                 @if(Auth::user()->garage->operations->isEmpty())
-                <p class="p-4 text-gray-500 text-center">Aucune voiture disponible.</p>
+                <p class="p-4 text-gray-500 text-center">Aucun voiture disponible.</p>
                 @else
                 <ul role="list" class="divide-y divide-gray-200">
                   @foreach (Auth::user()->garage->operations->take(5) as $operation)
@@ -176,7 +176,7 @@
                         </p>
                       </div>
                       <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                        <a href="{{ route('mechanic.voitures.show',$operation->voiture->id) }}" class="text-sm font-medium text-blue-600  inline-flex items-center p-2 capitalize hover:underline">details</a>
+                        <a href="{{ route('mechanic.voitures.show',$operation->voiture->id) }}" class="text-sm font-medium text-blue-600  inline-flex items-center p-2 capitalize hover:underline">Détails</a>
                       </div>
                     </div>
                   </li>

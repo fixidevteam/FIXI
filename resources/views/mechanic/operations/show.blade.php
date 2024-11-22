@@ -54,7 +54,7 @@
               <a
                 href=""
                 class="inline-flex items-center text-sm font-medium text-gray-700   ">
-                Details d'operation 
+                Détails d'operation 
               </a>
             </div>
           </li>
@@ -66,8 +66,8 @@
     <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
       {{-- content (slot on layouts/app.blade.php)--}}
       <div class=" px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-        <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900 mb-4">Details d'operation</h2>
-        {{-- content of details  --}}
+        <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900 mb-4">Détails d'operation</h2>
+        {{-- content of Détails  --}}
         <div class="grid grid-cols-1 md:grid-cols-2">
           {{-- Categorie --}}
           <div class="mb-4">
@@ -98,7 +98,7 @@
           </div>
           {{-- Sous operation --}}
           <div>
-            <p class="capitalize text-sm font-medium text-gray-900 truncate">
+            <p class="first-letter:capitalize text-sm font-medium text-gray-900 truncate">
               Sous operation
             </p>
             @if($operation->sousoperations->isEmpty())
@@ -133,7 +133,7 @@
           <img class="w-full h-96 object-cover" src="../../images/defaultimage.jpg" alt="image description">
           @endif
         </div>
-        {{-- content of details  --}}
+        {{-- content of Détails  --}}
         <div class="grid grid-cols-1 md:grid-cols-2">
           {{-- Matricule --}}
           <div class="mb-4">
@@ -164,35 +164,35 @@
           </div>
           {{-- Date d'achat --}}
           <div class="mb-4">
-            <p class="capitalize text-sm font-medium text-gray-900 truncate">
+            <p class="first-letter:capitalize text-sm font-medium text-gray-900 truncate">
               Date d'achat
             </p>
             <p class="text-sm text-gray-500 truncate">
-              {{ $operation->voiture->date_achat }}
+              {{ $operation->voiture->date_achat ?? 'N/A' }}
             </p>
           </div>
           {{-- Date de première mise en circulation --}}
           <div class="mb-4">
-            <p class="capitalize text-sm font-medium text-gray-900 truncate">
+            <p class="first-letter:capitalize text-sm font-medium text-gray-900 truncate">
               Date de première mise en circulation
             </p>
             <p class="text-sm text-gray-500 truncate">
-              {{ $operation->voiture->date_de_première_mise_en_circulation }}
+              {{ $operation->voiture->date_de_première_mise_en_circulation ?? 'N/A' }}
             </p>
           </div>
           {{-- La date de dédouanement --}}
           <div class="mb-4">
-            <p class="capitalize text-sm font-medium text-gray-900 truncate">
+            <p class="first-letter:capitalize text-sm font-medium text-gray-900 truncate">
               La date de dédouanement
             </p>
             <p class="text-sm text-gray-500 truncate">
-              {{ $operation->voiture->date_de_dédouanement }}
+              {{ $operation->voiture->date_de_dédouanement ?? 'N/A' }}
             </p>
           </div>
-          {{-- details du voiture --}}
+          {{-- Détails du voiture --}}
           <div class="mb-4">
             <a href="{{ route('mechanic.voitures.show',$operation->voiture->id) }}">
-                <x-primary-button>details du voiture</x-primary-button>
+                <x-primary-button>Détails du voiture</x-primary-button>
             </a>
           </div>
         </div>

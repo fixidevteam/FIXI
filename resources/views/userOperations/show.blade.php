@@ -52,9 +52,9 @@
                   d="m1 9 4-4-4-4" />
               </svg>
               <a
-                href="#"
+                href="{{ route('voiture.show',$voiture->id) }}"
                 class="inline-flex items-center text-sm font-medium text-gray-700   ">
-                Details du Véhicule
+                Détails du véhicule
               </a>
             </div>
           </li>
@@ -76,7 +76,7 @@
               <a
                 href=""
                 class="inline-flex items-center text-sm font-medium text-gray-700   ">
-                Details D'operation
+                Détails d'operation
               </a>
             </div>
           </li>
@@ -89,7 +89,7 @@
       {{-- content (slot on layouts/app.blade.php)--}}
       <div class=" px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="flex justify-between items-center my-6">
-          <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Details du véhicule</h2>
+          <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Détails du véhicule</h2>
         </div>
         {{-- Details of cars --}}
         <div class="flex flex-col md:flex-row gap-10 items-center">
@@ -108,8 +108,10 @@
             <div class="flex-1 space-y-4">
               {{-- Matricule --}}
               <div>
-                <p class="capitalize text-sm font-medium text-gray-900">Matricule</p>
-                <p class="text-sm text-gray-500">{{$voiture->numero_immatriculation}}</p>
+                <p class="capitalize text-sm font-medium text-gray-900">immatricule</p>
+                <p class="text-sm text-gray-500">
+                  <span>{{ explode('-', $voiture->numero_immatriculation)[0] }}</span>-<span dir="rtl">{{ explode('-', $voiture->numero_immatriculation)[1] }}</span>-<span>{{ explode('-', $voiture->numero_immatriculation)[2] }}</span>
+                </p>
               </div>
 
               {{-- Marque --}}
@@ -129,20 +131,20 @@
             <div class="flex-1 space-y-4">
               {{-- Date de première mise en circulation --}}
               <div>
-                <p class="capitalize text-sm font-medium text-gray-900">Date de première mise en circulation</p>
-                <p class="text-sm text-gray-500">{{$voiture->date_de_première_mise_en_circulation}}</p>
+                <p class="text-sm font-medium text-gray-900">Date de première mise en circulation</p>
+                <p class="text-sm text-gray-500">{{$voiture->date_de_première_mise_en_circulation ?? 'N/A' }}</p>
               </div>
 
               {{-- Date d'achat --}}
               <div>
-                <p class="capitalize text-sm font-medium text-gray-900">Date d'achat</p>
-                <p class="text-sm text-gray-500">{{$voiture->date_achat}}</p>
+                <p class="text-sm font-medium text-gray-900">Date d'achat</p>
+                <p class="text-sm text-gray-500">{{$voiture->date_achat ?? 'N/A' }}</p>
               </div>
 
               {{-- Date de dédouanement --}}
               <div>
-                <p class="capitalize text-sm font-medium text-gray-900">Date de dédouanement</p>
-                <p class="text-sm text-gray-500">{{$voiture->date_de_dédouanement}}</p>
+                <p class="text-sm font-medium text-gray-900">Date de dédouanement</p>
+                <p class="text-sm text-gray-500">{{$voiture->date_de_dédouanement ?? 'N/A' }}</p>
               </div>
             </div>
           </div>
