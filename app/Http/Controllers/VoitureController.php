@@ -42,9 +42,9 @@ class VoitureController extends Controller
             'marque' => ['required', 'max:30'],
             'modele' => ['required', 'max:30'],
             'photo' => ['image'],
-            'date_de_première_mise_en_circulation' => ['required', 'date'],
-            'date_achat' => ['required', 'date'],
-            'date_de_dédouanement' => ['required', 'date'],
+            'date_de_première_mise_en_circulation' => ['nullable','date'],
+            'date_achat' => ['nullable','date'],
+            'date_de_dédouanement' => ['nullable','date'],
         ]);
         // Combine the parts into the `numero_immatriculation`
         $numeroImmatriculation = $data['part1'] . '-' . $data['part2'] . '-' . $data['part3'];
@@ -111,9 +111,9 @@ class VoitureController extends Controller
             'marque' => ['required', 'max:30'],
             'modele' => ['required', 'max:30'],
             'photo' => ['image'],
-            'date_de_première_mise_en_circulation' => ['required', 'date'],
-            'date_achat' => ['required', 'date'],
-            'date_de_dédouanement' => ['required', 'date'],
+            'date_de_première_mise_en_circulation' => ['nullable','date'],
+            'date_achat' => ['nullable','date'],
+            'date_de_dédouanement' => ['nullable','date'],
         ]);
         // Combine the parts into the `numero_immatriculation`
         $numeroImmatriculation = $data['part1'] . '-' . $data['part2'] . '-' . $data['part3'];

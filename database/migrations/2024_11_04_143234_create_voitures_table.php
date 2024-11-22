@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string("marque");
             $table->string("modele");
             $table->string("photo")->nullable();
-            $table->date("date_de_première_mise_en_circulation");
-            $table->date("date_achat");
-            $table->date("date_de_dédouanement");
+            $table->date("date_de_première_mise_en_circulation")->nullable();
+            $table->date("date_achat")->nullable();
+            $table->date("date_de_dédouanement")->nullable();
             $table->foreignId('user_id')->constrained();
             $table->softDeletes();
             $table->timestamps();

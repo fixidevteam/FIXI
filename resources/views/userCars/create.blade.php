@@ -54,7 +54,7 @@
                             <a
                                 href="{{ route('voiture.create') }}"
                                 class="inline-flex items-center text-sm font-medium text-gray-700   ">
-                                Ajouter Voiture
+                                Ajouter voiture
                             </a>
                         </div>
                     </li>

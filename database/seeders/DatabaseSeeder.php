@@ -27,10 +27,10 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         // Creating categories (nom_categorie)
-        $category1 = nom_categorie::create(['nom_categorie' => "Services d'un Garage Mécanique"]);
-        $category2 = nom_categorie::create(['nom_categorie' => "Services d'un Garage de Lavage"]);
-        $category3 = nom_categorie::create(['nom_categorie' => "Services d'un Garage de Carrosserie"]);
-        $category4 = nom_categorie::create(['nom_categorie' => "Services d'un Garage Pneumatique"]);
+        $category1 = nom_categorie::create(['nom_categorie' => "Services d'un garage mécanique"]);
+        $category2 = nom_categorie::create(['nom_categorie' => "Services d'un garage de lavage"]);
+        $category3 = nom_categorie::create(['nom_categorie' => "Services d'un garage de carrosserie"]);
+        $category4 = nom_categorie::create(['nom_categorie' => "Services d'un garage pneumatique"]);
 
 
         // Creating operations (nom_operation) and linking to categories
@@ -110,33 +110,33 @@ class DatabaseSeeder extends Seeder
 
         garage::create([
             'id' => 1,
-            'name'=>'Auto Atlas',
-            'ref'=>'AA11',
+            'name' => 'Auto Atlas',
+            'ref' => 'AA11',
             'localisation' => 'marrakech, cherifia'
         ]);
         garage::create([
             'id' => 2,
-            'name'=>'Auto Madina',
-            'ref'=>'AA22',
+            'name' => 'Auto Madina',
+            'ref' => 'AA22',
             'localisation' => 'marrakech, Madina'
         ]);
         garage::create([
             'id' => 3,
-            'name'=>'Auto Nassim',
-            'ref'=>'AA33',
+            'name' => 'Auto Nassim',
+            'ref' => 'AA33',
             'localisation' => 'marrakech, Nassim'
         ]);
         garage::create([
             'id' => 4,
-            'name'=>'Auto Tari9',
-            'ref'=>'AA44',
+            'name' => 'Auto Tari9',
+            'ref' => 'AA44',
             'localisation' => 'marrakech, Mhamid'
         ]);
-        Admin::create([
-            'name'=>'admin',
-            'email'=>'admin@gmail.com',
-            'password' => 'admin123'
-        ]);
+        // Admin::create([
+        //     'name'=>'admin',
+        //     'email'=>'admin@gmail.com',
+        //     'password' => 'admin123'
+        // ]);
         // $this->call([
         //     TypePapierpSeeder::class,
         //     TypePapiervSeeder::class,
@@ -149,5 +149,5 @@ class DatabaseSeeder extends Seeder
         //     SousOperationSeeder::class,
         //     // Other seeders can be listed here
         // ]);
-     }
+    }
 }

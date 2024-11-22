@@ -98,7 +98,7 @@
                     {{-- alert close --}}
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         @if($voitures->isEmpty())
-                        <p class="p-4 text-gray-500 text-center">Aucune voiture disponible.</p>
+                        <p class="p-4 text-gray-500 text-center">Aucun voiture disponible.</p>
                         @else
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                             <caption class="sr-only">Liste des voitures</caption>
@@ -138,7 +138,7 @@
                                         {{$voiture->modele}}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{$voiture->date_de_première_mise_en_circulation}}
+                                        {{$voiture->date_de_première_mise_en_circulation ?? 'N/A'}}
                                     </td>
                                     <td class="px-6 py-4">
                                         @if($voiture->photo !== NULL)
@@ -148,7 +148,7 @@
                                         @endif
                                     </td>
                                     <td class="px-6 py-4">
-                                        <a href="{{ route('voiture.show',$voiture->id) }}" class="font-medium capitalize text-blue-600 dark:text-blue-500 hover:underline">details</a>
+                                        <a href="{{ route('voiture.show',$voiture->id) }}" class="font-medium capitalize text-blue-600 dark:text-blue-500 hover:underline">Détails</a>
                                     </td>
                                 </tr>
                                 @endforeach

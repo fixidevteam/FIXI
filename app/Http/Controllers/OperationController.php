@@ -49,7 +49,7 @@ class OperationController extends Controller
             'nom' => ['required'],
             'description' => ['max:255'],
             'photo' => ['image'],
-            'date_operation' => ['required', 'date'],
+            'date_operation' => ['date'],
             'garage_id' => ['required'],
         ]);
         if ($request->hasFile('photo')) {

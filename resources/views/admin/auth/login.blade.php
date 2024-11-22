@@ -17,7 +17,7 @@
         <!-- Password -->
         <div class="mt-4">
             <div class="flex items-center justify-between">
-                <x-input-label for="password" :value="__('Mot de pass')" />
+                <x-input-label for="password" :value="__('Mot de passe')" />
                 <div class="text-sm">
                     @if (Route::has('password.request'))
                     <a class="underline text-sm font-semibold text-blue-600 hover:text-blue-500" href="{{ route('password.request') }}">
