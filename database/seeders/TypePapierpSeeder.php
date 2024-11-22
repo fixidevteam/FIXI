@@ -14,19 +14,19 @@ class TypePapierpSeeder extends Seeder
     public function run(): void
     {
         $types = [
-            'Carte Nationale d\'Identité (CIN)',
+            'Carte nationale d\'identité (cin)',
             'Passeport',
-            'Permis de Conduire',
-            'Certificat de Résidence',
-            'Carte Bancaire',
-            'Certificat Médical',
-            'Diplômes Académiques',
-            'Certificat de Travail',
-            'Carte de Séjour',
-            'Certificat de Mariage',
-            'Certificat de Décès',
-            'Acte de Naissance',
-            'Livret de Famille',
+            'Permis de conduire',
+            'Certificat de résidence',
+            'Carte bancaire',
+            'Certificat médical',
+            'Diplômes académiques',
+            'Certificat de travail',
+            'Carte de séjour',
+            'Certificat de mariage',
+            'Certificat de décès',
+            'Acte de naissance',
+            'Livret de famille',
         ]; // Replace with your types
 
         foreach ($types as $type) {

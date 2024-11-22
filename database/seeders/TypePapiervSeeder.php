@@ -14,16 +14,16 @@ class TypePapiervSeeder extends Seeder
     public function run(): void
     {
         $types = [
-            'Carte Grise',
-            'Visite Technique',
-            'Assurance Auto',
-            'Certificat de Dédouanement',
-            'Permis de Circulation Temporaire',
-            'Procès-verbal d\'Accord de Transformation',
+            'Carte grise',
+            'Visite technique',
+            'Assurance auto',
+            'Certificat de dédouanement',
+            'Permis de circulation temporaire',
+            'Procès-verbal d\'accord de transformation',
             'Vignette',
-            'Reçu de Vente',
-            'Attestation d\'Immatriculation Provisoire',
-            'Fiche Technique ',
+            'Reçu de vente',
+            'Attestation d\'immatriculation provisoire',
+            'Fiche technique',
         ]; // Replace with your types
 
         foreach ($types as $type) {

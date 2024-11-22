@@ -1,8 +1,8 @@
 <footer class="bg-white md:flex md:items-center md:justify-between shadow rounded-lg p-4 md:p-6 xl:p-8 my-6 mx-4">
   <ul class="flex items-center flex-wrap mb-6 md:mb-0">
-      <li><a href="https://fixi.ma/blog/" target="_blanck" class="capitalize text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Fixi Blogs</a></li>
-      <li><a href="https://fixi.ma/conditions-generales/" class="capitalize text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">conditions generales</a></li>
-      <li><a href="https://fixi.ma/mentions-legales/" target="_blanck" class="capitalize text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">mentions legales</a></li>
+      <li><a href="https://fixi.ma/blog/" target="_blanck" class="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Fixi blogs</a></li>
+      <li><a href="https://fixi.ma/conditions-generales/" class="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Conditions generales</a></li>
+      <li><a href="https://fixi.ma/mentions-legales/" target="_blanck" class="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Mentions legales</a></li>
       <li><a href="mailto:contact@fixi.ma" class="text-sm font-normal text-gray-500 hover:underline">Contact</a></li>
   </ul>
   <div class="flex sm:justify-center space-x-6">

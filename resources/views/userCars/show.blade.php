@@ -53,8 +53,8 @@
               </svg>
               <a
                 href=""
-                class="inline-flex items-center text-sm font-medium text-gray-700   ">
-                Details du Véhicule
+                class="inline-flex items-center text-sm font-medium text-gray-700">
+                Détails du véhicule
               </a>
             </div>
           </li>
@@ -67,7 +67,7 @@
       {{-- content (slot on layouts/app.blade.php)--}}
       <div class=" px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="flex justify-between items-center my-6">
-          <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Details du véhicule</h2>
+          <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Détails du véhicule</h2>
           <div class="flex items-center">
             <a href="{{route('voiture.edit',['voiture'=>$voiture])}}">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -101,7 +101,7 @@
             <div class="flex-1 space-y-4">
               {{-- Matricule --}}
               <div>
-                <p class="capitalize text-sm font-medium text-gray-900">Matricule</p>
+                <p class="capitalize text-sm font-medium text-gray-900">immatricule</p>
                 <p class="text-sm text-gray-500">
                   <span>{{ explode('-', $voiture->numero_immatriculation)[0] }}</span>-<span dir="rtl">{{ explode('-', $voiture->numero_immatriculation)[1] }}</span>-<span>{{ explode('-', $voiture->numero_immatriculation)[2] }}</span>
                 </p>
@@ -124,20 +124,20 @@
             <div class="flex-1 space-y-4">
               {{-- Date de première mise en circulation --}}
               <div>
-                <p class="capitalize text-sm font-medium text-gray-900">Date de première mise en circulation</p>
-                <p class="text-sm text-gray-500">{{$voiture->date_de_première_mise_en_circulation}}</p>
+                <p class="first-letter:capitalize text-sm font-medium text-gray-900">Date de première mise en circulation</p>
+                <p class="text-sm text-gray-500">{{$voiture->date_de_première_mise_en_circulation ?? 'N/A'}}</p>
               </div>
 
               {{-- Date d'achat --}}
               <div>
-                <p class="capitalize text-sm font-medium text-gray-900">Date d'achat</p>
-                <p class="text-sm text-gray-500">{{$voiture->date_achat}}</p>
+                <p class="first-letter:capitalize text-sm font-medium text-gray-900">Date d'achat</p>
+                <p class="text-sm text-gray-500">{{$voiture->date_achat ?? 'N/A' }}</p>
               </div>
 
               {{-- Date de dédouanement --}}
               <div>
-                <p class="capitalize text-sm font-medium text-gray-900">Date de dédouanement</p>
-                <p class="text-sm text-gray-500">{{$voiture->date_de_dédouanement}}</p>
+                <p class="first-letter:capitalize text-sm font-medium text-gray-900">Date de dédouanement</p>
+                <p class="text-sm text-gray-500">{{$voiture->date_de_dédouanement ?? 'N/A' }}</p>
               </div>
             </div>
           </div>
@@ -200,7 +200,7 @@
           {{-- alert close --}}
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             @if($voiture->papiersVoiture->isEmpty())
-            <p class="p-4 text-gray-500 text-center">Aucune papier disponible.</p>
+            <p class="p-4 text-gray-500 text-center">Aucun papier disponible.</p>
             @else
             <table class="w-full text-sm text-left rtl:text-right text-gray-500">
               <caption class="sr-only">Liste des papiers voiture</caption>
@@ -246,7 +246,7 @@
                     @endif
                   </td>
                   <td class="px-6 py-4">
-                    <a href="{{route('paiperVoiture.show',$papier)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detail</a>
+                    <a href="{{route('paiperVoiture.show',$papier)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Détails</a>
                   </td>
                   <td class="px-6 py-4">
                     @php
@@ -329,7 +329,7 @@
 
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             @if($voiture->operations->isEmpty())
-            <p class="p-4 text-gray-500 text-center">Aucune opération disponible.</p>
+            <p class="p-4 text-gray-500 text-center">Aucun opération disponible.</p>
             @else
             <table class="w-full text-sm text-left rtl:text-right text-gray-500">
               <caption class="sr-only">Liste des opérations</caption>
@@ -374,7 +374,7 @@
                   </td>
                   {{-- Action --}}
                   <td class="px-6 py-4">
-                    <a href="{{ route('operation.show',$operation->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Details</a>
+                    <a href="{{ route('operation.show',$operation->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Détails</a>
                   </td>
                 </tr>
                 @endforeach

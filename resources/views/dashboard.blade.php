@@ -26,7 +26,7 @@
             <div class="flex items-center bg-white p-8 rounded-lg shadow">
               <div class="flex-shrink-0">
                 <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{ Auth::user()->voitures->count() }}</span>
-                <h3 class="text-base font-normal text-gray-500 capitalize">nombre des voiture</h3>
+                <h3 class="text-base font-normal text-gray-500 first-letter:capitalize">nombre des voiture</h3>
               </div>
               <div class="ml-5 w-0 flex items-center justify-end flex-1 text-gray-600 text-base font-bold">
                 <svg class="w-5 h-5" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -38,7 +38,7 @@
             <div class="flex items-center bg-white p-8 rounded-lg shadow">
               <div class="flex-shrink-0">
                 <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{ Auth::user()->papiersUsers->count() }}</span>
-                <h3 class="text-base font-normal text-gray-500 capitalize">nombre des papiers</h3>
+                <h3 class="text-base font-normal text-gray-500 first-letter:capitalize">nombre des papiers</h3>
               </div>
               <div class="ml-5 w-0 flex items-center justify-end flex-1 text-gray-600 text-base font-bold">
                 <svg class="w-5 h-5" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -56,7 +56,7 @@
             <div class="flex items-center bg-white p-8 rounded-lg shadow">
               <div class="flex-shrink-0">
                 <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{ $operationsCount }}</span>
-                <h3 class="text-base font-normal text-gray-500 capitalize">nombre des operations</h3>
+                <h3 class="text-base font-normal text-gray-500 first-letter:capitalize">nombre des operations</h3>
               </div>
               <div class="ml-5 w-0 flex items-center justify-end flex-1 text-gray-600 text-base font-bold">
                 <svg class="w-5 h-5" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -82,14 +82,14 @@
             {{-- box 1 --}}
             <div class="bg-white shadow rounded-lg mb-4 p-4 sm:p-6 h-full">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-xl font-bold leading-none text-gray-900 capitalize">Mes voitures</h3>
-                <a href="{{ route('voiture.index') }}" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">
-                  afficher tout
+                <h3 class="text-xl font-bold leading-none text-gray-900 first-letter:capitalize">Mes voitures</h3>
+                <a href="{{ route('voiture.index') }}" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 first-letter:capitalize">
+                  Afficher tout
                 </a>
               </div>
               <div class="flow-root">
                 @if(Auth::user()->voitures ->isEmpty())
-                <p class="p-4 text-gray-500 text-center">Aucune voiture disponible.</p>
+                <p class="p-4 text-gray-500 text-center">Aucun voiture disponible.</p>
                 @else
                 <ul role="list" class="divide-y divide-gray-200">
                   @foreach (Auth::user()->voitures->take(5) as $voiture)
@@ -124,14 +124,14 @@
             {{-- box 2 --}}
             <div class="bg-white shadow rounded-lg mb-4 p-4 sm:p-6 h-full">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-xl font-bold leading-none text-gray-900 capitalize">Mes papiers Personnels</h3>
-                <a href="{{ route('paiperPersonnel.index') }}" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 capitalize">
-                  afficher tout
+                <h3 class="text-xl font-bold leading-none text-gray-900 first-letter:capitalize">Mes papiers personnels</h3>
+                <a href="{{ route('paiperPersonnel.index') }}" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2 first-letter:capitalize">
+                  Afficher tout
                 </a>
               </div>
               <div class="flow-root">
                 @if(Auth::user()->papiersUsers->isEmpty())
-                <p class="p-4 text-gray-500 text-center">Aucune papier disponible.</p>
+                <p class="p-4 text-gray-500 text-center">Aucun papier disponible.</p>
                 @else
                 <ul role="list" class="divide-y divide-gray-200">
                   @foreach (Auth::user()->papiersUsers->take(5) as $papier)
