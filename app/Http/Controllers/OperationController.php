@@ -45,11 +45,11 @@ class OperationController extends Controller
         $voiture = Session::get('voiture_id');
         $data = $request->validate([
             'categorie' => ['required',],
-            'nom' => ['required'],
+            'nom' => ['nullable'],
             'description' => ['max:255'],
             'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
             'date_operation' => ['required', 'date'],
-            'garage_id' => ['required'],
+            'garage_id' => ['nullable'],
         ]);
         if ($request->hasFile('photo')) {
             $imagePath = $request->file('photo')->store('user/operations', 'public');

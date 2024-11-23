@@ -98,9 +98,6 @@
                                         Date de Première Circulation
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        nombre des operation
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
                                         photo
                                     </th>
                                     <th scope="col" class="px-6 py-3">
@@ -124,12 +121,7 @@
 
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{$voiture->date_de_première_mise_en_circulation}}
-
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{$voiture->date_de_première_mise_en_circulation}}
-
+                                        {{$voiture->date_de_première_mise_en_circulation ?? 'N/A'}}
                                     </td>
                                     <td class="px-6 py-4">
                                         @if($voiture->photo !== NULL)

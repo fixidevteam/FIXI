@@ -130,7 +130,7 @@
                           @php
                           $nomOp= App\Models\nom_operation::find($operation->nom);
                           @endphp
-                          {{$nomOp->nom_operation}}
+                          {{$nomOp->nom_operation ?? 'N/A'}}
                         </p>
                       </div>
                       <div class="inline-flex items-center text-base font-semibold text-gray-900">

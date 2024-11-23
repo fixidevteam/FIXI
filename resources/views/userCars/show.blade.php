@@ -382,7 +382,7 @@
                   {{-- nom --}}
                   <td class="px-6 py-4">
                     {{
-                      $operations->where('id', $operation->nom)->first()->nom_operation ;
+                      $operations->where('id', $operation->nom)->first()->nom_operation ?? 'N/A';
                     }}
                   </td>
 

@@ -190,8 +190,7 @@
             </p>
             <p class="text-sm text-gray-500 truncate">
               {{
-            $operations->where('id', $operation->nom)->first()->nom_operation ;
-
+                $operations->where('id', $operation->nom)->first()->nom_operation ?? 'N/A';
               }}
             </p>
           </div>
@@ -201,7 +200,7 @@
               Gagare
             </p>
             <p class="text-sm text-gray-500 truncate">
-              {{$operation->garage->name}}
+              {{$operation->garage->name ?? 'N/A'}}
             </p>
           </div>
           {{-- Date --}}
