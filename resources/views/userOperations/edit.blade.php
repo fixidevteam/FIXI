@@ -87,6 +87,8 @@
                         <input type="hidden" id="existingOperationId" value="{{ $operation->nom }}">
                         <select id="operation" name="nom" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </select>
+                        <p class="mt-1 text-sm text-gray-500" id="operation_input_help">Si nous avons trouvé votre opération ici, veuillez l'ajouter dans le champ 'Description'. </p>
+
                         <x-input-error :messages="$errors->get('nom')" class="mt-2" />
                     </div>
                     <div>
@@ -113,6 +115,8 @@
                             <option value="{{ $garage->id }}" @if(old('garage_id')==$garage->id || $operation->garage_id == $garage->id) selected @endif>{{ $garage->name }}</option>
                             @endforeach
                         </select>
+                        <p class="mt-1 text-sm text-gray-500" id="operation_input_help">Si nous avons trouvé le garage ici, veuillez l'ajouter dans le champ 'Description'.</p>
+
                         <x-input-error :messages="$errors->get('garage_id')" class="mt-2" />
                     </div>
                     <div>
