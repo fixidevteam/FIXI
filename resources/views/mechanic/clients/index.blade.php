@@ -51,7 +51,7 @@
                 <form action="{{ route('mechanic.clients.index') }}" method="GET" class="flex items-center w-full mx-auto">   
                   <label for="simple-search" class="sr-only">Search</label>
                   <div class="w-full">
-                      <input type="text" name="search" value="{{ old('search', $search) }}" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-500 block w-full ps-5 p-2.5" placeholder="client nom"  />
+                      <input type="text" name="search" value="{{ old('search', $search) }}" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-500 block w-full ps-5 p-2.5" placeholder="Nom/Email"  />
                   </div>
                   <button type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-gray-700 rounded-lg border border-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300">
                     <svg class="w-4 h-4" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -91,6 +91,9 @@
                                 <th scope="col" class="px-6 py-3">
                                     tel
                                 </th>
+                                <th scope="col" class="px-6 py-3">
+                                    action
+                                </th>
                             </tr>
                           </thead>
                           <tbody>
@@ -105,6 +108,9 @@
                                   <td class="px-6 py-4">
                                     {{ $client->telephone }}
                                   </td>
+                                  <td class="px-6 py-4">
+                                    <a href="{{route('mechanic.clients.show',$client->id)}}" class="font-medium capitalize text-blue-600 dark:text-blue-500 hover:underline">détails</a>
+                                </td>
                               </tr>
                               @endforeach
                           </tbody>

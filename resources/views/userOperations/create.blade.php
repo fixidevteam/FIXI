@@ -86,18 +86,10 @@
                             <option value="">Select operation</option>
                             
                         </select>
-
-                        <div id="add-new-option" class="mt-4 hidden">
-                            <label for="new-option" class="block text-sm font-medium text-gray-700">Ajouter autre operation</label>
-                            <input id="new-option" type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Enter new option">
-                            <button type="button" id="save-option" class="mt-2 px-4 py-2  bg-black text-white text-sm font-medium rounded-md  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                Ajouter
-                            </button>
-                        </div>
+                        <p class="mt-1 text-sm text-gray-500" id="operation_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
                         <x-input-error :messages="$errors->get('nom')" class="mt-2" />
                     </div>
                     <div>
-
                         <div id="sousOperationCheckboxes" style="margin-top: 10px;">
                             @if(!empty($sousOperations))
                             <input type="hidden" id="existingSousOperations" value="{{ json_encode($operation->sousOperations->pluck('id')->toArray()) }}">
@@ -119,6 +111,7 @@
                             <option value="{{ $garage->id }}" @if(old('garage_id')==$garage->id) selected @endif>{{ $garage->name }}</option>
                             @endforeach
                         </select>
+                        <p class="mt-1 text-sm text-gray-500" id="operation_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
                         <x-input-error :messages="$errors->get('garage_id')" class="mt-2" />
                     </div>
                     <div>

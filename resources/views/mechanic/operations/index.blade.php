@@ -92,7 +92,7 @@
                                             @php
                                                 $sousOperations = $ope->where('id', $operation->nom)->first()->sousOperations ?? [];
                                             @endphp
-                                            {{ $sousOperations->first()->nom_sous_operation ?? 'N/A' }}
+                                            {{ $sousOperations->nom_sous_operation ?? 'N/A' }}
                                         </td>
                                         <td class="px-6 py-4">
                                             {{ $operation->date_operation }}

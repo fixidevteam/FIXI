@@ -10,6 +10,7 @@ use App\Models\Operation;
 use App\Models\SousOperation;
 use App\Models\Voiture;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use PhpParser\Node\Stmt\Foreach_;
@@ -43,20 +44,17 @@ class OperationController extends Controller
 
         $voiture = Session::get('voiture_id');
         $data = $request->validate([
-            'categorie' => [
-                'required',
-            ],
-            'nom' => ['required'],
+            'categorie' => ['required',],
+            'nom' => ['nullable'],
             'description' => ['max:255'],
             'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
             'date_operation' => ['required', 'date'],
-            'garage_id' => ['required'],
+            'garage_id' => ['nullable'],
         ]);
         if ($request->hasFile('photo')) {
             $imagePath = $request->file('photo')->store('user/operations', 'public');
             $data['photo'] = $imagePath;
         }
-
         $data['voiture_id'] = $voiture;
         $operation = Operation::create($data);
 

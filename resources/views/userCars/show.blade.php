@@ -381,16 +381,9 @@
 
                   {{-- nom --}}
                   <td class="px-6 py-4">
-                    @php
-                        $oper = $operations->where('id', $operation->nom)->first();
-                    @endphp
-                  
-                      @if($oper)
-                      {{  $oper->nom_operation }}
-                      @else
-                       {{ $operation->nom}}
-                      @endif
-
+                    {{
+                      $operations->where('id', $operation->nom)->first()->nom_operation ?? 'N/A';
+                    }}
                   </td>
 
                   {{-- description --}}

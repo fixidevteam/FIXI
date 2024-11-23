@@ -19,7 +19,7 @@ class MechanicClientController extends Controller
         // Get search query
         $search = $request->input('search');
 
-        // Fetch clients from the mechanic's garage based on search by name
+        // Fetch clients from the mechanic's garage based on search by name or email
         $clients = User::whereHas('voitures', function ($query) use ($user) {
             $query->whereHas('operations', function ($operationQuery) use ($user) {
                 $operationQuery->whereHas('garage', function ($garageQuery) use ($user) {
@@ -28,13 +28,17 @@ class MechanicClientController extends Controller
             });
         })
             ->when($search, function ($query, $search) {
-                $query->where('name', 'like', '%' . $search . '%'); // Search by client name
+                $query->where(function ($subQuery) use ($search) {
+                    $subQuery->where('name', 'like', '%' . $search . '%')
+                        ->orWhere('email', 'like', '%' . $search . '%'); // Add email to the search
+                });
             })
             ->with('voitures.operations')
             ->get();
 
         return view('mechanic.clients.index', compact('clients', 'search'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -57,7 +61,25 @@ class MechanicClientController extends Controller
      */
     public function show(string $id)
     {
-        return back();
+        $user = Auth::user();
+
+        // Find the client by ID and ensure they belong to the mechanic's garage
+        $client = User::whereHas('voitures', function ($query) use ($user) {
+            $query->whereHas('operations', function ($operationQuery) use ($user) {
+                $operationQuery->whereHas('garage', function ($garageQuery) use ($user) {
+                    $garageQuery->where('id', $user->garage_id);
+                });
+            });
+        })
+            ->with('voitures.operations')
+            ->find($id);
+
+        // If the client is not found, redirect back with an error message
+        if (!$client) {
+            return back()->with('error', 'Voiture introuvable ou n\'appartient pas à ce garage.');
+        }
+
+        return view('mechanic.clients.show', compact('client'));
     }
 
     /**

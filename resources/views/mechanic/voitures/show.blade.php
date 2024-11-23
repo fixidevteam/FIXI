@@ -32,7 +32,7 @@
               <a
                 href="{{ route('mechanic.voitures.index') }}"
                 class="inline-flex items-center text-sm font-medium text-gray-700   ">
-                La liste des véhicule
+                La liste des véhicules
               </a>
             </div>
           </li>
@@ -189,7 +189,7 @@
 
                   {{-- nom --}}
                   <td class="px-6 py-4">
-                  {{$nom_operations->where('id', $operation->nom)->first()->nom_operation}}
+                  {{$nom_operations->where('id', $operation->nom)->first()->nom_operation ?? 'N/A'}}
                   </td>
                   {{-- date doperation --}}
                   <td class="px-6 py-4">

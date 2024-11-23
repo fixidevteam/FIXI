@@ -189,18 +189,9 @@
               Operation
             </p>
             <p class="text-sm text-gray-500 truncate">
-              <td class="px-6 py-4">
-                @php
-                $oper = $operations->where('id', $operation->nom)->first();
-                @endphp
-
-                @if($oper)
-                {{ $oper->nom_operation }}
-                @else
-                {{ $operation->nom}}
-                @endif
-
-              </td>
+              {{
+                $operations->where('id', $operation->nom)->first()->nom_operation ?? 'N/A';
+              }}
             </p>
           </div>
           {{-- Gagare --}}
@@ -209,7 +200,7 @@
               Gagare
             </p>
             <p class="text-sm text-gray-500 truncate">
-              {{$operation->garage->name}}
+              {{$operation->garage->name ?? 'N/A'}}
             </p>
           </div>
           {{-- Date --}}

@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('operations', function (Blueprint $table) {
             $table->id();
             $table->string("categorie");
-            $table->string("nom");
+            $table->string("nom")->nullable();
             $table->string("description")->nullable();
             $table->date("date_operation");
             $table->string('photo')->nullable();
             $table->foreignId("voiture_id")->constrained();
-            $table->foreignId("garage_id")->constrained();
+            $table->foreignId("garage_id")->nullable()->constrained();
             $table->softDeletes();
             $table->timestamps();
         });

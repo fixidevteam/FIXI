@@ -11,8 +11,8 @@ class LoginTest extends TestCase
 
     /* 
     
-    -- how to run test :  php artisan test --filter LoginTest: 
-    -- how to run test specific method : php artisan test --filter LoginTest.test_specific_user_can_login: 
+    -- how to run test :  php artisan test --filter LoginTest
+    -- how to run test specific method : php artisan test --filter LoginTest.test_specific_user_can_login
     
     */
 
