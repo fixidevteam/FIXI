@@ -381,9 +381,16 @@
 
                   {{-- nom --}}
                   <td class="px-6 py-4">
-                    {{
-                      $operations->where('id', $operation->nom)->first()->nom_operation ;
-                    }}
+                    @php
+                        $oper = $operations->where('id', $operation->nom)->first();
+                    @endphp
+                  
+                      @if($oper)
+                      {{  $oper->nom_operation }}
+                      @else
+                       {{ $operation->nom}}
+                      @endif
+
                   </td>
 
                   {{-- description --}}

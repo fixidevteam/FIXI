@@ -138,8 +138,8 @@
                                     <td class="px-6 py-4">
                                         <form action="{{ route('admin.users.toggleStatus', $user->id) }}" method="POST" style="display: inline;">
                                             @csrf
-                                            <button type="submit" class="{{ $user->status ? 'rounded-[20px] bg-red-600 px-3 py-1 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600' : 'rounded-[20px] bg-green-600 px-3 py-1 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600' }}">
-                                                {{ $user->status ? 'Deactivate' : 'Activate' }}
+                                            <button type="submit" class="{{ $user->status ? 'rounded-[20px] bg-red-600 px-3 py-1 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600' : 'rounded-[20px] bg-green-600 px-3 py-1 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600' }}">
+                                                {{ $user->status ? 'Desactiver' : 'Activer' }}
                                             </button>
                                         </form>
                                     </td>

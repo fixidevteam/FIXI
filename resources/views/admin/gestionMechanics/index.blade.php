@@ -47,7 +47,7 @@
                     <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Liste des garagistes</h2>
                     <div>
                         <a href="{{ route('admin.gestionGaragistes.create') }}">
-                            <x-primary-button class="hidden md:block">Ajouter garagiste</x-primary-button>
+                            <x-primary-button class="hidden md:block">Ajouter un garagiste</x-primary-button>
                             <x-primary-button class="sm:hidden">
                                 <svg class="w-5 h-5 text-white" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12.75 9C12.75 8.58579 12.4142 8.25 12 8.25C11.5858 8.25 11.25 8.58579 11.25 9L11.25 11.25H9C8.58579 11.25 8.25 11.5858 8.25 12C8.25 12.4142 8.58579 12.75 9 12.75H11.25V15C11.25 15.4142 11.5858 15.75 12 15.75C12.4142 15.75 12.75 15.4142 12.75 15L12.75 12.75H15C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25H12.75V9Z" fill="currentColor" />
@@ -155,8 +155,8 @@
                                     <td class="px-6 py-4">
                                         <form action="{{ route('admin.garagiste.toggleStatus', $mechanic->id) }}" method="POST" style="display: inline;">
                                             @csrf
-                                            <button type="submit" class="{{ $mechanic->status ? 'rounded-[20px] bg-red-600 px-3 py-1 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600' : 'rounded-[20px] bg-green-600 px-3 py-1 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600' }}">
-                                                {{ $mechanic->status ? 'Deactivate' : 'Activate' }}
+                                            <button type="submit" class="{{ $mechanic->status ? 'rounded-[20px] bg-red-600 px-3 py-1 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600' : 'rounded-[20px] bg-green-600 px-3 py-1 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600' }}">
+                                                {{ $mechanic->status ? 'Desactiver' : 'Activer' }}
                                             </button>
                                         </form>
                                     </td>

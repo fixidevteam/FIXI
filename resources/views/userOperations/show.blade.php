@@ -189,10 +189,18 @@
               Operation
             </p>
             <p class="text-sm text-gray-500 truncate">
-              {{
-            $operations->where('id', $operation->nom)->first()->nom_operation ;
+              <td class="px-6 py-4">
+                @php
+                $oper = $operations->where('id', $operation->nom)->first();
+                @endphp
 
-              }}
+                @if($oper)
+                {{ $oper->nom_operation }}
+                @else
+                {{ $operation->nom}}
+                @endif
+
+              </td>
             </p>
           </div>
           {{-- Gagare --}}
@@ -242,30 +250,30 @@
         {{-- operation description close  --}}
       </div>
     </div>
-  {{-- contet close colse --}}
-  <div id="confirmationModal" class="fixed inset-0 bg-white bg-opacity-30 backdrop-blur-[2px] flex items-center justify-center hidden">
-    <div class="bg-white rounded-lg p-6 w-96 shadow-lg ">
-      <h2 class="text-lg font-bold text-gray-800">Confirmation de suppression</h2>
-      <p class="text-gray-600 mt-2">Êtes-vous sûr de vouloir supprimer cette document ? Cette action ne peut pas être annulée.</p>
+    {{-- contet close colse --}}
+    <div id="confirmationModal" class="fixed inset-0 bg-white bg-opacity-30 backdrop-blur-[2px] flex items-center justify-center hidden">
+      <div class="bg-white rounded-lg p-6 w-96 shadow-lg ">
+        <h2 class="text-lg font-bold text-gray-800">Confirmation de suppression</h2>
+        <p class="text-gray-600 mt-2">Êtes-vous sûr de vouloir supprimer cette document ? Cette action ne peut pas être annulée.</p>
 
-      <!-- Action Buttons -->
-      <div class="flex justify-end mt-4">
-        <button onclick="toggleModal(false)" class="px-4 py-2 bg-gray-300 text-gray-800 rounded mr-2">
-          Annuler
-        </button>
-        <form id="deleteForm" action="{{ route('operation.destroy', $operation->id) }}" method="POST">
-          @csrf
-          @method('DELETE')
-          <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
-            confirmer
+        <!-- Action Buttons -->
+        <div class="flex justify-end mt-4">
+          <button onclick="toggleModal(false)" class="px-4 py-2 bg-gray-300 text-gray-800 rounded mr-2">
+            Annuler
           </button>
-        </form>
+          <form id="deleteForm" action="{{ route('operation.destroy', $operation->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+              confirmer
+            </button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-  {{-- footer --}}
-  <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
-    @include('layouts.footer')
-  </div>
+    {{-- footer --}}
+    <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
+      @include('layouts.footer')
+    </div>
   </div>
 </x-app-layout>

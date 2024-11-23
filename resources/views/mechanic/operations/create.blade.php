@@ -9,7 +9,7 @@
                     class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                     <li class="inline-flex items-center">
                         <a
-                            href="{{ route('dashboard') }}"
+                            href="{{ route('mechanic.dashboard') }}"
                             class="inline-flex items-center text-sm font-medium text-gray-700">
                             Accueil
                         </a>
@@ -83,7 +83,7 @@
                         <x-input-label for="nom" :value="__('Nom de l\'opération')" />
                         <input type="hidden" id="existingOperationId" value="{{old('nom')}}">
                         <select id="operation" name="nom" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            <option value="">Select Operation</option>
+                            <option value="">Select operation</option>
                         </select>
 
                         <x-input-error :messages="$errors->get('nom')" class="mt-2" />
@@ -99,7 +99,7 @@
                         <x-input-error :messages="$errors->get('modele')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="date_operation" :value="__('Date de l\'Operation')" />
+                        <x-input-label for="date_operation" :value="__('Date de l\'operation')" />
                         <x-text-input id="date_operation" class="block mt-1 w-full" type="date" name="date_operation" :value="old('date_operation')" autofocus autocomplete="date_operation" />
                         <x-input-error :messages="$errors->get('date_operation')" class="mt-2" />
                     </div>
@@ -116,8 +116,8 @@
                         <x-input-error :messages="$errors->get('photo')" class="mt-2" />
                     </div>
                     <div class="flex items-center justify-end mt-4">
-                        <x-primary-button class="flex justify-center rounded-[20px] bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
-                            {{ __('ajouter operation') }}
+                        <x-primary-button class="flex justify-center rounded-[20px] bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
+                            {{ __('ajouter l\'operation') }}
                         </x-primary-button>
                     </div>
                 </form>

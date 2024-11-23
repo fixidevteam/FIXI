@@ -30,7 +30,7 @@
                                 @auth('web')
                                     <a href="{{ url('/dashboard') }}">
                                         <button
-                                        class="w-full inline-block first-letter:capitalize border border-transparent rounded-[20px] bg-red-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-500 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                                        class="w-full inline-block first-letter:capitalize border border-transparent rounded-[20px] bg-red-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
                                     >
                                         tableau de bord de l'utilisateur
                                         </button>
@@ -38,7 +38,7 @@
                                 @else
                                     <a href="{{ route('login') }}">
                                         <button
-                                        class="w-full inline-block first-letter:capitalize border border-transparent rounded-[20px] bg-red-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-500 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                                        class="w-full inline-block first-letter:capitalize border border-transparent rounded-[20px] bg-red-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
                                     >
                                         Espace client
                                         </button>
@@ -48,7 +48,7 @@
                                 @auth('mechanic')
                                     <a href="{{ url('/mechanic/dashboard') }}">
                                         <button
-                                        class="my-5 w-full inline-block first-letter:capitalize border border-transparent rounded-[20px] bg-red-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-500 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                                        class="my-5 w-full inline-block first-letter:capitalize border border-transparent rounded-[20px] bg-red-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
                                     >
                                         tableau de bord du garage
                                         </button>
@@ -56,7 +56,7 @@
                                 @else
                                     <a href="{{ route('mechanic.login') }}">
                                         <button
-                                        class="my-5 w-full inline-block first-letter:capitalize border border-transparent rounded-[20px] bg-red-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-500 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                                        class="my-5 w-full inline-block first-letter:capitalize border border-transparent rounded-[20px] bg-red-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
                                     >
                                         Espace garage
                                         </button>
@@ -66,7 +66,7 @@
                                 @auth('admin')
                                     <a href="{{ url('/admin/dashboard') }}">
                                         <button
-                                        class="w-full inline-block first-letter:capitalize border border-transparent rounded-[20px] bg-red-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-500 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                                        class="w-full inline-block first-letter:capitalize border border-transparent rounded-[20px] bg-red-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
                                     >
                                         tableau de bord de l'administrateur
                                         </button>
@@ -74,7 +74,7 @@
                                 @else
                                     <a href="{{ route('admin.login') }}">
                                         <button
-                                        class="w-full inline-block first-letter:capitalize border border-transparent rounded-[20px] bg-red-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-500 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                                        class="w-full inline-block first-letter:capitalize border border-transparent rounded-[20px] bg-red-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
                                     >
                                         Espace administrateur
                                         </button>

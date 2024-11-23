@@ -58,7 +58,7 @@
                     })
                     .then(data => {
                         const operationSelect = document.getElementById('operation');
-                        operationSelect.innerHTML = '<option value="">Select Operation</option>'; // Clear current options
+                        operationSelect.innerHTML = '<option value="">Select operation</option>'; // Clear current options
 
                         data.forEach(operation => {
                             const option = document.createElement('option');
