@@ -32,7 +32,7 @@
                             <a
                                 href=""
                                 class="inline-flex items-center text-sm font-medium text-gray-700   ">
-                                La liste des véhicule
+                                La liste des véhicules
                             </a>
                         </div>
                     </li>
