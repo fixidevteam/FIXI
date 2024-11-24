@@ -34,8 +34,14 @@ class AdminGestionGarageController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'ref' => ['required', 'unique:garages'],
             'localisation' => ['nullable', 'string'],
+            'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2048']
         ]);
-        $garage = garage::create($data);
+        if ($request->hasFile('photo')) {
+            $imagePath = $request->file('photo')->store('garage', 'public');
+            $data['photo'] = $imagePath;
+        }
+
+        garage::create($data);
         // Flash message to the session
         session()->flash('success', 'Garage ajoutée');
         session()->flash('subtitle', 'Garage a été ajoutée avec succès à la liste.');
@@ -79,7 +85,13 @@ class AdminGestionGarageController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'ref' => ['required'],
             'localisation' => ['nullable', 'string'],
+            'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2048']
+
         ]);
+        if ($request->hasFile('photo')) {
+            $imagePath = $request->file('photo')->store('garage', 'public');
+            $data['photo'] = $imagePath;
+        }
         $garage->update($data);
         // Flash message to the session
         session()->flash('success', 'Garage modifiée');

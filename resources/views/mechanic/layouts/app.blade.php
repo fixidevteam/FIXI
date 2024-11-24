@@ -19,13 +19,124 @@
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-[#F1F1F1]">
         @include('mechanic.layouts.n')
-    <!-- Page Content -->
-    <main>
-        {{ $slot }}
-    </main>
+        <!-- Page Content -->
+        <main>
+            {{ $slot }}
+        </main>
     </div>
     <script>
-        window.addEventListener('DOMContentLoaded', () => {
+        // window.addEventListener('DOMContentLoaded', () => {
+        //     const initialCategorie = document.getElementById('categorie').value;
+
+        //     if (initialCategorie) {
+        //         loadOperations(initialCategorie); // Load operations based on the initial category
+        //     }
+
+        //     document.getElementById('categorie').addEventListener('change', function() {
+        //         loadOperations(this.value); // Refresh operations when category changes
+        //     });
+
+        //     document.getElementById('operation').addEventListener('change', function() {
+        //         if (this.value) { // Only load sous-operations if an operation is selected
+        //             loadsousOperations(this.value);
+        //         } else {
+        //             clearSousOperations(); // Clear checkboxes if no operation is selected
+        //         }
+        //     });
+        // });
+
+        // function loadOperations(categorieId) {
+        //     // Safely access the value of existingOperationId if it exists
+        //     const existingOperationElement = document.getElementById('existingOperationId');
+        //     const existingOperationId = existingOperationElement ? existingOperationElement.value : "";
+
+        //     if (categorieId) {
+        //         fetch(`/api/operations/${categorieId}`)
+        //             .then(response => {
+        //                 if (!response.ok) throw new Error("Failed to fetch operations");
+        //                 return response.json();
+        //             })
+        //             .then(data => {
+        //                 const operationSelect = document.getElementById('operation');
+        //                 operationSelect.innerHTML = '<option value="">Select operation</option>'; // Clear current options
+
+        //                 data.forEach(operation => {
+        //                     const option = document.createElement('option');
+        //                     option.value = operation.id;
+        //                     option.textContent = operation.nom_operation;
+
+        //                     // Auto-select the existing operation if it matches
+        //                     if (operation.id == existingOperationId) {
+        //                         option.selected = true;
+        //                     }
+
+        //                     operationSelect.appendChild(option);
+        //                 });
+
+        //                 // Load sous operations if an operation is selected
+        //                 if (operationSelect.value) {
+        //                     loadsousOperations(operationSelect.value);
+        //                 } else {
+        //                     clearSousOperations(); // Clear sous-operations if no operation is selected
+        //                 }
+        //             })
+        //             .catch(error => {
+        //                 console.error("Error loading operations:", error); // Log errors
+        //             });
+        //     } else {
+        //         clearSousOperations(); // Clear sous-operations if no category selected
+        //     }
+        // }
+
+        // function loadsousOperations(operationId) {
+        //     const existingSousOperations = JSON.parse(document.getElementById('existingSousOperations')?.value || '[]');
+        //     const sousOperationContainer = document.getElementById('sousOperationCheckboxes');
+        //     sousOperationContainer.innerHTML = ""; // Clear existing checkboxes
+
+        //     if (operationId) {
+        //         fetch(`/api/sous-operations/${operationId}`)
+        //             .then(response => response.json())
+        //             .then(data => {
+        //                 if (data.length > 0) {
+        //                     const p = document.createElement('p');
+        //                     p.textContent = 'Sous opération';
+        //                     p.className = 'block text-sm font-medium leading-6 text-gray-900';
+        //                     sousOperationContainer.appendChild(p);
+
+        //                     data.forEach(sousOperation => {
+        //                         const checkbox = document.createElement('input');
+        //                         checkbox.type = 'checkbox';
+        //                         checkbox.id = `sousOperation_${sousOperation.id}`;
+        //                         checkbox.name = 'sousOperations[]';
+        //                         checkbox.value = sousOperation.id;
+        //                         checkbox.className = 'w-4 h-4 text-black border-gray-300 rounded focus:ring-blue-500 focus:ring-2';
+
+        //                         if (existingSousOperations.includes(sousOperation.id)) {
+        //                             checkbox.checked = true;
+        //                         }
+
+        //                         const label = document.createElement('label');
+        //                         label.htmlFor = `sousOperation_${sousOperation.id}`;
+        //                         label.textContent = sousOperation.nom_sous_operation;
+        //                         label.className = 'ms-2 text-gray-900 text-sm font-medium';
+
+        //                         const checkboxWrapper = document.createElement('div');
+        //                         checkboxWrapper.appendChild(checkbox);
+        //                         checkboxWrapper.appendChild(label);
+
+        //                         sousOperationContainer.appendChild(checkboxWrapper);
+        //                     });
+        //                 }
+        //             });
+        //     }
+        // }
+
+        // function clearSousOperations() {
+        //     document.getElementById('sousOperationCheckboxes').innerHTML = ""; // Clear checkboxes
+        // }
+
+
+        document.addEventListener('DOMContentLoaded', () => {
             const initialCategorie = document.getElementById('categorie').value;
 
             if (initialCategorie) {
@@ -37,8 +148,8 @@
             });
 
             document.getElementById('operation').addEventListener('change', function() {
-                if (this.value) { // Only load sous-operations if an operation is selected
-                    loadsousOperations(this.value);
+                if (this.value) {
+                    loadsousOperations(this.value); // Load sous-operations when an operation is selected
                 } else {
                     clearSousOperations(); // Clear checkboxes if no operation is selected
                 }
@@ -46,19 +157,15 @@
         });
 
         function loadOperations(categorieId) {
-            // Safely access the value of existingOperationId if it exists
             const existingOperationElement = document.getElementById('existingOperationId');
             const existingOperationId = existingOperationElement ? existingOperationElement.value : "";
 
             if (categorieId) {
                 fetch(`/api/operations/${categorieId}`)
-                    .then(response => {
-                        if (!response.ok) throw new Error("Failed to fetch operations");
-                        return response.json();
-                    })
+                    .then(response => response.json())
                     .then(data => {
                         const operationSelect = document.getElementById('operation');
-                        operationSelect.innerHTML = '<option value="">Select operation</option>'; // Clear current options
+                        operationSelect.innerHTML = '<option value="">Select operation</option>';
 
                         data.forEach(operation => {
                             const option = document.createElement('option');
@@ -73,23 +180,22 @@
                             operationSelect.appendChild(option);
                         });
 
-                        // Load sous operations if an operation is selected
+                        // Load sous-operations if an operation is selected
                         if (operationSelect.value) {
                             loadsousOperations(operationSelect.value);
                         } else {
-                            clearSousOperations(); // Clear sous-operations if no operation is selected
+                            clearSousOperations();
                         }
                     })
-                    .catch(error => {
-                        console.error("Error loading operations:", error); // Log errors
-                    });
+                    .catch(error => console.error("Error loading operations:", error));
             } else {
-                clearSousOperations(); // Clear sous-operations if no category selected
+                clearSousOperations();
             }
         }
 
         function loadsousOperations(operationId) {
-            const existingSousOperations = JSON.parse(document.getElementById('existingSousOperations')?.value || '[]');
+            // Parse existingSousOperations safely and normalize to integers
+            const existingSousOperations = JSON.parse(document.getElementById('existingSousOperations')?.value || '[]').map(Number);
             const sousOperationContainer = document.getElementById('sousOperationCheckboxes');
             sousOperationContainer.innerHTML = ""; // Clear existing checkboxes
 
@@ -111,7 +217,8 @@
                                 checkbox.value = sousOperation.id;
                                 checkbox.className = 'w-4 h-4 text-black border-gray-300 rounded focus:ring-blue-500 focus:ring-2';
 
-                                if (existingSousOperations.includes(sousOperation.id)) {
+                                // Mark checkbox as checked if sousOperation.id exists in existingSousOperations
+                                if (existingSousOperations.includes(Number(sousOperation.id))) {
                                     checkbox.checked = true;
                                 }
 
@@ -127,12 +234,15 @@
                                 sousOperationContainer.appendChild(checkboxWrapper);
                             });
                         }
+                    })
+                    .catch(error => {
+                        console.error("Error loading sous-operations:", error);
                     });
             }
         }
 
         function clearSousOperations() {
-            document.getElementById('sousOperationCheckboxes').innerHTML = ""; // Clear checkboxes
+            document.getElementById('sousOperationCheckboxes').innerHTML = ""; // Clear sous-operations container
         }
     </script>
 </body>

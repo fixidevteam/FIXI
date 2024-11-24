@@ -34,7 +34,6 @@ Route::middleware(['auth:mechanic', 'checkMechanicStatus'])->prefix('mechanic')-
     Route::resource('/voitures', MechanicVoitureController::class);
     Route::resource('/clients', MechanicClientController::class);
 
-
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
