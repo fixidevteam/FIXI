@@ -108,7 +108,7 @@
                     {{-- alert close --}}
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         @if($garages->isEmpty())
-                        <p class="p-4 text-gray-500 text-center">Aucune garage disponible.</p>
+                        <p class="p-4 text-gray-500 text-center">Aucun garage disponible.</p>
                         @else
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                             <caption class="sr-only">Liste des garages</caption>
@@ -142,7 +142,7 @@
                                         {{ $garage->localisation ?? 'N/A' }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        <a href="{{ route('admin.gestionGarages.show',$garage->id) }}" class="font-medium capitalize text-blue-600 dark:text-blue-500 hover:underline">details</a>
+                                        <a href="{{ route('admin.gestionGarages.show',$garage->id) }}" class="font-medium capitalize text-blue-600 dark:text-blue-500 hover:underline">détails</a>
                                     </td>
                                 </tr>
                                 @endforeach

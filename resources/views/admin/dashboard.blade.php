@@ -7,7 +7,7 @@
                     <h1 class="text-lg font-medium text-gray-900">Bonjour, {{ Auth::user()->name }} </h1>
                     <p class="text-sm text-gray-600 md:w-[300px] sm:w-full mx-0 text-left">Ajoutez vos informations en quelques clics,et accédez  à une vue d’ensemble claire et sécurisée de toutes vos  données importantes.</p>
                     <div class="mt-4">
-                      <a href="#">
+                      <a href="{{ route('admin.gestionGarages.create') }}">
                         <x-primary-button>ajouter un garage</x-primary-button>
                       </a>
                     </div>

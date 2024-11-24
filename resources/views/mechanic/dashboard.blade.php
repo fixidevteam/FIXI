@@ -99,7 +99,7 @@
             {{-- box 1 --}}
             <div class="bg-white shadow rounded-lg mb-4 p-4 sm:p-6 h-full">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-xl font-bold leading-none text-gray-900 first-letter:capitalize">la liste des operation</h3>
+                <h3 class="text-xl font-bold leading-none text-gray-900 first-letter:capitalize">la liste des operations</h3>
                 <a href="{{ route('mechanic.operations.index') }}" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2">
                   Afficher tout
                 </a>
@@ -147,7 +147,7 @@
             {{-- box 2 --}}
             <div class="bg-white shadow rounded-lg mb-4 p-4 sm:p-6 h-full">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-xl font-bold leading-none text-gray-900 first-letter:capitalize">la liste des véhicule</h3>
+                <h3 class="text-xl font-bold leading-none text-gray-900 first-letter:capitalize">la liste des véhicules</h3>
                 <a href="{{ route('mechanic.voitures.index') }}" class="text-sm font-medium text-blue-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2">
                   Afficher tout
                 </a>

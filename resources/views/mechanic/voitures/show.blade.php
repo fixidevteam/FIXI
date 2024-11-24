@@ -205,7 +205,6 @@
             </table>
               @endif 
           </div>
-
         </div>
         {{-- table close --}}
       </div>
