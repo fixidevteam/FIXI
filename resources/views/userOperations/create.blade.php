@@ -71,7 +71,6 @@
                     @csrf
                     <div>
                         <x-input-label for="categorie" :value="__('Categorie de l\'opération')" />
-                        <!-- <x-text-input id="categorie" class="block mt-1 w-full" type="text" name="categorie" :value="old('categorie')" autofocus autocomplete="categorie" /> -->
                         <select id="categorie" name="categorie" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             @foreach ($categories as $categorie)
                             <option value="{{ $categorie->id }}" @if(old('categorie')==$categorie->id) selected @endif>{{ $categorie->nom_categorie }}</option>
@@ -84,9 +83,8 @@
                         <input type="hidden" id="existingOperationId" value="{{old('nom')}}">
                         <select id="operation" name="nom" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             <option value="">Select operation</option>
-                            
                         </select>
-                        <p class="mt-1 text-sm text-gray-500" id="operation_input_help">Si nous avons trouvé votre opération ici, veuillez l'ajouter dans le champ 'Description'. </p>
+                        <p class="mt-1 text-sm text-gray-500" id="operation_input_help">Si nous avons trouvé votre opération ici, veuillez l'ajouter dans le champ <label class="font-bold underline" for="description">'Description'</label>. </p>
                         <x-input-error :messages="$errors->get('nom')" class="mt-2" />
                     </div>
                     <div>
@@ -111,7 +109,7 @@
                             <option value="{{ $garage->id }}" @if(old('garage_id')==$garage->id) selected @endif>{{ $garage->name }}</option>
                             @endforeach
                         </select>
-                        <p class="mt-1 text-sm text-gray-500" id="operation_input_help">Si nous avons trouvé le garage ici, veuillez l'ajouter dans le champ 'Description'.</p>
+                        <p class="mt-1 text-sm text-gray-500" id="operation_input_help">Si nous avons trouvé le garage ici, veuillez l'ajouter dans le champ <label class="font-bold underline" for="description">'Description'</label>.</p>
                         <x-input-error :messages="$errors->get('garage_id')" class="mt-2" />
                     </div>
                     <div>

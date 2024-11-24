@@ -26,7 +26,7 @@
             <div class="flex items-center bg-white p-8 rounded-lg shadow">
               <div class="flex-shrink-0">
                 <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{ Auth::user()->voitures->count() }}</span>
-                <h3 class="text-base font-normal text-gray-500 first-letter:capitalize">nombre des voiture</h3>
+                <h3 class="text-base font-normal text-gray-500 first-letter:capitalize">nombre des voitures</h3>
               </div>
               <div class="ml-5 w-0 flex items-center justify-end flex-1 text-gray-600 text-base font-bold">
                 <svg class="w-5 h-5" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
