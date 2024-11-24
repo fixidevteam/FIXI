@@ -44,11 +44,8 @@ Route::middleware(['auth', 'checkdocuments', 'checkUserStatus'])->group(function
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::get('/notifications/{id}/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
     Route::get('/notifications/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.markAllAsRead');
-});
-Route::get('/api/operations/{categorieId}', [App\Http\Controllers\DataController::class, 'getOperations']);
-Route::get('/api/sous-operations/{operationId}', [App\Http\Controllers\DataController::class, 'getSousOperations']);
-Route::get('test',function(){
-    return view('test');
+    Route::get('/api/operations/{categorieId}', [App\Http\Controllers\DataController::class, 'getOperations']);
+    Route::get('/api/sous-operations/{operationId}', [App\Http\Controllers\DataController::class, 'getSousOperations']);
 });
 // General Authentication Routes
 require_once __DIR__ . '/auth.php';

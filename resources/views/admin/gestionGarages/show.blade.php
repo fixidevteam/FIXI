@@ -54,7 +54,7 @@
               <a
                 href=""
                 class="inline-flex items-center text-sm font-medium text-gray-700   ">
-                Details des garages
+                Détails des garages
               </a>
             </div>
           </li>

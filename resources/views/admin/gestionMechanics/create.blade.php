@@ -70,7 +70,7 @@
             <form method="POST" action="{{ route('admin.gestionGaragistes.store') }}" class="space-y-6" enctype="multipart/form-data">
                 @csrf
                 <div>
-                    <x-input-label for="name" :value="__('Garagiste Nom')" />
+                    <x-input-label for="name" :value="__('Nom du garagiste')" />
                     <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" autofocus autocomplete="name" />
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                 </div>
@@ -85,13 +85,13 @@
                     <x-input-error :messages="$errors->get('telephone')" class="mt-2" />
                 </div>
                 <div>
-                    <x-input-label for="password" :value="__('Mot de pass')" />
+                    <x-input-label for="password" :value="__('Mot de passe')" />
                     <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" :value="old('password')" autofocus autocomplete="new-password" />
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
                 </div>
                 <!-- Confirm Password -->
                 <div class="mt-4">
-                    <x-input-label for="password_confirmation" :value="__('Confimer le mot de pass')" />
+                    <x-input-label for="password_confirmation" :value="__('Confimer le mot de passe')" />
                     <x-text-input id="password_confirmation" class="block mt-1 w-full"
                         type="password"
                         name="password_confirmation" autocomplete="new-password" />
