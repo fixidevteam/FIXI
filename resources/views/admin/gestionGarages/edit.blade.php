@@ -66,32 +66,37 @@
         <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
             {{-- content (slot on layouts/app.blade.php)--}}
             <div class=" px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <h2 class="mt-10  text-2xl font-bold leading-9 tracking-tight text-gray-900">Modifier Garage</h2>
-            <form method="POST" action="{{ route('admin.gestionGarages.update',$garage->id) }}" class="space-y-6" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div>
-                    <x-input-label for="name" :value="__('Garage')" />
-                    <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name') ?? $garage->name" autofocus autocomplete="name" />
-                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                </div>
-                <div>
-                    <x-input-label for="ref" :value="__('Ref')" />
-                    <x-text-input id="ref" class="block mt-1 w-full" type="text" name="ref" :value="old('ref') ?? $garage->ref" autofocus autocomplete="ref" />
-                    <x-input-error :messages="$errors->get('ref')" class="mt-2" />
-                </div>
-                <div>
-                    <x-input-label for="localisation" :value="__('Localisation')" />
-                    <x-text-input id="localisation" class="block mt-1 w-full" type="text" name="localisation" :value="old('localisation') ?? $garage->localisation" autofocus autocomplete="localisation" />
-                    <x-input-error :messages="$errors->get('localisation')" class="mt-2" />
-                </div>
-                
-                <div class="flex items-center justify-end mt-4">
-                    <x-primary-button class="flex justify-center rounded-[20px] bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
-                        {{ __('Modifier le garage') }}
-                    </x-primary-button>
-                </div>
-            </form>
+                <h2 class="mt-10  text-2xl font-bold leading-9 tracking-tight text-gray-900">Modifier Garage</h2>
+                <form method="POST" action="{{ route('admin.gestionGarages.update',$garage->id) }}" class="space-y-6" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div>
+                        <x-input-label for="name" :value="__('Garage')" />
+                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name') ?? $garage->name" autofocus autocomplete="name" />
+                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                    </div>
+                    <div>
+                        <x-input-label for="ref" :value="__('Ref')" />
+                        <x-text-input id="ref" class="block mt-1 w-full" type="text" name="ref" :value="old('ref') ?? $garage->ref" autofocus autocomplete="ref" />
+                        <x-input-error :messages="$errors->get('ref')" class="mt-2" />
+                    </div>
+                    <div>
+                        <x-input-label for="file_input" :value="__('Photo')" />
+                        <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" />
+                        <x-input-error :messages="$errors->get('photo')" class="mt-2" />
+                    </div>
+                    <div>
+                        <x-input-label for="localisation" :value="__('Localisation')" />
+                        <x-text-input id="localisation" class="block mt-1 w-full" type="text" name="localisation" :value="old('localisation') ?? $garage->localisation" autofocus autocomplete="localisation" />
+                        <x-input-error :messages="$errors->get('localisation')" class="mt-2" />
+                    </div>
+
+                    <div class="flex items-center justify-end mt-4">
+                        <x-primary-button class="flex justify-center rounded-[20px] bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
+                            {{ __('Modifier le garage') }}
+                        </x-primary-button>
+                    </div>
+                </form>
 
             </div>
 

@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/operations/{categorieId}', [App\Http\Controllers\DataController::class, 'getOperations']);
+Route::get('/sous-operations/{operationId}', [App\Http\Controllers\DataController::class, 'getSousOperations']);
