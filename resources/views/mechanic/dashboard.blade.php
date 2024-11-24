@@ -10,7 +10,7 @@
               <h2 class="text-lg font-medium text-gray-900">REF : {{ Auth::user()->garage?->ref }}</h2>
             </div>
           </div>
-          <p class="mt-1 text-sm text-gray-600">Ajoutez vos informations en quelques clics,et accédez <br> à une vue d’ensemble claire et sécurisée de toutes vos <br> données importantes.</p>
+          <p class="text-sm text-gray-600 md:w-[300px] sm:w-full mx-0 text-left">Ajoutez vos informations en quelques clics,et accédez  à une vue d’ensemble claire et sécurisée de toutes vos données importantes.</p>
           <div class="mt-4">
             <a href="{{ route('mechanic.operations.index') }}">
               <x-primary-button>mes opération</x-primary-button>
