@@ -80,14 +80,14 @@
                         <x-input-error :messages="$errors->get('ref')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="file_input" :value="__('Photo')" />
-                        <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" />
-                        <x-input-error :messages="$errors->get('photo')" class="mt-2" />
-                    </div>
-                    <div>
                         <x-input-label for="localisation" :value="__('Localisation')" />
                         <x-text-input id="localisation" class="block mt-1 w-full" type="text" name="localisation" :value="old('localisation')" autofocus autocomplete="localisation" />
                         <x-input-error :messages="$errors->get('localisation')" class="mt-2" />
+                    </div>
+                    <div>
+                        <x-input-label for="file_input" :value="__('Photo')" />
+                        <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" />
+                        <x-input-error :messages="$errors->get('photo')" class="mt-2" />
                     </div>
 
                     <div class="flex items-center justify-end mt-4">

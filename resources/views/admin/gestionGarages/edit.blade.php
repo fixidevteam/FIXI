@@ -81,16 +81,15 @@
                         <x-input-error :messages="$errors->get('ref')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="file_input" :value="__('Photo')" />
-                        <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" />
-                        <x-input-error :messages="$errors->get('photo')" class="mt-2" />
-                    </div>
-                    <div>
                         <x-input-label for="localisation" :value="__('Localisation')" />
                         <x-text-input id="localisation" class="block mt-1 w-full" type="text" name="localisation" :value="old('localisation') ?? $garage->localisation" autofocus autocomplete="localisation" />
                         <x-input-error :messages="$errors->get('localisation')" class="mt-2" />
                     </div>
-
+                    <div>
+                        <x-input-label for="file_input" :value="__('Photo')" />
+                        <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" />
+                        <x-input-error :messages="$errors->get('photo')" class="mt-2" />
+                    </div>
                     <div class="flex items-center justify-end mt-4">
                         <x-primary-button class="flex justify-center rounded-[20px] bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
                             {{ __('Modifier le garage') }}

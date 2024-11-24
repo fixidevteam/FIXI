@@ -173,10 +173,10 @@ class DatabaseSeeder extends Seeder
         //     'email'=>'admin@gmail.com',
         //     'password' => 'admin123'
         // ]);
-        // $this->call([
-        //     TypePapierpSeeder::class,
-        //     TypePapiervSeeder::class,
-        // ]);
+        $this->call([
+            TypePapierpSeeder::class,
+            TypePapiervSeeder::class,
+        ]);
         // $this->call([
         //     VoitureSeeder::class,
         //     PapierVoitureSeeder::class,

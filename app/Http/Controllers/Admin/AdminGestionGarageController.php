@@ -86,7 +86,6 @@ class AdminGestionGarageController extends Controller
             'ref' => ['required'],
             'localisation' => ['nullable', 'string'],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2048']
-
         ]);
         if ($request->hasFile('photo')) {
             $imagePath = $request->file('photo')->store('garage', 'public');
