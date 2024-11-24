@@ -41,7 +41,6 @@ class OperationController extends Controller
      */
     public function store(Request $request)
     {
-
         $voiture = Session::get('voiture_id');
         $data = $request->validate([
             'categorie' => ['required',],
@@ -151,6 +150,9 @@ class OperationController extends Controller
                     'operation_id' => $operation->id
                 ]);
             }
+        } else {
+            // If no sousOperations provided, delete all related sousOperations
+            $operation->sousOperations()->delete();
         }
         session()->flash('success', 'Operation modifiée');
         session()->flash('subtitle', 'Votre Operation a été modifiée avec succès à la liste.');
