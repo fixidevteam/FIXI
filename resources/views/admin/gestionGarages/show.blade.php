@@ -134,11 +134,12 @@
         <div class="flex flex-col md:flex-row gap-10 items-center">
           {{-- Car Image --}}
           <div class="md:w-[160px] md:h-[160px] overflow-hidden md:rounded-full border flex-shrink-0">
-            @if($garage->photo !== NULL)
-            <img class="w-full h-full object-cover" src="{{asset('storage/'.$garage->photo)}}" alt="gara$garage image">
-            @else
-            <img class="w-full h-full object-cover" src="{{asset('../../images/defaultimage.jpg')}}" alt="image description">
-            @endif
+            <img 
+              class="w-full h-full object-cover cursor-pointer" 
+              src="{{ $garage->photo ? asset('storage/'.$garage->photo) : asset('../../images/defaultimage.jpg') }}" 
+              alt="{{ $garage->photo ? 'Garage Image' : 'Default Image' }}" 
+              id="garageImage"
+            >
           </div>
 
           {{-- Car Details in Two Columns --}}
@@ -229,6 +230,21 @@
         {{-- table close --}}
       </div>
     </div>
+    {{-- Modal --}}
+    <div id="imageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-75 flex items-center justify-center">
+      <div class="relative max-w-4xl w-full mx-auto">
+        <img 
+          id="modalImage" 
+          src="{{ $garage->photo !== NULL ? asset('storage/'.$garage->photo) : asset('../../images/defaultimage.jpg') }}" 
+          alt="Expanded Garage Image" 
+          class="w-full max-h-[80vh] object-contain"
+        >
+        <button
+          class="absolute top-4 right-4 text-white text-2xl font-bold bg-black bg-opacity-50 rounded-full px-3 py-1 hover:bg-opacity-75"
+          onclick="toggleModalImage(false)"
+        >&times;</button>
+      </div>
+    </div>
     <!-- Confirmation Modal (Hidden by default) -->
     <div id="confirmationModal" class="fixed inset-0 bg-white bg-opacity-30 backdrop-blur-[2px] flex items-center justify-center hidden">
       <div class="bg-white rounded-lg p-6 w-96 shadow-lg ">
@@ -256,4 +272,26 @@
       @include('layouts.footer')
     </div>
   </div>
+  <script>
+    const modal = document.getElementById('imageModal');
+    const garageImage = document.getElementById('garageImage');
+  
+    if (garageImage) {
+      garageImage.addEventListener('click', () => {
+        toggleModalImage(true);
+      });
+    }
+  
+    modal.addEventListener('click', (event) => {
+      // Close the modal if the click is outside the image
+      if (event.target === modal) {
+        toggleModalImage(false);
+      }
+    });
+  
+    function toggleModalImage(show) {
+      modal.classList.toggle('hidden', !show);
+      modal.classList.toggle('flex', show);
+    }
+  </script>
   </x-app-layout>

@@ -153,42 +153,45 @@
             </button>
           </div>
         </div>
-        {{-- paipe image  --}}
-        {{-- <div class="flex justify-center my-8 overflow-hidden">
-          @if($papier->photo !== NULL)
-          <img class="w-50 h-96 object-cover" src="{{asset('storage/'.$papier->photo)}}" alt="image description">
-          @else
-          <img class="w-50 h-96 object-cover" src="../images/defaultimage.jpg" alt="image description">
-          @endif
-        </div> --}}
         <div class="flex flex-col justify-center gap-4 my-8 overflow-hidden">
           @if($papier->photo)
           @php
               $fileExtension = pathinfo($papier->photo, PATHINFO_EXTENSION);
           @endphp
-      
+        
           @if(in_array(strtolower($fileExtension), ['jpg', 'jpeg', 'png']))
-              <!-- Display image -->
-              <img class="w-50 h-96 object-cover" src="{{ asset('storage/' . $papier->photo) }}" alt="Document Image">
+              <!-- Display Image with Modal Trigger -->
+              <img 
+                class="w-50 h-96 object-cover cursor-pointer" 
+                src="{{ asset('storage/' . $papier->photo) }}" 
+                alt="Document Image" 
+                id="documentImage"
+              >
           @elseif(strtolower($fileExtension) === 'pdf')
               <!-- Display PDF -->
-                <iframe src="{{ asset('storage/' . $papier->photo) }}" 
-                  width="100%" 
-                  height="384px" 
-                  style="border: none;">
-                </iframe>
-                <p>
-                    <a href="{{ asset('storage/' . $papier->photo) }}" download>
-                      <x-primary-button>Télécharger le PDF</x-primary-button>
-                    </a>
-                </p>
+              <iframe 
+                src="{{ asset('storage/' . $papier->photo) }}" 
+                width="100%" 
+                height="384px" 
+                style="border: none;">
+              </iframe>
+              <p>
+                  <a href="{{ asset('storage/' . $papier->photo) }}" download>
+                    <x-primary-button>Télécharger le PDF</x-primary-button>
+                  </a>
+              </p>
           @else
               <p>Fichier non supporté.</p>
           @endif
           @else
-          <img class="w-50 h-96 object-cover" src="../images/defaultimage.jpg" alt="image description">
+          <img 
+            class="w-50 h-96 object-cover cursor-pointer" 
+            src="../images/defaultimage.jpg"
+            id="documentImage" 
+            alt="Image par défaut"
+          >
           @endif
-        </div>
+        </div>        
         {{-- paipe close  --}}
         {{-- paipe note  --}}
         <div class="grid grid-cols-1 md:grid-cols-2">
@@ -247,10 +250,47 @@
         </div>
       </div>
     </div>
+    {{-- Modal for Image --}}
+    <div id="imageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-75 flex items-center justify-center">
+      <div class="relative max-w-4xl w-full mx-auto">
+        <img 
+          id="modalImage" 
+          src="{{ $papier->photo ? asset('storage/' . $papier->photo) : '../images/defaultimage.jpg' }}" 
+          alt="Expanded Document Image" 
+          class="w-full max-h-[80vh] object-contain"
+        >
+        <button
+          class="absolute top-4 right-4 text-white text-2xl font-bold bg-black bg-opacity-50 rounded-full px-3 py-1 hover:bg-opacity-75 hover:text-red-500 transition-all duration-300 ease-in"
+          onclick="toggleModalImage(false)"
+        >&times;</button>
+      </div>
+    </div>
     {{-- contet close colse --}}
     {{-- footer --}}
     <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
       @include('layouts.footer')
     </div>
   </div>
+  <script>
+    const modal = document.getElementById('imageModal');
+    const documentImage = document.getElementById('documentImage');
+  
+    if (documentImage) {
+      documentImage.addEventListener('click', () => {
+        toggleModalImage(true);
+      });
+    }
+  
+    modal.addEventListener('click', (event) => {
+      // Close the modal only if the click is outside the image
+      if (event.target === modal) {
+        toggleModalImage(false);
+      }
+    });
+  
+    function toggleModalImage(show) {
+      modal.classList.toggle('hidden', !show);
+      modal.classList.toggle('flex', show);
+    }
+  </script>
 </x-app-layout>

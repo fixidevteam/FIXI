@@ -127,11 +127,12 @@
         @endif
         {{-- operation description close  --}}
         <div class="flex justify-center my-8 overflow-hidden">
-          @if($operation->photo !== NULL)
-          <img class="w-full h-96 object-cover" src="{{asset('storage/'.$operation->photo)}}" alt="image description">
-          @else
-          <img class="w-full h-96 object-cover" src="../../images/defaultimage.jpg" alt="image description">
-          @endif
+          <img
+            class="w-full h-96 object-cover cursor-pointer"
+            src="{{ $operation->photo !== NULL ? asset('storage/'.$operation->photo) : '../../images/defaultimage.jpg' }}"
+            alt="Image d'opération"
+            id="operationImage"
+          >
         </div>
         {{-- content of Détails  --}}
         <div class="grid grid-cols-1 md:grid-cols-2">
@@ -198,10 +199,45 @@
         </div>
       </div>
     </div>
+    {{-- Modal --}}
+    <div id="imageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-75 flex items-center justify-center">
+      <div class="relative max-w-4xl w-full mx-auto">
+        <img
+          id="modalImage"
+          src="{{ $operation->photo !== NULL ? asset('storage/'.$operation->photo) : '../../images/defaultimage.jpg' }}"
+          alt="Image agrandie"
+          class="w-full max-h-[80vh] object-contain"
+        >
+        <button
+          class="absolute top-4 right-4 text-white text-2xl font-bold bg-black bg-opacity-50 rounded-full px-3 py-1 hover:bg-opacity-75 hover:text-red-500 transition-all duration-300 ease-in"
+          onclick="toggleModalImage(false)"
+        >&times;</button>
+      </div>
+    </div>
   {{-- contet close colse --}}
   {{-- footer --}}
   <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
     @include('layouts.footer')
   </div>
   </div>
+  <script>
+    const modal = document.getElementById('imageModal');
+    const operationImage = document.getElementById('operationImage');
+  
+    operationImage.addEventListener('click', () => {
+      toggleModalImage(true);
+    });
+  
+    modal.addEventListener('click', (event) => {
+      // Close the modal only if the click is outside the image
+      if (event.target === modal) {
+        toggleModalImage(false);
+      }
+    });
+  
+    function toggleModalImage(show) {
+      modal.classList.toggle('hidden', !show);
+      modal.classList.toggle('flex', show);
+    }
+  </script>
 </x-mechanic-app-layout>

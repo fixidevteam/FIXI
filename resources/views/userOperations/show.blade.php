@@ -174,12 +174,14 @@
             </button>
           </div>
         </div>
+        {{-- Image Section --}}
         <div class="flex justify-center my-8 overflow-hidden">
-          @if($operation->photo !== NULL)
-          <img class="w-full h-96 object-cover" src="{{asset('storage/'.$operation->photo)}}" alt="image description">
-          @else
-          <img class="w-full h-96 object-cover" src="../images/defaultimage.jpg" alt="image description">
-          @endif
+          <img
+            class="w-full h-96 object-cover cursor-pointer"
+            src="{{ $operation->photo !== NULL ? asset('storage/'.$operation->photo) : '../images/defaultimage.jpg' }}"
+            alt="Image description"
+            id="operationImage"
+          >
         </div>
         {{-- content of details  --}}
         <div class="grid grid-cols-1 md:grid-cols-2">
@@ -242,6 +244,23 @@
       </div>
     </div>
     {{-- contet close colse --}}
+    {{-- Modal --}}
+    {{-- Modal --}}
+    <div id="imageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-75 flex items-center justify-center">
+      <div class="relative max-w-4xl w-full mx-auto">
+        <img
+          id="modalImage"
+          src="{{ $operation->photo !== NULL ? asset('storage/'.$operation->photo) : '../images/defaultimage.jpg' }}"
+          alt="Expanded Image"
+          class="w-full max-h-[80vh] object-contain"
+        >
+        <button
+          class="absolute top-4 right-4 text-white text-2xl font-bold bg-black bg-opacity-50 rounded-full px-3 py-1 hover:bg-opacity-75 hover:text-red-500 transition-all duration-300 ease-in"
+          onclick="toggleModalImage(false)"
+        >&times;</button>
+      </div>
+    </div>
+    {{-- Modal delete --}}
     <div id="confirmationModal" class="fixed inset-0 bg-white bg-opacity-30 backdrop-blur-[2px] flex items-center justify-center hidden">
       <div class="bg-white rounded-lg p-6 w-96 shadow-lg ">
         <h2 class="text-lg font-bold text-gray-800">Confirmation de suppression</h2>
@@ -267,4 +286,25 @@
       @include('layouts.footer')
     </div>
   </div>
+  <script>
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const operationImage = document.getElementById('operationImage');
+  
+    operationImage.addEventListener('click', () => {
+      toggleModalImage(true);
+    });
+  
+    modal.addEventListener('click', (event) => {
+      // Close the modal only if the click is outside the image
+      if (event.target === modal) {
+        toggleModalImage(false);
+      }
+    });
+  
+    function toggleModalImage(show) {
+      modal.classList.toggle('hidden', !show);
+      modal.classList.toggle('flex', show);
+    }
+  </script>
 </x-app-layout>
