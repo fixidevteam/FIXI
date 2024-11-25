@@ -86,7 +86,7 @@
                             <option value="">Select operation</option>
 
                         </select>
-                        <p class="mt-1 text-sm text-gray-500" id="operation_input_help">Si nous avons trouvé votre opération ici, veuillez l'ajouter dans le champ 'Description'. </p>
+                        <p class="mt-1 text-sm text-gray-500" id="operation_input_help">Si nous avons trouvé votre opération ici, veuillez l'ajouter dans le champ <label class="font-bold underline" for="description">'Description'</label>. </p>
                         <x-input-error :messages="$errors->get('nom')" class="mt-2" />
                     </div>
                     <div>

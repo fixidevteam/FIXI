@@ -41,7 +41,7 @@
                 <div class="my-5">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         @if($categories->isEmpty())
-                        <p class="p-4 text-gray-500 text-center">Aucune catégorie disponible.</p>
+                        <p class="p-4 text-gray-500 text-center">Aucun catégorie disponible.</p>
                         @else
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                             <caption class="sr-only">Liste des catégories</caption>
@@ -137,7 +137,7 @@
                     {{-- alert close --}}
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         @if($operations->isEmpty())
-                        <p class="p-4 text-gray-500 text-center">Aucune operation disponible.</p>
+                        <p class="p-4 text-gray-500 text-center">Aucun operation disponible.</p>
                         @else
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                             <caption class="sr-only">Liste des operations</caption>
@@ -198,7 +198,7 @@
                 <div class="my-5">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         @if($sousOperations->isEmpty())
-                        <p class="p-4 text-gray-500 text-center">Aucune sous operation disponible.</p>
+                        <p class="p-4 text-gray-500 text-center">Aucun sous operation disponible.</p>
                         @else
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                             <caption class="sr-only">Liste des sous operations</caption>

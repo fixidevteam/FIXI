@@ -97,7 +97,7 @@
                     {{-- alert close --}}
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         @if($mechanics->isEmpty())
-                        <p class="p-4 text-gray-500 text-center">Aucune garagiste disponible.</p>
+                        <p class="p-4 text-gray-500 text-center">Aucun garagiste disponible.</p>
                         @else
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                             <caption class="sr-only">Liste des garagiste</caption>

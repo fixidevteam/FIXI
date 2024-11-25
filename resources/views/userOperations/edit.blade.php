@@ -118,7 +118,7 @@
                             <option value="{{ $garage->id }}" @if(old('garage_id')==$garage->id || $operation->garage_id == $garage->id) selected @endif>{{ $garage->name }}</option>
                             @endforeach
                         </select>
-                        <p class="mt-1 text-sm text-gray-500" id="operation_input_help">Si nous avons trouvé le garage ici, veuillez l'ajouter dans le champ <label class="font-bold underline" for="description">'Description'</label>.</p>
+                        <p class="mt-1 text-sm text-gray-500" id="operation_input_help">Si le nom du garage n'apparaît pas dans la liste, veuillez l'ajouter manuellement dans le champ <label class="font-bold underline" for="description">'Description'</label>.</p>
 
                         <x-input-error :messages="$errors->get('garage_id')" class="mt-2" />
                     </div>
