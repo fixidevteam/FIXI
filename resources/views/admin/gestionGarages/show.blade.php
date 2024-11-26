@@ -135,7 +135,7 @@
           {{-- Car Image --}}
           <div class="md:w-[160px] md:h-[160px] overflow-hidden md:rounded-full border flex-shrink-0">
             <img 
-              class="w-full h-full object-cover cursor-pointer" 
+              class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-all duration-300 ease-in" 
               src="{{ $garage->photo ? asset('storage/'.$garage->photo) : asset('../../images/defaultimage.jpg') }}" 
               alt="{{ $garage->photo ? 'Garage Image' : 'Default Image' }}" 
               id="garageImage"
