@@ -128,7 +128,7 @@
         {{-- operation description close  --}}
         <div class="flex justify-center my-8 overflow-hidden">
           <img
-            class="w-full h-96 object-cover cursor-pointer"
+            class="w-full h-96 object-cover cursor-pointer hover:scale-105 transition-all duration-300 ease-in"
             src="{{ $operation->photo !== NULL ? asset('storage/'.$operation->photo) : '../../images/defaultimage.jpg' }}"
             alt="Image d'opération"
             id="operationImage"
