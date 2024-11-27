@@ -48,6 +48,11 @@ class PapierVoitureController extends Controller
 
         // Fetch the valid types from the database
         $validTypes = type_papierv::pluck('type')->toArray();
+        if ($request->hasFile('photo')) {
+            $imagePath = $request->file('photo')->store('user/papierVoiture', 'public');
+            $request->session()->put('temp_photo_path', $imagePath); // Save the path in the session    
+
+        }
         $data = $request->validate([
             'type' => ['required', 'string', Rule::in($validTypes)], // Ensure type is valid
             'note' => ['nullable', 'max:255'],
@@ -56,13 +61,16 @@ class PapierVoitureController extends Controller
             'date_fin' => ['required', 'date'],
 
         ]);
-
-        if ($request->hasFile('photo')) {
-            $imagePath = $request->file('photo')->store('user/papierVoiture', 'public');
+        // Use temp_photo_path if no new file is uploaded
+        if (!$request->hasFile('photo') && $request->input('temp_photo_path')) {
+            $data['photo'] = $request->input('temp_photo_path');
+        } elseif ($request->hasFile('photo')) {
             $data['photo'] = $imagePath;
         }
         $data['voiture_id'] = $voiture_id;
         VoiturePapier::create($data);
+
+        $request->session()->forget('temp_photo_path');
         session()->flash('success', 'Document ajouté');
         session()->flash('subtitle', 'Votre document a été ajouté avec succès à la liste.');
         return redirect()->route('voiture.show', $voiture_id);
@@ -86,7 +94,7 @@ class PapierVoitureController extends Controller
         $daysRemaining = $today->diffInDays($dateFin, false); // false makes it negative if date_fin is in the past
         // Determine if it's close to expiring, e.g., less than 7 days left
         $isCloseToExpiry = $daysRemaining <= 7 && $daysRemaining > 0;
-        return view('userPaiperVoiture.show', compact('papier', 'daysRemaining', 'isCloseToExpiry','fileExtension'));
+        return view('userPaiperVoiture.show', compact('papier', 'daysRemaining', 'isCloseToExpiry', 'fileExtension'));
     }
 
     /**

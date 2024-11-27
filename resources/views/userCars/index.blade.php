@@ -63,36 +63,33 @@
                     @foreach (['success', 'error'] as $type)
                     @if (session($type))
                     <div class="fixed top-20 right-4 mb-5 flex justify-end z-10"
-                        x-data="{ show: true }" 
-                        x-show="show" 
-                        x-transition:leave="transition ease-in duration-1000" 
-                        x-transition:leave-start="opacity-100" 
-                        x-transition:leave-end="opacity-0" 
-                        x-init="setTimeout(() => show = false, 3000)" 
-                        >
-                            <div role="alert" class="rounded-xl border border-gray-100 bg-white p-4 shadow-md">
-                                <div class="flex items-start gap-4">
+                        x-data="{ show: true }"
+                        x-show="show"
+                        x-transition:leave="transition ease-in duration-1000"
+                        x-transition:leave-start="opacity-100"
+                        x-transition:leave-end="opacity-0"
+                        x-init="setTimeout(() => show = false, 3000)">
+                        <div role="alert" class="rounded-xl border border-gray-100 bg-white p-4 shadow-md">
+                            <div class="flex items-start gap-4">
                                 <span class="{{ $type === 'success' ? 'text-green-600' : 'text-red-600' }}">
                                     @if ($type === 'success')
                                     <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="size-6"
-                                    >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                                    />
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="1.5"
+                                        stroke="currentColor"
+                                        class="size-6">
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                     @else
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12 6.25C12.4142 6.25 12.75 6.58579 12.75 7V13C12.75 13.4142 12.4142 13.75 12 13.75C11.5858 13.75 11.25 13.4142 11.25 13V7C11.25 6.58579 11.5858 6.25 12 6.25Z" fill="currentColor"/>
-                                        <path d="M12 17C12.5523 17 13 16.5523 13 16C13 15.4477 12.5523 15 12 15C11.4477 15 11 15.4477 11 16C11 16.5523 11.4477 17 12 17Z" fill="currentColor"/>
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.25 12C1.25 6.06294 6.06294 1.25 12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75C6.06294 22.75 1.25 17.9371 1.25 12ZM12 2.75C6.89137 2.75 2.75 6.89137 2.75 12C2.75 17.1086 6.89137 21.25 12 21.25C17.1086 21.25 21.25 17.1086 21.25 12C21.25 6.89137 17.1086 2.75 12 2.75Z" fill="currentColor"/>
+                                        <path d="M12 6.25C12.4142 6.25 12.75 6.58579 12.75 7V13C12.75 13.4142 12.4142 13.75 12 13.75C11.5858 13.75 11.25 13.4142 11.25 13V7C11.25 6.58579 11.5858 6.25 12 6.25Z" fill="currentColor" />
+                                        <path d="M12 17C12.5523 17 13 16.5523 13 16C13 15.4477 12.5523 15 12 15C11.4477 15 11 15.4477 11 16C11 16.5523 11.4477 17 12 17Z" fill="currentColor" />
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.25 12C1.25 6.06294 6.06294 1.25 12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75C6.06294 22.75 1.25 17.9371 1.25 12ZM12 2.75C6.89137 2.75 2.75 6.89137 2.75 12C2.75 17.1086 6.89137 21.25 12 21.25C17.1086 21.25 21.25 17.1086 21.25 12C21.25 6.89137 17.1086 2.75 12 2.75Z" fill="currentColor" />
                                     </svg>
                                     @endif
                                 </span>
@@ -100,9 +97,9 @@
                                     <strong class="block font-medium text-gray-900"> {{ session($type) }} </strong>
                                     <p class="mt-1 text-sm text-gray-700">{{ session('subtitle') }}</p>
                                 </div>
-                                </div>
                             </div>
                         </div>
+                    </div>
                     @endif
                     @endforeach
                     {{-- alert close --}}
@@ -139,7 +136,10 @@
                                 @foreach($voitures as $voiture)
                                 <tr class="bg-white border-b">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                        <span>{{ explode('-', $voiture->numero_immatriculation)[0] }}</span>-<span dir="rtl">{{ explode('-', $voiture->numero_immatriculation)[1] }}</span>-<span>{{ explode('-', $voiture->numero_immatriculation)[2] }}</span>
+                                        <a href="{{ route('voiture.show',$voiture->id) }}">
+
+                                            <span>{{ explode('-', $voiture->numero_immatriculation)[0] }}</span>-<span dir="rtl">{{ explode('-', $voiture->numero_immatriculation)[1] }}</span>-<span>{{ explode('-', $voiture->numero_immatriculation)[2] }}</span>
+                                        </a>
                                     </th>
                                     <td class="px-6 py-4">
                                         {{$voiture->marque}}
@@ -151,11 +151,14 @@
                                         {{$voiture->date_de_première_mise_en_circulation ?? 'N/A'}}
                                     </td>
                                     <td class="px-6 py-4">
-                                        @if($voiture->photo !== NULL)
-                                        <img class="rounded-full w-8 h-8 object-cover" src="{{asset('storage/'.$voiture->photo)}}" alt="image description">
-                                        @else
-                                        <img class="rounded-full w-8 h-8 object-cover" src="images/defaultimage.jpg" alt="image description">
-                                        @endif
+                                        <a href="{{ route('voiture.show',$voiture->id) }}">
+
+                                            @if($voiture->photo !== NULL)
+                                            <img class="rounded-full w-8 h-8 object-cover" src="{{asset('storage/'.$voiture->photo)}}" alt="image description">
+                                            @else
+                                            <img class="rounded-full w-8 h-8 object-cover" src="images/defaultimage.jpg" alt="image description">
+                                            @endif
+                                        </a>
                                     </td>
                                     <td class="px-6 py-4">
                                         <a href="{{ route('voiture.show',$voiture->id) }}" class="font-medium capitalize text-blue-600 dark:text-blue-500 hover:underline">Détails</a>

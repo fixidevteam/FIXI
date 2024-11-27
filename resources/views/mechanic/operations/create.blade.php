@@ -116,6 +116,10 @@
                     <div>
                         <x-input-label for="file_input" :value="__('Photo')" />
                         <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" accept="image/*" />
+                        <!-- Hidden Input to Preserve Old Value -->
+                        @if(session('temp_photo_path'))
+                        <input type="hidden" name="temp_photo_path" value="{{ session('temp_photo_path') }}">
+                        @endif
                         <x-input-error :messages="$errors->get('photo')" class="mt-2" />
                     </div>
                     <div class="flex items-center justify-end mt-4">

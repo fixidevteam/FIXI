@@ -52,6 +52,11 @@ class PapierPeronnelController extends Controller
 
         // Fetch the valid types from the database
         $validTypes = type_papierp::pluck('type')->toArray();
+        if ($request->hasFile('photo')) {
+            $imagePath = $request->file('photo')->store('user/papierperso', 'public');
+            $request->session()->put('temp_photo_path', $imagePath); // Save the path in the session    
+
+        }
         $data = $request->validate([
             'type' => ['required', 'string', Rule::in($validTypes)], // Ensure type is valid
             'note' => ['nullable', 'max:255'],
@@ -59,12 +64,16 @@ class PapierPeronnelController extends Controller
             'date_debut' => ['required', 'date'],
             'date_fin' => ['required', 'date'],
         ]);
-        if ($request->hasFile('photo')) {
-            $imagePath = $request->file('photo')->store('user/papierperso', 'public');
+        // Use temp_photo_path if no new file is uploaded
+        if (!$request->hasFile('photo') && $request->input('temp_photo_path')) {
+            $data['photo'] = $request->input('temp_photo_path');
+        } elseif ($request->hasFile('photo')) {
             $data['photo'] = $imagePath;
         }
         $data['user_id'] = $user_id;
         UserPapier::create($data);
+
+        $request->session()->forget('temp_photo_path');
         session()->flash('success', 'Document ajouté');
         session()->flash('subtitle', 'Votre document a été ajouté avec succès à la liste.');
         return redirect()->route('paiperPersonnel.index');

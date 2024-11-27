@@ -61,17 +61,26 @@ class MechanicOperatioController extends Controller
     {
         $garage = Auth::user()->garage_id;
         $voiture = Session::get('voiture_id');
+        if ($request->hasFile('photo')) {
+            $imagePath = $request->file('photo')->store('user/operations', 'public');
+            $request->session()->put('temp_photo_path', $imagePath); // Save the path in the session    
+        }
+
         $data = $request->validate([
             'categorie' => [
                 'required',
             ],
-            'nom' => ['required'],
+            'nom' => ['nullable'],
             'description' => ['max:255'],
             'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
             'date_operation' => ['required', 'date'],
+        
         ]);
-        if ($request->hasFile('photo')) {
-            $imagePath = $request->file('photo')->store('user/operations', 'public');
+
+        // Use temp_photo_path if no new file is uploaded
+        if (!$request->hasFile('photo') && $request->input('temp_photo_path')) {
+            $data['photo'] = $request->input('temp_photo_path');
+        } elseif ($request->hasFile('photo')) {
             $data['photo'] = $imagePath;
         }
 
@@ -92,7 +101,7 @@ class MechanicOperatioController extends Controller
                 );
             }
         }
-
+        $request->session()->forget('temp_photo_path');
         // Flash message to the session
         session()->flash('success', 'Operation ajoutée');
         session()->flash('subtitle', 'Votre Operation a été ajoutée avec succès à la liste.');

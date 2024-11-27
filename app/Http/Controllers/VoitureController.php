@@ -44,7 +44,11 @@ class VoitureController extends Controller
             session()->flash('subtitle', 'Pour ajouter davantage, merci de nous contacter.');
             return redirect()->route('voiture.index');
         }
+        if ($request->hasFile('photo')) {
+            $imagePath = $request->file('photo')->store('user/voitures', 'public');
+            $request->session()->put('temp_photo_path', $imagePath); // Save the path in the session    
 
+        }
         $data = $request->validate([
             'part1' => ['required', 'digits_between:1,6'], // 1 to 6 digits
             'part2' => ['required', 'string', 'size:1'], // Single Arabic letter
@@ -56,6 +60,13 @@ class VoitureController extends Controller
             'date_achat' => ['nullable', 'date'],
             'date_de_dédouanement' => ['nullable', 'date'],
         ]);
+
+        // Use temp_photo_path if no new file is uploaded
+        if (!$request->hasFile('photo') && $request->input('temp_photo_path')) {
+            $data['photo'] = $request->input('temp_photo_path');
+        } elseif ($request->hasFile('photo')) {
+            $data['photo'] = $imagePath;
+        }
         // Combine the parts into the `numero_immatriculation`
         $numeroImmatriculation = $data['part1'] . '-' . $data['part2'] . '-' . $data['part3'];
         $request->validate([
@@ -64,16 +75,15 @@ class VoitureController extends Controller
                 Rule::unique('voitures', 'numero_immatriculation')->whereNull('deleted_at'), // Check uniqueness
             ],
         ]);
-        if ($request->hasFile('photo')) {
-            $imagePath = $request->file('photo')->store('user/voitures', 'public');
-            $data['photo'] = $imagePath;
-        }
+
         $data['user_id'] = $user_id;
         $data['numero_immatriculation'] = $numeroImmatriculation;
         // Remove temporary fields to avoid unnecessary database columns
         unset($data['part1'], $data['part2'], $data['part3']);
         Voiture::create($data);
+        
         // Flash message to the session
+        $request->session()->forget('temp_photo_path');
         session()->flash('success', 'Voiture ajoutée');
         session()->flash('subtitle', 'Votre voiture a été ajoutée avec succès à la liste.');
         return redirect()->route('voiture.index');
