@@ -73,7 +73,7 @@
         <div class="flex flex-col md:flex-row gap-10 items-center">
           {{-- Car Image --}}
           <div class="md:w-[160px] md:h-[160px] overflow-hidden md:rounded-full border flex-shrink-0">
-          @if($voiture->photo !== NULL)
+            @if($voiture->photo !== NULL)
             <img class="w-full h-full object-cover" src="{{asset('storage/'.$voiture->photo)}}" alt="voiture image">
             @else
             <img class="w-full h-full object-cover" src="../../images/defaultimage.jpg" alt="image description">
@@ -97,7 +97,7 @@
                 <p class="capitalize text-sm font-medium text-gray-900">Marque</p>
                 <p class="text-sm text-gray-500">
                   {{$voiture->marque}}
-                  
+
                 </p>
               </div>
 
@@ -105,8 +105,8 @@
               <div>
                 <p class="capitalize text-sm font-medium text-gray-900">Modèle</p>
                 <p class="text-sm text-gray-500">
-                {{$voiture->modele}} 
-                  
+                  {{$voiture->modele}}
+
                 </p>
               </div>
             </div>
@@ -116,8 +116,8 @@
               <div>
                 <p class="first-letter:capitalize text-sm font-medium text-gray-900">Date de première mise en circulation</p>
                 <p class="text-sm text-gray-500">
-                {{$voiture->date_de_première_mise_en_circulation ?? 'N/A' }} 
-                  
+                  {{$voiture->date_de_première_mise_en_circulation ?? 'N/A' }}
+
                 </p>
               </div>
 
@@ -126,7 +126,7 @@
                 <p class="first-letter:capitalize text-sm font-medium text-gray-900">Date d'achat</p>
                 <p class="text-sm text-gray-500">
                   {{$voiture->date_achat ?? 'N/A' }}
-                  
+
                 </p>
               </div>
 
@@ -134,8 +134,8 @@
               <div>
                 <p class="first-letter:capitalize text-sm font-medium text-gray-900">Date de dédouanement</p>
                 <p class="text-sm text-gray-500">
-               {{$voiture->date_de_dédouanement ?? 'N/A' }} 
-                  
+                  {{$voiture->date_de_dédouanement ?? 'N/A' }}
+
                 </p>
               </div>
             </div>
@@ -165,9 +165,9 @@
         <div class="my-5">
 
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            @if($voiture->operations->isEmpty()) 
-             <p class="p-4 text-gray-500 text-center">Aucun opération disponible.</p> 
-            @else 
+            @if($voiture->operations->isEmpty())
+            <p class="p-4 text-gray-500 text-center">Aucun opération disponible.</p>
+            @else
             <table class="w-full text-sm text-left rtl:text-right text-gray-500">
               <caption class="sr-only">Liste des opérations</caption>
               <thead class="text-xs text-gray-700 uppercase bg-gray-50">
@@ -179,40 +179,43 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach($operations as $operation) 
+                @foreach($operations as $operation)
                 <tr class="bg-white border-b">
                   {{-- Categorie --}}
                   <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                  {{$nom_categories->where('id', $operation->categorie)->first()->nom_categorie}}
-                
+                    <a href="{{route('mechanic.operations.show',$operation->id)}}">
+
+                      {{$nom_categories->where('id', $operation->categorie)->first()->nom_categorie}}
+
+                    </a>
                   </th>
 
                   {{-- nom --}}
                   <td class="px-6 py-4">
-                  {{$nom_operations->where('id', $operation->nom)->first()->nom_operation ?? 'N/A'}}
+                    {{$nom_operations->where('id', $operation->nom)->first()->nom_operation ?? 'N/A'}}
                   </td>
                   {{-- date doperation --}}
                   <td class="px-6 py-4">
-                 {{ $operation->date_operation}}
+                    {{ $operation->date_operation}}
                   </td>
                   {{-- Action --}}
                   <td class="px-6 py-4">
                     <a href="{{route('mechanic.operations.show',$operation->id)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Détails</a>
                   </td>
                 </tr>
-                 @endforeach 
+                @endforeach
               </tbody>
             </table>
-              @endif 
+            @endif
           </div>
         </div>
         {{-- table close --}}
       </div>
     </div>
-  {{-- contet close colse --}}
-  {{-- footer --}}
-  <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
-    @include('layouts.footer')
-  </div>
+    {{-- contet close colse --}}
+    {{-- footer --}}
+    <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
+      @include('layouts.footer')
+    </div>
   </div>
 </x-mechanic-app-layout>
