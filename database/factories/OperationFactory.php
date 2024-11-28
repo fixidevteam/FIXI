@@ -15,9 +15,9 @@ class OperationFactory extends Factory
         return [
             'categorie' => $this->faker->word,
             'nom' => $this->faker->word,
-            'description' => $this->faker->sentence(),
-            'date_operation' => $this->faker->date(),
-            'voiture_id' => Voiture::factory(), // Assuming Voiture factory exists
+            'description' => $this->faker->sentence,
+            'date_operation' => $this->faker->date,
+            'voiture_id' => Voiture::factory(),
         ];
     }
 }

@@ -16,7 +16,7 @@ class AdminTest extends TestCase
     // Test if an admin user can access admin functionalities
     public function test_admin_can_access_admin_functionalities()
     {
-        $admin = new Admin();
+        $admin = new Admin(['garage_id'=>1]);
         $admin->name = 'Admin User';
         $admin->email = 'admin@gmail.com';
         $admin->password = bcrypt('admin123');
@@ -31,22 +31,22 @@ class AdminTest extends TestCase
     // Test if an user can access admin functionalities
     public function test_user_can_access_admin_functionalities()
     {
-        $user = new User();
-        $user->name = 'User User';
-        $user->email = 'user@gmail.com';
-        $user->password = bcrypt('user123');
-        $user->save();
+        $admin = new Admin();
+        $admin->name = 'admin$admin admin$admin';
+        $admin->email = 'adminadmin@gmail.com';
+        $admin->password = bcrypt('admin$admin123');
+        $admin->save();
 
-        $this->actingAs($user, 'admin'); // Use 'admin' guard
+        $this->actingAs($admin, 'admin'); // Use 'admin' guard
 
         $response = $this->get('/admin/dashboard');
 
         $response->assertStatus(200); // Assuming 200 is the status code for success
     }
-    // Test if an mechanic user can access admin functionalities
+    // Test if an mechanic admin$admin can access admin functionalities
     public function test_mechanic_can_access_admin_functionalities()
     {
-        $mechanic = new Mechanic();
+        $mechanic = new Mechanic(['garage_id'=>1]);
         $mechanic->name = 'Mechanic User';
         $mechanic->email = 'mechanic@gmail.com';
         $mechanic->password = bcrypt('mechanic123');
