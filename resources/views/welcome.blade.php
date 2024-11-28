@@ -16,7 +16,7 @@
                 <div class="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
                     <div class="mx-auto max-w-lg text-center">
                         <a href="/">
-                            <img class="mx-auto h-16 w-auto" src="../images/fixi.png" alt="Fixi">
+                            <img class="mx-auto h-16 w-auto" src="/images/fixi.png" alt="Fixi">
                         </a>
                         <p class="mt-4 text-gray-500">
                             Bienvenue sur la plateforme Fixi ! Veuillez choisir votre espace pour commencer.
@@ -69,7 +69,7 @@
                     <div class="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
                         <img
                             alt="Fixi Welcome Image"
-                            src="../images/fixiRepair.jpg"
+                            src="/images/fixiRepair.jpg"
                             class="absolute inset-0 h-full w-full object-cover"
                         />
                     </div>
