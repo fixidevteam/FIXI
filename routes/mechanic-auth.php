@@ -9,11 +9,11 @@ use App\Http\Controllers\Mechanic\MechanicVoitureController;
 use App\Http\Controllers\Mechanic\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('guest:mechanic')->prefix('mechanic')->name('mechanic.')->group(function () {
-    Route::get('register', [RegisteredUserController::class, 'create'])
-        ->name('register');
+Route::middleware('guest:mechanic')->prefix('fixi-pro')->name('mechanic.')->group(function () {
+    // Route::get('register', [RegisteredUserController::class, 'create'])
+        // ->name('register');
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    // Route::post('register', [RegisteredUserController::class, 'store']);
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
@@ -21,7 +21,7 @@ Route::middleware('guest:mechanic')->prefix('mechanic')->name('mechanic.')->grou
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 });
 
-Route::middleware(['auth:mechanic', 'checkMechanicStatus'])->prefix('mechanic')->name('mechanic.')->group(function () {
+Route::middleware(['auth:mechanic', 'checkMechanicStatus'])->prefix('fixi-pro')->name('mechanic.')->group(function () {
     Route::get('/dashboard', function () {
         return view('mechanic.dashboard');
     })->middleware(['auth', 'verified'])->name('dashboard');

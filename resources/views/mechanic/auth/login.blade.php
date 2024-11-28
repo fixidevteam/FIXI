@@ -62,10 +62,10 @@
             </x-primary-button>
         </div>
     </form>
-    <p class="mt-10 text-center text-sm text-gray-500">
+    {{-- <p class="mt-10 text-center text-sm text-gray-500">
         Vous n'avez pas de compte?
         <a href="{{ route('mechanic.register') }}" class="font-semibold leading-6 text-blue-600 hover:text-blue-500">{{ __('Inscrivez-vous') }}</a>
-    </p>
+    </p> --}}
 
 
     <script>

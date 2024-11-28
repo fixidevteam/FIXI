@@ -160,14 +160,14 @@
                                             <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('storage/' . $papier->photo) }}" alt="image description">
                                             @elseif(strtolower($fileExtension) === 'pdf')
                                             <!-- Display the default image for PDFs -->
-                                            <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('images/file.png') }}" alt="default image">
+                                            <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('/images/file.png') }}" alt="default image">
                                             @else
                                             <!-- Display the default image for unsupported formats -->
-                                            <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('images/defaultimage.jpg') }}" alt="default image">
+                                            <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('/images/defaultimage.jpg') }}" alt="default image">
                                             @endif
                                             @else
                                             <!-- Display the default image if no photo is provided -->
-                                            <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('images/defaultimage.jpg') }}" alt="default image">
+                                            <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('/images/defaultimage.jpg') }}" alt="default image">
                                             @endif
                                         </a>
                                     </td>

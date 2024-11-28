@@ -76,7 +76,7 @@
             @if($voiture->photo !== NULL)
             <img class="w-full h-full object-cover" src="{{asset('storage/'.$voiture->photo)}}" alt="voiture image">
             @else
-            <img class="w-full h-full object-cover" src="../../images/defaultimage.jpg" alt="image description">
+            <img class="w-full h-full object-cover" src="/images/defaultimage.jpg" alt="image description">
             @endif
           </div>
 

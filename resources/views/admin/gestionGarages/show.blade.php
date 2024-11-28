@@ -136,7 +136,7 @@
           <div class="md:w-[160px] md:h-[160px] overflow-hidden md:rounded-full border flex-shrink-0">
             <img 
               class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-all duration-300 ease-in" 
-              src="{{ $garage->photo ? asset('storage/'.$garage->photo) : asset('../../images/defaultimage.jpg') }}" 
+              src="{{ $garage->photo ? asset('storage/'.$garage->photo) : asset('/images/defaultimage.jpg') }}" 
               alt="{{ $garage->photo ? 'Garage Image' : 'Default Image' }}" 
               id="garageImage"
             >
@@ -235,7 +235,7 @@
       <div class="relative max-w-4xl w-full mx-auto">
         <img 
           id="modalImage" 
-          src="{{ $garage->photo !== NULL ? asset('storage/'.$garage->photo) : asset('../../images/defaultimage.jpg') }}" 
+          src="{{ $garage->photo !== NULL ? asset('storage/'.$garage->photo) : asset('/images/defaultimage.jpg') }}" 
           alt="Expanded Garage Image" 
           class="w-full max-h-[80vh] object-contain"
         >

@@ -91,7 +91,7 @@
             @if($voiture->photo !== NULL)
             <img class="w-full h-full object-cover" src="{{asset('storage/'.$voiture->photo)}}" alt="voiture image">
             @else
-            <img class="w-full h-full object-cover" src="../images/defaultimage.jpg" alt="image description">
+            <img class="w-full h-full object-cover" src="/images/defaultimage.jpg" alt="image description">
             @endif
           </div>
 
@@ -264,14 +264,14 @@
                       <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('storage/' . $papier->photo) }}" alt="image description">
                       @elseif(strtolower($fileExtension) === 'pdf')
                       <!-- Display the default image for PDFs -->
-                      <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('images/file.png') }}" alt="default image">
+                      <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('/images/file.png') }}" alt="default image">
                       @else
                       <!-- Display the default image for unsupported formats -->
-                      <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('images/defaultimage.jpg') }}" alt="default image">
+                      <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('/images/defaultimage.jpg') }}" alt="default image">
                       @endif
                       @else
                       <!-- Display the default image if no photo is provided -->
-                      <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('images/defaultimage.jpg') }}" alt="default image">
+                      <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('/images/defaultimage.jpg') }}" alt="default image">
                       @endif
                     </a>
                   </td>
@@ -398,7 +398,7 @@
                     @if($operation->photo !== NULL)
                     <img class="rounded-full w-8 h-8 object-cover" src="{{asset('storage/'.$operation->photo)}}" alt="image description">
                     @else
-                    <img class="rounded-full w-8 h-8 object-cover" src="../images/defaultimage.jpg" alt="image description">
+                    <img class="rounded-full w-8 h-8 object-cover" src="/images/defaultimage.jpg" alt="image description">
                     @endif
                   </a>
                 </td>
