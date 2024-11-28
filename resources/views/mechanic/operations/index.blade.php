@@ -99,7 +99,7 @@
                                             @if($operation->voiture->photo)
                                                 <img class="w-8 h-8 object-cover rounded-full" src="{{ asset('storage/' . $operation->voiture->photo) }}" alt="Voiture">
                                             @else
-                                                <img class="w-8 h-8 object-cover rounded-full" src="{{ asset('images/defaultimage.jpg') }}" alt="Default">
+                                                <img class="w-8 h-8 object-cover rounded-full" src="{{ asset('/images/defaultimage.jpg') }}" alt="Default">
                                             @endif
                                             </a>
                                         </td>

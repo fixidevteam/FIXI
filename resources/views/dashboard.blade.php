@@ -97,9 +97,9 @@
                     <div class="flex items-center space-x-4">
                       <div class="flex-shrink-0">
                         @if($voiture->photo !== NULL)
-                        <img class="rounded-full w-8 h-8" src="{{asset('storage/'.$voiture->photo)}}" alt="image description">
+                        <img class="rounded-full w-8 h-8 object-cover" src="{{asset('storage/'.$voiture->photo)}}" alt="image description">
                         @else
-                        <img class="rounded-full w-8 h-8" src="images/defaultimage.jpg" alt="image description">
+                        <img class="rounded-full w-8 h-8 object-cover" src="/images/defaultimage.jpg" alt="image description">
                         @endif
                       </div>
                       <div class="flex-1 min-w-0">
@@ -148,14 +148,14 @@
                         <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('storage/' . $papier->photo) }}" alt="image description">
                     @elseif(strtolower($fileExtension) === 'pdf')
                         <!-- Display the default image for PDFs -->
-                        <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('images/file.png') }}" alt="default image">
+                        <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('/images/file.png') }}" alt="default image">
                     @else
                         <!-- Display the default image for unsupported formats -->
-                        <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('images/defaultimage.jpg') }}" alt="default image">
+                        <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('/images/defaultimage.jpg') }}" alt="default image">
                     @endif
                     @else
                         <!-- Display the default image if no photo is provided -->
-                        <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('images/defaultimage.jpg') }}" alt="default image">
+                        <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('/images/defaultimage.jpg') }}" alt="default image">
                     @endif
                       </div>
                       <div class="flex-1 min-w-0">

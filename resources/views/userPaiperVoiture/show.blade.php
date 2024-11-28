@@ -130,7 +130,7 @@
           @else
           <img 
             class="w-50 h-96 object-cover cursor-pointer hover:scale-105 transition-all duration-300 ease-in" 
-            src="../images/defaultimage.jpg" 
+            src="/images/defaultimage.jpg" 
             id="documentImage"
             alt="Image par défaut"
           >
@@ -200,7 +200,7 @@
       <div class="relative max-w-4xl w-full mx-auto">
         <img 
           id="modalImage" 
-          src="{{ $papier->photo ? asset('storage/' . $papier->photo) : '../images/defaultimage.jpg' }}" 
+          src="{{ $papier->photo ? asset('storage/' . $papier->photo) : '/images/defaultimage.jpg' }}" 
           alt="Expanded Document Image" 
           class="w-full max-h-[80vh] object-contain"
         >
