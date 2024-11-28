@@ -173,7 +173,8 @@
                 src="{{ asset('storage/' . $papier->photo) }}" 
                 width="100%" 
                 height="384px" 
-                style="border: none;">
+                title="{{$papier->type}}"
+                style="border: none;">                
               </iframe>
               <p>
                   <a href="{{ asset('storage/' . $papier->photo) }}" download>

@@ -1,6 +1,6 @@
-projectKey=last-fixi-scan
+projectKey=V1_FIXI
 serverUrl=http://localhost:9000
 serverVersion=10.3.0.82913
-dashboardUrl=http://localhost:9000/dashboard?id=last-fixi-scan
-ceTaskId=AZM5-3OxgmUj2h0eMnKk
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AZM5-3OxgmUj2h0eMnKk
+dashboardUrl=http://localhost:9000/dashboard?id=V1_FIXI
+ceTaskId=AZNycSar6DlvWPLSvUdQ
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AZNycSar6DlvWPLSvUdQ
