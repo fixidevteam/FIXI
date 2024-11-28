@@ -23,7 +23,7 @@
                         </p>
                     </div>
                     {{-- platform space --}}
-                    <div class="mx-auto mb-0 mt-8 max-w-md space-y-4">
+                    <div class="mx-auto mb-0 mt-8 max-w-md space-y-6">
                         @if (Route::has('login'))
                             <div>
                                 {{-- user auth --}}
@@ -59,24 +59,6 @@
                                         class="my-5 w-full inline-block first-letter:capitalize border border-transparent rounded-[20px] bg-red-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
                                     >
                                         Espace garage
-                                        </button>
-                                    </a>
-                                @endauth
-                                {{-- admin auth --}}
-                                @auth('admin')
-                                    <a href="{{ url('/admin/dashboard') }}">
-                                        <button
-                                        class="w-full inline-block first-letter:capitalize border border-transparent rounded-[20px] bg-red-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
-                                    >
-                                        tableau de bord de l'administrateur
-                                        </button>
-                                    </a>
-                                @else
-                                    <a href="{{ route('admin.login') }}">
-                                        <button
-                                        class="w-full inline-block first-letter:capitalize border border-transparent rounded-[20px] bg-red-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
-                                    >
-                                        Espace administrateur
                                         </button>
                                     </a>
                                 @endauth
