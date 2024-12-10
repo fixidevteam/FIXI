@@ -141,6 +141,7 @@ return [
             'file' => 'Le fichier doit être valide.',
             'mimes' => 'Le fichier doit être au format JPG, PNG ou PDF.',
             'max' => 'La taille du fichier ne peut pas dépasser 2 Mo.',
+            'upload_failed' => 'La photo n\'a pas pu être téléchargée.',
         ],
     ],
 

@@ -24,7 +24,16 @@ class OperationController extends Controller
      */
     public function index()
     {
-        abort(403);
+        // Fetch the authenticated user's operations & Display 10 operations per page
+        $operations = Operation::whereHas('voiture', function ($query) {
+            $query->where('user_id', Auth::id());
+        })->paginate(10);
+
+        // Get categories,operations and garages for the view
+        $operationsAll = nom_operation::all();
+        $categories = nom_categorie::all();
+        $garages = garage::all();
+        return view('userOperations.index', compact('operations', 'operationsAll', 'categories', 'garages'));
     }
 
     /**
@@ -91,16 +100,19 @@ class OperationController extends Controller
      */
     public function show(string $id)
     {
-        $idvoiture = Session::get('voiture_id');
-        $voiture = Voiture::find($idvoiture);
         $operation = Operation::find($id);
-        $operations = nom_operation::all();
-        $categories = nom_categorie::all();
-        $sousOperation = nom_sous_operation::all();
-        if (!$operation || $operation->voiture_id != Session::get('voiture_id')) {
+        if ($operation) {
+            $voiture = $operation->voiture;
+            $operations = nom_operation::all();
+            $categories = nom_categorie::all();
+            $sousOperation = nom_sous_operation::all();
+            if (!$operation || $operation->voiture_id != $operation->voiture->id) {
+                abort(403);
+            }
+            return view('userOperations.show', compact('voiture', 'operation', 'operations', 'categories', 'sousOperation'));
+        } else {
             abort(403);
         }
-        return view('userOperations.show', compact('voiture', 'operation', 'operations', 'categories', 'sousOperation'));
     }
 
     /**
