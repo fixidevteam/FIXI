@@ -10,6 +10,7 @@ use App\Models\Operation;
 use App\Models\SousOperation;
 use App\Models\Voiture;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
@@ -23,7 +24,17 @@ class OperationController extends Controller
      */
     public function index()
     {
-        abort(403);
+        // Fetch the authenticated user's operations
+        $operations = Operation::whereHas('voiture', function ($query) {
+            $query->where('user_id', Auth::id());
+        })->get();
+
+        // Get categories,operations and garages for the view
+        $operationsAll = nom_operation::all();
+        $categories = nom_categorie::all();
+        $garages = garage::all();
+        // dd($operations);
+        return view('userOperations.index', compact('operations','operationsAll', 'categories', 'garages'));
     }
 
     /**
