@@ -77,6 +77,9 @@
                                         opération
                                     </th>
                                     <th scope="col" class="px-6 py-3">
+                                        garage
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
                                         Photo
                                     </th>
                                     <th scope="col" class="px-6 py-3">
@@ -104,6 +107,11 @@
                                     <td class="px-6 py-4">
                                         {{
                                             $operationsAll->where('id', $operation->nom)->first()->nom_operation ?? 'N/A';
+                                        }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{
+                                            $garages->where('id', $operation->garage_id)->first()->name ?? 'N/A';
                                         }}
                                     </td>
                                     <td class="px-6 py-4">

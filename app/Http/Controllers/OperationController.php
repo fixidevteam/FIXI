@@ -29,12 +29,18 @@ class OperationController extends Controller
             $query->where('user_id', Auth::id());
         })->get();
 
+        // Set the session voiture_id (use the first voiture associated with the user)
+        $firstVoiture = Voiture::where('user_id', Auth::id())->first();
+        if ($firstVoiture) {
+            Session::put('voiture_id', $firstVoiture->id);
+        }
+
         // Get categories,operations and garages for the view
         $operationsAll = nom_operation::all();
         $categories = nom_categorie::all();
         $garages = garage::all();
         // dd($operations);
-        return view('userOperations.index', compact('operations','operationsAll', 'categories', 'garages'));
+        return view('userOperations.index', compact('operations', 'operationsAll', 'categories', 'garages'));
     }
 
     /**
