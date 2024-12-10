@@ -104,7 +104,15 @@
                     </div>
                     <div>
                         <x-input-label for="marque" :value="__('Marque')" />
-                        <x-text-input id="marque" class="block mt-1 w-full" type="text" name="marque" :value="old('marque')" autofocus autocomplete="marque" />
+                        <select id="marque" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" name="marque" autofocus>
+                            <option value="">{{ __('Select a marque') }}</option>
+                            @foreach($marques as $marque)
+                                <option value="{{ $marque->marque }}" {{ old('marque') == $marque->id ? 'selected' : '' }}>
+                                    {{ $marque->marque }}
+                                </option>
+                            @endforeach
+                            <option value="autre" {{ old('marque') == 'autre' ? 'selected' : '' }}>{{ __('Autre') }}</option>
+                        </select>
                         <x-input-error :messages="$errors->get('marque')" class="mt-2" />
                     </div>
                     <div>

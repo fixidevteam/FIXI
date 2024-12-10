@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MarqueVoiture;
 use App\Models\nom_categorie;
 use App\Models\nom_operation;
 use App\Models\Voiture;
@@ -25,8 +26,8 @@ class VoitureController extends Controller
      */
     public function create()
     {
-        // $marque 
-        return view("userCars.create");
+        $marques = MarqueVoiture::all();
+        return view("userCars.create", compact('marques'));
     }
 
     /**
@@ -82,7 +83,7 @@ class VoitureController extends Controller
         // Remove temporary fields to avoid unnecessary database columns
         unset($data['part1'], $data['part2'], $data['part3']);
         Voiture::create($data);
-        
+
         // Flash message to the session
         $request->session()->forget('temp_photo_path');
         session()->flash('success', 'Voiture ajoutée');
@@ -112,10 +113,11 @@ class VoitureController extends Controller
     public function edit(string $id)
     {
         $voiture = Voiture::find($id);
+        $marques = MarqueVoiture::all();
         if (!$voiture || $voiture->user_id !== auth()->id()) {
             abort(403);
         }
-        return view('userCars.edit', compact('voiture'));
+        return view('userCars.edit', compact('voiture','marques'));
     }
 
     /**
