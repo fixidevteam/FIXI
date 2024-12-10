@@ -24,10 +24,10 @@ class OperationController extends Controller
      */
     public function index()
     {
-        // Fetch the authenticated user's operations
+        // Fetch the authenticated user's operations & Display 10 operations per page
         $operations = Operation::whereHas('voiture', function ($query) {
             $query->where('user_id', Auth::id());
-        })->get();
+        })->paginate(10);
 
         // Set the session voiture_id (use the first voiture associated with the user)
         $firstVoiture = Voiture::where('user_id', Auth::id())->first();

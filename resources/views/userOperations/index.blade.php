@@ -136,6 +136,9 @@
                     </div>
                     @endif
                 </div>
+                <div class="my-4">
+                    {{ $operations->links() }}
+                </div>
                 {{-- table close --}}
 
             </div>
