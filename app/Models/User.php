@@ -26,6 +26,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'ville',
+        'quartier',
         'provider',
         'provider_id',
         'provider_token',

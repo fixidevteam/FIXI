@@ -40,6 +40,8 @@ class RegisteredUserController extends Controller
                 'max:20',
                 'regex:/^(\+2126\d{8}|\+2127\d{8}|06\d{8}|07\d{8})$/',
             ],
+            'ville'=>['required','string'],
+            'quartier'=>['nullable'],
         ]);
 
         $user = User::create([
@@ -47,6 +49,8 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'telephone' => $request->telephone,
+            'ville' => $request->ville,
+            'quartier' => $request->quartier,
         ]);
 
         event(new Registered($user));

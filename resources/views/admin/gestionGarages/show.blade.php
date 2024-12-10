@@ -132,14 +132,12 @@
         </div>
 
         <div class="flex flex-col md:flex-row gap-10 items-center">
-          {{-- Car Image --}}
           <div class="md:w-[160px] md:h-[160px] overflow-hidden md:rounded-full border flex-shrink-0">
-            <img 
-              class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-all duration-300 ease-in" 
-              src="{{ $garage->photo ? asset('storage/'.$garage->photo) : asset('/images/defaultimage.jpg') }}" 
-              alt="{{ $garage->photo ? 'Garage Image' : 'Default Image' }}" 
-              id="garageImage"
-            >
+            <img
+              class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-all duration-300 ease-in"
+              src="{{ $garage->photo ? asset('storage/'.$garage->photo) : asset('/images/defaultimage.jpg') }}"
+              alt="{{ $garage->photo ? 'Garage Image' : 'Default Image' }}"
+              id="garageImage">
           </div>
 
           {{-- Car Details in Two Columns --}}
@@ -156,14 +154,22 @@
                 <p class="capitalize text-sm font-medium text-gray-900">Reference de garage</p>
                 <p class="text-sm text-gray-500">{{$garage->ref}}</p>
               </div>
+              <div>
+                <p class="capitalize text-sm font-medium text-gray-900"> Localisation</p>
+                <p class="text-sm text-gray-500">{{$garage->localisation ?? 'N/A'}}</p>
+              </div>
             </div>
 
             {{-- Column 2 --}}
             <div class="flex-1 space-y-4">
               {{-- location --}}
               <div>
-                <p class="capitalize text-sm font-medium text-gray-900"> Localisation</p>
-                <p class="text-sm text-gray-500">{{$garage->localisation ?? 'N/A'}}</p>
+                <p class="capitalize text-sm font-medium text-gray-900"> Ville</p>
+                <p class="text-sm text-gray-500">{{$garage->ville}}</p>
+              </div>
+              <div>
+                <p class="capitalize text-sm font-medium text-gray-900"> quartier</p>
+                <p class="text-sm text-gray-500">{{$garage->quartier ?? 'N/A'}}</p>
               </div>
             </div>
           </div>
@@ -233,16 +239,14 @@
     {{-- Modal --}}
     <div id="imageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-75 flex items-center justify-center">
       <div class="relative max-w-4xl w-full mx-auto">
-        <img 
-          id="modalImage" 
-          src="{{ $garage->photo !== NULL ? asset('storage/'.$garage->photo) : asset('/images/defaultimage.jpg') }}" 
-          alt="Expanded Garage Image" 
-          class="w-full max-h-[80vh] object-contain"
-        >
+        <img
+          id="modalImage"
+          src="{{ $garage->photo !== NULL ? asset('storage/'.$garage->photo) : asset('/images/defaultimage.jpg') }}"
+          alt="Expanded Garage Image"
+          class="w-full max-h-[80vh] object-contain">
         <button
           class="absolute top-4 right-4 text-white text-2xl font-bold bg-black bg-opacity-50 rounded-full px-3 py-1 hover:bg-opacity-75"
-          onclick="toggleModalImage(false)"
-        >&times;</button>
+          onclick="toggleModalImage(false)">&times;</button>
       </div>
     </div>
     <!-- Confirmation Modal (Hidden by default) -->
@@ -275,20 +279,20 @@
   <script>
     const modal = document.getElementById('imageModal');
     const garageImage = document.getElementById('garageImage');
-  
+
     if (garageImage) {
       garageImage.addEventListener('click', () => {
         toggleModalImage(true);
       });
     }
-  
+
     modal.addEventListener('click', (event) => {
       // Close the modal if the click is outside the image
       if (event.target === modal) {
         toggleModalImage(false);
       }
     });
-  
+
     function toggleModalImage(show) {
       modal.classList.toggle('hidden', !show);
       modal.classList.toggle('flex', show);

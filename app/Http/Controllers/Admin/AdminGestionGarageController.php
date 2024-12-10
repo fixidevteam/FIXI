@@ -34,6 +34,8 @@ class AdminGestionGarageController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'ref' => ['required', 'unique:garages'],
             'localisation' => ['nullable', 'string'],
+            'quartier' => ['nullable', 'string'],
+            'ville' => ['required', 'string'],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2048']
         ]);
         if ($request->hasFile('photo')) {
@@ -67,12 +69,11 @@ class AdminGestionGarageController extends Controller
     public function edit(string $id)
     {
         $garage = garage::find($id);
-        
-        if($garage){
-                return view('admin.gestionGarages.edit', compact('garage'));
+
+        if ($garage) {
+            return view('admin.gestionGarages.edit', compact('garage'));
         }
         return back()->with('error', 'Garage introuvable');
-        
     }
 
     /**
@@ -85,6 +86,8 @@ class AdminGestionGarageController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'ref' => ['required'],
             'localisation' => ['nullable', 'string'],
+            'quartier' => ['nullable', 'string'],
+            'ville' => ['required', 'string'],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2048']
         ]);
         if ($request->hasFile('photo')) {

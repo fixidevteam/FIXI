@@ -41,7 +41,7 @@ class OperationController extends Controller
      */
     public function create()
     {
-        $garages = garage::all();
+        $garages = garage::where('ville', Auth::user()->ville)->get();
         $categories = nom_categorie::all();
         return view('userOperations.create', compact('categories', 'garages'));
     }
@@ -121,7 +121,7 @@ class OperationController extends Controller
     public function edit(string $id)
     {
         $categories = nom_categorie::all();
-        $garages = garage::all();
+        $garages = garage::where('ville', Auth::user()->ville)->get();
         $operation = Operation::find($id);
         $sousOperation = nom_sous_operation::all();
         if (!$operation || $operation->voiture_id != Session::get('voiture_id')) {

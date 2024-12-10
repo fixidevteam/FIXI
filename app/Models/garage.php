@@ -13,6 +13,8 @@ class garage extends Model
         'name',
         'ref',
         'photo',
+        'ville',
+        'quartier',
         'localisation',
     ];
     public function mechanics(): HasMany

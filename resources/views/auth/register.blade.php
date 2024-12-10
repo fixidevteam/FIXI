@@ -16,6 +16,18 @@
             <x-text-input id="email" class="block mt-1 w-full" type="text" name="email" :value="old('email')"  autocomplete="email" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
+        <!--  Ville -->
+        <div class="mt-4">
+            <x-input-label for="ville" :value="__('Ville')" />
+            <x-text-input id="ville" class="block mt-1 w-full" type="text" name="ville" :value="old('ville')"  autocomplete="ville" />
+            <x-input-error :messages="$errors->get('ville')" class="mt-2" />
+        </div>
+        <!-- quartier  -->
+        <div class="mt-4">
+            <x-input-label for="quartier" :value="__('Quartier')" />
+            <x-text-input id="quartier" class="block mt-1 w-full" type="text" name="quartier" :value=" old('quartier')"  autocomplete="quartier" />
+            <x-input-error :messages="$errors->get('quartier')" class="mt-2" />
+        </div>
         <!-- phone -->
         <div class="mt-4">
             <x-input-label for="telephone" :value="__('Téléphone')" />
