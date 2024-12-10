@@ -121,6 +121,12 @@
                                         ref
                                     </th>
                                     <th scope="col" class="px-6 py-3">
+                                        ville
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        quartier
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
                                         localisation
                                     </th>
                                     <th scope="col" class="px-6 py-3">
@@ -137,6 +143,12 @@
                                     </th>
                                     <td class="px-6 py-4">
                                         {{ $garage->ref }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $garage->ville }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $garage->quartier ?? 'N/A' }}
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $garage->localisation ?? 'N/A' }}

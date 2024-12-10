@@ -86,8 +86,18 @@
                         <x-input-error :messages="$errors->get('localisation')" class="mt-2" />
                     </div>
                     <div>
+                        <x-input-label for="ville" :value="__('Ville')" />
+                        <x-text-input id="ville" class="block mt-1 w-full" type="text" name="ville" :value="old('ville')?? $garage->ville" autofocus autocomplete="ville" />
+                        <x-input-error :messages="$errors->get('ville')" class="mt-2" />
+                    </div>
+                    <div>
+                        <x-input-label for="quartier" :value="__('Quartier')" />
+                        <x-text-input id="quartier" class="block mt-1 w-full" type="text" name="quartier" :value="old('quartier')?? $garage->quartier" autofocus autocomplete="quartier" />
+                        <x-input-error :messages="$errors->get('quartier')" class="mt-2" />
+                    </div>
+                    <div>
                         <x-input-label for="file_input" :value="__('Photo')" />
-                        <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" accept="image/*"/>
+                        <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" accept="image/*" />
                         <x-input-error :messages="$errors->get('photo')" class="mt-2" />
                     </div>
                     <div class="flex items-center justify-end mt-4">
