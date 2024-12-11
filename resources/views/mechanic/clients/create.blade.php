@@ -52,7 +52,7 @@
                                     d="m1 9 4-4-4-4" />
                             </svg>
                             <a
-                                href="{{ route('mechanic.clients.index') }}"
+                                href="{{ route('mechanic.clients.create') }}"
                                 class="inline-flex items-center text-sm font-medium text-gray-700   ">
                                 Ajouter un client
                             </a>
