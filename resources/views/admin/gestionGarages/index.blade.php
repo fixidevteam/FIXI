@@ -130,6 +130,9 @@
                                         localisation
                                     </th>
                                     <th scope="col" class="px-6 py-3">
+                                        Créé par
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
                                         Action
                                     </th>
                                 </tr>
@@ -152,6 +155,11 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $garage->localisation ?? 'N/A' }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span class="{{ $garage->user_id ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800' }} text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">
+                                            {{ $garage->user_id ? 'utilisateur' : 'administrateur' }}
+                                        </span>
                                     </td>
                                     <td class="px-6 py-4">
                                         <a href="{{ route('admin.gestionGarages.show',$garage->id) }}" class="font-medium capitalize text-blue-600 dark:text-blue-500 hover:underline">détails</a>

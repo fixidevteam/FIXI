@@ -35,19 +35,6 @@ class DocumentExpiryNotification extends Notification
             'car_id' => $this->isCar ? $this->document->voiture_id : null,
         ];
     }
-    // public function toMail($notifiable)
-    // {
-    //     $url = $this->isCar
-    //         ? route('paiperVoiture.show', $this->document->id)
-    //         : route('paiperPersonnel.show', $this->document->id);
-
-    //     return (new MailMessage)
-    //         ->subject('Notification de document expiré')
-    //         ->greeting('Bonjour ' . $notifiable->name . ',')
-    //         ->line($this->message)
-    //         ->action('Voir le document', $url)
-    //         ->line('Merci de rester attentif à vos documents !');
-    // }
     public function toMail($notifiable)
     {
         $url = $this->isCar
