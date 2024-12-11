@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\nom_categorie;
 use App\Models\nom_operation;
 use App\Models\Operation;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -16,15 +17,44 @@ class MechanicVoitureController extends Controller
     /**
      * Display a listing of the resource.
      */
+    // public function index(Request $request)
+    // {
+    //     // Get the authenticated user's garage operations
+    //     $user = Auth::user();
+    //     $search = $request->input('search'); // Retrieve the search query
+
+    //     // Fetch voitures related to the user's garage operations
+    //     $voitures = collect(); // Initialize an empty collection for voitures
+
+    //     $operations = $user->garage->operations()->with('voiture')->get();
+
+    //     foreach ($operations as $operation) {
+    //         if ($operation->voiture) {
+    //             $voitures->push($operation->voiture);
+    //         }
+    //     }
+
+    //     // Filter voitures if search query is provided
+    //     if (!empty($search)) {
+    //         $voitures = $voitures->filter(function ($voiture) use ($search) {
+    //             return stripos($voiture->numero_immatriculation, $search) !== false;
+    //         });
+    //     }
+
+    //     // Remove duplicate voitures (if any)
+    //     $voitures = $voitures->unique('id')->values();
+
+    //     // Pass the voitures and search query to the view
+    //     return view('mechanic.voitures.index', compact('voitures', 'search'));
+    // }
     public function index(Request $request)
     {
-        // Get the authenticated user's garage operations
+        // Get the authenticated user (mechanic)
         $user = Auth::user();
         $search = $request->input('search'); // Retrieve the search query
 
         // Fetch voitures related to the user's garage operations
         $voitures = collect(); // Initialize an empty collection for voitures
-
         $operations = $user->garage->operations()->with('voiture')->get();
 
         foreach ($operations as $operation) {
@@ -33,15 +63,27 @@ class MechanicVoitureController extends Controller
             }
         }
 
-        // Filter voitures if search query is provided
-        if (!empty($search)) {
-            $voitures = $voitures->filter(function ($voiture) use ($search) {
-                return stripos($voiture->numero_immatriculation, $search) !== false;
-            });
-        }
+        // Fetch voitures of users created by the mechanic
+        $createdVoitures = User::where('created_by_mechanic', 1)
+            ->where('mechanic_id', $user->id)
+            ->with('voitures')
+            ->get()
+            ->pluck('voitures')
+            ->flatten();
+
+        // Merge voitures from the garage and those created by the mechanic
+        $voitures = $voitures->merge($createdVoitures);
 
         // Remove duplicate voitures (if any)
         $voitures = $voitures->unique('id')->values();
+
+        // Filter voitures if search query is provided
+        if (!empty($search)) {
+            $voitures = $voitures->filter(function ($voiture) use ($search) {
+                return isset($voiture->numero_immatriculation) &&
+                    stripos($voiture->numero_immatriculation, $search) !== false;
+            });
+        }
 
         // Pass the voitures and search query to the view
         return view('mechanic.voitures.index', compact('voitures', 'search'));
@@ -71,17 +113,31 @@ class MechanicVoitureController extends Controller
     {
 
         $user = Auth::user();
-        $voitures = collect(); // Initialize an empty collection for voitures
+        $voiture = User::where(function ($query) use ($user, $id) {
+            // Case 1: Voitures linked to the garage
+            $query->whereHas('voitures', function ($voitureQuery) use ($user, $id) {
+                $voitureQuery->where('id', $id)
+                    ->whereHas('operations', function ($operationQuery) use ($user) {
+                        $operationQuery->whereHas('garage', function ($garageQuery) use ($user) {
+                            $garageQuery->where('id', $user->garage_id);
+                        });
+                    });
+            })
+                // Case 2: Voitures of users created by the mechanic
+                ->orWhere(function ($query) use ($user, $id) {
+                    $query->where('created_by_mechanic', 1)
+                        ->where('mechanic_id', $user->id)
+                        ->whereHas('voitures', function ($voitureQuery) use ($id) {
+                            $voitureQuery->where('id', $id);
+                        });
+                });
+        })
+            ->with('voitures.operations') // Eager load voitures and operations
+            ->get()
+            ->pluck('voitures')
+            ->flatten()
+            ->firstWhere('id', $id); // Use firstWhere to find voiture by ID
 
-        $operations = $user->garage->operations()->with('voiture')->get();
-
-        foreach ($operations as $operation) {
-            if ($operation->voiture) {
-                $voitures->push($operation->voiture);
-            }
-        }
-
-        $voiture = $voitures->firstWhere('id', $id); // Use firstWhere to find voiture by ID
         if ($voiture) {
             Session::put('voiture_id', $id);
             $operations = Operation::where('voiture_id', $voiture->id)
