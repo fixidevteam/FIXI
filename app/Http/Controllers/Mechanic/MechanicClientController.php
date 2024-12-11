@@ -91,7 +91,7 @@ class MechanicClientController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'ville' => 'required|string|max:255',
-            'email' => ['nullable', 'unique:' . User::class],
+            'email' => ['nullable','email', 'unique:' . User::class],
             'telephone' => [
                 'required',
                 'string',
