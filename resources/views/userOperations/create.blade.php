@@ -112,9 +112,22 @@
                             @foreach ($garages as $garage)
                             <option value="{{ $garage->id }}" @if(old('garage_id')==$garage->id) selected @endif>{{ $garage->name }}</option>
                             @endforeach
+                            <option value="autre" @if(old('garage_id') == 'autre') selected @endif>Autre</option>
                         </select>
-                        <p class="mt-1 text-sm text-gray-500" id="operation_input_help">Si le nom du garage n'apparaît pas dans la liste, veuillez l'ajouter manuellement dans le champ <label class="font-bold underline" for="description">'Description'</label>.</p>
+                        <p class="mt-1 text-sm text-gray-500" id="operation_input_help">Si le nom du garage n'apparaît pas dans la liste, sélectionnez "Autre" pour le saisir manuellement.</p>
                         <x-input-error :messages="$errors->get('garage_id')" class="mt-2" />
+                        {{-- new garage --}}
+                        <div class="mt-2">
+                            <input 
+                            type="text" 
+                            id="new_garage_name" 
+                            name="new_garage_name" 
+                            value="{{ old('new_garage_name') }}"  
+                            class="{{ old('garage_id') == 'autre' ? '' : 'hidden' }} mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                            placeholder="Entrez le nom du nouveau garage" 
+                            />
+                            <x-input-error :messages="$errors->get('new_garage_name')" class="mt-2" />    
+                        </div>
                     </div>
                     <div>
                         <x-input-label for="description" :value="__('Description')" />
@@ -148,6 +161,32 @@
             @include('layouts.footer')
         </div>
     </div>
-
-
+    <script>
+        document.getElementById('garage').addEventListener('change', function () {
+            const newGarageInput = document.getElementById('new_garage_name');
+    
+            if (this.value === 'autre') {
+                newGarageInput.classList.remove('hidden');
+                newGarageInput.setAttribute('required', 'required'); // Add 'required' attribute
+            } else {
+                newGarageInput.classList.add('hidden');
+                newGarageInput.removeAttribute('required'); // Remove 'required' attribute
+                newGarageInput.value = ''; // Clear the input field
+            }
+        });
+    
+        // Ensure the "Autre" field is visible if it was selected on validation failure
+        document.addEventListener('DOMContentLoaded', function () {
+            const garageSelect = document.getElementById('garage');
+            const newGarageInput = document.getElementById('new_garage_name');
+    
+            if (garageSelect.value === 'autre') {
+                newGarageInput.classList.remove('hidden');
+                newGarageInput.setAttribute('required', 'required'); // Add 'required' attribute
+            } else {
+                newGarageInput.classList.add('hidden');
+                newGarageInput.removeAttribute('required'); // Remove 'required' attribute
+            }
+        });
+    </script>
 </x-app-layout>

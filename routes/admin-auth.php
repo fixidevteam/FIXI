@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminGestionCategorieController;
 use App\Http\Controllers\Admin\AdminGestionGarageController;
+use App\Http\Controllers\Admin\AdminGestionMarqueContoller;
 use App\Http\Controllers\Admin\AdminGestionMechanicController;
 use App\Http\Controllers\Admin\AdminGestionOperationController;
 use App\Http\Controllers\Admin\AdminGestionPapierPersoController;
@@ -47,6 +48,7 @@ Route::middleware('auth:admin')->prefix('fp-admin')->name('admin.')->group(funct
     Route::resource('/gestionOperation', AdminGestionOperationController::class);
     Route::resource('/gestionSousOperation', AdminGestionSousOperationController::class);
     Route::resource('/gestionCategorie', AdminGestionCategorieController::class);
+    Route::resource('/gestionMarque', AdminGestionMarqueContoller::class);
 
 
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');

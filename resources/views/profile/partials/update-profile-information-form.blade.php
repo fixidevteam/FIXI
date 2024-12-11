@@ -52,6 +52,18 @@
             <x-text-input id="telephone" name="telephone" type="text" class="mt-1 block w-full" :value="old('telephone', $user->telephone)" required  autocomplete="telephone" />
             <x-input-error class="mt-2" :messages="$errors->get('telephone')" />
         </div>
+        <!-- Add Ville Field -->
+        <div>
+            <x-input-label for="ville" :value="__('Ville')" />
+            <x-text-input id="ville" name="ville" type="text" class="mt-1 block w-full" :value="old('ville', $user->ville)" required  autocomplete="ville" />
+            <x-input-error class="mt-2" :messages="$errors->get('ville')" />
+        </div>
+        <!-- Add Quartier Field -->
+        <div>
+            <x-input-label for="quartier" :value="__('Quartier')" />
+            <x-text-input id="quartier" name="quartier" type="text" class="mt-1 block w-full" :value="old('quartier', $user->quartier)"   autocomplete="quartier" />
+            <x-input-error class="mt-2" :messages="$errors->get('quartier')" />
+        </div>
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('sauvegarder') }}</x-primary-button>
