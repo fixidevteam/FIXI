@@ -100,15 +100,7 @@ class MechanicClientController extends Controller
             ],
         ]);
 
-        $created_user =  User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'ville' => $request->ville,
-            'telephone' => $request->telephone,
-            'status' => 0,
-            'created_by_mechanic' => 1,
-            'mechanic_id' => Auth::user()->id,
-        ]);
+
 
 
         // Use temp_photo_path if no new file is uploaded
@@ -125,7 +117,15 @@ class MechanicClientController extends Controller
                 Rule::unique('voitures', 'numero_immatriculation')->whereNull('deleted_at'), // Check uniqueness
             ],
         ]);
-
+        $created_user =  User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'ville' => $request->ville,
+            'telephone' => $request->telephone,
+            'status' => 0,
+            'created_by_mechanic' => 1,
+            'mechanic_id' => Auth::user()->id,
+        ]);
         $data['user_id'] = $created_user->id;
         $data['numero_immatriculation'] = $numeroImmatriculation;
         // Remove temporary fields to avoid unnecessary database columns
