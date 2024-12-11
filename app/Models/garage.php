@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class garage extends Model
@@ -16,6 +17,7 @@ class garage extends Model
         'ville',
         'quartier',
         'localisation',
+        'user_id'
     ];
     public function mechanics(): HasMany
     {
@@ -24,5 +26,9 @@ class garage extends Model
     public function operations(): HasMany
     {
         return $this->hasMany(Operation::class);
+    }
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

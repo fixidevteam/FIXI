@@ -145,7 +145,7 @@
                                         {{ $garage->ref }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{ $garage->ville }}
+                                        {{ $garage->ville ?? 'N/A'}}
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $garage->quartier ?? 'N/A' }}

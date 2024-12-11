@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use PhpParser\Node\Stmt\Foreach_;
 use PHPUnit\Framework\Constraint\Operator;
+use Illuminate\Support\Str;
+
 
 class OperationController extends Controller
 {
@@ -41,7 +43,12 @@ class OperationController extends Controller
      */
     public function create()
     {
-        $garages = garage::where('ville', Auth::user()->ville)->get();
+        // $garages = garage::where('ville', Auth::user()->ville)->get();
+        $garages = Garage::where(function ($query) {
+            $query->where('ville', Auth::user()->ville) // Global garages for the same city
+                ->whereNull('user_id')               // Global garages only
+                ->orWhere('user_id', Auth::id());    // User-specific garages
+        })->get();
         $categories = nom_categorie::all();
         return view('userOperations.create', compact('categories', 'garages'));
     }
@@ -63,7 +70,18 @@ class OperationController extends Controller
             'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
             'date_operation' => ['required', 'date'],
             'garage_id' => ['nullable'],
+            'new_garage_name' => ['nullable', 'string', 'max:255'],
         ]);
+        // If "Autre" is selected, create a new garage for the current user
+        if ($request->filled('new_garage_name')) {
+            $newGarage = Garage::create([
+                'name' => $request->input('new_garage_name'),
+                'ref' => Str::random(8),
+                'user_id' => Auth::id(),
+                'ville' => Auth::user()->ville, // Assign the current user's city
+            ]);
+            $data['garage_id'] = $newGarage->id;
+        }
         // Use temp_photo_path if no new file is uploaded
         if (!$request->hasFile('photo') && $request->input('temp_photo_path')) {
             $data['photo'] = $request->input('temp_photo_path');
@@ -121,7 +139,12 @@ class OperationController extends Controller
     public function edit(string $id)
     {
         $categories = nom_categorie::all();
-        $garages = garage::where('ville', Auth::user()->ville)->get();
+        // $garages = garage::where('ville', Auth::user()->ville)->get();
+        $garages = Garage::where(function ($query) {
+            $query->where('ville', Auth::user()->ville) // Global garages for the same city
+                ->whereNull('user_id')               // Global garages only
+                ->orWhere('user_id', Auth::id());    // User-specific garages
+        })->get();
         $operation = Operation::find($id);
         $sousOperation = nom_sous_operation::all();
         if (!$operation || $operation->voiture_id != Session::get('voiture_id')) {
@@ -147,8 +170,19 @@ class OperationController extends Controller
             'description' => ['max:255'],
             'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
             'date_operation' => ['required', 'date'],
-            'garage_id' => ['nullable']
+            'garage_id' => ['nullable'],
+            'new_garage_name' => ['nullable', 'string', 'max:255',],
         ]);
+        // Handle "Autre" option for a new garage
+        if ($request->filled('new_garage_name')) {
+            $newGarage = Garage::create([
+                'name' => $request->input('new_garage_name'),
+                'ref' => Str::random(8),
+                'user_id' => Auth::id(),
+                'ville' => Auth::user()->ville, // Assign the current user's city
+            ]);
+            $data['garage_id'] = $newGarage->id;
+        }
         if ($request->hasFile('photo')) {
             $imagePath = $request->file('photo')->store('user/operations', 'public');
             $data['photo'] = $imagePath;
