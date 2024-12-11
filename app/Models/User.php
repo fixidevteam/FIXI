@@ -32,7 +32,9 @@ class User extends Authenticatable
         'provider_id',
         'provider_token',
         'telephone',
-        'status'
+        'status',
+        'created_by_mechanic',
+        'mechanic_id'
     ];
 
     /**
