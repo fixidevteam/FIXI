@@ -91,7 +91,7 @@ class MechanicClientController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'ville' => 'required|string|max:255',
-            'email' => ['nullable','email', 'unique:' . User::class],
+            'email' => ['nullable', 'email', 'unique:' . User::class],
             'telephone' => [
                 'required',
                 'string',
@@ -99,9 +99,6 @@ class MechanicClientController extends Controller
                 'regex:/^(\+2126\d{8}|\+2127\d{8}|06\d{8}|07\d{8})$/',
             ],
         ]);
-
-
-
 
         // Use temp_photo_path if no new file is uploaded
         if (!$request->hasFile('photo') && $request->input('temp_photo_path')) {
