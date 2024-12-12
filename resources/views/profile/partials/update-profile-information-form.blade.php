@@ -53,17 +53,51 @@
             <x-input-error class="mt-2" :messages="$errors->get('telephone')" />
         </div>
         <!-- Add Ville Field -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div>
+                <x-input-label for="currentVille" :value="__('Ville Actuelle')" />
+                <x-text-input id="currentVille" type="text" class="mt-1 block w-full" :value="old('ville', $user->ville)" readonly/>
+            </div>
+            <!-- Add Quartier Field -->
+            <div>
+                <x-input-label for="cuuentQuartier" :value="__('Quartier Actuelle')" />
+                <x-text-input id="cuuentQuartier" type="text" class="mt-1 block w-full" :value="old('quartier', $user->quartier)" readonly/>
+            </div>
+        </div>
+        
+
+        <!-- Ville Field -->
         <div>
             <x-input-label for="ville" :value="__('Ville')" />
-            <x-text-input id="ville" name="ville" type="text" class="mt-1 block w-full" :value="old('ville', $user->ville)" required  autocomplete="ville" />
+            <select id="ville" name="ville" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                <option value="">{{ __('Sélectionnez une Ville') }}</option>
+                @foreach($villes as $ville)
+                    <option value="{{ $ville->id }}" >
+                        {{ $ville->ville }}
+                    </option>
+                @endforeach
+            </select>
             <x-input-error class="mt-2" :messages="$errors->get('ville')" />
         </div>
-        <!-- Add Quartier Field -->
+
+        <!-- Quartier Field -->
         <div>
             <x-input-label for="quartier" :value="__('Quartier')" />
-            <x-text-input id="quartier" name="quartier" type="text" class="mt-1 block w-full" :value="old('quartier', $user->quartier)"   autocomplete="quartier" />
+            <select id="quartier" name="quartier" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                <option value="" selected>{{ __('Sélectionnez un Quartier (Optionnel)') }}</option>
+                <!-- Quartiers will be populated dynamically by JavaScript -->
+                @if($user->ville)
+                    @foreach($quartiers as $quartier)
+                        <option value="{{ $quartier->name }}" 
+                            {{ old('quartier', $user->quartier) == $quartier->name ? 'selected' : '' }}>
+                            {{ $quartier->name }}
+                        </option>
+                    @endforeach
+                @endif
+            </select>
             <x-input-error class="mt-2" :messages="$errors->get('quartier')" />
         </div>
+
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('sauvegarder') }}</x-primary-button>
@@ -80,3 +114,45 @@
         </div>
     </form>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const villeSelect = document.getElementById('ville');
+    const quartierSelect = document.getElementById('quartier');
+
+    function fetchQuartiers(villeId, preSelectedQuartier = null) {
+        quartierSelect.innerHTML = '<option value="" selected>{{ __("Chargement...") }}</option>';
+
+        fetch(`/quartiers?ville_id=${villeId}`)
+            .then(response => response.json())
+            .then(data => {
+                quartierSelect.innerHTML = '<option value="" selected>{{ __("Sélectionnez un Quartier (Optionnel)") }}</option>';
+                data.forEach(quartier => {
+                    const selected = preSelectedQuartier === quartier.quartier ? 'selected' : '';
+                    quartierSelect.innerHTML += `<option value="${quartier.quartier}" ${selected}>${quartier.quartier}</option>`;
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching quartiers:', error);
+                quartierSelect.innerHTML = '<option value="" disabled>{{ __("Erreur de chargement") }}</option>';
+            });
+    }
+
+    // Trigger on Ville change
+    villeSelect.addEventListener('change', function () {
+        const villeId = this.value;
+        if (villeId) {
+            fetchQuartiers(villeId);
+        } else {
+            quartierSelect.innerHTML = '<option value="" selected>{{ __("Sélectionnez un Quartier (Optionnel)") }}</option>';
+        }
+    });
+
+    // Handle pre-selected Ville and Quartier
+    const preSelectedVille = "{{ $user->ville_id }}"; // Use the ville ID here
+    const preSelectedQuartier = "{{ $user->quartier }}";
+    if (preSelectedVille) {
+        fetchQuartiers(preSelectedVille, preSelectedQuartier);
+        }
+    });
+</script>

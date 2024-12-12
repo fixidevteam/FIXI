@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Quartier;
+use App\Models\Ville;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +18,20 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $user = $request->user();
+
+        // Fetch all villes for the dropdown
+        $villes = Ville::all();
+
+        // Fetch quartiers if the user already has a ville
+        $quartiers = $user->ville
+            ? Quartier::where('ville_id', $user->ville)->get()
+            : [];
+
         return view('profile.edit', [
-            'user' => $request->user(),
+            'user' => $user,
+            'villes' => $villes,
+            'quartiers' => $quartiers,
         ]);
     }
 
@@ -26,13 +40,22 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        // Fetch the ville name based on the submitted ID
+        $ville = Ville::where('id', $request->ville)->firstOrFail();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        // Update the user's information
+        $user = $request->user();
+        $user->fill([
+            'ville' => $ville->ville, // Store the name of the city
+            'quartier' => $request->quartier, // Update quartier directly
+        ]);
+
+        // If email is updated, reset email verification
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
 
-        $request->user()->save();
+        $user->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
