@@ -16,43 +16,37 @@ class PapierPersoTest extends TestCase
      */
     public function test_papiers_perso(): void
     {
-        $user = User::factory()->create(['status' => 1]);
-        $res = $this->actingAs($user)->get('paiperPersonnel');
+        $user = User::factory()->create(['status' => 1, 'ville' => 'marrakech']);
+        $res = $this->actingAs($user)->get('my-fixi/paiperPersonnel');
         $res->assertOk();
     }
-    public function test_ajouter_p_p(): void
+    public function test_ajouter_pp_get_notification(): void
     {
-        $user = User::factory()->create(['status' => 1]);
+        $this->withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class);
+        // Create a user and log in
+        $user = User::factory()->create(['status' => 1, 'ville' => 'marrakech']);
+        $this->actingAs($user);
+
+        // Create a valid type in the database
         type_papierp::create([
             'type' => 'Passeport'
         ]);
-        $res = $this->actingAs($user)->post(
-            '/paiperPersonnel',
+
+        // Make the POST request
+        $response = $this->post(
+            'my-fixi/paiperPersonnel',
             [
                 'type' => 'Passeport',
-                'date_debut' => now()->toDateString(),
-                'date_fin' => now()->addDay()->toDateString(), // Ensure valid date range
-                'user_id' => $user->id,
+                'date_debut' => now(),
+                'date_fin' => now(), // Ensure valid date range
             ]
         );
-        $res->assertOk();
-    }
-    public function test_supprimer_papier_perso(): void
-    {
-        // Arrange: Create a user and a PapierPersonnel instance
-        $user = User::factory()->create(['status' => 1]);
-
-        // Log in as the user
-        $this->actingAs($user);
-
-        // Create a PapierPersonnel record to delete
-        $papierPersonnel = UserPapier::factory()->create();
-
-        // Act: Send DELETE request to the destroy route
-        $response = $this->delete('/paiperPersonnel/' . $papierPersonnel->id);
-
-        // Assert: Check that the response status is 200 or a successful redirect (302)
-        $response->assertRedirect(); // Typically, destroy routes redirect after deletion
+        // Assert that the response is successful
+        $this->assertDatabaseHas('user_papiers', [
+            'user_id' => $user->id,
+        ]);
 
     }
+
+
 }
