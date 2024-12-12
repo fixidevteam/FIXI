@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Quartier;
 use App\Models\User;
 use App\Models\Ville;
 use App\Providers\RouteServiceProvider;
@@ -22,7 +23,10 @@ class RegisteredUserController extends Controller
     public function create(): View
     {
         $villes = Ville::all();
-        return view('auth.register', compact('villes'));
+        $selectedVille = old('ville');
+        $quartiers = $selectedVille ? Quartier::where('ville_id', $selectedVille)->get() : collect();
+
+        return view('auth.register', compact('villes', 'quartiers'));
     }
 
     /**
@@ -46,12 +50,15 @@ class RegisteredUserController extends Controller
             'quartier' => ['nullable'],
         ]);
 
+        // Fetch the ville name based on the ID
+        $ville = Ville::findOrFail($request->ville);
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'telephone' => $request->telephone,
-            'ville' => $request->ville,
+            'ville' => $ville->ville, // Store the city name
             'quartier' => $request->quartier,
         ]);
 
