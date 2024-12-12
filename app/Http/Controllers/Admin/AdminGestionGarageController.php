@@ -36,6 +36,7 @@ class AdminGestionGarageController extends Controller
             'localisation' => ['nullable', 'string'],
             'quartier' => ['nullable', 'string'],
             'ville' => ['required', 'string'],
+            'virtualGarage' => ['nullable', 'string'],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2048']
         ]);
         if ($request->hasFile('photo')) {
@@ -88,6 +89,7 @@ class AdminGestionGarageController extends Controller
             'localisation' => ['nullable', 'string'],
             'quartier' => ['nullable', 'string'],
             'ville' => ['required', 'string'],
+            'virtualGarage' => ['nullable', 'string'],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2048']
         ]);
         if ($request->hasFile('photo')) {

@@ -17,7 +17,8 @@ class garage extends Model
         'ville',
         'quartier',
         'localisation',
-        'user_id'
+        'user_id',
+        'virtualGarage'
     ];
     public function mechanics(): HasMany
     {

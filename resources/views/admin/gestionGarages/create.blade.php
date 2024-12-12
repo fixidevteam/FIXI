@@ -95,6 +95,11 @@
                         <x-input-error :messages="$errors->get('quartier')" class="mt-2" />
                     </div>
                     <div>
+                        <x-input-label for="virtualGarage" :value="__('Virtual garage')" />
+                        <x-text-input id="virtualGarage" class="block mt-1 w-full" type="text" name="virtualGarage" :value="old('virtualGarage')" autofocus autocomplete="virtualGarage" />
+                        <x-input-error :messages="$errors->get('virtualGarage')" class="mt-2" />
+                    </div>
+                    <div>
                         <x-input-label for="file_input" :value="__('Photo')" />
                         <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" accept="image/*"/>
                         <x-input-error :messages="$errors->get('photo')" class="mt-2" />
