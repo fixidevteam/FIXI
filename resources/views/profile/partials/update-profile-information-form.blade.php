@@ -68,7 +68,7 @@
 
         <!-- Ville Field -->
         <div>
-            <x-input-label for="ville" :value="__('Ville')" />
+            <x-input-label for="ville" :value="__('Changer la ville')" />
             <select id="ville" name="ville" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 <option value="">{{ __('Sélectionnez une Ville') }}</option>
                 @foreach($villes as $ville)
@@ -82,7 +82,7 @@
 
         <!-- Quartier Field -->
         <div>
-            <x-input-label for="quartier" :value="__('Quartier')" />
+            <x-input-label for="quartier" :value="__('Changer le quartier')" />
             <select id="quartier" name="quartier" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 <option value="" selected>{{ __('Sélectionnez un Quartier (Optionnel)') }}</option>
                 <!-- Quartiers will be populated dynamically by JavaScript -->
