@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Mechanic;
 
 use App\Http\Controllers\Controller;
+use App\Models\MarqueVoiture;
 use App\Models\nom_categorie;
 use App\Models\nom_operation;
 use App\Models\Operation;
 use App\Models\User;
+use App\Models\Voiture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Validation\Rule;
 
 class MechanicVoitureController extends Controller
 {
@@ -95,7 +97,10 @@ class MechanicVoitureController extends Controller
      */
     public function create()
     {
-        return back();
+        $client = Session::get('client');
+        $marques = MarqueVoiture::all();
+        // dd($client);
+        return view('mechanic.voitures.create', compact('marques', 'client'));
     }
 
     /**
@@ -103,7 +108,49 @@ class MechanicVoitureController extends Controller
      */
     public function store(Request $request)
     {
-        return back();
+        if ($request->hasFile('photo')) {
+            $imagePath = $request->file('photo')->store('user/voitures', 'public');
+            $request->session()->put('temp_photo_path', $imagePath); // Save the path in the session    
+
+        }
+        $data = $request->validate([
+            'part1' => ['required', 'digits_between:1,6'], // 1 to 6 digits
+            'part2' => ['required', 'string', 'size:1'], // Single Arabic letter
+            'part3' => ['required', 'digits_between:1,2'], // 1 to 2 digits
+            'marque' => ['required', 'max:30'],
+            'modele' => ['required', 'max:30'],
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
+        ]);
+
+
+        // Use temp_photo_path if no new file is uploaded
+        if (!$request->hasFile('photo') && $request->input('temp_photo_path')) {
+            $data['photo'] = $request->input('temp_photo_path');
+        } elseif ($request->hasFile('photo')) {
+            $data['photo'] = $imagePath;
+        }
+        // Combine the parts into the `numero_immatriculation`
+        $numeroImmatriculation = $data['part1'] . '-' . $data['part2'] . '-' . $data['part3'];
+        $request->validate([
+            'numero_immatriculation' => [
+                'regex:/^\d{1,6}-[أ-ي]{1}-\d{1,2}$/', // Ensure it matches the pattern
+                Rule::unique('voitures', 'numero_immatriculation')->whereNull('deleted_at'), // Check uniqueness
+            ],
+        ]);
+        $client = Session::get('client');
+        $data['user_id'] = $client->id ;
+        $data['numero_immatriculation'] = $numeroImmatriculation;
+        // Remove temporary fields to avoid unnecessary database columns
+        unset($data['part1'], $data['part2'], $data['part3']);
+
+        Voiture::create($data);
+
+        // Flash message to the session
+        $request->session()->forget('temp_photo_path');
+        session()->flash('success', 'voitire ajoutée');
+        session()->flash('subtitle', 'la voiture  a été ajoutée avec succès à la liste.');
+
+        return redirect()->route('mechanic.clients.show',$client);
     }
 
     /**

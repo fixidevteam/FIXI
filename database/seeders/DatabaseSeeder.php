@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Admin;
 use App\Models\garage;
+use App\Models\Mechanic;
 use App\Models\nom_categorie;
 use App\Models\nom_operation;
 use App\Models\nom_sous_operation;
@@ -180,6 +181,12 @@ class DatabaseSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('adminadmin')
+        ]);
+        Mechanic::create([
+            'name' => 'mechannic',
+            'email' => 'user@gmail.com',
+            'password' => Hash::make('user12345'),
+            'garage_id'=>1 
         ]);
         $this->call([
             VilleSeeder::class,

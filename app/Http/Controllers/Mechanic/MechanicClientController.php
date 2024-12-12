@@ -10,6 +10,7 @@ use App\Models\Voiture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 
 class MechanicClientController extends Controller
@@ -168,7 +169,7 @@ class MechanicClientController extends Controller
         if (!$client) {
             return back()->with('error', 'client introuvable ou n\'appartient pas à ce garage.');
         }
-
+        Session::put('client', $client);
         return view('mechanic.clients.show', compact('client'));
     }
 
