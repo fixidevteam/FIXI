@@ -22,7 +22,7 @@ class DocumentExpiryNotification extends Notification
     public function via($notifiable)
     {
         // Use database channel for notifications
-        return ['database', 'mail'];
+        return ['database','mail'];
     }
     public function toDatabase($notifiable)
     {
