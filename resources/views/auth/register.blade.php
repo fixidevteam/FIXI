@@ -16,18 +16,33 @@
             <x-text-input id="email" class="block mt-1 w-full" type="text" name="email" :value="old('email')"  autocomplete="email" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
-        <!--  Ville -->
+        <!-- Ville -->
         <div class="mt-4">
-            <x-input-label for="ville" :value="__('Ville')" />
-            <x-text-input id="ville" class="block mt-1 w-full" type="text" name="ville" :value="old('ville')"  autocomplete="ville" />
-            <x-input-error :messages="$errors->get('ville')" class="mt-2" />
+            <select id="ville" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" name="ville">
+                <option value="" disabled {{ old('ville') ? '' : 'selected' }}>{{ __('Sélectionnez une Ville') }}</option>
+                @foreach($villes as $ville)
+                    <option value="{{ $ville->id }}" {{ old('ville') == $ville->id ? 'selected' : '' }}>
+                        {{ $ville->ville }}
+                    </option>
+                @endforeach
+            </select>
         </div>
-        <!-- quartier  -->
+
+        <!-- Quartier -->
         <div class="mt-4">
-            <x-input-label for="quartier" :value="__('Quartier')" />
-            <x-text-input id="quartier" class="block mt-1 w-full" type="text" name="quartier" :value=" old('quartier')"  autocomplete="quartier" />
-            <x-input-error :messages="$errors->get('quartier')" class="mt-2" />
+            <select id="quartier" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" name="quartier">
+                <option value="" selected>{{ __('Sélectionnez un Quartier (Optionnel)') }}</option>
+                @if(old('ville'))
+                    @foreach($quartiers as $quartier)
+                        <option value="{{ $quartier->quartier }}" {{ old('quartier') == $quartier->quartier ? 'selected' : '' }}>
+                            {{ $quartier->quartier }}
+                        </option>
+                    @endforeach
+                @endif
+            </select>
         </div>
+
+
         <!-- phone -->
         <div class="mt-4">
             <x-input-label for="telephone" :value="__('Téléphone')" />
@@ -90,4 +105,47 @@
         Vous avez déjà un compte?
         <a href="{{ route('login') }}" class="font-semibold leading-6 text-blue-600 hover:text-blue-500">{{ __('Connectez-vous') }}</a>
     </p>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+        const villeSelect = document.getElementById('ville');
+        const quartierSelect = document.getElementById('quartier');
+
+        function fetchQuartiers(villeId, preSelectedQuartier = null) {
+            quartierSelect.innerHTML = '<option value="" selected>{{ __("Chargement...") }}</option>';
+
+            fetch(`/quartiers?ville_id=${villeId}`)
+                .then(response => response.json())
+                .then(data => {
+                    quartierSelect.innerHTML = '<option value="" selected>{{ __("Sélectionnez un Quartier (Optionnel)") }}</option>';
+                    data.forEach(quartier => {
+                        const selected = preSelectedQuartier === quartier.quartier ? 'selected' : '';
+                        quartierSelect.innerHTML += `<option value="${quartier.quartier}" ${selected}>${quartier.quartier}</option>`;
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching quartiers:', error);
+                    quartierSelect.innerHTML = '<option value="" disabled>{{ __("Erreur de chargement") }}</option>';
+                });
+        }
+
+        villeSelect.addEventListener('change', function () {
+            const villeId = this.value;
+            if (villeId) {
+                fetchQuartiers(villeId);
+            } else {
+                quartierSelect.innerHTML = '<option value="" selected>{{ __("Sélectionnez un Quartier (Optionnel)") }}</option>';
+            }
+        });
+
+        const preSelectedVille = "{{ old('ville') }}";
+        const preSelectedQuartier = "{{ old('quartier') }}";
+        if (preSelectedVille) {
+            fetchQuartiers(preSelectedVille, preSelectedQuartier);
+        }
+    });
+
+
+
+    </script>
+    
 </x-guest-layout>

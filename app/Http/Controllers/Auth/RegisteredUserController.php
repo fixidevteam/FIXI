@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Quartier;
 use App\Models\User;
+use App\Models\Ville;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -20,7 +22,11 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $villes = Ville::all();
+        $selectedVille = old('ville');
+        $quartiers = $selectedVille ? Quartier::where('ville_id', $selectedVille)->get() : collect();
+
+        return view('auth.register', compact('villes', 'quartiers'));
     }
 
     /**
@@ -40,16 +46,19 @@ class RegisteredUserController extends Controller
                 'max:20',
                 'regex:/^(\+2126\d{8}|\+2127\d{8}|06\d{8}|07\d{8})$/',
             ],
-            'ville'=>['required','string'],
-            'quartier'=>['nullable'],
+            'ville' => ['required', 'string'],
+            'quartier' => ['nullable'],
         ]);
+
+        // Fetch the ville name based on the ID
+        $ville = Ville::findOrFail($request->ville);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'telephone' => $request->telephone,
-            'ville' => $request->ville,
+            'ville' => $ville->ville, // Store the city name
             'quartier' => $request->quartier,
         ]);
 
@@ -57,7 +66,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
         // Send email verification notification
-        $request->user()->sendEmailVerificationNotification();
+        // $request->user()->sendEmailVerificationNotification();
 
         return redirect(RouteServiceProvider::HOME);
     }
