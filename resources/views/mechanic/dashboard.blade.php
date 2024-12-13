@@ -22,9 +22,8 @@
     {{-- content --}}
     <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
       {{-- content (slot on layouts/app.blade.php)--}}
-
-
-      <div class="">
+      <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+      <div class="p-6 text-gray-900">
         <!-- THE CHART  -->
         <form method="GET" action="{{ route('mechanic.dashboard') }}" class="mb-4 w-full flex flex-col sm:flex-row sm:items-end items-end justify-between  gap-4">
           <!-- Dropdown Container -->
@@ -44,18 +43,14 @@
             {{ __('Filter') }}
           </x-primary-button>
         </form>
-
-
         <canvas id="operationsChart" height="200" class="w-full bg-white"></canvas>
         <!-- END OF CHART -->
-
+      </div>
       </div>
     </div>
 
     <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
       {{-- content (slot on layouts/app.blade.php)--}}
-
-
       <div>
         <div>
           <div class="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
