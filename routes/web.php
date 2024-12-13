@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\ProviderController;
 use App\Http\Controllers\getQuartiersController;
+use App\Http\Controllers\getAnalyticsDataController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OperationController;
 use App\Http\Controllers\PapierPeronnelController;
@@ -29,7 +30,6 @@ Route::get('/', function () {
 Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect']);
 Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback']);
 Route::get('/quartiers', [getQuartiersController::class, 'getQuartiers'])->name('quartiers.get');
-
 
 
 Route::get('/dashboard', function () {

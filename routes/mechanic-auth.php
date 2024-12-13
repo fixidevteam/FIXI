@@ -3,6 +3,8 @@
 use App\Http\Controllers\Mechanic\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Mechanic\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\PasswordController;
+use App\Http\Controllers\getAnalyticsDataController;
+use App\Http\Controllers\Mechanic\ChartContoller;
 use App\Http\Controllers\Mechanic\MechanicClientController;
 use App\Http\Controllers\Mechanic\MechanicOperatioController;
 use App\Http\Controllers\Mechanic\MechanicVoitureController;
@@ -11,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest:mechanic')->prefix('fixi-pro')->name('mechanic.')->group(function () {
     // Route::get('register', [RegisteredUserController::class, 'create'])
-        // ->name('register');
+    // ->name('register');
 
     // Route::post('register', [RegisteredUserController::class, 'store']);
 
@@ -33,6 +35,8 @@ Route::middleware(['auth:mechanic', 'checkMechanicStatus'])->prefix('fixi-pro')-
     Route::resource('/operations', MechanicOperatioController::class);
     Route::resource('/voitures', MechanicVoitureController::class);
     Route::resource('/clients', MechanicClientController::class);
+    Route::get('/analytics-data', [getAnalyticsDataController::class, 'getAnalyticsData'])->name('analytics.data');
+    Route::get('/chart',[ChartContoller::class,'index'])->name('chart');
 
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
