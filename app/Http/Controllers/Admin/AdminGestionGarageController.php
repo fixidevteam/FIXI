@@ -139,6 +139,14 @@ class AdminGestionGarageController extends Controller
                 return redirect()->route('admin.gestionGarages.index');
             }
 
+            // Check if the garage has associated operations
+            if ($garage->operations()->exists()) {
+                session()->flash('error', 'Impossible de supprimer le garage');
+                session()->flash('subtitle', 'Ce garage est lié à des opérations et ne peut pas être supprimé.');
+                return redirect()->route('admin.gestionGarages.index');
+            }
+
+
             // Delete the garage if it has no mechanics
             $garage->delete();
             session()->flash('success', 'Garage supprimé');
