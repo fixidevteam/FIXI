@@ -202,7 +202,7 @@
               Gagare
             </p>
             <p class="text-sm text-gray-500 truncate">
-              {{$operation->garage->name ?? 'N/A'}}
+              {{$operation->garage->name ?? 'N/A' }}{{ $operation->garage->quartier ? ' - ' . $operation->garage->quartier : '' }}
             </p>
           </div>
           {{-- Date --}}

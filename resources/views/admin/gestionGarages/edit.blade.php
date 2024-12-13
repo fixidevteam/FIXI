@@ -116,11 +116,11 @@
                         <select id="ville" 
                                 class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
                                 name="ville">
-                            <option value="" disabled {{ old('ville', $garage->ville) ? '' : 'selected' }}>
+                            <option value="" {{ old('ville', $garage->ville) ? '' : 'selected' }}>
                                 {{ __('Sélectionnez une Ville') }}
                             </option>
                             @foreach($villes as $ville)
-                                <option value="{{ $ville->id }}" {{ old('ville', $garage->ville) == $ville->id ? 'selected' : '' }}>
+                                <option value="{{ $ville->id }}" {{ old('ville', $garage->ville) == $ville->ville ? 'selected' : '' }}>
                                     {{ $ville->ville }}
                                 </option>
                             @endforeach
