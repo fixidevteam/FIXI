@@ -43,11 +43,13 @@
         <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
             {{-- content (slot on layouts/app.blade.php)--}}
             <div class=" px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <h2 class="mt-10  text-2xl font-bold leading-9 tracking-tight text-gray-900">Analytique</h2>
+                <h2 class="mt-10 text-2xl font-bold leading-9 tracking-tight text-gray-900">Analytique</h2>
                 <div class="container">
-                    <h2>Suivi des opérations et des clients (3 derniers mois)</h2>
-                    <canvas id="operationsChart"></canvas>
-                    <canvas id="clientsChart" class="mt-4"></canvas>
+                    <h2 class="text-sm md:text-base">Suivi des opérations et des clients (3 derniers mois)</h2>
+                    <div class="my-4">
+                        <canvas id="operationsChart"></canvas>
+                        <canvas id="clientsChart" class="mt-4"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
