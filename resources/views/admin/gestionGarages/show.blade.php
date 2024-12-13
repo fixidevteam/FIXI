@@ -147,7 +147,7 @@
               {{-- garage --}}
               <div>
                 <p class="capitalize text-sm font-medium text-gray-900">Garage</p>
-                <p class="text-sm text-gray-500">{{$garage->name}}</p>
+                <p class="text-sm text-gray-500">{{$garage->name}}{{ $garage->quartier ? ' - ' . $garage->quartier : '' }}</p>
               </div>
               {{-- ref --}}
               <div>
@@ -165,7 +165,7 @@
               {{-- location --}}
               <div>
                 <p class="capitalize text-sm font-medium text-gray-900">Ville</p>
-                <p class="text-sm text-gray-500">{{$garage->ville}}</p>
+                <p class="text-sm text-gray-500">{{$garage->ville ?? 'N/A'}}</p>
               </div>
               <div>
                 <p class="capitalize text-sm font-medium text-gray-900">quartier</p>

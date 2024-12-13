@@ -167,76 +167,81 @@
 
         </div>
         {{-- Details of cars --}}
-        @foreach($client->voitures as $voiture)
-        <div class="flex flex-col md:flex-row gap-10 items-center ">
-          {{-- Car Image --}}
-          <div class="md:w-[160px] md:h-[160px] overflow-hidden md:rounded-full border flex-shrink-0">
-            <a  href="{{ route('mechanic.voitures.show',$voiture->id) }}">
-              @if($voiture->photo !== NULL)
-
-              <img class="w-full h-full object-cover" src="{{asset('storage/'.$voiture->photo)}}" alt="voiture image">
-
-              @else
-
-              <img class="w-full h-full object-cover" src="/images/defaultimage.jpg" alt="image description">
-              @endif
-            </a>
-          </div>
-          {{-- Car Details in Two Columns --}}
-          <div class="flex flex-col md:flex-row gap-5 w-full justify-center md:justify-start">
-            {{-- Column 1 --}}
-            <div class="flex-1 space-y-4">
-              {{-- Matricule --}}
-              <div>
-                <p class="capitalize text-sm font-medium text-gray-900">immatricule</p>
-                <p class="text-sm text-gray-500">
-                  <span>{{ explode('-', $voiture->numero_immatriculation)[0] }}</span>-<span dir="rtl">{{ explode('-', $voiture->numero_immatriculation)[1] }}</span>-<span>{{ explode('-', $voiture->numero_immatriculation)[2] }}</span>
-                </p>
+        <div class="divide-y">
+          @foreach($client->voitures as $voiture)
+          <div>
+            <div class="flex flex-col md:flex-row gap-10 items-center my-4">
+              {{-- Car Image --}}
+              <div class="md:w-[160px] md:h-[160px] overflow-hidden md:rounded-full border flex-shrink-0">
+                <a  href="{{ route('mechanic.voitures.show',$voiture->id) }}">
+                  @if($voiture->photo !== NULL)
+  
+                  <img class="w-full h-full object-cover" src="{{asset('storage/'.$voiture->photo)}}" alt="voiture image">
+  
+                  @else
+  
+                  <img class="w-full h-full object-cover" src="/images/defaultimage.jpg" alt="image description">
+                  @endif
+                </a>
               </div>
-
-              {{-- Marque --}}
-              <div>
-                <p class="capitalize text-sm font-medium text-gray-900">Marque</p>
-                <p class="text-sm text-gray-500">{{$voiture->marque}}</p>
-              </div>
-
-              {{-- Modèle --}}
-              <div>
-                <p class="capitalize text-sm font-medium text-gray-900">Modèle</p>
-                <p class="text-sm text-gray-500">{{$voiture->modele}}</p>
+              {{-- Car Details in Two Columns --}}
+              <div class="flex flex-col md:flex-row gap-5 w-full justify-center md:justify-start">
+                {{-- Column 1 --}}
+                <div class="flex-1 space-y-4">
+                  {{-- Matricule --}}
+                  <div>
+                    <p class="capitalize text-sm font-medium text-gray-900">immatricule</p>
+                    <p class="text-sm text-gray-500">
+                      <span>{{ explode('-', $voiture->numero_immatriculation)[0] }}</span>-<span dir="rtl">{{ explode('-', $voiture->numero_immatriculation)[1] }}</span>-<span>{{ explode('-', $voiture->numero_immatriculation)[2] }}</span>
+                    </p>
+                  </div>
+  
+                  {{-- Marque --}}
+                  <div>
+                    <p class="capitalize text-sm font-medium text-gray-900">Marque</p>
+                    <p class="text-sm text-gray-500">{{$voiture->marque}}</p>
+                  </div>
+  
+                  {{-- Modèle --}}
+                  <div>
+                    <p class="capitalize text-sm font-medium text-gray-900">Modèle</p>
+                    <p class="text-sm text-gray-500">{{$voiture->modele}}</p>
+                  </div>
+                </div>
+  
+                {{-- Column 2 --}}
+                <div class="flex-1 space-y-4">
+                  {{-- Date de première mise en circulation --}}
+                  <div>
+                    <p class="first-letter:capitalize text-sm font-medium text-gray-900">Date de première mise en circulation</p>
+                    <p class="text-sm text-gray-500">{{$voiture->date_de_première_mise_en_circulation ?? 'N/A'}}</p>
+                  </div>
+  
+                  {{-- Date d'achat --}}
+                  <div>
+                    <p class="first-letter:capitalize text-sm font-medium text-gray-900">Date d'achat</p>
+                    <p class="text-sm text-gray-500">{{$voiture->date_achat ?? 'N/A' }}</p>
+                  </div>
+  
+                  {{-- Date de dédouanement --}}
+                  <div>
+                    <p class="first-letter:capitalize text-sm font-medium text-gray-900">Date de dédouanement</p>
+                    <p class="text-sm text-gray-500">{{$voiture->date_de_dédouanement ?? 'N/A' }}</p>
+                  </div>
+                </div>
               </div>
             </div>
-
-            {{-- Column 2 --}}
-            <div class="flex-1 space-y-4">
-              {{-- Date de première mise en circulation --}}
-              <div>
-                <p class="first-letter:capitalize text-sm font-medium text-gray-900">Date de première mise en circulation</p>
-                <p class="text-sm text-gray-500">{{$voiture->date_de_première_mise_en_circulation ?? 'N/A'}}</p>
-              </div>
-
-              {{-- Date d'achat --}}
-              <div>
-                <p class="first-letter:capitalize text-sm font-medium text-gray-900">Date d'achat</p>
-                <p class="text-sm text-gray-500">{{$voiture->date_achat ?? 'N/A' }}</p>
-              </div>
-
-              {{-- Date de dédouanement --}}
-              <div>
-                <p class="first-letter:capitalize text-sm font-medium text-gray-900">Date de dédouanement</p>
-                <p class="text-sm text-gray-500">{{$voiture->date_de_dédouanement ?? 'N/A' }}</p>
-              </div>
+            <div class="my-6 ">
+              {{-- Détails du voiture --}}
+              <a href="{{ route('mechanic.voitures.show',$voiture->id) }}">
+                <x-primary-button>Détails du voiture</x-primary-button>
+              </a>
             </div>
           </div>
-
+          @endforeach
+          
         </div>
-        <div class="my-6 ">
-          {{-- Détails du voiture --}}
-          <a href="{{ route('mechanic.voitures.show',$voiture->id) }}">
-            <x-primary-button>Détails du voiture</x-primary-button>
-          </a>
-        </div>
-        @endforeach
+        
 
 
         {{-- details of cars close --}}
