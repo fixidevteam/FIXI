@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MarqueVoiture;
 use App\Models\MechanicClient;
 use App\Models\User;
+use App\Models\Ville;
 use App\Models\Voiture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,7 +69,8 @@ class MechanicClientController extends Controller
     public function create()
     {
         $marques = MarqueVoiture::all();
-        return view('mechanic.clients.create', compact('marques'));
+        $villes = Ville::all();
+        return view('mechanic.clients.create', compact('marques','villes'));
     }
 
     /**

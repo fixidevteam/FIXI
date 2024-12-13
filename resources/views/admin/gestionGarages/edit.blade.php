@@ -85,16 +85,68 @@
                         <x-text-input id="localisation" class="block mt-1 w-full" type="text" name="localisation" :value="old('localisation') ?? $garage->localisation" autofocus autocomplete="localisation" />
                         <x-input-error :messages="$errors->get('localisation')" class="mt-2" />
                     </div>
-                    <div>
+                    {{-- <div>
                         <x-input-label for="ville" :value="__('Ville')" />
-                        <x-text-input id="ville" class="block mt-1 w-full" type="text" name="ville" :value="old('ville')?? $garage->ville" autofocus autocomplete="ville" />
-                        <x-input-error :messages="$errors->get('ville')" class="mt-2" />
+                            <select id="ville" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" name="ville">
+                                <option value="" disabled {{ old('ville') ? '' : 'selected' }}>{{ __('Sélectionnez une ville') }}</option>
+                                @foreach($villes as $ville)
+                                    <option value="{{ $ville->id }}" {{ old('ville') == $ville->id ? 'selected' : '' }}>
+                                        {{ $ville->ville }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <x-input-error :messages="$errors->get('ville')" class="mt-2" />
                     </div>
                     <div>
                         <x-input-label for="quartier" :value="__('Quartier')" />
-                        <x-text-input id="quartier" class="block mt-1 w-full" type="text" name="quartier" :value="old('quartier')?? $garage->quartier" autofocus autocomplete="quartier" />
+                            <select id="quartier" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" name="quartier">
+                                <option value="" selected>{{ __('Sélectionnez un quartier (Optionnel)') }}</option>
+                                @if(old('ville'))
+                                    @foreach($quartiers as $quartier)
+                                        <option value="{{ $quartier->quartier }}" {{ old('quartier') == $quartier->quartier ? 'selected' : '' }}>
+                                            {{ $quartier->quartier }}
+                                        </option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            <x-input-error :messages="$errors->get('quartier')" class="mt-2" />
+                    </div> --}}
+                    <div>
+                        <x-input-label for="ville" :value="__('Ville')" />
+                        <select id="ville" 
+                                class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                                name="ville">
+                            <option value="" disabled {{ old('ville', $garage->ville) ? '' : 'selected' }}>
+                                {{ __('Sélectionnez une Ville') }}
+                            </option>
+                            @foreach($villes as $ville)
+                                <option value="{{ $ville->id }}" {{ old('ville', $garage->ville) == $ville->id ? 'selected' : '' }}>
+                                    {{ $ville->ville }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <x-input-error :messages="$errors->get('ville')" class="mt-2" />
+                    </div>
+                    
+                    <div>
+                        <x-input-label for="quartier" :value="__('Quartier')" />
+                        <select id="quartier" 
+                                class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                                name="quartier">
+                            <option value="" selected>
+                                {{ __('Sélectionnez un Quartier (Optionnel)') }}
+                            </option>
+                            @if(old('ville', $garage->ville))
+                                @foreach($quartiers as $quartier)
+                                    <option value="{{ $quartier->quartier }}" {{ old('quartier', $garage->quartier) == $quartier->quartier ? 'selected' : '' }}>
+                                        {{ $quartier->quartier }}
+                                    </option>
+                                @endforeach
+                            @endif
+                        </select>
                         <x-input-error :messages="$errors->get('quartier')" class="mt-2" />
                     </div>
+                    
                     <div>
                         <x-input-label for="virtualGarage" :value="__('Virtual garage')" />
                         <x-text-input id="virtualGarage" class="block mt-1 w-full" type="text" name="virtualGarage" :value="old('virtualGarage')?? $garage->virtualGarage" autofocus autocomplete="virtualGarage" />
@@ -121,4 +173,45 @@
             @include('layouts.footer')
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const villeSelect = document.getElementById('ville');
+    const quartierSelect = document.getElementById('quartier');
+
+    function fetchQuartiers(villeId, preSelectedQuartier = null) {
+        quartierSelect.innerHTML = '<option value="" selected>{{ __("Chargement...") }}</option>';
+
+        fetch(`/quartiers?ville_id=${villeId}`)
+            .then(response => response.json())
+            .then(data => {
+                quartierSelect.innerHTML = '<option value="" selected>{{ __("Sélectionnez un quartier (Optionnel)") }}</option>';
+                data.forEach(quartier => {
+                    const selected = preSelectedQuartier === quartier.quartier ? 'selected' : '';
+                    quartierSelect.innerHTML += `<option value="${quartier.quartier}" ${selected}>${quartier.quartier}</option>`;
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching quartiers:', error);
+                quartierSelect.innerHTML = '<option value="" disabled>{{ __("Erreur de chargement") }}</option>';
+            });
+    }
+
+    // Fetch quartiers when a new ville is selected
+    villeSelect.addEventListener('change', function () {
+        const villeId = this.value;
+        if (villeId) {
+            fetchQuartiers(villeId);
+        } else {
+            quartierSelect.innerHTML = '<option value="" selected>{{ __("Sélectionnez un Quartier (Optionnel)") }}</option>';
+        }
+    });
+
+    // Preload quartiers if a ville is pre-selected
+    const preSelectedVille = "{{ old('ville', $garage->ville) }}";
+    const preSelectedQuartier = "{{ old('quartier', $garage->quartier) }}";
+    if (preSelectedVille) {
+        fetchQuartiers(preSelectedVille, preSelectedQuartier);
+        }
+    });
+    </script>
 </x-admin-app-layout>

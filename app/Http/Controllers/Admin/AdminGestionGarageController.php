@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\garage;
+use App\Models\Quartier;
+use App\Models\Ville;
 use Illuminate\Http\Request;
 
 class AdminGestionGarageController extends Controller
@@ -22,7 +24,10 @@ class AdminGestionGarageController extends Controller
      */
     public function create()
     {
-        return view('admin.gestionGarages.create');
+        $villes = Ville::all();
+        $selectedVille = old('ville');
+        $quartiers = $selectedVille ? Quartier::where('ville_id', $selectedVille)->get() : collect();
+        return view('admin.gestionGarages.create', compact('villes', 'quartiers'));
     }
 
     /**
@@ -39,10 +44,17 @@ class AdminGestionGarageController extends Controller
             'virtualGarage' => ['nullable', 'string'],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2048']
         ]);
+
+        // Fetch the ville name based on the ID
+        $ville = Ville::findOrFail($request->ville); // Ensure the ID is valid
+
         if ($request->hasFile('photo')) {
             $imagePath = $request->file('photo')->store('garage', 'public');
             $data['photo'] = $imagePath;
         }
+
+        // Assign the ville name to the data array
+        $data['ville'] = $ville->ville; // Replace 'name' with the actual column for the ville name
 
         garage::create($data);
         // Flash message to the session
@@ -69,10 +81,13 @@ class AdminGestionGarageController extends Controller
      */
     public function edit(string $id)
     {
+        $villes = Ville::all();
+        $selectedVille = old('ville');
+        $quartiers = $selectedVille ? Quartier::where('ville_id', $selectedVille)->get() : collect();
         $garage = garage::find($id);
 
         if ($garage) {
-            return view('admin.gestionGarages.edit', compact('garage'));
+            return view('admin.gestionGarages.edit', compact('garage', 'villes', 'quartiers'));
         }
         return back()->with('error', 'Garage introuvable');
     }
@@ -92,10 +107,16 @@ class AdminGestionGarageController extends Controller
             'virtualGarage' => ['nullable', 'string'],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2048']
         ]);
+        // Fetch the ville name based on the ID
+        $ville = Ville::findOrFail($request->ville); // Ensure the ville ID is valid
+
         if ($request->hasFile('photo')) {
             $imagePath = $request->file('photo')->store('garage', 'public');
             $data['photo'] = $imagePath;
         }
+        // Assign the ville name to the data array
+        $data['ville'] = $ville->ville; // Replace 'name' with the actual column for the ville name
+
         $garage->update($data);
         // Flash message to the session
         session()->flash('success', 'Garage modifiée');
