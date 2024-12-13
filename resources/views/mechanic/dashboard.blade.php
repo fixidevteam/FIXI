@@ -10,7 +10,7 @@
               <h2 class="text-lg font-medium text-gray-900">REF : {{ Auth::user()->garage?->ref }}</h2>
             </div>
           </div>
-          <p class="text-sm text-gray-600 md:w-[300px] sm:w-full mx-0 text-left">Ajoutez vos informations en quelques clics,et accédez  à une vue d’ensemble claire et sécurisée de toutes vos données importantes.</p>
+          <p class="text-sm text-gray-600 md:w-[300px] sm:w-full mx-0 text-left">Ajoutez vos informations en quelques clics,et accédez à une vue d’ensemble claire et sécurisée de toutes vos données importantes.</p>
           <div class="mt-4">
             <a href="{{ route('mechanic.operations.index') }}">
               <x-primary-button>mes opération</x-primary-button>
@@ -20,9 +20,15 @@
       </div>
     </div>
     {{-- content --}}
+
     <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
       {{-- content (slot on layouts/app.blade.php)--}}
+
+
       <div>
+        <!-- THE CHART  -->
+        <canvas id="operationsChart" height="200" class="w-full"></canvas>
+        <!-- END OF CHART -->
         <div>
           <div class="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {{-- box 1 --}}
@@ -91,6 +97,11 @@
         </div>
       </div>
     </div>
+
+
+
+
+
     <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
       {{-- content (slot on layouts/app.blade.php)--}}
       <div>
@@ -121,8 +132,8 @@
                       </div>
                       <div class="flex-1 min-w-0">
                         <p class="text-sm font-medium text-gray-900 truncate">
-                          @php 
-                            $categorie = App\Models\nom_categorie::find($operation->categorie);
+                          @php
+                          $categorie = App\Models\nom_categorie::find($operation->categorie);
                           @endphp
                           {{$categorie->nom_categorie}}
                         </p>
@@ -196,4 +207,38 @@
       @include('layouts.footer')
     </div>
   </div>
+  <script>
+    // Data passed from the controller
+    const labels = @json($labels); // Month names
+    const values = @json($values); // Operation counts
+
+    const ctx = document.getElementById('operationsChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels, // Labels for the x-axis
+        datasets: [{
+          label: 'Nombre des operations',
+          data: values, // Data for the y-axis
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgb(34, 153, 233)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              stepSize: 1,
+              callback: function(value) {
+                return Number.isInteger(value) ? value : '';
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
 </x-mechanic-app-layout>

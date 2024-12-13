@@ -7,6 +7,7 @@ use App\Http\Controllers\Mechanic\MechanicClientController;
 use App\Http\Controllers\Mechanic\MechanicOperatioController;
 use App\Http\Controllers\Mechanic\MechanicVoitureController;
 use App\Http\Controllers\Mechanic\ProfileController;
+use App\Http\Controllers\Mechanic\mechanicDashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest:mechanic')->prefix('fixi-pro')->name('mechanic.')->group(function () {
@@ -22,9 +23,7 @@ Route::middleware('guest:mechanic')->prefix('fixi-pro')->name('mechanic.')->grou
 });
 
 Route::middleware(['auth:mechanic', 'checkMechanicStatus'])->prefix('fixi-pro')->name('mechanic.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('mechanic.dashboard');
-    })->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/dashboard',[mechanicDashboardController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
