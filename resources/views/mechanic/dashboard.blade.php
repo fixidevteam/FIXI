@@ -43,7 +43,7 @@
             {{ __('Filter') }}
           </x-primary-button>
         </form>
-        <canvas id="operationsChart" height="200" class="w-full bg-white"></canvas>
+        <canvas id="operationsChart" height="250" class="w-full bg-white"></canvas>
         <!-- END OF CHART -->
       </div>
       </div>
