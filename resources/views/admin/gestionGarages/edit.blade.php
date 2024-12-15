@@ -85,32 +85,6 @@
                         <x-text-input id="localisation" class="block mt-1 w-full" type="text" name="localisation" :value="old('localisation') ?? $garage->localisation" autofocus autocomplete="localisation" />
                         <x-input-error :messages="$errors->get('localisation')" class="mt-2" />
                     </div>
-                    {{-- <div>
-                        <x-input-label for="ville" :value="__('Ville')" />
-                            <select id="ville" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" name="ville">
-                                <option value="" disabled {{ old('ville') ? '' : 'selected' }}>{{ __('Sélectionnez une ville') }}</option>
-                                @foreach($villes as $ville)
-                                    <option value="{{ $ville->id }}" {{ old('ville') == $ville->id ? 'selected' : '' }}>
-                                        {{ $ville->ville }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <x-input-error :messages="$errors->get('ville')" class="mt-2" />
-                    </div>
-                    <div>
-                        <x-input-label for="quartier" :value="__('Quartier')" />
-                            <select id="quartier" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" name="quartier">
-                                <option value="" selected>{{ __('Sélectionnez un quartier (Optionnel)') }}</option>
-                                @if(old('ville'))
-                                    @foreach($quartiers as $quartier)
-                                        <option value="{{ $quartier->quartier }}" {{ old('quartier') == $quartier->quartier ? 'selected' : '' }}>
-                                            {{ $quartier->quartier }}
-                                        </option>
-                                    @endforeach
-                                @endif
-                            </select>
-                            <x-input-error :messages="$errors->get('quartier')" class="mt-2" />
-                    </div> --}}
                     <div>
                         <x-input-label for="ville" :value="__('Ville')" />
                         <select id="ville" 
@@ -148,7 +122,7 @@
                     </div>
                     
                     <div>
-                        <x-input-label for="virtualGarage" :value="__('garage Virtual')" />
+                        <x-input-label for="virtualGarage" :value="__('Garage virtual')" />
                         <x-text-input id="virtualGarage" class="block mt-1 w-full" type="text" name="virtualGarage" :value="old('virtualGarage')?? $garage->virtualGarage" autofocus autocomplete="virtualGarage" />
                         <x-input-error :messages="$errors->get('virtualGarage')" class="mt-2" />
                     </div>

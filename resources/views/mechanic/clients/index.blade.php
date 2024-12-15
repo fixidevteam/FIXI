@@ -31,7 +31,7 @@
                             </svg>
                             <a
                                 href="{{ route('mechanic.clients.index') }}"
-                                class="inline-flex items-center text-sm font-medium text-gray-700   ">
+                                class="inline-flex items-center text-sm font-medium text-gray-700">
                                 La liste des clients
                             </a>
                         </div>
@@ -149,6 +149,9 @@
                                         tel
                                     </th>
                                     <th scope="col" class="px-6 py-3">
+                                        Créé par
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
                                         action
                                     </th>
                                 </tr>
@@ -166,6 +169,17 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $client->telephone }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        @if($client->created_by_mechanic && $client->mechanic_id == Auth::user()->id)
+                                            <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">
+                                                Garage {{ '- ' . Auth::user()->garage->name }}
+                                            </span>
+                                        @else
+                                            <span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">
+                                                Client
+                                            </span>
+                                        @endif
                                     </td>
                                     <td class="px-6 py-4">
                                         <a href="{{route('mechanic.clients.show',$client->id)}}" class="font-medium capitalize text-blue-600 dark:text-blue-500 hover:underline">détails</a>

@@ -29,7 +29,7 @@
                 <div class="flex justify-between items-center my-6">
                     <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Liste des Marques</h2>
                     <a href="{{ route('admin.gestionMarque.create') }}">
-                        <x-primary-button class="hidden md:block">Ajouter Marque</x-primary-button>
+                        <x-primary-button class="hidden md:block">Ajouter une Marque</x-primary-button>
                     </a>
                 </div>
 

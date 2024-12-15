@@ -111,7 +111,7 @@
                             <x-input-error :messages="$errors->get('quartier')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="virtualGarage" :value="__('garage Virtual')" />
+                        <x-input-label for="virtualGarage" :value="__('Garage virtual')" />
                         <x-text-input id="virtualGarage" class="block mt-1 w-full" type="text" name="virtualGarage" :value="old('virtualGarage')" autofocus autocomplete="virtualGarage" />
                         <x-input-error :messages="$errors->get('virtualGarage')" class="mt-2" />
                     </div>
