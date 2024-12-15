@@ -66,7 +66,7 @@
                             {{ __('Filter') }}
                             </x-primary-button>
                         </form>
-                        <canvas id="operations" height="200" class="w-full bg-white"></canvas>
+                        <canvas id="operations" height="350" class="w-full bg-white"></canvas>
                         <!-- END OF CHART -->
                     </div>
                     <h2 class="text-sm md:text-base mb-4">Suivi des opérations et des clients (3 derniers mois)</h2>
