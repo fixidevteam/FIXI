@@ -56,12 +56,12 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
             <div>
                 <x-input-label for="currentVille" :value="__('Ville Actuelle')" />
-                <x-text-input id="currentVille" type="text" class="mt-1 block w-full" :value="old('ville', $user->ville)" readonly/>
+                <x-text-input id="currentVille" type="text" class="mt-1 block w-full bg-gray-100 border border-gray-300 text-gray-900 cursor-not-allowed" :value="old('ville', $user->ville)" disabled readonly/>
             </div>
             <!-- Add Quartier Field -->
             <div>
                 <x-input-label for="cuuentQuartier" :value="__('Quartier Actuelle')" />
-                <x-text-input id="cuuentQuartier" type="text" class="mt-1 block w-full" :value="old('quartier', $user->quartier)" readonly/>
+                <x-text-input id="cuuentQuartier" type="text" class="mt-1 block w-full bg-gray-100 border border-gray-300 text-gray-900 cursor-not-allowed" :value="old('quartier', $user->quartier)" disabled readonly/>
             </div>
         </div>
         
