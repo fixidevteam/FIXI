@@ -151,7 +151,7 @@ class OperationController extends Controller
         })->get();
         $operation = Operation::find($id);
         $sousOperation = nom_sous_operation::all();
-        if (!$operation || $operation->voiture_id != Session::get('voiture_id')) {
+        if (!$operation || $operation->voiture_id != $operation->voiture_id) {
             abort(403);
         }
         return view('userOperations.edit', compact('operation', 'categories', 'garages'));
