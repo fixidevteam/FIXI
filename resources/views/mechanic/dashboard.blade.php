@@ -162,9 +162,11 @@
                         </p>
                         <p class="text-sm text-gray-500 truncate">
                           @php
-                          $nomOp= App\Models\nom_operation::find($operation->nom);
+                                $nomOp = $operation->nom === 'Autre'
+                                ? "Autre" // Display "autre" or a default
+                                : App\Models\nom_operation::find($operation->nom);
                           @endphp
-                          {{$nomOp->nom_operation ?? 'N/A'}}
+                                {{ is_string($nomOp) ? $nomOp : ($nomOp->nom_operation ?? 'N/A') }}
                         </p>
                       </div>
                       <div class="inline-flex items-center text-base font-semibold text-gray-900">
