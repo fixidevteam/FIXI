@@ -84,7 +84,11 @@
               Operation
             </p>
             <p class="text-sm text-gray-500 truncate">
-              {{ $ope->where('id', $operation->nom)->first()->nom_operation ?? 'N/A' }}
+              {{ 
+                $operation->nom === 'Autre' 
+                ? 'Autre' 
+                : ($ope->where('id', $operation->nom)->first()->nom_operation ?? 'N/A') 
+              }}
             </p>
           </div>
           {{-- Date --}}

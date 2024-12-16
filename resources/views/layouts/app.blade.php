@@ -70,6 +70,14 @@
 
                             operationSelect.appendChild(option);
                         });
+                        // Add the static "Autre" option
+                        const autreOption = document.createElement('option');
+                        autreOption.value = 'autre';
+                        autreOption.textContent = 'Autre';
+                        if (existingOperationId === 'autre') {
+                            autreOption.selected = true;
+                        }
+                        operationSelect.appendChild(autreOption);
 
                         // Load sous-operations if an operation is selected
                         if (operationSelect.value) {

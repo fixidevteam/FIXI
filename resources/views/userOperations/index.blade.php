@@ -94,8 +94,10 @@
                                         }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{
-                                            $operationsAll->where('id', $operation->nom)->first()->nom_operation ?? 'N/A';
+                                        {{ 
+                                            $operation->nom === 'Autre' 
+                                                ? 'Autre' 
+                                                : ($operationsAll->where('id', $operation->nom)->first()->nom_operation ?? 'N/A') 
                                         }}
                                     </td>
                                     <td class="px-6 py-4">
@@ -129,9 +131,7 @@
                     {{ $operations->links() }}
                 </div>
                 {{-- table close --}}
-
             </div>
-
         </div>
         {{-- contet close colse --}}
         {{-- footer --}}

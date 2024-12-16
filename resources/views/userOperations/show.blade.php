@@ -192,7 +192,9 @@
             </p>
             <p class="text-sm text-gray-500 truncate">
               {{
-                $operations->where('id', $operation->nom)->first()->nom_operation ?? 'N/A';
+                $operation->nom === 'Autre' 
+                ? 'Autre' 
+                : ($operations->where('id', $operation->nom)->first()->nom_operation ?? 'N/A')
               }}
             </p>
           </div>

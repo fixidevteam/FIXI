@@ -70,7 +70,6 @@
                                     <th scope="col" class="px-6 py-3">Numéro d'immatriculation</th>
                                     <th scope="col" class="px-6 py-3">Catégorie</th>
                                     <th scope="col" class="px-6 py-3">Opération</th>
-                                    
                                     <th scope="col" class="px-6 py-3">Date d'opération</th>
                                     <th scope="col" class="px-6 py-3">Photo</th>
                                     <th scope="col" class="px-6 py-3">Action</th>
@@ -88,7 +87,11 @@
                                             {{ $categories->where('id', $operation->categorie)->first()->nom_categorie ?? 'N/A' }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $ope->where('id', $operation->nom)->first()->nom_operation ?? 'N/A' }}
+                                            {{ 
+                                                $operation->nom === 'Autre'
+                                                ? 'Autre' 
+                                                : ($ope->where('id', $operation->nom)->first()->nom_operation ?? 'N/A')
+                                            }}
                                         </td>
                                     
                                         <td class="px-6 py-4">

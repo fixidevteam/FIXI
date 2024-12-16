@@ -192,7 +192,11 @@
 
                   {{-- nom --}}
                   <td class="px-6 py-4">
-                    {{$nom_operations->where('id', $operation->nom)->first()->nom_operation ?? 'N/A'}}
+                    {{
+                        $operation->nom === 'Autre' 
+                        ? 'Autre' 
+                        : ($nom_operations->where('id', $operation->nom)->first()->nom_operation ?? 'N/A')
+                    }}
                   </td>
                   {{-- date doperation --}}
                   <td class="px-6 py-4">

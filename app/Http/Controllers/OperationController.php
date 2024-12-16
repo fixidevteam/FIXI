@@ -72,6 +72,10 @@ class OperationController extends Controller
             'garage_id' => ['nullable'],
             'new_garage_name' => ['nullable', 'string', 'max:255'],
         ]);
+        // Check if "Autre" is selected and handle it
+        if ($request->nom === 'autre') {
+            $data['nom'] = 'Autre'; // Store 'Autre' directly in the 'nom' field
+        }
         // If "Autre" is selected, create a new garage for the current user
         if ($request->filled('new_garage_name')) {
             $newGarage = Garage::create([
@@ -173,6 +177,10 @@ class OperationController extends Controller
             'garage_id' => ['nullable'],
             'new_garage_name' => ['nullable', 'string', 'max:255',],
         ]);
+        // Check if "Autre" is selected and handle it
+        if ($request->nom === 'autre') {
+            $data['nom'] = 'Autre'; // Store 'Autre' directly in the 'nom' field
+        }
         // Handle "Autre" option for a new garage
         if ($request->filled('new_garage_name')) {
             $newGarage = Garage::create([
