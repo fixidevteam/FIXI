@@ -74,15 +74,19 @@ class MechanicOperatioController extends Controller
             'description' => ['max:255'],
             'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
             'date_operation' => ['required', 'date'],
-        
-        ]);
 
+        ]);
+        // Check if "Autre" is selected and handle it
+        if ($request->nom === 'autre') {
+            $data['nom'] = 'Autre'; // Store 'Autre' directly in the 'nom' field
+        }
         // Use temp_photo_path if no new file is uploaded
         if (!$request->hasFile('photo') && $request->input('temp_photo_path')) {
             $data['photo'] = $request->input('temp_photo_path');
         } elseif ($request->hasFile('photo')) {
             $data['photo'] = $imagePath;
         }
+
 
         $data['voiture_id'] = $voiture;
         $data['garage_id'] = $garage;
