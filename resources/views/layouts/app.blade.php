@@ -74,7 +74,7 @@
                         const autreOption = document.createElement('option');
                         autreOption.value = 'autre';
                         autreOption.textContent = 'Autre';
-                        if (existingOperationId === 'autre') {
+                        if (existingOperationId === 'autre' || existingOperationId === 'Autre') {
                             autreOption.selected = true;
                         }
                         operationSelect.appendChild(autreOption);
