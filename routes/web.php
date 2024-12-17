@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\ProviderController;
 use App\Http\Controllers\generateVehicleHistoryPDF;
 use App\Http\Controllers\getQuartiersController;
 use App\Http\Controllers\getAnalyticsDataController;
+use App\Http\Controllers\ListingGaragesController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OperationController;
 use App\Http\Controllers\PapierPeronnelController;
@@ -45,6 +46,7 @@ Route::middleware(['auth', 'checkdocuments', 'checkUserStatus'])->prefix('my-fix
     Route::resource('/paiperPersonnel', PapierPeronnelController::class);
     Route::resource('/paiperVoiture', PapierVoitureController::class);
     Route::resource('/operation', OperationController::class);
+    Route::resource('/garages', ListingGaragesController::class);
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::get('/notifications/{id}/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
     Route::get('/notifications/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.markAllAsRead');
