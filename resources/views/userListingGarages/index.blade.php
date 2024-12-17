@@ -91,7 +91,7 @@
                             <div>
                                 <div class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row w-full hover:bg-gray-100">
                                     <img 
-                                        class="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-80 md:rounded-none md:rounded-s-lg"
+                                        class="object-cover w-full h-96 rounded-t-lg md:h-60 md:w-60 md:rounded-none md:rounded-s-lg"
                                         src="{{ $garage->photo ? asset('storage/' . $garage->photo) : '/images/defaultimage.jpg' }}"
                                         alt="Garage Image"
                                     >
