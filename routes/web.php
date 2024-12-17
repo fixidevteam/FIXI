@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\ProviderController;
+use App\Http\Controllers\generateVehicleHistoryPDF;
 use App\Http\Controllers\getQuartiersController;
 use App\Http\Controllers\getAnalyticsDataController;
 use App\Http\Controllers\NotificationController;
@@ -47,6 +48,7 @@ Route::middleware(['auth', 'checkdocuments', 'checkUserStatus'])->prefix('my-fix
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::get('/notifications/{id}/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
     Route::get('/notifications/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.markAllAsRead');
+    Route::get('/voiture/{id}/pdf', [generateVehicleHistoryPDF::class, 'generateVehicleHistoryPDF'])->name('voiture.pdf');
 });
 // General Authentication Routes
 require_once __DIR__ . '/auth.php';

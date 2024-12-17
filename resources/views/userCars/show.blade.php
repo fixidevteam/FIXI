@@ -142,6 +142,14 @@
             </div>
           </div>
         </div>
+        @if($voiture->operations->isNotEmpty())
+        <div class="my-2 flex sm:justify-start">
+          <a href="{{route('voiture.pdf',$voiture->id)}}">
+            <x-primary-button class="block md:inline-block">Télécharger l'historique de voiture</x-primary-button>
+          </a>
+        </div>
+        @endif
+
         {{-- details of cars close --}}
       </div>
     </div>
