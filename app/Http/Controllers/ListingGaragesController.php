@@ -24,10 +24,11 @@ class ListingGaragesController extends Controller
             return $query->where('ville', $searchVille);
         })
             ->whereNull('user_id') // Exclude garages with a user_id
-            ->paginate(10); // 5 items per page
+            ->paginate(10); // 10 items per page
 
         return view('userListingGarages.index', compact('garages', 'villes', 'searchVille'));
     }
+
 
 
     /**
