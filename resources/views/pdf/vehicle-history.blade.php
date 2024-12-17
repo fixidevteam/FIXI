@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -8,15 +8,39 @@
     <style>
         /* General Page Styling */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'DejaVu Sans', sans-serif;
             margin: 20px;
             color: #333;
         }
 
-        h2 {
+        h1,
+        h2,
+        h3 {
             text-align: center;
-            color: #444;
             margin-bottom: 10px;
+            color: #444;
+        }
+
+        h1 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        h2 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        p {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
         }
 
         /* Table Styling */
@@ -34,8 +58,8 @@
         }
 
         th {
-            background-color: #f4f4f4;
-            color: #555;
+            background-color: #34495e;
+            color: #ffffff;
             font-weight: bold;
             text-transform: uppercase;
             text-align: center;
@@ -59,16 +83,34 @@
         /* Header Styling */
         .header {
             text-align: center;
-            font-size: 14px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .header img {
+            width: 100px;
+            margin-bottom: 10px;
         }
 
         /* Footer Styling */
         .footer {
-            margin-top: 20px;
+            margin-top: 30px;
             text-align: center;
-            font-size: 10px;
+            font-size: 12px;
             color: #777;
+        }
+
+        .footer img {
+            width: 50px;
+            margin-top: 10px;
+        }
+
+        /* Custom Greetings */
+        .greeting {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -76,9 +118,11 @@
 <body>
     <!-- Page Header -->
     <div class="header">
-        <img src="{{ public_path('images/fixi.png') }}" alt="Logo" style="width: 100px;">
-
-        <h3>Historique des opérations pour le véhicule: {{ $voiture->marque }} {{ $voiture->modele }}</h3>
+        <img src="{{ public_path('images/fixi.png') }}" alt="Logo">
+        <h1>Bonjour, {{ Auth::user()->name }} </h1>
+        <h2>Historique des opérations pour le véhicule</h2>
+        <h3>{{ $voiture->marque }} {{ $voiture->modele }} - {{ $voiture->numero_immatriculation }}</h3>
+        <p>Ceci est le document détaillé des opérations effectuées sur votre véhicule.</p>
     </div>
 
     <!-- Operations Table -->
@@ -109,10 +153,11 @@
                     }}
                 </td>
 
-                <!-- Description -->
+                <!-- Garage -->
                 <td>
                     {{ $operation->garage->name ?? 'N/A' }}
                 </td>
+
                 <!-- Description -->
                 <td>
                     {{ $operation->description ?? 'N/A' }}
@@ -129,8 +174,7 @@
 
     <!-- Footer -->
     <div class="footer">
-        <img src="{{ public_path('images/fixi.png') }}" alt="Logo" style="width: 50px;">
-
+        <img src="{{ public_path('images/fixi.png') }}" alt="Logo">
         <p>Document généré par MyFIXI | {{ now()->format('d/m/Y H:i') }}</p>
     </div>
 </body>
