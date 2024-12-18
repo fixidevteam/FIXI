@@ -142,6 +142,25 @@
         function clearSousOperations() {
             document.getElementById('sousOperationCheckboxes').innerHTML = ""; // Clear sous-operations container
         }
+        // copy of the ref garage
+        document.getElementById('garage-ref').addEventListener('click', function() {
+        const refText = this.textContent.trim(); // Get the text content
+        navigator.clipboard.writeText(refText) // Copy to clipboard
+            .then(() => {
+                // Show the success message
+                const notification = document.getElementById('copy-notification');
+                notification.classList.remove('hidden');
+                setTimeout(() => {
+                    notification.classList.add('hidden');
+                }, 3000); // Hide the message after 3 seconds
+            })
+            .catch(err => {
+                console.error('Error copying text: ', err);
+                });
+        });
+
+
+
     </script>
 </body>
 

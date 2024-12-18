@@ -7,7 +7,28 @@
           <div class="flex flex-col md:flex-row md:justify-between md:items-center">
             <h1 class="text-lg font-medium text-gray-900">Bonjour, {{ Auth::user()->name }} </h1>
             <div>
-              <h2 class="text-lg font-medium text-gray-900">REF : {{ Auth::user()->garage?->ref }}</h2>
+              <h2  class="text-lg font-medium text-gray-900">REF : <span id="garage-ref" class="cursor-pointer">{{ Auth::user()->garage?->ref }}</span></h2>
+            </div>
+            <!-- Notification element for success message -->
+            <div id="copy-notification" class="fixed top-20 right-4 mb-5 flex justify-end z-10 hidden"
+            x-data="{ show: true }"
+            x-show="show"
+            x-transition:leave="transition ease-in duration-1000"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            x-init="setTimeout(() => show = false, 3000)">
+            <div role="alert" class="rounded-xl border border-gray-100 bg-white p-4 shadow-md">
+              <div class="flex items-start gap-4">
+                <span class="text-green-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </span>
+                <div class="flex-1">
+                  <strong class="block font-medium text-gray-900">Référence copiée dans le presse-papiers!</strong>
+                </div>
+              </div>
+            </div>
             </div>
           </div>
           <p class="text-sm text-gray-600 md:w-[300px] sm:w-full mx-0 text-left">Ajoutez vos informations en quelques clics,et accédez à une vue d’ensemble claire et sécurisée de toutes vos données importantes.</p>
