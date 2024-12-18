@@ -7,6 +7,7 @@ use App\Models\garage;
 use App\Models\Quartier;
 use App\Models\Ville;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class AdminGestionGarageController extends Controller
 {
@@ -37,7 +38,6 @@ class AdminGestionGarageController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'ref' => ['required', 'unique:garages'],
             'localisation' => ['nullable', 'string'],
             'quartier' => ['nullable', 'string'],
             'ville' => ['required', 'string'],
@@ -56,6 +56,10 @@ class AdminGestionGarageController extends Controller
 
         // Assign the ville name to the data array
         $data['ville'] = $ville->ville; // Replace 'name' with the actual column for the ville name
+        // Generate a unique reference ID
+        $lastGarage = Garage::latest()->first(); // Get the last created garage
+        $lastId = $lastGarage ? $lastGarage->id : 0; // Get the last ID or start from 0
+        $data['ref'] = 'GAR-' . str_pad($lastId + 1, 5, '0', STR_PAD_LEFT); // Format as GAR-00001, GAR-00002, etc.
 
         garage::create($data);
         // Flash message to the session
@@ -101,7 +105,11 @@ class AdminGestionGarageController extends Controller
         $garage = garage::findOrFail($id);
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'ref' => ['required'],
+            'ref' => [
+                'required',
+                // Ensure the ref is unique, excluding the current garage being updated
+                Rule::unique('garages')->ignore($garage->id)
+            ],
             'localisation' => ['nullable', 'string'],
             'quartier' => ['nullable', 'string'],
             'ville' => ['required', 'string'],

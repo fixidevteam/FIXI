@@ -75,11 +75,6 @@
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="ref" :value="__('Ref')" />
-                        <x-text-input id="ref" class="block mt-1 w-full" type="text" name="ref" :value="old('ref')" autofocus autocomplete="ref" />
-                        <x-input-error :messages="$errors->get('ref')" class="mt-2" />
-                    </div>
-                    <div>
                         <x-input-label for="localisation" :value="__('Localisation')" />
                         <x-text-input id="localisation" class="block mt-1 w-full" type="text" name="localisation" :value="old('localisation')" autofocus autocomplete="localisation" />
                         <x-input-error :messages="$errors->get('localisation')" class="mt-2" />
