@@ -98,10 +98,13 @@
                                     <div class="flex flex-col justify-between p-4 leading-normal w-full">
                                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $garage->name }}</h5>
                                         <p class="mb-3 font-normal text-gray-700">
-                                            {{ $garage->ville }} {{ $garage->quartier ? '- ' . $garage->quartier : '' }}
+                                            <span class="text-red-700 font-bold">{{ $garage->ville }}</span> {{ $garage->quartier ? '- ' . $garage->quartier : '' }}
                                         </p>
                                         @if($garage->localisation)
                                             <p class="mb-3 font-normal text-gray-700">{{ $garage->localisation }}</p>
+                                        @endif
+                                        @if($garage->services)
+                                        <p class="mb-3 text-red-700 font-bold">{{ implode(' / ', $garage->services) }}</p>
                                         @endif
                                         <a href="{{ route('garages.show', $garage->id) }}">
                                             <button class="inline-flex items-center px-4 py-2 bg-red-600 text-white font-semibold text-xs rounded-[24px] hover:bg-gray-700 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition ease-in-out duration-150">
