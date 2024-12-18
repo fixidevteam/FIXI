@@ -46,6 +46,9 @@ class ProfileController extends Controller
         // Update the user's information
         $user = $request->user();
         $user->fill([
+            'name' => $request->name,
+            'email' => $request->email,
+            'telephone' => $request->telephone,
             'ville' => $ville->ville, // Store the name of the city
             'quartier' => $request->quartier, // Update quartier directly
         ]);
