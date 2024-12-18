@@ -137,7 +137,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($voiture->operations as $operation)
+            @foreach($voiture->operations->sortByDesc('date_operation') as $operation)
             <tr>
                 <!-- Catégorie -->
                 <td>

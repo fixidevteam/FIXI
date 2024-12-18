@@ -28,6 +28,10 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const operationSelect = document.getElementById('operation');
+            const newOperationWrapper = document.getElementById('newOperationWrapper');
+            const newOperationInput = document.getElementById('new_operation');
+
             const initialCategorie = document.getElementById('categorie').value;
 
             if (initialCategorie) {
@@ -38,7 +42,17 @@
                 loadOperations(this.value); // Refresh operations when category changes
             });
 
-            document.getElementById('operation').addEventListener('change', function() {
+            operationSelect.addEventListener('change', function() {
+                if (this.value === 'autre') {
+                    // Show the custom operation input
+                    newOperationWrapper.classList.remove('hidden');
+                } else {
+                    // Hide the custom operation input
+                    newOperationWrapper.classList.add('hidden');
+                    newOperationInput.removeAttribute('required');
+                    newOperationInput.value = ''; // Clear the input field
+                }
+
                 if (this.value) {
                     loadsousOperations(this.value); // Load sous-operations when an operation is selected
                 } else {
@@ -46,6 +60,7 @@
                 }
             });
         });
+
 
         function loadOperations(categorieId) {
             const existingOperationElement = document.getElementById('existingOperationId');
@@ -76,6 +91,7 @@
                         autreOption.textContent = 'Autre';
                         if (existingOperationId === 'autre' || existingOperationId === 'Autre') {
                             autreOption.selected = true;
+                            newOperationWrapper.classList.remove('hidden');
                         }
                         operationSelect.appendChild(autreOption);
 

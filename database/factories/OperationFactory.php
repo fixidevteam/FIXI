@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\garage;
 use App\Models\Operation;
 use App\Models\Voiture;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -13,11 +14,12 @@ class OperationFactory extends Factory
     public function definition()
     {
         return [
-            'categorie' => $this->faker->word,
-            'nom' => $this->faker->word,
+            'categorie' => 1,
+            'nom' => 1,
             'description' => $this->faker->sentence,
             'date_operation' => $this->faker->date,
-            'voiture_id' => Voiture::factory(),
+            'voiture_id' => 6,
+            'garage_id' => $this->faker->randomElement(garage::all())->id
         ];
     }
 }

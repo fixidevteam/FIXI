@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\nom_categorie;
 use App\Models\nom_operation;
 use App\Models\nom_sous_operation;
+use App\Models\Operation;
 use Illuminate\Http\Request;
 
 class AdminGestionCategorieController extends Controller
@@ -16,9 +17,11 @@ class AdminGestionCategorieController extends Controller
     public function index()
     {
         $categories = nom_categorie::all();
+        $operationsCreatedByUser = Operation::whereNotNull('autre_operation')->get();
+        // dd($operationsCreatedByUser); 
         $operations = nom_operation::all();
         $sousOperations = nom_sous_operation::all();
-        return view('admin.gestionCategorie.index', compact('categories', 'operations', 'sousOperations'));
+        return view('admin.gestionCategorie.index', compact('categories', 'operations','operationsCreatedByUser', 'sousOperations'));
     }
 
     /**

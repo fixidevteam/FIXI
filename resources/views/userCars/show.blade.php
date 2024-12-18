@@ -396,7 +396,7 @@
                 <td class="px-6 py-4">
                   {{
                       $operation->nom === 'Autre' 
-                      ? 'Autre' 
+                      ? $operation->autre_operation 
                       : ($operations->where('id', $operation->nom)->first()->nom_operation ?? 'N/A')
                   }}
                 </td>
