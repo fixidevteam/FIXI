@@ -70,9 +70,6 @@
           <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Détails des garages</h2>
         </div>
         {{-- details of garage --}}
-        <div class="flex justify-between items-center my-6">
-          <h3 class="text-xl font-medium leading-9 tracking-tight text-gray-900">{{$garage->name}}</h3>
-        </div>
         <div class="flex flex-col justify-center gap-4 my-8 overflow-hidden">
           <img
           class="w-full h-96 object-cover cursor-pointer hover:scale-105 transition-all duration-300 ease-in"
@@ -80,14 +77,17 @@
           alt="Garage Image"
           id="garageImage"
         >
+        </div>
+        <div class="flex justify-between items-center my-6">
+          <h3 class="text-xl font-medium leading-9 tracking-tight text-gray-900">{{$garage->name}}</h3>
         </div>        
-        <div class="grid grid-cols-1 md:grid-cols-2">
+        <div>
           {{-- ville --}}
           <div class="mb-4">
             <p class="first-letter:capitalize text-sm font-medium text-gray-900 ">
               ville
             </p>
-            <p class="text-sm text-gray-500 ">
+            <p class="text-sm text-red-700 font-bold">
               {{$garage->ville}}
             </p>
           </div>
@@ -103,7 +103,7 @@
           </div>
           @endif
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2">
+        <div>
           {{-- localisation --}}
         @if($garage->localisation !== NULL)
         <div class="mb-4">
@@ -117,13 +117,26 @@
         @endif
           {{-- virtualGarage --}}
           @if($garage->virtualGarage !== NULL)
-          <div>
+          <div class="mb-4">
             <p class="first-letter:capitalize text-sm font-medium text-gray-900 ">
               virtual garage
             </p>
-              <a href="{{$garage->virtualGarage}}" class="text-sm text-blue-500 hover:underline">{{ $garage->name }}</a>
+              <a href="{{$garage->virtualGarage}}" class="text-sm text-blue-500 hover:underline" target="_blank">{{ $garage->name }}</a>
           </div>
           @endif
+        </div>
+        <div>
+          {{-- localisation --}}
+        @if($garage->services !== NULL)
+        <div class="mb-4">
+          <p class="capitalize text-sm font-medium text-gray-900">
+            Domaines
+          </p>
+          <p class="text-sm text-red-700 font-bold">
+            {{ implode(' / ', $garage->services) }}
+          </p>
+        </div>
+        @endif
         </div>
         {{-- details of garage close --}}
       </div>

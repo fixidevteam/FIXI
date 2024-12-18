@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::table('garages', function (Blueprint $table) {
             $table->string('photo')->nullable()->after('ref');
-            
         });
     }
 

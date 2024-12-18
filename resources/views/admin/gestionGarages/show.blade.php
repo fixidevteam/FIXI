@@ -158,6 +158,16 @@
                 <p class="capitalize text-sm font-medium text-gray-900"> Localisation</p>
                 <p class="text-sm text-gray-500">{{$garage->localisation ?? 'N/A'}}</p>
               </div>
+              <div>
+                <p class="capitalize text-sm font-medium text-gray-900">Domaines</p>
+                <p class="text-sm text-gray-500"> 
+                    @if($garage->services)
+                        {{ implode(' / ', $garage->services) }}
+                    @else
+                        <span class="text-sm text-gray-500">N/A</span>
+                    @endif
+                </p>
+              </div>
             </div>
 
             {{-- Column 2 --}}

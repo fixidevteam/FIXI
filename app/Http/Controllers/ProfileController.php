@@ -23,6 +23,9 @@ class ProfileController extends Controller
         // Fetch all villes for the dropdown
         $villes = Ville::all();
 
+        // Get the ville_id corresponding to the user's ville name
+        $userVille = Ville::where('ville', $user->ville)->first();
+
         // Fetch quartiers if the user already has a ville
         $quartiers = $user->ville
             ? Quartier::where('ville_id', $user->ville)->get()
@@ -32,6 +35,7 @@ class ProfileController extends Controller
             'user' => $user,
             'villes' => $villes,
             'quartiers' => $quartiers,
+            'userVilleId' => $userVille?->id,
         ]);
     }
 
@@ -45,11 +49,10 @@ class ProfileController extends Controller
 
         // Update the user's information
         $user = $request->user();
-
         $user->fill([
-            'name' => $request->name, // Update name
-            'email' => $request->email, // Update email
-            'telephone' => $request->telephone, // Update telephone
+            'name' => $request->name,
+            'email' => $request->email,
+            'telephone' => $request->telephone,
             'ville' => $ville->ville, // Store the name of the city
             'quartier' => $request->quartier, // Update quartier directly
         ]);

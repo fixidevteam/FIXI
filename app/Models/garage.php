@@ -18,7 +18,11 @@ class garage extends Model
         'quartier',
         'localisation',
         'user_id',
-        'virtualGarage'
+        'virtualGarage',
+        'services'
+    ];
+    protected $casts = [
+        'services' => 'array',
     ];
     public function mechanics(): HasMany
     {

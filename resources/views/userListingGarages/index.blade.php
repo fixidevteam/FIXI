@@ -32,7 +32,7 @@
                             <a
                                 href="{{ route('garages.index') }}"
                                 class="inline-flex items-center text-sm font-medium text-gray-700">
-                                listing des garages
+                                Listing des garages
                             </a>
                         </div>
                     </li>
@@ -91,17 +91,20 @@
                             <div>
                                 <div class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row w-full hover:bg-gray-100">
                                     <img 
-                                        class="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-80 md:rounded-none md:rounded-s-lg"
+                                        class="object-cover w-full h-96 rounded-t-lg md:h-60 md:w-60 md:rounded-none md:rounded-s-lg"
                                         src="{{ $garage->photo ? asset('storage/' . $garage->photo) : '/images/defaultimage.jpg' }}"
                                         alt="Garage Image"
                                     >
                                     <div class="flex flex-col justify-between p-4 leading-normal w-full">
                                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $garage->name }}</h5>
                                         <p class="mb-3 font-normal text-gray-700">
-                                            {{ $garage->ville }} {{ $garage->quartier ? '- ' . $garage->quartier : '' }}
+                                            <span class="text-red-700 font-bold">{{ $garage->ville }}</span> {{ $garage->quartier ? '- ' . $garage->quartier : '' }}
                                         </p>
                                         @if($garage->localisation)
                                             <p class="mb-3 font-normal text-gray-700">{{ $garage->localisation }}</p>
+                                        @endif
+                                        @if($garage->services)
+                                        <p class="mb-3 text-red-700 font-bold">{{ implode(' / ', $garage->services) }}</p>
                                         @endif
                                         <a href="{{ route('garages.show', $garage->id) }}">
                                             <button class="inline-flex items-center px-4 py-2 bg-red-600 text-white font-semibold text-xs rounded-[24px] hover:bg-gray-700 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition ease-in-out duration-150">
