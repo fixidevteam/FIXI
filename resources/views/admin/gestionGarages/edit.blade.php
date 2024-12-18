@@ -127,6 +127,51 @@
                         <x-input-error :messages="$errors->get('virtualGarage')" class="mt-2" />
                     </div>
                     <div>
+                        <x-input-label for="services" :value="__('Domaines')" />
+                        <div class="mt-2 space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" 
+                                    name="services[]" 
+                                    value="Carrosserie" 
+                                    class="w-4 h-4 text-black border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                                    {{ in_array('Carrosserie', old('services', $garage->services ?? [])) ? 'checked' : '' }} />
+                                <span class="ml-2 text-sm text-gray-600">{{ __('Carrosserie') }}</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" 
+                                    name="services[]" 
+                                    value="Lavage" 
+                                    class="w-4 h-4 text-black border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                                    {{ in_array('Lavage', old('services', $garage->services ?? [])) ? 'checked' : '' }} />
+                                <span class="ml-2 text-sm text-gray-600">{{ __('Lavage') }}</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" 
+                                    name="services[]" 
+                                    value="Mécanique" 
+                                    class="w-4 h-4 text-black border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                                    {{ in_array('Mécanique', old('services', $garage->services ?? [])) ? 'checked' : '' }} />
+                                <span class="ml-2 text-sm text-gray-600">{{ __('Mécanique') }}</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" 
+                                    name="services[]" 
+                                    value="Pneumatique" 
+                                    class="w-4 h-4 text-black border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                                    {{ in_array('Pneumatique', old('services', $garage->services ?? [])) ? 'checked' : '' }} />
+                                <span class="ml-2 text-sm text-gray-600">{{ __('Pneumatique') }}</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" 
+                                    name="services[]" 
+                                    value="Dépannage" 
+                                    class="w-4 h-4 text-black border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                                    {{ in_array('Dépannage', old('services', $garage->services ?? [])) ? 'checked' : '' }} />
+                                <span class="ml-2 text-sm text-gray-600">{{ __('Dépannage') }}</span>
+                            </label>
+                        </div>
+                    </div>                    
+                    <div>
                         <x-input-label for="file_input" :value="__('Photo')" />
                         <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" accept="image/*" />
                         <x-input-error :messages="$errors->get('photo')" class="mt-2" />

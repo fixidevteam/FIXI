@@ -42,7 +42,8 @@ class AdminGestionGarageController extends Controller
             'quartier' => ['nullable', 'string'],
             'ville' => ['required', 'string'],
             'virtualGarage' => ['nullable', 'string'],
-            'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2048']
+            'services' => ['nullable', 'array'], // Expecting an array for services
+            'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2048'],
         ]);
 
         // Fetch the ville name based on the ID
@@ -105,6 +106,7 @@ class AdminGestionGarageController extends Controller
             'quartier' => ['nullable', 'string'],
             'ville' => ['required', 'string'],
             'virtualGarage' => ['nullable', 'string'],
+            'services' => ['nullable', 'array'], // Expecting an array for services
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2048']
         ]);
         // Fetch the ville name based on the ID

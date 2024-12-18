@@ -121,7 +121,7 @@
             <p class="first-letter:capitalize text-sm font-medium text-gray-900 ">
               virtual garage
             </p>
-              <a href="{{$garage->virtualGarage}}" class="text-sm text-blue-500 hover:underline">{{ $garage->name }}</a>
+              <a href="{{$garage->virtualGarage}}" class="text-sm text-blue-500 hover:underline" target="_blank">{{ $garage->name }}</a>
           </div>
           @endif
         </div>
