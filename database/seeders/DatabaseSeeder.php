@@ -188,18 +188,16 @@ class DatabaseSeeder extends Seeder
         //     'password' => Hash::make('user12345'),
         //     'garage_id'=>1 
         // ]);
-        // $this->call([
-        //     VilleSeeder::class,
-        //     QuartierSeeder::class,
-        //     MarqueSeeder::class,
+        $this->call([
+            OperationSeeder::class,
 
-        //     // Other seeders can be listed here
-        // ]);
-        Mechanic::create([
-            'name' => 'mechannic',
-            'email' => 'user1@gmail.com',
-            'password' => Hash::make('user12345'),
-            'garage_id'=>1 
+            // Other seeders can be listed here
         ]);
+        // Mechanic::create([
+        //     'name' => 'mechannic',
+        //     'email' => 'user1@gmail.com',
+        //     'password' => Hash::make('user12345'),
+        //     'garage_id'=>1 
+        // ]);
     }
 }

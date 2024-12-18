@@ -66,15 +66,19 @@ class OperationController extends Controller
         $data = $request->validate([
             'categorie' => ['required',],
             'nom' => ['nullable'],
+            'autre_operation' => ['nullable', 'string', 'max:255'],
             'description' => ['max:255'],
             'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
             'date_operation' => ['required', 'date'],
             'garage_id' => ['nullable'],
             'new_garage_name' => ['nullable', 'string', 'max:255'],
         ]);
-        // Check if "Autre" is selected and handle it
+        // Handle "Autre" for operations
         if ($request->nom === 'autre') {
-            $data['nom'] = 'Autre'; // Store 'Autre' directly in the 'nom' field
+            $data['nom'] = 'Autre'; // Set 'nom' as 'Autre'
+            $data['autre_operation'] = $request->autre_operation; // Store the custom operation name
+        } else {
+            $data['autre_operation'] = null; // Clear custom name for predefined operations
         }
         // If "Autre" is selected, create a new garage for the current user
         if ($request->filled('new_garage_name')) {
@@ -171,6 +175,7 @@ class OperationController extends Controller
                 'required',
             ],
             'nom' => ['nullable'],
+            'autre_operation' => ['nullable', 'string', 'max:255'],
             'description' => ['max:255'],
             'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
             'date_operation' => ['required', 'date'],
@@ -179,7 +184,10 @@ class OperationController extends Controller
         ]);
         // Check if "Autre" is selected and handle it
         if ($request->nom === 'autre') {
-            $data['nom'] = 'Autre'; // Store 'Autre' directly in the 'nom' field
+            $data['nom'] = 'Autre'; // Set 'nom' as 'Autre'
+            $data['autre_operation'] = $request->autre_operation; // Store the custom operation name
+        } else {
+            $data['autre_operation'] = null; // Clear custom name for predefined operations
         }
         // Handle "Autre" option for a new garage
         if ($request->filled('new_garage_name')) {
