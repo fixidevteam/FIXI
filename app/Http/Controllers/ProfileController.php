@@ -23,6 +23,9 @@ class ProfileController extends Controller
         // Fetch all villes for the dropdown
         $villes = Ville::all();
 
+        // Get the ville_id corresponding to the user's ville name
+        $userVille = Ville::where('ville', $user->ville)->first();
+
         // Fetch quartiers if the user already has a ville
         $quartiers = $user->ville
             ? Quartier::where('ville_id', $user->ville)->get()
@@ -32,6 +35,7 @@ class ProfileController extends Controller
             'user' => $user,
             'villes' => $villes,
             'quartiers' => $quartiers,
+            'userVilleId' => $userVille?->id,
         ]);
     }
 
