@@ -117,7 +117,7 @@ class VoitureController extends Controller
         if (!$voiture || $voiture->user_id !== auth()->id()) {
             abort(403);
         }
-        return view('userCars.edit', compact('voiture','marques'));
+        return view('userCars.edit', compact('voiture', 'marques'));
     }
 
     /**
