@@ -169,11 +169,11 @@
     <div id="confirmationModal" class="fixed inset-0 bg-white bg-opacity-30 backdrop-blur-[2px] flex items-center justify-center hidden">
       <div class="bg-white rounded-lg p-6 w-96 shadow-lg ">
         <h2 class="text-lg font-bold text-gray-800">Confirmation de suppression</h2>
-        <p class="text-gray-600 mt-2">Êtes-vous sûr de vouloir supprimer cette promption ? Cette action ne peut pas être annulée.</p>
+        <p class="text-gray-600 mt-2">Êtes-vous sûr de vouloir supprimer cette promotion ? Cette action ne peut pas être annulée.</p>
 
         <!-- Action Buttons -->
         <div class="flex justify-end mt-4">
-          <button onclick="toggleModal(false)" class="px-4 py-2 bg-gray-300 text-gray-800 rounded mr-2">
+          <button onclick="toggleModalDelete(false)" class="px-4 py-2 bg-gray-300 text-gray-800 rounded mr-2">
             Annuler
           </button>
           <form id="deleteForm" action="{{ route('admin.gestionPromotions.destroy', $promotion->id) }}" method="POST">
