@@ -3,25 +3,10 @@
   <div class="p-4 sm:ml-64">
 
 
-    
-    <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-14 ">
-      {{-- content (slot on layouts/app.blade.php)--}}
-      <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6 text-gray-900">
-          <h1 class="text-lg font-medium text-gray-900">Bonjour, {{ Auth::user()->name }} </h1>
-          <p class="text-sm text-gray-600 md:w-[300px] sm:w-full mx-0 text-left">Ajoutez vos informations en quelques clics,et accédez à une vue d’ensemble claire et sécurisée de toutes vos données importantes.</p>
-          <div class="mt-4">
-            <a href="{{ route('voiture.create') }}">
-              <x-primary-button>Ajouter une voiture</x-primary-button>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg ">
-      <div id="default-carousel" class="relative md:w-[70%] sm:w-full m-auto" data-carousel="slide">
+    <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-14">
+      <div id="default-carousel" class="relative w-full m-auto" data-carousel="slide">
         <!-- Carousel wrapper -->
-        <div class="relative h-48 md:h-64 lg:h-72 overflow-hidden rounded-lg">
+        <div class="relative h-32 md:h-40 lg:h-48 overflow-hidden rounded-lg">
           <!-- Item 1 -->
           <div class="hidden duration-1000 ease-in-out" data-carousel-item>
             <img src="https://media.ed.edmunds-media.com/audi/rs-7/2024/oem/2024_audi_rs-7_sedan_performance_fq_oem_1_815.jpg" class="absolute block w-full h-full object-cover" alt="Ad 1">
@@ -58,6 +43,21 @@
             <span class="sr-only">Next</span>
           </span>
         </button>
+      </div>
+    </div>
+
+    <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg  ">
+      {{-- content (slot on layouts/app.blade.php)--}}
+      <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="p-6 text-gray-900">
+          <h1 class="text-lg font-medium text-gray-900">Bonjour, {{ Auth::user()->name }} </h1>
+          <p class="text-sm text-gray-600 md:w-[300px] sm:w-full mx-0 text-left">Ajoutez vos informations en quelques clics,et accédez à une vue d’ensemble claire et sécurisée de toutes vos données importantes.</p>
+          <div class="mt-4">
+            <a href="{{ route('voiture.create') }}">
+              <x-primary-button>Ajouter une voiture</x-primary-button>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 
