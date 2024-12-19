@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\ProviderController;
+use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\generateVehicleHistoryPDF;
 use App\Http\Controllers\getQuartiersController;
 use App\Http\Controllers\getAnalyticsDataController;
@@ -34,9 +35,7 @@ Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback'])
 Route::get('/quartiers', [getQuartiersController::class, 'getQuartiers'])->name('quartiers.get');
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified', 'checkdocuments', 'checkUserStatus'])->prefix('my-fixi')->name('dashboard');
+Route::get('/dashboard',[dashboardController::class,'index'])->middleware(['auth', 'verified', 'checkdocuments', 'checkUserStatus'])->prefix('my-fixi')->name('dashboard');
 
 Route::middleware(['auth', 'checkdocuments', 'checkUserStatus'])->prefix('my-fixi')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
