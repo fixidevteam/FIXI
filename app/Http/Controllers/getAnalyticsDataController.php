@@ -14,8 +14,9 @@ class getAnalyticsDataController extends Controller
 
     public function getAnalyticsData()
     {
-        $threeMonthsAgo = Carbon::now()->subMonths(3);
-        // dd(Auth::user()->garage->id);
+        $threeMonthsAgo = Carbon::now()->subMonths(3)->startOfMonth();
+        $currentDate = Carbon::now()->endOfMonth();
+
         $garageId = Auth::user()->garage?->id;
 
         if (!$garageId) {
@@ -27,10 +28,11 @@ class getAnalyticsDataController extends Controller
 
         // Fetch operations by month for the logged-in mechanic's garage
         $operations = DB::table('operations')
-            ->where('date_operation', '>=', $threeMonthsAgo)
+            ->whereBetween('date_operation', [$threeMonthsAgo, $currentDate])
             ->where('garage_id', $garageId)
-            ->selectRaw('MONTH(date_operation) as month, COUNT(*) as total_operations')
-            ->groupBy('month')
+            ->selectRaw('YEAR(date_operation) as year, MONTH(date_operation) as month, COUNT(*) as total_operations')
+            ->groupBy('year', 'month')
+            ->orderBy('year')
             ->orderBy('month')
             ->get();
 
@@ -38,10 +40,11 @@ class getAnalyticsDataController extends Controller
         $clients = DB::table('operations')
             ->join('voitures', 'operations.voiture_id', '=', 'voitures.id')
             ->join('users', 'voitures.user_id', '=', 'users.id')
-            ->where('operations.date_operation', '>=', $threeMonthsAgo)
+            ->whereBetween('operations.date_operation', [$threeMonthsAgo, $currentDate])
             ->where('operations.garage_id', $garageId)
-            ->selectRaw('MONTH(operations.date_operation) as month, COUNT(DISTINCT users.id) as total_clients')
-            ->groupBy('month')
+            ->selectRaw('YEAR(operations.date_operation) as year, MONTH(operations.date_operation) as month, COUNT(DISTINCT users.id) as total_clients')
+            ->groupBy('year', 'month')
+            ->orderBy('year')
             ->orderBy('month')
             ->get();
 

@@ -142,24 +142,28 @@
         function clearSousOperations() {
             document.getElementById('sousOperationCheckboxes').innerHTML = ""; // Clear sous-operations container
         }
-        // copy of the ref garage
-        document.getElementById('garage-ref').addEventListener('click', function() {
+        // copy garage ref logique
+        document.getElementById('garage-ref').addEventListener('click', function () {
         const refText = this.textContent.trim(); // Get the text content
+        const copyIcon = document.getElementById('copy-icon');
+        const checkIcon = document.getElementById('check-icon');
+
         navigator.clipboard.writeText(refText) // Copy to clipboard
             .then(() => {
-                // Show the success message
-                const notification = document.getElementById('copy-notification');
-                notification.classList.remove('hidden');
-                setTimeout(() => {
-                    notification.classList.add('hidden');
-                }, 3000); // Hide the message after 3 seconds
+            // Toggle icons
+            copyIcon.classList.add('hidden');
+            checkIcon.classList.remove('hidden');
+
+            // Revert back to copy icon after 3 seconds
+            setTimeout(() => {
+                copyIcon.classList.remove('hidden');
+                checkIcon.classList.add('hidden');
+            }, 3000);
             })
             .catch(err => {
-                console.error('Error copying text: ', err);
-                });
+            console.error('Error copying text: ', err);
+            });
         });
-
-
 
     </script>
 </body>
