@@ -2,7 +2,9 @@
 
   <div class="p-4 sm:ml-64">
 
-    <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-14">
+
+    
+    <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-14 ">
       {{-- content (slot on layouts/app.blade.php)--}}
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 text-gray-900">
@@ -16,6 +18,49 @@
         </div>
       </div>
     </div>
+    <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg ">
+      <div id="default-carousel" class="relative md:w-[70%] sm:w-full m-auto" data-carousel="slide">
+        <!-- Carousel wrapper -->
+        <div class="relative h-48 md:h-64 lg:h-72 overflow-hidden rounded-lg">
+          <!-- Item 1 -->
+          <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+            <img src="https://media.ed.edmunds-media.com/audi/rs-7/2024/oem/2024_audi_rs-7_sedan_performance_fq_oem_1_815.jpg" class="absolute block w-full h-full object-cover" alt="Ad 1">
+          </div>
+          <!-- Item 2 -->
+          <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+            <img src="https://media.ed.edmunds-media.com/audi/rs-7/2024/oem/2024_audi_rs-7_sedan_performance_fq_oem_3_815x543.jpg" class="absolute block w-full h-full object-cover" alt="Ad 2">
+          </div>
+          <!-- Item 3 -->
+          <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+            <img src="https://media.ed.edmunds-media.com/audi/rs-7/2024/oem/2024_audi_rs-7_sedan_performance_fq_oem_5_815x543.jpg" class="absolute block w-full h-full object-cover" alt="Ad 3">
+          </div>
+        </div>
+        <!-- Slider indicators -->
+        <div class="absolute z-30 flex -translate-x-1/2 bottom-3 left-1/2 space-x-3 rtl:space-x-reverse">
+          <button type="button" class="w-3 h-3 rounded-full bg-gray-300" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+          <button type="button" class="w-3 h-3 rounded-full bg-gray-300" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+          <button type="button" class="w-3 h-3 rounded-full bg-gray-300" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+        </div>
+        <!-- Slider controls -->
+        <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-3 cursor-pointer group focus:outline-none" data-carousel-prev>
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-800/50 text-white">
+            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
+            </svg>
+            <span class="sr-only">Previous</span>
+          </span>
+        </button>
+        <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-3 cursor-pointer group focus:outline-none" data-carousel-next>
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-800/50 text-white">
+            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 9l4-4-4-4" />
+            </svg>
+            <span class="sr-only">Next</span>
+          </span>
+        </button>
+      </div>
+    </div>
+
     {{-- content --}}
     <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
       {{-- content (slot on layouts/app.blade.php)--}}
@@ -139,24 +184,24 @@
                     <div class="flex items-center space-x-4">
                       <div class="flex-shrink-0">
                         @if($papier->photo !== NULL)
-                    @php
+                        @php
                         $fileExtension = pathinfo($papier->photo, PATHINFO_EXTENSION);
-                    @endphp
+                        @endphp
 
-                    @if(in_array(strtolower($fileExtension), ['jpg', 'jpeg', 'png']))
+                        @if(in_array(strtolower($fileExtension), ['jpg', 'jpeg', 'png']))
                         <!-- Display the actual photo -->
                         <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('storage/' . $papier->photo) }}" alt="image description">
-                    @elseif(strtolower($fileExtension) === 'pdf')
+                        @elseif(strtolower($fileExtension) === 'pdf')
                         <!-- Display the default image for PDFs -->
                         <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('/images/file.png') }}" alt="default image">
-                    @else
+                        @else
                         <!-- Display the default image for unsupported formats -->
                         <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('/images/defaultimage.jpg') }}" alt="default image">
-                    @endif
-                    @else
+                        @endif
+                        @else
                         <!-- Display the default image if no photo is provided -->
                         <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('/images/defaultimage.jpg') }}" alt="default image">
-                    @endif
+                        @endif
                       </div>
                       <div class="flex-1 min-w-0">
                         <p class="text-sm font-medium text-gray-900 truncate">
