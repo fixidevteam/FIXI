@@ -10,7 +10,7 @@
           @foreach($promotions as $promotion)
           <!-- Item 1 -->
           <div class="hidden duration-1000 ease-in-out" data-carousel-item>
-            <a href="{{$promotion->lien_promotion}}">
+            <a href="{{$promotion->lien_promotion}}" target="_blank">
               <img src="{{asset('storage/'.$promotion->photo_promotion)}}" class="absolute block w-full h-full object-cover" alt="Ad 1">
             </a>
           </div>
