@@ -146,6 +146,13 @@ return [
             'max' => 'La taille du fichier ne peut pas dépasser 2 Mo.',
             'upload_failed' => 'La photo n\'a pas pu être téléchargée.',
         ],
+        'photo_promotion' => [
+            'required' => 'Veuillez ajouter un fichier.',
+            'file' => 'Le fichier doit être valide.',
+            'mimes' => 'Le fichier doit être au format JPG, PNG ou JPEG.',
+            'max' => 'La taille du fichier ne peut pas dépasser 2 Mo.',
+            'upload_failed' => 'La photo n\'a pas pu être téléchargée.',
+        ],
     ],
 
     /*

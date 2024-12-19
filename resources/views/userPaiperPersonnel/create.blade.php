@@ -80,7 +80,6 @@
                             </option>
                             @endforeach
                         </select>
-
                         <x-input-error :messages="$errors->get('type')" class="mt-2" />
                     </div>
                     <div>
