@@ -7,24 +7,22 @@
       <div id="default-carousel" class="relative w-full m-auto" data-carousel="slide">
         <!-- Carousel wrapper -->
         <div class="relative h-32 md:h-40 lg:h-48 overflow-hidden rounded-lg">
+          @foreach($promotions as $promotion)
           <!-- Item 1 -->
           <div class="hidden duration-1000 ease-in-out" data-carousel-item>
-            <img src="https://media.ed.edmunds-media.com/audi/rs-7/2024/oem/2024_audi_rs-7_sedan_performance_fq_oem_1_815.jpg" class="absolute block w-full h-full object-cover" alt="Ad 1">
+            <a href="{{$promotion->lien_promotion}}" target="_blank">
+              <img src="{{asset('storage/'.$promotion->photo_promotion)}}" class="absolute block w-full h-full object-cover" alt="Ad 1">
+            </a>
+
           </div>
+          @endforeach
           <!-- Item 2 -->
-          <div class="hidden duration-1000 ease-in-out" data-carousel-item>
-            <img src="https://media.ed.edmunds-media.com/audi/rs-7/2024/oem/2024_audi_rs-7_sedan_performance_fq_oem_3_815x543.jpg" class="absolute block w-full h-full object-cover" alt="Ad 2">
-          </div>
-          <!-- Item 3 -->
-          <div class="hidden duration-1000 ease-in-out" data-carousel-item>
-            <img src="https://media.ed.edmunds-media.com/audi/rs-7/2024/oem/2024_audi_rs-7_sedan_performance_fq_oem_5_815x543.jpg" class="absolute block w-full h-full object-cover" alt="Ad 3">
-          </div>
         </div>
         <!-- Slider indicators -->
         <div class="absolute z-30 flex -translate-x-1/2 bottom-3 left-1/2 space-x-3 rtl:space-x-reverse">
-          <button type="button" class="w-3 h-3 rounded-full bg-gray-300" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-          <button type="button" class="w-3 h-3 rounded-full bg-gray-300" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-          <button type="button" class="w-3 h-3 rounded-full bg-gray-300" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+          @foreach($promotions as $promotion)
+          <button type="button" class="w-3 h-3 rounded-full bg-gray-300" aria-current="true" aria-label="Slide {{$promotion->id}}" data-carousel-slide-to="{{$promotion->id}}"></button>
+          @endforeach
         </div>
         <!-- Slider controls -->
         <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-3 cursor-pointer group focus:outline-none" data-carousel-prev>
