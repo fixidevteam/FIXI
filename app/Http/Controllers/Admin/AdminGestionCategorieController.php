@@ -18,10 +18,13 @@ class AdminGestionCategorieController extends Controller
     {
         $categories = nom_categorie::all();
         $operationsCreatedByUser = Operation::whereNotNull('autre_operation')->get();
-        // dd($operationsCreatedByUser); 
         $operations = nom_operation::all();
+        // Merge the two collections
+        $allOperations = $operations->merge($operationsCreatedByUser);
+        
+        // dd($allOperations);
         $sousOperations = nom_sous_operation::all();
-        return view('admin.gestionCategorie.index', compact('categories', 'operations','operationsCreatedByUser', 'sousOperations'));
+        return view('admin.gestionCategorie.index', compact('categories', 'allOperations', 'operations', 'sousOperations'));
     }
 
     /**
@@ -42,7 +45,7 @@ class AdminGestionCategorieController extends Controller
         if ($nom_categorie) {
             nom_categorie::create($nom_categorie);
             session()->flash('success', 'Categorie ajouté');
-            session()->flash('subtitle', 'Categorie a été ajouté avec succès.');    
+            session()->flash('subtitle', 'Categorie a été ajouté avec succès.');
             return redirect()->route('admin.gestionCategorie.index');
         }
     }
@@ -78,7 +81,7 @@ class AdminGestionCategorieController extends Controller
         if ($categorie) {
             $categorie->update($nom_categorie);
             session()->flash('success', 'Categorie mise à jour');
-            session()->flash('subtitle', 'Categorie a été mis à jour avec succès.');    
+            session()->flash('subtitle', 'Categorie a été mis à jour avec succès.');
         }
         return redirect()->route('admin.gestionCategorie.index');
     }

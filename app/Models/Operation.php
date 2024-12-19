@@ -20,7 +20,8 @@ class Operation extends Model
         'photo',
         'voiture_id',
         'garage_id',
-        'autre_operation'
+        'autre_operation',
+        'create_by'
     ];
     public function voiture(): BelongsTo
     {

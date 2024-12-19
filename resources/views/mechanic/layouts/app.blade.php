@@ -26,7 +26,30 @@
         </main>
     </div>
     <script>
+        // document.addEventListener('DOMContentLoaded', () => {
+        //     const initialCategorie = document.getElementById('categorie').value;
+
+        //     if (initialCategorie) {
+        //         loadOperations(initialCategorie); // Load operations based on the initial category
+        //     }
+
+        //     document.getElementById('categorie').addEventListener('change', function() {
+        //         loadOperations(this.value); // Refresh operations when category changes
+        //     });
+
+        //     document.getElementById('operation').addEventListener('change', function() {
+        //         if (this.value) {
+        //             loadsousOperations(this.value); // Load sous-operations when an operation is selected
+        //         } else {
+        //             clearSousOperations(); // Clear checkboxes if no operation is selected
+        //         }
+        //     });
+        // });
         document.addEventListener('DOMContentLoaded', () => {
+            const operationSelect = document.getElementById('operation');
+            const newOperationWrapper = document.getElementById('newOperationWrapper');
+            const newOperationInput = document.getElementById('new_operation');
+
             const initialCategorie = document.getElementById('categorie').value;
 
             if (initialCategorie) {
@@ -37,7 +60,17 @@
                 loadOperations(this.value); // Refresh operations when category changes
             });
 
-            document.getElementById('operation').addEventListener('change', function() {
+            operationSelect.addEventListener('change', function() {
+                if (this.value === 'autre') {
+                    // Show the custom operation input
+                    newOperationWrapper.classList.remove('hidden');
+                } else {
+                    // Hide the custom operation input
+                    newOperationWrapper.classList.add('hidden');
+                    newOperationInput.removeAttribute('required');
+                    newOperationInput.value = ''; // Clear the input field
+                }
+
                 if (this.value) {
                     loadsousOperations(this.value); // Load sous-operations when an operation is selected
                 } else {
@@ -45,6 +78,7 @@
                 }
             });
         });
+
 
         function loadOperations(categorieId) {
             const existingOperationElement = document.getElementById('existingOperationId');
@@ -75,6 +109,7 @@
                         autreOption.textContent = 'Autre';
                         if (existingOperationId === 'autre') {
                             autreOption.selected = true;
+                            newOperationWrapper.classList.remove('hidden');
                         }
                         operationSelect.appendChild(autreOption);
 
@@ -144,23 +179,20 @@
         }
         // copy of the ref garage
         document.getElementById('garage-ref').addEventListener('click', function() {
-        const refText = this.textContent.trim(); // Get the text content
-        navigator.clipboard.writeText(refText) // Copy to clipboard
-            .then(() => {
-                // Show the success message
-                const notification = document.getElementById('copy-notification');
-                notification.classList.remove('hidden');
-                setTimeout(() => {
-                    notification.classList.add('hidden');
-                }, 3000); // Hide the message after 3 seconds
-            })
-            .catch(err => {
-                console.error('Error copying text: ', err);
+            const refText = this.textContent.trim(); // Get the text content
+            navigator.clipboard.writeText(refText) // Copy to clipboard
+                .then(() => {
+                    // Show the success message
+                    const notification = document.getElementById('copy-notification');
+                    notification.classList.remove('hidden');
+                    setTimeout(() => {
+                        notification.classList.add('hidden');
+                    }, 3000); // Hide the message after 3 seconds
+                })
+                .catch(err => {
+                    console.error('Error copying text: ', err);
                 });
         });
-
-
-
     </script>
 </body>
 

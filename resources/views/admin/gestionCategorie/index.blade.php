@@ -131,7 +131,7 @@
                     @endif
                     {{-- alert close --}}
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        @if($operations->isEmpty() && $operationsCreatedByUser->isEmpty())
+                        @if($allOperations->isEmpty())
                         <p class="p-4 text-gray-500 text-center">Aucun operation disponible.</p>
                         @else
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
@@ -144,10 +144,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($operations as $operation)
+                                @foreach($allOperations as $operation)
                                 <tr class="bg-white border-b">
-                                    <td class="px-6 py-4">{{ $operation->categorie->nom_categorie }}</td>
-                                    <td class="px-6 py-4">{{ $operation->nom_operation }}</td>
+                                    <td class="px-6 py-4">{{ $operation->categorie->nom_categorie ??  $categories->find($operation->categorie)->nom_categorie}}</td>
+                                    <td class="px-6 py-4">{{ $operation->nom_operation ?? $operation->autre_operation}}</td>
+                                    @if($operation->autre_operation)
+                                    <td class="px-6 py-4">
+                                        <span class="{{$operation->create_by === 'user'? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800' }} text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">
+                                            Créé par {{ $operation->create_by === 'user' ? 'utilisateur' : 'garagiste' }}
+                                        </span>
+                                    </td>
+
+                                    @else
                                     <td class="px-6 py-4">
                                         <div class="flex items-center">
                                             <a href="{{ route('admin.gestionOperation.edit', $operation->id) }}" class="text-blue-500 flex items-center">
@@ -164,24 +172,15 @@
                                             </button>
                                         </div>
                                     </td>
+                                    @endif
                                 </tr>
-                                @endforeach
-                                @foreach($operationsCreatedByUser as $operationCreatedByUser)
-                                <tr class="bg-white border-b">
-                                    <td class="px-6 py-4">{{ $categories->find($operationCreatedByUser->categorie)->nom_categorie }}</td>
-                                    <td class="px-6 py-4">{{$operationCreatedByUser->autre_operation }}</td>
-                                    <td class="px-6 py-4">
-                                        <span class="bg-green-100 text-green-800' text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">
-                                            Créé par l'utilisateur
-                                        </span>
-                                    </td>
-                                </tr>
-
                                 @endforeach
                             </tbody>
                         </table>
+                        
                         @endif
                     </div>
+
                 </div>
             </div>
         </div>

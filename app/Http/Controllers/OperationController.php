@@ -97,6 +97,7 @@ class OperationController extends Controller
             $data['photo'] = $imagePath;
         }
         $data['voiture_id'] = $voiture;
+        $data['create_by'] = 'user';
         $operation = Operation::create($data);
 
         // add sous operation 

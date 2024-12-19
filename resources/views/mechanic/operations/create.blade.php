@@ -86,6 +86,11 @@
                             <option value="">Select operation</option>
 
                         </select>
+                        <div id="newOperationWrapper" class="hidden mt-4">
+                            <x-input-label for="new_operation" :value="__('Nom de la nouvelle opération')" />
+                            <x-text-input id="new_operation" name="autre_operation" type="text" class="block mt-1 w-full" value="{{ old('autre_operation') }}" />
+                            <x-input-error :messages="$errors->get('autre_operation')" class="mt-2" />
+                        </div>
                         <p class="mt-1 text-sm text-gray-500" id="operation_input_help">Si nous avons trouvé votre opération ici, veuillez l'ajouter dans le champ <label class="font-bold underline" for="description">'Description'</label>. </p>
                         <x-input-error :messages="$errors->get('nom')" class="mt-2" />
                     </div>

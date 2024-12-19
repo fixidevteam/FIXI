@@ -71,6 +71,7 @@ class MechanicOperatioController extends Controller
                 'required',
             ],
             'nom' => ['nullable'],
+            'autre_operation' => ['nullable', 'string', 'max:255'],
             'description' => ['max:255'],
             'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
             'date_operation' => ['required', 'date'],
@@ -78,7 +79,10 @@ class MechanicOperatioController extends Controller
         ]);
         // Check if "Autre" is selected and handle it
         if ($request->nom === 'autre') {
-            $data['nom'] = 'Autre'; // Store 'Autre' directly in the 'nom' field
+            $data['nom'] = 'Autre'; // Set 'nom' as 'Autre'
+            $data['autre_operation'] = $request->autre_operation; // Store the custom operation name
+        } else {
+            $data['autre_operation'] = null; // Clear custom name for predefined operations
         }
         // Use temp_photo_path if no new file is uploaded
         if (!$request->hasFile('photo') && $request->input('temp_photo_path')) {
@@ -90,6 +94,7 @@ class MechanicOperatioController extends Controller
 
         $data['voiture_id'] = $voiture;
         $data['garage_id'] = $garage;
+        $data['create_by'] = 'garage';
         $operation = Operation::create($data);
 
         // add sous operation 

@@ -86,7 +86,7 @@
             <p class="text-sm text-gray-500 truncate">
               {{ 
                 $operation->nom === 'Autre' 
-                ? 'Autre' 
+                ? $operation->autre_operation
                 : ($ope->where('id', $operation->nom)->first()->nom_operation ?? 'N/A') 
               }}
             </p>
