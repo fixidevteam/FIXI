@@ -46,6 +46,7 @@
                 if (this.value === 'autre') {
                     // Show the custom operation input
                     newOperationWrapper.classList.remove('hidden');
+                    newOperationInput.setAttribute('required', 'required');
                 } else {
                     // Hide the custom operation input
                     newOperationWrapper.classList.add('hidden');
