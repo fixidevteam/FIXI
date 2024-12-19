@@ -203,7 +203,13 @@
               Gagare
             </p>
             <p class="text-sm text-gray-500 truncate">
-              {{$operation->garage->name ?? 'N/A' }}{{ $operation->garage->quartier ? ' - ' . $operation->garage->quartier : '' }}
+              @if($operation->garage)
+              {{$operation->garage->name ?? 'N/A' }}{{ $operation->garage->quartier ? ' - ' . $operation->garage->quartier : ''}}
+              @else
+              N/A
+              @endif
+
+
             </p>
           </div>
           {{-- Date --}}
