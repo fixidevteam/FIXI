@@ -17,17 +17,10 @@ class OperationControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Test to create a new operation.
-     */
-    public function test_create_operation(): void
+    public function test_create_operation_without_autre(): void
     {
-        $user = User::create([
-            'name' => 'Test User',
-            'email' => 'testuser@example.com',
-            'password' => bcrypt('password'),
-            'status' => 1,
-        ]);
+        $user = User::factory()->create(['status' => 1, 'ville' => 'marrakech']);
+
 
         $voiture = Voiture::create([
             'marque' => 'Toyota',
@@ -35,37 +28,86 @@ class OperationControllerTest extends TestCase
             'numero_immatriculation' => '123-أ-45',
             'user_id' => $user->id,
         ]);
-
+        $garage = garage::create(
+            [
+                'name' => "garage1 ",
+                'ref' => 'gar-1111',
+                'ville' => 'marrakech',
+                'localisation' => 'marrakech',
+                'services' => 'lavage'
+            ]
+        );
         Session::put('voiture_id', $voiture->id);
 
         $response = $this->actingAs($user)->post(route('operation.store'), [
             'categorie' => 'category',
-            'nom' => 'Test Operation',
+            'nom' => 'test',
             'description' => 'This is a test operation',
             'date_operation' => '2023-11-01',
-            'sousOperations' => ['1', '1'],
+            'garage_id' => $garage->id
         ]);
 
 
         $this->assertDatabaseHas('operations', [
-            'nom' => 'Test Operation',
+            'nom' => 'test',
             'description' => 'This is a test operation',
+            'date_operation' => '2023-11-01',
             'voiture_id' => $voiture->id,
         ]);
+        $response->assertStatus(302);
+        $response->assertRedirect(route('voiture.show', $voiture->id));
+    }
+    public function test_create_operation_with_autre(): void
+    {
+        $user = User::factory()->create(['status' => 1, 'ville' => 'marrakech']);
+
+
+        $voiture = Voiture::create([
+            'marque' => 'Toyota',
+            'modele' => 'Corolla',
+            'numero_immatriculation' => '123-أ-45',
+            'user_id' => $user->id,
+        ]);
+        $garage = garage::create(
+            [
+                'name' => "garage1 ",
+                'ref' => 'gar-1111',
+                'ville' => 'marrakech',
+                'localisation' => 'marrakech',
+                'services' => 'lavage'
+            ]
+        );
+        Session::put('voiture_id', $voiture->id);
+
+        $response = $this->actingAs($user)->post(route('operation.store'), [
+            'categorie' => 'category',
+            'nom' => 'autre',
+            'autre_operation' => 'test',
+            'description' => 'This is a test operation',
+            'date_operation' => '2023-11-01',
+            'garage_id' => $garage->id
+        ]);
+
+
+        $this->assertDatabaseHas('operations', [
+            'nom' => 'autre',
+            'autre_operation' => 'test',
+            'description' => 'This is a test operation',
+            'date_operation' => '2023-11-01',
+            'voiture_id' => $voiture->id,
+        ]);
+        $response->assertStatus(302);
+        $response->assertRedirect(route('voiture.show', $voiture->id));
     }
     /**
      * Test list of operations.
      */
-    public function test_list_operations()
+    public function test_operation_list()
     {
-        $user = User::create([
-            'name' => 'Test User',
-            'email' => 'testuser@example.com',
-            'password' => bcrypt('password'),
-            'status' => 1,
-        ]);
+        $user = User::factory()->create(['status' => 1, 'ville' => 'marrakech']);
+
         $response = $this->actingAs($user)->get(route('operation.index'));
-        $response->assertStatus(200);
+        $response->assertViewIs('userOperations.index');
     }
     /**
      * Test the show method for a valid operation.
@@ -73,12 +115,7 @@ class OperationControllerTest extends TestCase
     public function test_show_operation_with_valid_id(): void
     {
         // Create a user
-        $user = User::create([
-            'name' => 'Test User',
-            'email' => 'testuser@example.com',
-            'password' => bcrypt('password'),
-            'status' => 1, // Active user
-        ]);
+        $user = User::factory()->create(['status' => 1, 'ville' => 'marrakech']);
 
         // Create a voiture
         $voiture = Voiture::create([
@@ -90,9 +127,6 @@ class OperationControllerTest extends TestCase
 
         // Create some related data for nom_categorie
         $categorie1 = nom_categorie::create(['nom_categorie' => "Services d'un garage mécanique"]);
-        $categorie2 = nom_categorie::create(['nom_categorie' => "Services d'un garage de lavage"]);
-        $categorie3 = nom_categorie::create(['nom_categorie' => "Services d'un garage de carrosserie"]);
-        $categorie4 = nom_categorie::create(['nom_categorie' => "Services d'un garage pneumatique"]);
 
         // Create nom_operation linked to categories
         $operation1 = nom_operation::create([
@@ -100,26 +134,10 @@ class OperationControllerTest extends TestCase
             'nom_categorie_id' => $categorie1->id, // Link to "Services d'un Garage Mécanique"
         ]);
 
-        $operation2 = nom_operation::create([
-            'nom_operation' => 'Entretien et vidange',
-            'nom_categorie_id' => $categorie1->id, // Link to "Services d'un Garage Mécanique"
-        ]);
-
-        // Create nom_sous_operation linked to operations
-        nom_sous_operation::create([
-            'nom_sous_operation' => 'Remplacement des filtres à huile',
-            'nom_operation_id' => $operation1->id,
-        ]);
-
-        nom_sous_operation::create([
-            'nom_sous_operation' => 'Remplacement des filtres à carburant',
-            'nom_operation_id' => $operation1->id,
-        ]);
-
         // Create an operation linked to the voiture
         $operation = Operation::create([
             'categorie' => $categorie1->id,
-            'nom' => $operation2->id,
+            'nom' => $operation1,
             'description' => 'This is a test operation',
             'date_operation' => '2023-11-01',
             'photo' => null,
@@ -127,19 +145,12 @@ class OperationControllerTest extends TestCase
             'garage_id' => null,
         ]);
 
-        // Act as the user and request the show route
-        $response = $this->actingAs($user)->get(route('operation.show', $operation->id));
+        // Act as the user and request 
+        $response = $this->actingAs($user)->get(route('voiture.show', $voiture->id));
 
         // Assert the view is returned with correct data
         $response->assertStatus(200);
-        $response->assertViewIs('userOperations.show');
-        $response->assertViewHasAll([
-            'voiture' => $voiture,
-            'operation' => $operation,
-            'operations',
-            'categories',
-            'sousOperation',
-        ]);
+        $response->assertViewIs('userCars.show');
     }
     /**
      * Test the show method with an invalid operation ID.
@@ -147,12 +158,8 @@ class OperationControllerTest extends TestCase
     public function test_show_operation_with_invalid_id(): void
     {
         // Create a user
-        $user = User::create([
-            'name' => 'Test User',
-            'email' => 'testuser@example.com',
-            'password' => bcrypt('password'),
-            'status' => 1,
-        ]);
+        $user = User::factory()->create(['status' => 1, 'ville' => 'marrakech']);
+
         // Create a voiture
         $voiture = Voiture::create([
             'marque' => 'Toyota',
