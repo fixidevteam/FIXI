@@ -10,6 +10,7 @@ use App\Http\Controllers\OperationController;
 use App\Http\Controllers\PapierPeronnelController;
 use App\Http\Controllers\PapierVoitureController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\VoitureController;
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +48,7 @@ Route::middleware(['auth', 'checkdocuments', 'checkUserStatus'])->prefix('my-fix
     Route::resource('/paiperVoiture', PapierVoitureController::class);
     Route::resource('/operation', OperationController::class);
     Route::resource('/garages', ListingGaragesController::class);
+    Route::resource('/promotions', PromotionController::class);
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::get('/notifications/{id}/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
     Route::get('/notifications/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.markAllAsRead');

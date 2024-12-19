@@ -82,7 +82,7 @@
                 </form>                
                 {{-- card --}}
                 <div class="my-5">
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <div class="">
                         @if($garages->isEmpty())
                             <p class="p-4 text-gray-500 text-center">Aucun garage disponible.</p>
                         @else
