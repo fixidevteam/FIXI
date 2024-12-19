@@ -94,6 +94,7 @@
                                         class="object-cover w-full h-96 rounded-t-lg md:h-60 md:w-60 md:rounded-none md:rounded-s-lg"
                                         src="{{ $garage->photo ? asset('storage/' . $garage->photo) : '/images/defaultimage.jpg' }}"
                                         alt="Garage Image"
+                                        loading="lazy"
                                     >
                                     <div class="flex flex-col justify-between p-4 leading-normal w-full">
                                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $garage->name }}</h5>

@@ -46,7 +46,7 @@
                 <h2 class="mt-10 text-2xl font-bold leading-9 tracking-tight text-gray-900">Analytique</h2>
                 <div class="container">
                     <div class="my-4">
-                        <h2 class="text-sm md:text-base mb-4">Suivi des opérations (tout les années)</h2>
+                        <h2 class="text-sm md:text-base mb-4">Suivi global des opérations (Toutes les années)</h2>
                         <!-- THE CHART  -->
                         <form method="GET" action="{{ route('mechanic.chart') }}" class="mb-4 w-full flex flex-col sm:flex-row sm:items-end items-end justify-between  gap-4">
                             <!-- Dropdown Container -->
@@ -69,7 +69,7 @@
                         <canvas id="operations" height="350" class="w-full bg-white"></canvas>
                         <!-- END OF CHART -->
                     </div>
-                    <h2 class="text-sm md:text-base mb-4">Suivi des opérations et des clients (3 derniers mois)</h2>
+                    <h2 class="text-sm md:text-base mb-4">Suivi des opérations et des clients (3 Derniers mois)</h2>
                     <div class="my-4">
                         <canvas id="operationsChart"></canvas>
                         <canvas id="clientsChart" class="mt-4"></canvas>
