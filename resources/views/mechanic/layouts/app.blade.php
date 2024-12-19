@@ -26,25 +26,6 @@
         </main>
     </div>
     <script>
-        // document.addEventListener('DOMContentLoaded', () => {
-        //     const initialCategorie = document.getElementById('categorie').value;
-
-        //     if (initialCategorie) {
-        //         loadOperations(initialCategorie); // Load operations based on the initial category
-        //     }
-
-        //     document.getElementById('categorie').addEventListener('change', function() {
-        //         loadOperations(this.value); // Refresh operations when category changes
-        //     });
-
-        //     document.getElementById('operation').addEventListener('change', function() {
-        //         if (this.value) {
-        //             loadsousOperations(this.value); // Load sous-operations when an operation is selected
-        //         } else {
-        //             clearSousOperations(); // Clear checkboxes if no operation is selected
-        //         }
-        //     });
-        // });
         document.addEventListener('DOMContentLoaded', () => {
             const operationSelect = document.getElementById('operation');
             const newOperationWrapper = document.getElementById('newOperationWrapper');
@@ -178,43 +159,27 @@
             document.getElementById('sousOperationCheckboxes').innerHTML = ""; // Clear sous-operations container
         }
         // copy garage ref logique
-        document.getElementById('garage-ref').addEventListener('click', function () {
-        const refText = this.textContent.trim(); // Get the text content
-        const copyIcon = document.getElementById('copy-icon');
-        const checkIcon = document.getElementById('check-icon');
-
-        navigator.clipboard.writeText(refText) // Copy to clipboard
-            .then(() => {
-            // Toggle icons
-            copyIcon.classList.add('hidden');
-            checkIcon.classList.remove('hidden');
-
-            // Revert back to copy icon after 3 seconds
-            setTimeout(() => {
-                copyIcon.classList.remove('hidden');
-                checkIcon.classList.add('hidden');
-            }, 3000);
-            })
-            .catch(err => {
-            console.error('Error copying text: ', err);
-            });
-        // copy of the ref garage
         document.getElementById('garage-ref').addEventListener('click', function() {
-            const refText = this.textContent.trim(); // Get the text content
-            navigator.clipboard.writeText(refText) // Copy to clipboard
-                .then(() => {
-                    // Show the success message
-                    const notification = document.getElementById('copy-notification');
-                    notification.classList.remove('hidden');
-                    setTimeout(() => {
-                        notification.classList.add('hidden');
-                    }, 3000); // Hide the message after 3 seconds
-                })
-                .catch(err => {
-                    console.error('Error copying text: ', err);
-                });
-        });
+                    const refText = this.textContent.trim(); // Get the text content
+                    const copyIcon = document.getElementById('copy-icon');
+                    const checkIcon = document.getElementById('check-icon');
 
+                    navigator.clipboard.writeText(refText) // Copy to clipboard
+                        .then(() => {
+                            // Toggle icons
+                            copyIcon.classList.add('hidden');
+                            checkIcon.classList.remove('hidden');
+
+                            // Revert back to copy icon after 3 seconds
+                            setTimeout(() => {
+                                copyIcon.classList.remove('hidden');
+                                checkIcon.classList.add('hidden');
+                            }, 3000);
+                        })
+                        .catch(err => {
+                            console.error('Error copying text: ', err);
+                        });
+                })
     </script>
 </body>
 
