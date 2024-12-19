@@ -13,6 +13,7 @@
             <a href="{{$promotion->lien_promotion}}" target="_blank">
               <img src="{{asset('storage/'.$promotion->photo_promotion)}}" class="absolute block w-full h-full object-cover" alt="Ad 1">
             </a>
+
           </div>
           @endforeach
           <!-- Item 2 -->
