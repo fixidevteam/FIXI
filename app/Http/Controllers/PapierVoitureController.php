@@ -40,7 +40,7 @@ class PapierVoitureController extends Controller
 
         // Check if the vehicle already has 3 documents
         $existingDocumentsCount = VoiturePapier::where('voiture_id', $voiture_id)->count();
-        if ($existingDocumentsCount >= 3) {
+        if ($existingDocumentsCount >= 5) {
             session()->flash('error', 'Limite atteinte');
             session()->flash('subtitle', 'Vous ne pouvez ajouter que 3 documents par véhicule.');
             return redirect()->route('voiture.show', $voiture_id);
