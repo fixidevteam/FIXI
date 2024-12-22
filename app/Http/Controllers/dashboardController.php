@@ -13,8 +13,8 @@ class dashboardController extends Controller
         $user = Auth::user();
 
         $promotions = Promotion::where('ville', $user->ville) // Filter by promotion's ville
-        ->where('date_fin', '>=', now()) // Filter by date_fin
-        ->get();
+            ->where('date_fin', '>=', now()) // Filter by date_fin
+            ->get();
 
 
         return view('dashboard', compact('promotions'));
