@@ -16,6 +16,7 @@ class Promotion extends Model
         'lien_promotion',
         'garage_id',
         'photo_promotion',
+        'description',
     ];
 
 

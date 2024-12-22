@@ -66,6 +66,7 @@
                                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $promotion->nom_promotion }}</h5>
                                         </a>
                                         <p class="mb-3 font-normal text-gray-700">{{ $promotion->garage->name }}</p>
+                                        <p class="mb-3 font-normal text-gray-700">{{ $promotion->description }}</p>
                                         <p class="mb-3 font-normal text-gray-700"><span>{{ $promotion->date_debut }}</span> / <span class="text-red-500">{{ $promotion->date_fin }}</span></p>
                                         <a href="{{ $promotion->lien_promotion }}" target="_blanck" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
                                             Lire la suite

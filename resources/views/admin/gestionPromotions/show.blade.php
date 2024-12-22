@@ -124,6 +124,16 @@
                   </a>
                 </p>
               </div>
+              <div>
+                <p class="capitalize text-sm font-medium text-gray-900">Description</p>
+                <p class="text-sm text-gray-500"> 
+                    @if($promotion->description)
+                        {{ $promotion->description }}
+                    @else
+                        <span class="text-sm text-gray-500">N/A</span>
+                    @endif
+                </p>
+              </div>
             </div>
 
             {{-- Column 2 --}}

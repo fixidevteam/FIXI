@@ -116,6 +116,13 @@
                     <x-input-error :messages="$errors->get('garage_id')" class="mt-2" />
                 </div>
                 <div>
+                    <x-input-label for="description" :value="__('Description')" />
+                    <x-text-textarea id="description" class="block mt-1 w-full" name="description" autofocus autocomplete="description">
+                        {{ old('description') }}
+                    </x-text-textarea>
+                    <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                </div>
+                <div>
                     <x-input-label for="file_input" :value="__('Photo')" />
                     <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo_promotion" :value="old('photo_promotion')" autofocus autocomplete="photo_promotion" accept="image/*" />
                     <x-input-error :messages="$errors->get('photo_promotion')" class="mt-2" />

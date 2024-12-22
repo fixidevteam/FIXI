@@ -43,6 +43,7 @@ class AdminGestionPromotionsController extends Controller
             'date_fin' => 'required|date|after_or_equal:date_debut',
             'lien_promotion' => 'required|url',
             'garage_id' => 'required|exists:garages,id',
+            'description' => 'nullable|string|max:500',
             'photo_promotion' => 'required|image|mimes:jpeg,png,jpg|max:2048', // Validate image file
         ]);
 
@@ -60,6 +61,7 @@ class AdminGestionPromotionsController extends Controller
             'date_fin' => $validated['date_fin'],
             'lien_promotion' => $validated['lien_promotion'],
             'garage_id' => $validated['garage_id'],
+            'description' => $validated['description'] ?? null,
             'photo_promotion' => $validated['photo_promotion'] ?? null, // Add the photo path or null
         ]);
 
@@ -105,6 +107,7 @@ class AdminGestionPromotionsController extends Controller
             'date_fin' => 'required|date|after_or_equal:date_debut',
             'lien_promotion' => 'nullable|url',
             'garage_id' => 'required|exists:garages,id',
+            'description' => 'nullable|string|max:500',
             'photo_promotion' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Allow null if no new photo
         ]);
 
