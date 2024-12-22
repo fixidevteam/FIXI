@@ -11,9 +11,8 @@
           <!-- Item 1 -->
           <div class="hidden duration-1000 ease-in-out" data-carousel-item>
             <a href="{{$promotion->lien_promotion}}" target="_blank">
-              <img src="{{asset('storage/'.$promotion->photo_promotion)}}" class="absolute block w-full h-full object-cover" alt="Ad 1">
+              <img src="{{asset('storage/'.$promotion->photo_promotion)}}" class="absolute block w-full h-full object-cover" alt="{{$promotion->nom_promotion}}">
             </a>
-
           </div>
           @endforeach
           <!-- Item 2 -->
@@ -44,7 +43,7 @@
       </div>
     </div>
 
-    <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg  ">
+    <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
       {{-- content (slot on layouts/app.blade.php)--}}
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 text-gray-900">
