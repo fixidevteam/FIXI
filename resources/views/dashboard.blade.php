@@ -2,7 +2,7 @@
 
   <div class="p-4 sm:ml-64">
 
-
+    @if(!$promotions->isEmpty())
     <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-14">
       <div id="default-carousel" class="relative w-full m-auto" data-carousel="slide">
         <!-- Carousel wrapper -->
@@ -42,8 +42,8 @@
         </button>
       </div>
     </div>
-
-    <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
+    @endif
+    <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg {{ $promotions->isEmpty() ? 'mt-14' : 'mt-4' }}">
       {{-- content (slot on layouts/app.blade.php)--}}
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 text-gray-900">

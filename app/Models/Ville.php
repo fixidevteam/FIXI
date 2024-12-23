@@ -21,6 +21,6 @@ class Ville extends Model
     // Assuming 'ville' in Garage matches 'name' in Ville
     public function garages()
     {
-        return $this->hasMany(Garage::class, 'ville', 'ville'); // Adjust column names as needed
+        return $this->hasMany(garage::class, 'ville', 'ville'); // Adjust column names as needed
     }
 }

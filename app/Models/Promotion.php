@@ -25,6 +25,6 @@ class Promotion extends Model
      */
     public function garage()
     {
-        return $this->belongsTo(Garage::class);
+        return $this->belongsTo(garage::class);
     }
 }
