@@ -141,46 +141,46 @@ class DatabaseSeeder extends Seeder
             'ville' => 'Marrakech',
         ]);
 
-        // $types = [
-        //     'Carte grise',
-        //     'Visite technique',
-        //     'Assurance auto',
-        //     'Certificat de dédouanement',
-        //     'Permis de circulation temporaire',
-        //     'Procès-verbal d\'accord de transformation',
-        //     'Vignette',
-        //     'Reçu de vente',
-        //     'Attestation d\'immatriculation provisoire',
-        //     'Fiche technique',
-        // ]; // Replace with your types
+        $types = [
+            'Carte grise',
+            'Visite technique',
+            'Assurance auto',
+            'Certificat de dédouanement',
+            'Permis de circulation temporaire',
+            'Procès-verbal d\'accord de transformation',
+            'Vignette',
+            'Reçu de vente',
+            'Attestation d\'immatriculation provisoire',
+            'Fiche technique',
+        ]; // Replace with your types
 
-        // foreach ($types as $type) {
-        //     type_papierv::create(['type' => $type]);
-        // }
-        // $types = [
-        //     'Carte nationale d\'identité (cin)',
-        //     'Passeport',
-        //     'Permis de conduire',
-        //     'Certificat de résidence',
-        //     'Carte bancaire',
-        //     'Certificat médical',
-        //     'Diplômes académiques',
-        //     'Certificat de travail',
-        //     'Carte de séjour',
-        //     'Certificat de mariage',
-        //     'Certificat de décès',
-        //     'Acte de naissance',
-        //     'Livret de famille',
-        // ]; // Replace with your types
+        foreach ($types as $type) {
+            type_papierv::create(['type' => $type]);
+        }
+        $types = [
+            'Carte nationale d\'identité (cin)',
+            'Passeport',
+            'Permis de conduire',
+            'Certificat de résidence',
+            'Carte bancaire',
+            'Certificat médical',
+            'Diplômes académiques',
+            'Certificat de travail',
+            'Carte de séjour',
+            'Certificat de mariage',
+            'Certificat de décès',
+            'Acte de naissance',
+            'Livret de famille',
+        ]; // Replace with your types
 
-        // foreach ($types as $type) {
-        //     type_papierp::create(['type' => $type]);
-        // }
-        // Admin::create([
-        //     'name' => 'admin',
-        //     'email' => 'admin@gmail.com',
-        //     'password' => Hash::make('adminadmin')
-        // ]);
+        foreach ($types as $type) {
+            type_papierp::create(['type' => $type]);
+        }
+        Admin::create([
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('adminadmin')
+        ]);
         // Mechanic::create([
         //     'name' => 'mechannic',
         //     'email' => 'user@gmail.com',

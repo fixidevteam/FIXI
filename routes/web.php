@@ -33,10 +33,13 @@ Route::get('/', function () {
 // auth google 
 Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect']);
 Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback']);
+Route::get('/my-fixi/complete-profile', [ProviderController::class, 'showCompleteProfileForm'])->name('complete-profile');
+Route::post('/my-fixi/complete-profile', [ProviderController::class, 'completeProfile'])->name('complete-profile.post');
+
 Route::get('/quartiers', [getQuartiersController::class, 'getQuartiers'])->name('quartiers.get');
 
 
-Route::get('/dashboard',[dashboardController::class,'index'])->middleware(['auth', 'verified', 'checkdocuments', 'checkUserStatus'])->prefix('my-fixi')->name('dashboard');
+Route::get('/dashboard', [dashboardController::class, 'index'])->middleware(['auth', 'verified', 'checkdocuments', 'checkUserStatus'])->prefix('my-fixi')->name('dashboard');
 
 Route::middleware(['auth', 'checkdocuments', 'checkUserStatus'])->prefix('my-fixi')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
