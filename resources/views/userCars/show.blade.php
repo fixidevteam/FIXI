@@ -142,12 +142,12 @@
             </div>
           </div>
         </div>
-        <div class="my-4 sm:w-full flex flex-col gap-4 sm:gap-0">
+        <div class="my-4 sm:w-full flex flex-col gap-0 ">
           @if($voiture->operations->isNotEmpty())
           <div class="flex sm:justify-start w-full">
             <a href="{{ route('voiture.pdf', $voiture->id) }}">
               <x-primary-button class="block md:inline-block">
-                Télécharger l’historique des opérations
+                Télécharger l’historique 
               </x-primary-button>
             </a>
           </div>
