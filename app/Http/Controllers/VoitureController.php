@@ -65,7 +65,7 @@ class VoitureController extends Controller
             $image = imagecreatefromjpeg($sourcePath);
 
             // Compress and save the image
-            imagejpeg($image, $outputPath, 75); // Quality: 75
+            imagejpeg($image, $outputPath, 25); // Quality: 25
 
             // Free memory
             imagedestroy($image);
@@ -93,7 +93,7 @@ class VoitureController extends Controller
         if (!$request->hasFile('photo') && $request->input('temp_photo_path')) {
             $data['photo'] = $request->input('temp_photo_path');
         } elseif ($request->hasFile('photo')) {
-            $data['photo'] = $imagePath;
+            $data['photo'] = $compressedImagePath;
         }
         // Combine the parts into the `numero_immatriculation`
         $numeroImmatriculation = $data['part1'] . '-' . $data['part2'] . '-' . $data['part3'];
