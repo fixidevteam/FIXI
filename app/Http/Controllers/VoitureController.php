@@ -46,11 +46,36 @@ class VoitureController extends Controller
             session()->flash('subtitle', 'Pour ajouter davantage, merci de nous contacter.');
             return redirect()->route('voiture.index');
         }
-        if ($request->hasFile('photo')) {
-            $imagePath = $request->file('photo')->store('user/voitures', 'public');
-            $request->session()->put('temp_photo_path', $imagePath); // Save the path in the session    
+        // if ($request->hasFile('photo')) {
+        //     $imagePath = $request->file('photo')->store('user/voitures', 'public');
+        //     $request->session()->put('temp_photo_path', $imagePath); // Save the path in the session    
 
+        // }
+
+
+        if ($request->hasFile('photo')) {
+            // Source image path (temporary uploaded file)
+            $sourcePath = $request->file('photo')->getRealPath();
+
+            // Define the output path (store in public storage for access)
+            $outputPath = storage_path('app/public/user/voitures/' . $request->file('photo')->getClientOriginalName());
+
+            // Load the image
+            $image = imagecreatefromjpeg($sourcePath);
+
+            // Compress and save the image
+            imagejpeg($image, $outputPath, 75); // Quality: 75
+
+            // Free memory
+            imagedestroy($image);
+
+            // Save the compressed image path (public URL)
+            $compressedImagePath = '/user/voitures/' . $request->file('photo')->getClientOriginalName();
+            $request->session()->put('temp_photo_path', $compressedImagePath);
         }
+
+
+
         $data = $request->validate([
             'part1' => ['required', 'digits_between:1,6'], // 1 to 6 digits
             'part2' => ['required', 'string', 'size:1'], // Single Arabic letter
