@@ -39,7 +39,7 @@ Route::post('/fixi-plus/complete-profile', [ProviderController::class, 'complete
 Route::get('/quartiers', [getQuartiersController::class, 'getQuartiers'])->name('quartiers.get');
 
 
-Route::get('/dashboard', [dashboardController::class, 'index'])->middleware(['auth', 'verified', 'checkdocuments', 'checkUserStatus'])->prefix('my-fixi')->name('dashboard');
+Route::get('/dashboard', [dashboardController::class, 'index'])->middleware(['auth', 'verified', 'checkdocuments', 'checkUserStatus'])->prefix('fixi-plus')->name('dashboard');
 
 Route::middleware(['auth', 'checkdocuments', 'checkUserStatus'])->prefix('fixi-plus')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
