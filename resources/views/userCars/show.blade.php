@@ -143,9 +143,17 @@
           </div>
         </div>
         @if($voiture->operations->isNotEmpty())
-        <div class="my-4 flex sm:justify-start">
+        <div class="my-4 flex sm:justify-start sm:w-full">
           <a href="{{route('voiture.pdf',$voiture->id)}}">
-            <x-primary-button class="block md:inline-block">Télécharger l’historique complet des opérations</x-primary-button>
+            <x-primary-button class="block md:inline-block">Télécharger l’historique des opérations</x-primary-button>
+          </a>
+        </div>
+        @endif
+
+        @if($voiture->marque !== 'autre')
+        <div class="my-4 flex sm:justify-start sm:w-full ">
+          <a href="https://fixi.ma/marques-de-voitures/{{ urlencode($voiture->marque) }}">
+            <x-primary-button class="block md:inline-block">Conseils d’entretien</x-primary-button>
           </a>
         </div>
         @endif

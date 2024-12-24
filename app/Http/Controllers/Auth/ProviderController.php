@@ -20,9 +20,11 @@ class ProviderController extends Controller
         try {
             // Retrieve the user's information from the provider
             $socialUser = Socialite::driver($provider)->user();
-
+            dd('test');
+            
             // Check if a user with the same email exists in the database
             $user = User::where('email', $socialUser->getEmail())->first();
+            
 
             if ($user) {
                 // If the user exists, check if it matches the same provider

@@ -48,6 +48,7 @@ class PapierVoitureController extends Controller
 
         // Fetch the valid types from the database
         $validTypes = type_papierv::pluck('type')->toArray();
+        
         if ($request->hasFile('photo')) {
             $imagePath = $request->file('photo')->store('user/papierVoiture', 'public');
             $request->session()->put('temp_photo_path', $imagePath); // Save the path in the session    

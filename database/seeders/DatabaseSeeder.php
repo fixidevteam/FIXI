@@ -181,12 +181,12 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => Hash::make('adminadmin')
         ]);
-        // Mechanic::create([
-        //     'name' => 'mechannic',
-        //     'email' => 'user@gmail.com',
-        //     'password' => Hash::make('user12345'),
-        //     'garage_id'=>1 
-        // ]);
+        Mechanic::create([
+            'name' => 'mechannic',
+            'email' => 'user@gmail.com',
+            'password' => Hash::make('user12345'),
+            'garage_id'=>1 
+        ]);
         // $this->call([
         //     OperationSeeder::class,
 
