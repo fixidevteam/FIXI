@@ -50,7 +50,7 @@ class VoitureController extends Controller
         if ($request->hasFile('photo')) {
             $imagePath = $request->file('photo')->store('user/voitures', 'public');
             $request->session()->put('temp_photo_path', $imagePath); // Save the path in the session    
-
+            
         }
         $data = $request->validate([
             'part1' => ['required', 'digits_between:1,6'], // 1 to 6 digits
