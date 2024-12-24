@@ -65,8 +65,16 @@ class VoitureController extends Controller
             $image = imagecreatefromjpeg($sourcePath);
 
             // Compress and save the image
-            imagejpeg($image, $outputPath, 25); // Quality: 25
-
+            imagejpeg($image, $outputPath, 25); 
+            // Quality: 25 Lower Values (e.g., 0–50):
+            // More compression.
+            // Smaller file size.
+            // Lower image quality.
+            // Higher Values (e.g., 70–100):
+            // Less compression.
+            // Larger file size.
+            // Better image quality.
+            
             // Free memory
             imagedestroy($image);
 

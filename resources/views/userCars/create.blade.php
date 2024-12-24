@@ -137,7 +137,7 @@
                     </div>
                     <div>
                         <x-input-label for="file_input" :value="__('Photo')" />
-                        <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" accept="image/*" />
+                        <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" accept="image/jpeg,image/png" />
                         <!-- Hidden Input to Preserve Old Value -->
                         @if(session('temp_photo_path'))
                         <input type="hidden" name="temp_photo_path" value="{{ session('temp_photo_path') }}">
