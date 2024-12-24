@@ -106,7 +106,7 @@
                           <option value="">Select garage</option>
                           @foreach ($garages as $garage)
                               <option value="{{ $garage->id }}" {{ old('garage_id', $promotion->garage_id) == $garage->id ? 'selected' : '' }}>
-                                  {{ $garage->name }}{{ $garage->quartier ? ' - ' . $garage->quartier : '' }}
+                                  {{ $garage->name }}{{ $garage->ville ? ' - ' . $garage->ville : '' }}{{ $garage->quartier ? ' - ' . $garage->quartier : '' }}{{ $garage->ref ? ' - ' . $garage->ref : '' }}
                               </option>
                           @endforeach
                       </select>

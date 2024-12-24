@@ -1,29 +1,38 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Mechanic;
 
+use App\Http\Controllers\Controller;
 use App\Models\Promotion;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PromotionController extends Controller
+class MechanicPromotionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // Récupérer la ville de l'utilisateur authentifié
-        $ville = Auth::user()->ville;
+        $garageId = Auth::user()->garage_id; // Assuming the user has a garage_id field
 
-        // Récupérer les promotions valides pour la ville de l'utilisateur
-        $promotions = Promotion::where('ville', $ville)
-            ->where('date_fin', '>=', now()) // Exclure les promotions expirées
-            ->paginate(12);
+        $activePromotions = Promotion::whereHas('garage', function ($query) use ($garageId) {
+            $query->where('id', $garageId);
+        })
+            ->where('date_fin', '>=', Carbon::now())
+            ->orderBy('date_fin', 'asc') // Promotions actives par ordre croissant
+            ->get();
 
-        return view('userPromotion.index', compact('promotions'));
+        $expiredPromotions = Promotion::whereHas('garage', function ($query) use ($garageId) {
+            $query->where('id', $garageId);
+        })
+            ->where('date_fin', '<', Carbon::now())
+            ->orderBy('date_fin', 'desc') // Promotions expirées par ordre décroissant
+            ->paginate(15);
+
+        return view('mechanic.promotions.index', compact('activePromotions', 'expiredPromotions'));
     }
-
 
     /**
      * Show the form for creating a new resource.

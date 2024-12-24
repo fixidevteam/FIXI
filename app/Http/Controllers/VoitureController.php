@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
-use Spatie\ImageOptimizer\OptimizerChainFactory;
 
 class VoitureController extends Controller
 {
