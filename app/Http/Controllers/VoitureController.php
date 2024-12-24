@@ -51,14 +51,16 @@ class VoitureController extends Controller
         //     $request->session()->put('temp_photo_path', $imagePath); // Save the path in the session    
 
         // }
+
+
         if ($request->hasFile('photo')) {
             // Source image path (temporary uploaded file)
             $sourcePath = $request->file('photo')->getRealPath();
 
             // Define the output path (store in public storage for access)
-            $outputPath = storage_path('app/public/user/voitures/test.jpeg');
+            $outputPath = storage_path('app/public/user/voitures/' . $request->file('photo')->getClientOriginalName());
 
-            // Load the image 
+            // Load the image
             $image = imagecreatefromjpeg($sourcePath);
 
             // Compress and save the image
@@ -67,10 +69,13 @@ class VoitureController extends Controller
             // Free memory
             imagedestroy($image);
 
-            // Save the compressed image path in session or return the path
-            $compressedImagePath = 'compressed_images/compressed_image.jpg'; // Relative path for public storage
+            // Save the compressed image path (public URL)
+            $compressedImagePath = '/user/voitures/' . $request->file('photo')->getClientOriginalName();
             $request->session()->put('temp_photo_path', $compressedImagePath);
         }
+
+
+
         $data = $request->validate([
             'part1' => ['required', 'digits_between:1,6'], // 1 to 6 digits
             'part2' => ['required', 'string', 'size:1'], // Single Arabic letter
