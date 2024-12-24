@@ -58,7 +58,8 @@ class VoitureController extends Controller
             $sourcePath = $request->file('photo')->getRealPath();
 
             // Define the output path (store in public storage for access)
-            $outputPath = storage_path('app/public/user/voitures/' . $request->file('photo')->getClientOriginalName());
+            $uniqueName = uniqid() . '_' . time() . $request->file('photo')->getClientOriginalName();
+            $outputPath = storage_path('app/public/user/voitures/' . $uniqueName);
 
             // Load the image
             $image = imagecreatefromjpeg($sourcePath);
@@ -70,7 +71,7 @@ class VoitureController extends Controller
             imagedestroy($image);
 
             // Save the compressed image path (public URL)
-            $compressedImagePath = '/user/voitures/' . $request->file('photo')->getClientOriginalName();
+            $compressedImagePath = '/user/voitures/' . $uniqueName;
             $request->session()->put('temp_photo_path', $compressedImagePath);
         }
 
