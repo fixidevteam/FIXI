@@ -82,6 +82,9 @@
                         </div>                        
                         @endif
                     </div>
+                    <div class="my-4">
+                        {{ $promotions->links() }}
+                    </div>
                 </div>
     </div>
 

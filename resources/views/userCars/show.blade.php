@@ -155,7 +155,7 @@
 
           @if($voiture->marque !== 'autre')
           <div class="mt-2 flex  sm:justify-start w-full">
-            <a href="https://fixi.ma/marques-de-voitures/{{ urlencode($voiture->marque) }}">
+            <a href="https://fixi.ma/marques-de-voitures/{{ urlencode($voiture->marque) }}" target="_blank">
               <x-primary-button class="block md:inline-block">
                 Conseils d’entretien
               </x-primary-button>
