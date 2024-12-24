@@ -34,13 +34,13 @@ class ProviderController extends Controller
 
                     // Redirect to profile completion if telephone or ville is missing
                     if (empty($user->telephone) || empty($user->ville)) {
-                        return redirect('/my-fixi/complete-profile');
+                        return redirect('/fixi-plus/complete-profile');
                     }
 
-                    return redirect('/my-fixi/dashboard');
+                    return redirect('/fixi-plus/dashboard');
                 } else {
                     // If the email exists but not the same provider, show an error
-                    return redirect('/my-fixi/login')->withErrors([
+                    return redirect('/fixi-plus/login')->withErrors([
                         'email' => 'Cette adresse email est déjà utilisée par un autre mode de connexion. Veuillez utiliser ce mode ou un autre email.',
                     ]);
                 }
@@ -61,12 +61,12 @@ class ProviderController extends Controller
 
             // Redirect to profile completion if telephone or ville is missing
             if (empty($user->telephone) || empty($user->ville)) {
-                return redirect('/my-fixi/complete-profile');
+                return redirect('/fixi-plus/complete-profile');
             }
 
-            return redirect('/my-fixi/dashboard');
+            return redirect('/fixi-plus/dashboard');
         } catch (\Exception $e) {
-            return redirect('/my-fixi/login')->withErrors([
+            return redirect('/fixi-plus/login')->withErrors([
                 'error' => 'Une erreur s\'est produite lors de la connexion. Veuillez réessayer.',
             ]);
         }
@@ -96,6 +96,6 @@ class ProviderController extends Controller
             'ville' => $request->ville,
         ]);
 
-        return redirect('/my-fixi/dashboard');
+        return redirect('/fixi-plus/dashboard');
     }
 }

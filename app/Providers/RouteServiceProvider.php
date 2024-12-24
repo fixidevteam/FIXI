@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/my-fixi/dashboard';
+    public const HOME = '/fixi-plus/dashboard';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
