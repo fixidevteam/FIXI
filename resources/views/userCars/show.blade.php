@@ -142,21 +142,28 @@
             </div>
           </div>
         </div>
-        @if($voiture->operations->isNotEmpty())
-        <div class="my-4 flex sm:justify-start sm:w-full">
-          <a href="{{route('voiture.pdf',$voiture->id)}}">
-            <x-primary-button class="block md:inline-block">Télécharger l’historique des opérations</x-primary-button>
-          </a>
-        </div>
-        @endif
+        <div class="my-4 sm:w-full flex flex-col gap-4 sm:gap-0">
+          @if($voiture->operations->isNotEmpty())
+          <div class="flex sm:justify-start w-full">
+            <a href="{{ route('voiture.pdf', $voiture->id) }}">
+              <x-primary-button class="block md:inline-block">
+                Télécharger l’historique des opérations
+              </x-primary-button>
+            </a>
+          </div>
+          @endif
 
-        @if($voiture->marque !== 'autre')
-        <div class="my-4 flex sm:justify-start sm:w-full ">
-          <a href="https://fixi.ma/marques-de-voitures/{{ urlencode($voiture->marque) }}">
-            <x-primary-button class="block md:inline-block">Conseils d’entretien</x-primary-button>
-          </a>
+          @if($voiture->marque !== 'autre')
+          <div class="mt-2 flex  sm:justify-start w-full">
+            <a href="https://fixi.ma/marques-de-voitures/{{ urlencode($voiture->marque) }}">
+              <x-primary-button class="block md:inline-block">
+                Conseils d’entretien
+              </x-primary-button>
+            </a>
+          </div>
+          @endif
         </div>
-        @endif
+
 
         {{-- details of cars close --}}
       </div>
