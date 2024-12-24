@@ -46,10 +46,30 @@ class VoitureController extends Controller
             session()->flash('subtitle', 'Pour ajouter davantage, merci de nous contacter.');
             return redirect()->route('voiture.index');
         }
+        // if ($request->hasFile('photo')) {
+        //     $imagePath = $request->file('photo')->store('user/voitures', 'public');
+        //     $request->session()->put('temp_photo_path', $imagePath); // Save the path in the session    
+
+        // }
         if ($request->hasFile('photo')) {
-            $imagePath = $request->file('photo')->store('user/voitures', 'public');
-            $request->session()->put('temp_photo_path', $imagePath); // Save the path in the session    
-            
+            // Source image path (temporary uploaded file)
+            $sourcePath = $request->file('photo')->getRealPath();
+
+            // Define the output path (store in public storage for access)
+            $outputPath = storage_path('app/public/user/voitures/test.jpeg');
+
+            // Load the image 
+            $image = imagecreatefromjpeg($sourcePath);
+
+            // Compress and save the image
+            imagejpeg($image, $outputPath, 75); // Quality: 75
+
+            // Free memory
+            imagedestroy($image);
+
+            // Save the compressed image path in session or return the path
+            $compressedImagePath = 'compressed_images/compressed_image.jpg'; // Relative path for public storage
+            $request->session()->put('temp_photo_path', $compressedImagePath);
         }
         $data = $request->validate([
             'part1' => ['required', 'digits_between:1,6'], // 1 to 6 digits
@@ -67,7 +87,7 @@ class VoitureController extends Controller
         if (!$request->hasFile('photo') && $request->input('temp_photo_path')) {
             $data['photo'] = $request->input('temp_photo_path');
         } elseif ($request->hasFile('photo')) {
-            $data['photo'] = $imagePath;
+            $data['photo'] = $compressedImagePath;
         }
         // Combine the parts into the `numero_immatriculation`
         $numeroImmatriculation = $data['part1'] . '-' . $data['part2'] . '-' . $data['part3'];
