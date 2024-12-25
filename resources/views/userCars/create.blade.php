@@ -135,15 +135,20 @@
                         <x-text-input id="date_de_dédouanement" class="block mt-1 w-full" type="date" name="date_de_dédouanement" :value="old('date_de_dédouanement')" autofocus autocomplete="date_de_dédouanement" />
                         <x-input-error :messages="$errors->get('date_de_dédouanement')" class="mt-2" />
                     </div>
-                    <div>
-                        <x-input-label for="file_input" :value="__('Photo')" />
-                        <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" accept="image/jpeg,image/png" />
-                        <!-- Hidden Input to Preserve Old Value -->
-                        @if(session('temp_photo_path'))
-                        <input type="hidden" name="temp_photo_path" value="{{ session('temp_photo_path') }}">
-                        @endif
-                        <x-input-error :messages="$errors->get('photo')" class="mt-2" />
+                    <div class="shrink-0">
+                        <img id='preview_img' class="h-16 w-16 object-cover rounded-full" src="{{session('temp_photo_path') ? asset('storage/'.session('temp_photo_path')) : asset('./images/defaultimage.jpg')}}" alt="Current profile photo" />
                     </div>
+                    <div class="">
+                        <label class="block">
+                            <x-input-label for="file_input" :value="__('Photo')" />
+                            <x-file-input id="file_input" onchange="loadFile(event)" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" accept="image/jpeg,png" />
+                            <x-input-error :messages="$errors->get('photo')" class="mt-2" />
+                            @if(session('temp_photo_path'))
+                            <input type="hidden" id="inputImage2" name="temp_photo_path" value="{{ session('temp_photo_path') }}">
+                            @endif
+                        </label>
+                    </div>
+
                     <div class="flex items-center justify-end mt-4">
                         <x-primary-button class="">
                             {{ __('Ajouter la voiture') }}
@@ -160,4 +165,16 @@
             @include('layouts.footer')
         </div>
     </div>
+    <script>
+        var loadFile = function(event) {
+            var input = event.target;
+            var file = input.files[0];
+            var type = file.type;
+            var output = document.getElementById('preview_img');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src) // free memory
+            }
+        };
+    </script>
 </x-app-layout>

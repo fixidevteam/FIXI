@@ -148,9 +148,12 @@
                         </x-text-textarea>
                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
                     </div>
+                    <div class="shrink-0">
+                        <img id='preview_img' class="h-16 w-16 object-cover rounded-full" src="{{$operation->photo ? asset('storage/'.$operation->photo) : asset('./images/defaultimage.jpg')}}" alt="Current profile photo" />
+                    </div>
                     <div>
                         <x-input-label for="file_input" :value="__('Photo')" />
-                        <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" accept="image/*" />
+                        <x-file-input id="file_input" onchange="loadFile(event)" class="block mt-1 w-full" type="file" name="photo" :value="$operation->photo ?? old('photo')" autofocus autocomplete="photo" accept="image/jpeg,png" />
                         <x-input-error :messages="$errors->get('photo')" class="mt-2" />
                     </div>
                     <div class="flex items-center justify-end mt-4">
@@ -196,5 +199,16 @@
                 newGarageInput.removeAttribute('required'); // Remove 'required' attribute
             }
         });
+
+        var loadFile = function(event) {
+            var input = event.target;
+            var file = input.files[0];
+            var type = file.type;
+            var output = document.getElementById('preview_img');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src) // free memory
+            }
+        };
     </script>
 </x-app-layout>

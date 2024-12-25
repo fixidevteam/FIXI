@@ -9,6 +9,7 @@ use App\Models\Voiture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class VoitureController extends Controller
@@ -37,7 +38,6 @@ class VoitureController extends Controller
     {
 
         $user_id = Auth::user()->id;
-
         // Vérifiez si l'utilisateur a déjà atteint la limite
         $existingVoituresCount = Voiture::where('user_id', $user_id)->count();
         if ($existingVoituresCount >= 1) {
@@ -46,52 +46,37 @@ class VoitureController extends Controller
             session()->flash('subtitle', 'Pour ajouter davantage, merci de nous contacter.');
             return redirect()->route('voiture.index');
         }
-        // if ($request->hasFile('photo')) {
-        //     $imagePath = $request->file('photo')->store('user/voitures', 'public');
-        //     $request->session()->put('temp_photo_path', $imagePath); // Save the path in the session    
-
-        // }
-
-
+        $request->validate([
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB
+        ]);
         if ($request->hasFile('photo')) {
             // Source image path (temporary uploaded file)
             $sourcePath = $request->file('photo')->getRealPath();
-
             // Define the output path (store in public storage for access)
-            $uniqueName = uniqid() . '_' . time() . $request->file('photo')->getClientOriginalName();
+            $extension = strtolower($request->file('photo')->getClientOriginalExtension());
+            $uniqueName = uniqid() . '_' . time() . '.' . $extension;
             $outputPath = storage_path('app/public/user/voitures/' . $uniqueName);
-
-            // Load the image
-            $image = imagecreatefromjpeg($sourcePath);
-
-            // Compress and save the image
-            imagejpeg($image, $outputPath, 25); 
-            // Quality: 25 Lower Values (e.g., 0–50):
-            // More compression.
-            // Smaller file size.
-            // Lower image quality.
-            // Higher Values (e.g., 70–100):
-            // Less compression.
-            // Larger file size.
-            // Better image quality.
-            
-            // Free memory
+            // Load the image based on its type
+            $image = null;
+            if (in_array($extension, ['jpg', 'jpeg'])) {
+                $image = imagecreatefromjpeg($sourcePath);
+                imagejpeg($image, $outputPath, 25); // Compress JPEG/JPG
+            } elseif ($extension === 'png') {
+                $image = imagecreatefrompng($sourcePath);
+                imagepng($image, $outputPath, 6);
+            }
             imagedestroy($image);
-
-            // Save the compressed image path (public URL)
             $compressedImagePath = '/user/voitures/' . $uniqueName;
             $request->session()->put('temp_photo_path', $compressedImagePath);
         }
-
-
-
+        // validation 
         $data = $request->validate([
             'part1' => ['required', 'digits_between:1,6'], // 1 to 6 digits
             'part2' => ['required', 'string', 'size:1'], // Single Arabic letter
             'part3' => ['required', 'digits_between:1,2'], // 1 to 2 digits
             'marque' => ['required', 'max:30'],
             'modele' => ['required', 'max:30'],
-            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB
             'date_de_première_mise_en_circulation' => ['nullable', 'date'],
             'date_achat' => ['nullable', 'date'],
             'date_de_dédouanement' => ['nullable', 'date'],
@@ -103,6 +88,7 @@ class VoitureController extends Controller
         } elseif ($request->hasFile('photo')) {
             $data['photo'] = $compressedImagePath;
         }
+
         // Combine the parts into the `numero_immatriculation`
         $numeroImmatriculation = $data['part1'] . '-' . $data['part2'] . '-' . $data['part3'];
         $request->validate([
@@ -118,8 +104,9 @@ class VoitureController extends Controller
         unset($data['part1'], $data['part2'], $data['part3']);
         Voiture::create($data);
 
-        // Flash message to the session
+        // Remove temp_photo_path when done
         $request->session()->forget('temp_photo_path');
+        // Flash message to the session
         session()->flash('success', 'Voiture ajoutée');
         session()->flash('subtitle', 'Votre voiture a été ajoutée avec succès à la liste.');
         return redirect()->route('voiture.index');
@@ -182,8 +169,25 @@ class VoitureController extends Controller
             ],
         ]);
         if ($request->hasFile('photo')) {
-            $imagePath = $request->file('photo')->store('user/voitures', 'public');
-            $data['photo'] = $imagePath;
+            // Source image path (temporary uploaded file)
+            $sourcePath = $request->file('photo')->getRealPath();
+            // Define the output path (store in public storage for access)
+            $extension = strtolower($request->file('photo')->getClientOriginalExtension());
+            $uniqueName = uniqid() . '_' . time() . '.' . $extension;
+            $outputPath = storage_path('app/public/user/voitures/' . $uniqueName);
+            // Load the image based on its type
+            $image = null;
+            if (in_array($extension, ['jpg', 'jpeg'])) {
+                $image = imagecreatefromjpeg($sourcePath);
+                imagejpeg($image, $outputPath, 25); // Compress JPEG/JPG
+            } elseif ($extension === 'png') {
+                $image = imagecreatefrompng($sourcePath);
+                imagepng($image, $outputPath, 6);
+            }
+            imagedestroy($image);
+            $compressedImagePath = '/user/voitures/' . $uniqueName;
+            $data['photo'] = $compressedImagePath;
+            
         }
         // Add user ID and combined numero_immatriculation
         $data['user_id'] = $user_id;
