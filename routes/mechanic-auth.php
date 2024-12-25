@@ -5,6 +5,7 @@ use App\Http\Controllers\Mechanic\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\getAnalyticsDataController;
 use App\Http\Controllers\Mechanic\ChartContoller;
+use App\Http\Controllers\Mechanic\ExportController;
 use App\Http\Controllers\Mechanic\MechanicClientController;
 use App\Http\Controllers\Mechanic\MechanicOperatioController;
 use App\Http\Controllers\Mechanic\MechanicVoitureController;
@@ -38,6 +39,7 @@ Route::middleware(['auth:mechanic', 'checkMechanicStatus'])->prefix('fixi-pro')-
     Route::resource('/promotions', MechanicPromotionController::class);
     Route::get('/analytics-data', [getAnalyticsDataController::class, 'getAnalyticsData'])->name('analytics.data');
     Route::get('/chart', [ChartContoller::class, 'index'])->name('chart');
+    Route::get('/mechanic/voitures/export/{voitureId}', [ExportController::class, 'exportOperations'])->name('voitures.export');
 
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
