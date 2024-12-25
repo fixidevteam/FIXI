@@ -19,36 +19,6 @@ class MechanicVoitureController extends Controller
     /**
      * Display a listing of the resource.
      */
-    // public function index(Request $request)
-    // {
-    //     // Get the authenticated user's garage operations
-    //     $user = Auth::user();
-    //     $search = $request->input('search'); // Retrieve the search query
-
-    //     // Fetch voitures related to the user's garage operations
-    //     $voitures = collect(); // Initialize an empty collection for voitures
-
-    //     $operations = $user->garage->operations()->with('voiture')->get();
-
-    //     foreach ($operations as $operation) {
-    //         if ($operation->voiture) {
-    //             $voitures->push($operation->voiture);
-    //         }
-    //     }
-
-    //     // Filter voitures if search query is provided
-    //     if (!empty($search)) {
-    //         $voitures = $voitures->filter(function ($voiture) use ($search) {
-    //             return stripos($voiture->numero_immatriculation, $search) !== false;
-    //         });
-    //     }
-
-    //     // Remove duplicate voitures (if any)
-    //     $voitures = $voitures->unique('id')->values();
-
-    //     // Pass the voitures and search query to the view
-    //     return view('mechanic.voitures.index', compact('voitures', 'search'));
-    // }
     public function index(Request $request)
     {
         // Get the authenticated user (mechanic)
@@ -138,7 +108,7 @@ class MechanicVoitureController extends Controller
             ],
         ]);
         $client = Session::get('client');
-        $data['user_id'] = $client->id ;
+        $data['user_id'] = $client->id;
         $data['numero_immatriculation'] = $numeroImmatriculation;
         // Remove temporary fields to avoid unnecessary database columns
         unset($data['part1'], $data['part2'], $data['part3']);
@@ -150,7 +120,7 @@ class MechanicVoitureController extends Controller
         session()->flash('success', 'voitire ajoutée');
         session()->flash('subtitle', 'la voiture  a été ajoutée avec succès à la liste.');
 
-        return redirect()->route('mechanic.clients.show',$client);
+        return redirect()->route('mechanic.clients.show', $client);
     }
 
     /**
