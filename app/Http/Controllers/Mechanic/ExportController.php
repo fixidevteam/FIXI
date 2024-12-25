@@ -39,10 +39,10 @@ class ExportController extends Controller
 
         // Generate the filename dynamically
         $filename = 'Suivi_Operations_' . ($voiture->numero_immatriculation ?? 'Vehicule') . '.xlsx';
-
+        $logoPath = public_path('images/fixi.png');
         // Pass operations, categories, operation names, and voiture to the export
         return Excel::download(
-            new OperationsExport($operations, $nom_categories, $nom_operations, $voiture),
+            new OperationsExport($user, $operations, $nom_categories, $nom_operations, $voiture, $logoPath),
             $filename
         );
     }
