@@ -59,10 +59,7 @@ class OperationController extends Controller
     public function store(Request $request)
     {
         $voiture = Session::get('voiture_id');
-        // if ($request->hasFile('photo')) {
-        //     $imagePath = $request->file('photo')->store('user/operations', 'public');
-        //     $request->session()->put('temp_photo_path', $imagePath); // Save the path in the session    
-        // }
+
         $request->validate([
             'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB
         ]);

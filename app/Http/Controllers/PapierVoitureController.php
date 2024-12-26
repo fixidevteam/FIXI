@@ -46,14 +46,44 @@ class PapierVoitureController extends Controller
             return redirect()->route('voiture.show', $voiture_id);
         }
 
+        $request->validate([
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB
+        ]);
+        if ($request->hasFile('photo')) {
+            // Source image path (temporary uploaded file)
+            $sourcePath = $request->file('photo')->getRealPath();
+            // Define the output path (store in public storage for access)
+            $extension = strtolower($request->file('photo')->getClientOriginalExtension());
+            $uniqueName = uniqid() . '_' . time() . '.' . $extension;
+            $outputPath = storage_path('app/public/user/papierVoiture/' . $uniqueName);
+            // Load the image based on its type
+            $image = null;
+            if (in_array($extension, ['jpg', 'jpeg'])) {
+                $image = imagecreatefromjpeg($sourcePath);
+                imagejpeg($image, $outputPath, 25); // Compress JPEG/JPG
+                imagedestroy($image);
+            } elseif ($extension === 'png') {
+                $image = imagecreatefrompng($sourcePath);
+                imagepng($image, $outputPath, 6);
+                imagedestroy($image);
+            } // Handle PDFs
+            elseif ($extension === 'pdf') {
+                // Save the PDF without compressing
+                $request->file('photo')->move(storage_path('app/public/user/papierVoiture'), $uniqueName);
+            }
+
+            $compressedFilePath = 'user/papierVoiture/' . $uniqueName;
+            $request->session()->put('temp_photo_path', $compressedFilePath);
+        }
+
         // Fetch the valid types from the database
         $validTypes = type_papierv::pluck('type')->toArray();
-        
-        if ($request->hasFile('photo')) {
-            $imagePath = $request->file('photo')->store('user/papierVoiture', 'public');
-            $request->session()->put('temp_photo_path', $imagePath); // Save the path in the session    
 
-        }
+        // if ($request->hasFile('photo')) {
+        //     $imagePath = $request->file('photo')->store('user/papierVoiture', 'public');
+        //     $request->session()->put('temp_photo_path', $imagePath); // Save the path in the session    
+
+        // }
         $data = $request->validate([
             'type' => ['required', 'string', Rule::in($validTypes)], // Ensure type is valid
             'note' => ['nullable', 'max:255'],
@@ -66,7 +96,7 @@ class PapierVoitureController extends Controller
         if (!$request->hasFile('photo') && $request->input('temp_photo_path')) {
             $data['photo'] = $request->input('temp_photo_path');
         } elseif ($request->hasFile('photo')) {
-            $data['photo'] = $imagePath;
+            $data['photo'] = $compressedFilePath;
         }
         $data['voiture_id'] = $voiture_id;
         VoiturePapier::create($data);
@@ -119,26 +149,52 @@ class PapierVoitureController extends Controller
         $papier = VoiturePapier::find($id);
         $voiture_id = Session::get('voiture_id');
 
-        // Validate the request data
-        $data = $request->validate([
-            'type' => ['required'],
-            'note' => ['max:255'],
-            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
-            'date_debut' => ['required', 'date'],
-            'date_fin' => ['required', 'date'],
-        ]);
-
-        // Handle file upload if a photo is provided
-        if ($request->hasFile('photo')) {
-            $imagePath = $request->file('photo')->store('user/papierVoiture', 'public');
-            $data['photo'] = $imagePath;
-        }
-
-        // Add voiture_id to the data
-        $data['voiture_id'] = $voiture_id;
-
-        // Update the document
         if ($papier) {
+            $request->validate(['photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048']]);
+            if ($request->hasFile('photo')) {
+                // Source image path (temporary uploaded file)
+                $sourcePath = $request->file('photo')->getRealPath();
+                // Define the output path (store in public storage for access)
+                $extension = strtolower($request->file('photo')->getClientOriginalExtension());
+                $uniqueName = uniqid() . '_' . time() . '.' . $extension;
+                $outputPath = storage_path('app/public/user/papierVoiture/' . $uniqueName);
+                // Load the image based on its type
+                $image = null;
+                if (in_array($extension, ['jpg', 'jpeg'])) {
+                    $image = imagecreatefromjpeg($sourcePath);
+                    imagejpeg($image, $outputPath, 25); // Compress JPEG/JPG
+                    imagedestroy($image);
+                } elseif ($extension === 'png') {
+                    $image = imagecreatefrompng($sourcePath);
+                    imagepng($image, $outputPath, 6);
+                    imagedestroy($image);
+                } // Handle PDFs
+                elseif ($extension === 'pdf') {
+                    // Save the PDF without compressing
+                    $request->file('photo')->move(storage_path('app/public/user/papierVoiture'), $uniqueName);
+                }
+
+                $compressedFilePath = 'user/papierVoiture/' . $uniqueName;
+                $request->session()->put('temp_photo_path', $compressedFilePath);
+            }
+            // Validate the request data
+            $data = $request->validate([
+                'type' => ['required'],
+                'note' => ['max:255'],
+                'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
+                'date_debut' => ['required', 'date'],
+                'date_fin' => ['required', 'date'],
+            ]);
+
+            // Handle file upload if a photo is provided
+            if ($request->hasFile('photo')) {
+                $data['photo'] = $compressedFilePath;
+            }
+
+            // Add voiture_id to the data
+            $data['voiture_id'] = $voiture_id;
+
+            // Update the document
             $papier->update($data);
 
             // Handle related notifications

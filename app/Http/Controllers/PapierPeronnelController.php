@@ -147,6 +147,7 @@ class PapierPeronnelController extends Controller
 
 
         if ($papier) {
+            $request->validate(['photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048']]);
             if ($request->hasFile('photo')) {
                 // Source image path (temporary uploaded file)
                 $sourcePath = $request->file('photo')->getRealPath();

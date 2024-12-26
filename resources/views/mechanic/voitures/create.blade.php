@@ -87,7 +87,7 @@
         <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-4">
             {{-- content (slot on layouts/app.blade.php)--}}
             <div class=" px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <h2 class="mt-10  text-2xl font-bold leading-9 tracking-tight text-gray-900">Ajouter une  Voiture</h2>
+                <h2 class="mt-10  text-2xl font-bold leading-9 tracking-tight text-gray-900">Ajouter une Voiture</h2>
                 <form method="POST" action="{{ route('mechanic.voitures.store') }}" class="space-y-6" enctype="multipart/form-data">
                     @csrf
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
@@ -141,9 +141,12 @@
                         <x-text-input id="modele" class="block mt-1 w-full" type="text" name="modele" :value="old('modele')" autofocus autocomplete="modele" />
                         <x-input-error :messages="$errors->get('modele')" class="mt-2" />
                     </div>
+                    <div class="shrink-0">
+                        <img id='preview_img' class="h-16 w-16 object-cover rounded-full" src="{{session('temp_photo_path') ? asset('storage/'.session('temp_photo_path')) : asset('./images/defaultimage.jpg')}}" alt="Current profile photo" />
+                    </div>
                     <div>
                         <x-input-label for="file_input" :value="__('Photo')" />
-                        <x-file-input id="file_input" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" accept="image/*" />
+                        <x-file-input id="file_input" onchange="loadFile(event)" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" accept="image/jpeg,png" />
                         <!-- Hidden Input to Preserve Old Value -->
                         @if(session('temp_photo_path'))
                         <input type="hidden" name="temp_photo_path" value="{{ session('temp_photo_path') }}">
@@ -167,4 +170,17 @@
             @include('layouts.footer')
         </div>
     </div>
+
+    <script>
+        var loadFile = function(event) {
+            var input = event.target;
+            var file = input.files[0];
+            var type = file.type;
+            var output = document.getElementById('preview_img');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src) // free memory
+            }
+        };
+    </script>
 </x-mechanic-app-layout>

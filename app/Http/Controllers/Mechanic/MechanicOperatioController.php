@@ -61,10 +61,30 @@ class MechanicOperatioController extends Controller
     {
         $garage = Auth::user()->garage_id;
         $voiture = Session::get('voiture_id');
+        $request->validate([
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB
+        ]);
         if ($request->hasFile('photo')) {
-            $imagePath = $request->file('photo')->store('user/operations', 'public');
-            $request->session()->put('temp_photo_path', $imagePath); // Save the path in the session    
+            // Source image path (temporary uploaded file)
+            $sourcePath = $request->file('photo')->getRealPath();
+            // Define the output path (store in public storage for access)
+            $extension = strtolower($request->file('photo')->getClientOriginalExtension());
+            $uniqueName = uniqid() . '_' . time() . '.' . $extension;
+            $outputPath = storage_path('app/public/user/operations/' . $uniqueName);
+            // Load the image based on its type
+            $image = null;
+            if (in_array($extension, ['jpg', 'jpeg'])) {
+                $image = imagecreatefromjpeg($sourcePath);
+                imagejpeg($image, $outputPath, 25); // Compress JPEG/JPG
+            } elseif ($extension === 'png') {
+                $image = imagecreatefrompng($sourcePath);
+                imagepng($image, $outputPath, 6);
+            }
+            imagedestroy($image);
+            $compressedImagePath = '/user/operations/' . $uniqueName;
+            $request->session()->put('temp_photo_path', $compressedImagePath);
         }
+
 
         $data = $request->validate([
             'categorie' => [
@@ -88,7 +108,7 @@ class MechanicOperatioController extends Controller
         if (!$request->hasFile('photo') && $request->input('temp_photo_path')) {
             $data['photo'] = $request->input('temp_photo_path');
         } elseif ($request->hasFile('photo')) {
-            $data['photo'] = $imagePath;
+            $data['photo'] = $compressedImagePath;
         }
 
 
@@ -99,7 +119,6 @@ class MechanicOperatioController extends Controller
 
         // add sous operation 
         if ($request->filled('sousOperations')) {
-            // If sousOperations is not empty, dump and display the data
             foreach ($request->input('sousOperations') as $idSous) {
                 $name = nom_sous_operation::find($idSous);
                 SousOperation::create(
