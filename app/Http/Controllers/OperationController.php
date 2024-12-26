@@ -190,8 +190,8 @@ class OperationController extends Controller
     {
 
         $operation = Operation::find($id);
-
-        $voiture = Session::get('voiture_id');
+        // dd($operation->voiture_id);
+        $voiture = $operation->voiture_id;
         $data = $request->validate([
             'categorie' => [
                 'required',
@@ -275,8 +275,8 @@ class OperationController extends Controller
      */
     public function destroy(string $id)
     {
-        $voiture = Session::get('voiture_id');
         $operation = Operation::find($id);
+        $voiture = $operation->voiture_id;
         $operation->sousOperations()->delete();
         $operation->delete();
         session()->flash('success', 'Operation supprimée');
