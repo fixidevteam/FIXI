@@ -30,6 +30,7 @@ class getAnalyticsDataController extends Controller
         $operations = DB::table('operations')
             ->whereBetween('date_operation', [$threeMonthsAgo, $currentDate])
             ->where('garage_id', $garageId)
+            ->whereNull('deleted_at') // Exclude soft-deleted records
             ->selectRaw('YEAR(date_operation) as year, MONTH(date_operation) as month, COUNT(*) as total_operations')
             ->groupBy('year', 'month')
             ->orderBy('year')
