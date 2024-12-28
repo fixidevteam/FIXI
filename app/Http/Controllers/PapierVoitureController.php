@@ -39,12 +39,12 @@ class PapierVoitureController extends Controller
         $voiture_id = Session::get('voiture_id');
 
         // Check if the vehicle already has 3 documents
-        $existingDocumentsCount = VoiturePapier::where('voiture_id', $voiture_id)->count();
-        if ($existingDocumentsCount >= 5) {
-            session()->flash('error', 'Limite atteinte');
-            session()->flash('subtitle', 'Vous ne pouvez ajouter que 3 documents par véhicule.');
-            return redirect()->route('voiture.show', $voiture_id);
-        }
+        // $existingDocumentsCount = VoiturePapier::where('voiture_id', $voiture_id)->count();
+        // if ($existingDocumentsCount >= 5) {
+        //     session()->flash('error', 'Limite atteinte');
+        //     session()->flash('subtitle', 'Vous ne pouvez ajouter que 3 documents par véhicule.');
+        //     return redirect()->route('voiture.show', $voiture_id);
+        // }
 
         $request->validate([
             'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB

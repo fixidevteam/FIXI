@@ -39,13 +39,13 @@ class VoitureController extends Controller
 
         $user_id = Auth::user()->id;
         // Vérifiez si l'utilisateur a déjà atteint la limite
-        $existingVoituresCount = Voiture::where('user_id', $user_id)->count();
-        if ($existingVoituresCount >= 1) {
+        // $existingVoituresCount = Voiture::where('user_id', $user_id)->count();
+        // if ($existingVoituresCount >= 1) {
             // Redirection avec un message d'assistance
-            session()->flash('error', 'Vous avez atteint la limite autorisée.');
-            session()->flash('subtitle', 'Pour ajouter davantage, merci de nous contacter.');
-            return redirect()->route('voiture.index');
-        }
+            // session()->flash('error', 'Vous avez atteint la limite autorisée.');
+            // session()->flash('subtitle', 'Pour ajouter davantage, merci de nous contacter.');
+            // return redirect()->route('voiture.index');
+        // }
         $request->validate([
             'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB
         ]);

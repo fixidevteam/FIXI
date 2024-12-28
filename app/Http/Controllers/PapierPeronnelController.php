@@ -43,12 +43,12 @@ class PapierPeronnelController extends Controller
         $user_id = Auth::user()->id;
 
         // Check if the user already has 3 documents
-        $existingDocumentsCount = UserPapier::where('user_id', $user_id)->count();
-        if ($existingDocumentsCount >= 5) {
-            session()->flash('error', 'Limite atteinte');
-            session()->flash('subtitle', 'Vous ne pouvez ajouter que 3 documents personnels.');
-            return redirect()->route('paiperPersonnel.index');
-        }
+        // $existingDocumentsCount = UserPapier::where('user_id', $user_id)->count();
+        // if ($existingDocumentsCount >= 5) {
+        //     session()->flash('error', 'Limite atteinte');
+        //     session()->flash('subtitle', 'Vous ne pouvez ajouter que 3 documents personnels.');
+        //     return redirect()->route('paiperPersonnel.index');
+        // }
         $request->validate([
             'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB
         ]);

@@ -106,7 +106,7 @@
           @if(in_array(strtolower($fileExtension), ['jpg', 'jpeg', 'png']))
               <!-- Display Image with Modal Trigger -->
               <img 
-                class="w-50 h-96 object-cover cursor-pointer hover:scale-105 transition-all duration-300 ease-in" 
+                class="m-auto w-full md:w-4/5 h-60 object-cover cursor-pointer" 
                 src="{{ asset('storage/' . $papier->photo) }}" 
                 alt="Document Image" 
                 id="documentImage"
@@ -130,7 +130,7 @@
           @endif
           @else
           <img 
-            class="w-50 h-96 object-cover cursor-pointer hover:scale-105 transition-all duration-300 ease-in" 
+            class="m-auto w-full md:w-4/5 h-60 object-cover cursor-pointer" 
             src="/images/defaultimage.jpg" 
             id="documentImage"
             alt="Image par défaut"
