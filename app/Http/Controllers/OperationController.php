@@ -59,7 +59,6 @@ class OperationController extends Controller
     public function store(Request $request)
     {
         $voiture = Session::get('voiture_id');
-
         $request->validate([
             'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB
         ]);

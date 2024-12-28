@@ -13,11 +13,13 @@ class PapierPersoTest extends TestCase
 {
     /**
      * A basic feature test example.
+     * 
      */
+    use RefreshDatabase;
     public function test_papiers_perso(): void
     {
         $user = User::factory()->create(['status' => 1, 'ville' => 'marrakech']);
-        $res = $this->actingAs($user)->get('my-fixi/paiperPersonnel');
+        $res = $this->actingAs($user)->get('fixi-plus/paiperPersonnel');
         $res->assertOk();
     }
     public function test_ajouter_pp_get_notification(): void
@@ -34,13 +36,14 @@ class PapierPersoTest extends TestCase
 
         // Make the POST request
         $response = $this->post(
-            'my-fixi/paiperPersonnel',
+            'fixi-plus/paiperPersonnel',
             [
                 'type' => 'Passeport',
                 'date_debut' => now(),
                 'date_fin' => now(), // Ensure valid date range
             ]
         );
+        $response->assertStatus(302);
         // Assert that the response is successful
         $this->assertDatabaseHas('user_papiers', [
             'user_id' => $user->id,
