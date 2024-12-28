@@ -159,6 +159,7 @@
                 </svg>
               </x-primary-button>
             </a>
+            @if(!$voiture->operations->isEmpty())
             {{-- desktop export --}}
             <div class="hidden md:block">
               <a href="{{ route('mechanic.voitures.export', ['voitureId' => $voiture->id]) }}" class="w-1/2 text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-200 font-medium inline-flex items-center justify-center rounded-[20px] text-sm px-3 py-2 text-center sm:w-auto">
@@ -168,6 +169,7 @@
                 Exporter les opérations vers Excel
               </a>
             </div>
+            @endif
           </div>
         </div>
         {{-- table --}}
