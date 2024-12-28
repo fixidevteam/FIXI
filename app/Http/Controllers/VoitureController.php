@@ -187,7 +187,6 @@ class VoitureController extends Controller
             imagedestroy($image);
             $compressedImagePath = '/user/voitures/' . $uniqueName;
             $data['photo'] = $compressedImagePath;
-            
         }
         // Add user ID and combined numero_immatriculation
         $data['user_id'] = $user_id;
