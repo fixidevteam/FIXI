@@ -32,7 +32,7 @@
                             <a
                                 href="{{ route('garages.index') }}"
                                 class="inline-flex items-center text-sm font-medium text-gray-700">
-                                Listing des garages
+                                Garages partenaires
                             </a>
                         </div>
                     </li>
@@ -45,7 +45,7 @@
             {{-- content (slot on layouts/app.blade.php)--}}
             <div class=" px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex justify-between items-center my-6">
-                    <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Liste des garages</h2>
+                    <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Garages partenaires</h2>
                 </div>
                 <form method="GET" action="{{ route('garages.index') }}" class="mb-4">
                     <div class="flex items-center space-x-2">
