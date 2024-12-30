@@ -112,9 +112,7 @@ return [
 
     'custom' => [
         'telephone' => [
-            'regex' => "Le numéro de téléphone est invalide. Veuillez entrer un numéro dans l'un des formats suivants : 
-                        +2126 suivi de 8 chiffres, 
-                        +2127 suivi de 8 chiffres, 
+            'regex' => "Le numéro de téléphone est invalide. Veuillez entrer un numéro dans l'un des formats suivants :
                         06 suivi de 8 chiffres, ou 
                         07 suivi de 8 chiffres.",
         ],
