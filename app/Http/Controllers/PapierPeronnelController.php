@@ -42,17 +42,9 @@ class PapierPeronnelController extends Controller
     {
         // update store :
         $user_id = Auth::user()->id;
-
         $request->validate([
-            'type' => ['required', 'string', Rule::in(type_papierp::pluck('type')->toArray())],
-            'note' => ['nullable', 'max:255'],
-            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB
-            'date_debut' => ['required', 'date'],
-            'date_fin' => ['required', 'date'],
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048']
         ]);
-
-        $compressedFilePath = null;
-
         if ($request->hasFile('photo')) {
             // Handle file upload and compression
             $extension = strtolower($request->file('photo')->getClientOriginalExtension());
@@ -72,20 +64,26 @@ class PapierPeronnelController extends Controller
             }
 
             $compressedFilePath = 'user/papierperso/' . $uniqueName;
-
             // Store path in the session
-            $request->session()->put('temp_photo_path', $compressedFilePath);
+            $request->session()->put('temp_photo_perso', $compressedFilePath);
+           
         }
-
+        $request->validate([
+            'type' => ['required', 'string', Rule::in(type_papierp::pluck('type')->toArray())],
+            'note' => ['nullable', 'max:255'],
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB
+            'date_debut' => ['required', 'date'],
+            'date_fin' => ['required', 'date'],
+        ]);
         // Prepare data for insertion
         $data = $request->all();
         $data['user_id'] = $user_id;
-        $data['photo'] = $compressedFilePath ?? $request->input('temp_photo_path');
+        $data['photo'] = $compressedFilePath ?? $request->input('temp_photo_perso');
 
         UserPapier::create($data);
 
         // Clear session after use
-        $request->session()->forget('temp_photo_path');
+        $request->session()->forget('temp_photo_perso');
 
         session()->flash('success', 'Document ajouté');
         session()->flash('subtitle', 'Votre document a été ajouté avec succès à la liste.');

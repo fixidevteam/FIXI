@@ -100,10 +100,10 @@
                     </div>
                     <div class="shrink-0">
                         <img id='preview_img' class="h-16 w-16 object-cover rounded-full" src="{{ 
-                                    session('temp_photo_path') 
-                                    ? (pathinfo(session('temp_photo_path'), PATHINFO_EXTENSION) === 'pdf' 
+                                    session('temp_photo_p_voiture') 
+                                    ? (pathinfo(session('temp_photo_p_voiture'), PATHINFO_EXTENSION) === 'pdf' 
                                         ? asset('./images/file.png') 
-                                        : asset('storage/' . session('temp_photo_path'))) 
+                                        : asset('storage/' . session('temp_photo_p_voiture'))) 
                                     : asset('./images/defaultimage.jpg') 
                                 }}"
                             alt="Current profile photo" />
@@ -112,8 +112,8 @@
                         <x-input-label for="file_input" :value="__('Photo')" />
                         <x-file-input id="file_input" onchange="loadFile(event)" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" accept="image/jpeg,image/png,application/pdf"/>
                         <!-- Hidden Input to Preserve Old Value -->
-                        @if(session('temp_photo_path'))
-                        <input type="hidden" name="temp_photo_path" value="{{ session('temp_photo_path') }}">
+                        @if(session('temp_photo_voiture'))
+                        <input type="hidden" name="temp_photo_p_voiture" value="{{ session('temp_photo_voiture') }}">
                         @endif
                         <x-input-error :messages="$errors->get('photo')" class="mt-2" />
                     </div>

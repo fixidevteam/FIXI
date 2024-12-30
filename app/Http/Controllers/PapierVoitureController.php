@@ -74,7 +74,7 @@ class PapierVoitureController extends Controller
             }
 
             // Store the file path in the session
-            $request->session()->put('temp_photo_path', $compressedFilePath);
+            $request->session()->put('temp_photo_p_voiture', $compressedFilePath);
         }
 
         // Fetch valid types from the database
@@ -89,8 +89,8 @@ class PapierVoitureController extends Controller
         ]);
 
         // Use temp_photo_path if no new file is uploaded
-        if (!$request->hasFile('photo') && $request->session()->has('temp_photo_path')) {
-            $data['photo'] = $request->session()->get('temp_photo_path');
+        if (!$request->hasFile('photo') && $request->session()->has('temp_photo_p_voiture')) {
+            $data['photo'] = $request->session()->get('temp_photo_p_voiture');
         } elseif ($request->hasFile('photo')) {
             $data['photo'] = $compressedFilePath;
         }
@@ -102,7 +102,7 @@ class PapierVoitureController extends Controller
         VoiturePapier::create($data);
 
         // Clear the temp_photo_path from the session
-        $request->session()->forget('temp_photo_path');
+        $request->session()->forget('temp_photo_p_voiture');
 
         // Flash success message and redirect
         session()->flash('success', 'Document ajouté');

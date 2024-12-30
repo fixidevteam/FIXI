@@ -99,7 +99,7 @@ class MechanicClientController extends Controller
             }
             imagedestroy($image);
             $compressedImagePath = '/user/voitures/' . $uniqueName;
-            $request->session()->put('temp_photo_path', $compressedImagePath);
+            $request->session()->put('temp_photo_garage_voiture', $compressedImagePath);
         }
         $data = $request->validate([
             'part1' => ['required', 'digits_between:1,6'], // 1 to 6 digits
@@ -121,9 +121,9 @@ class MechanicClientController extends Controller
             ],
         ]);
 
-        // Use temp_photo_path if no new file is uploaded
-        if (!$request->hasFile('photo') && $request->input('temp_photo_path')) {
-            $data['photo'] = $request->input('temp_photo_path');
+        // Use temp_photo_garage_voiture if no new file is uploaded
+        if (!$request->hasFile('photo') && $request->input('temp_photo_garage_voiture')) {
+            $data['photo'] = $request->input('temp_photo_garage_voiture');
         } elseif ($request->hasFile('photo')) {
             $data['photo'] = $compressedImagePath;
         }
@@ -152,7 +152,7 @@ class MechanicClientController extends Controller
         Voiture::create($data);
 
         // Flash message to the session
-        $request->session()->forget('temp_photo_path');
+        $request->session()->forget('temp_photo_garage_voiture');
         session()->flash('success', 'client ajoutée');
         session()->flash('subtitle', 'le client  a été ajoutée avec succès à la liste.');
 

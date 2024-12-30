@@ -136,15 +136,15 @@
                         <x-input-error :messages="$errors->get('date_de_dédouanement')" class="mt-2" />
                     </div>
                     <div class="shrink-0">
-                        <img id='preview_img' class="h-16 w-16 object-cover rounded-full" src="{{session('temp_photo_path') ? asset('storage/'.session('temp_photo_path')) : asset('./images/defaultimage.jpg')}}" alt="Current profile photo" />
+                        <img id='preview_img' class="h-16 w-16 object-cover rounded-full" src="{{session('temp_photo_voiture') ? asset('storage/'.session('temp_photo_voiture')) : asset('./images/defaultimage.jpg')}}" alt="Current profile photo" />
                     </div>
                     <div class="">
                         <label class="block">
                             <x-input-label for="file_input" :value="__('Photo')" />
                             <x-file-input id="file_input" onchange="loadFile(event)" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" accept="image/jpeg,png" />
                             <x-input-error :messages="$errors->get('photo')" class="mt-2" />
-                            @if(session('temp_photo_path'))
-                            <input type="hidden" id="inputImage2" name="temp_photo_path" value="{{ session('temp_photo_path') }}">
+                            @if(session('temp_photo_voiture'))
+                            <input type="hidden" id="inputImage2" name="temp_photo_voiture" value="{{ session('temp_photo_voiture') }}">
                             @endif
                         </label>
                     </div>

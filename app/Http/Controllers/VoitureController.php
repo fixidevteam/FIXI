@@ -67,7 +67,7 @@ class VoitureController extends Controller
             }
             imagedestroy($image);
             $compressedImagePath = '/user/voitures/' . $uniqueName;
-            $request->session()->put('temp_photo_path', $compressedImagePath);
+            $request->session()->put('temp_photo_voiture', $compressedImagePath);
         }
         // validation 
         $data = $request->validate([
@@ -82,9 +82,9 @@ class VoitureController extends Controller
             'date_de_dédouanement' => ['nullable', 'date'],
         ]);
 
-        // Use temp_photo_path if no new file is uploaded
-        if (!$request->hasFile('photo') && $request->input('temp_photo_path')) {
-            $data['photo'] = $request->input('temp_photo_path');
+        // Use temp_photo_voiture if no new file is uploaded
+        if (!$request->hasFile('photo') && $request->input('temp_photo_voiture')) {
+            $data['photo'] = $request->input('temp_photo_voiture');
         } elseif ($request->hasFile('photo')) {
             $data['photo'] = $compressedImagePath;
         }
@@ -104,8 +104,8 @@ class VoitureController extends Controller
         unset($data['part1'], $data['part2'], $data['part3']);
         Voiture::create($data);
 
-        // Remove temp_photo_path when done
-        $request->session()->forget('temp_photo_path');
+        // Remove temp_photo_voiture when done
+        $request->session()->forget('temp_photo_voiture');
         // Flash message to the session
         session()->flash('success', 'Voiture ajoutée');
         session()->flash('subtitle', 'Votre voiture a été ajoutée avec succès à la liste.');

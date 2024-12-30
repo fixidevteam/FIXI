@@ -80,7 +80,7 @@ class OperationController extends Controller
             }
             imagedestroy($image);
             $compressedImagePath = '/user/operations/' . $uniqueName;
-            $request->session()->put('temp_photo_path', $compressedImagePath);
+            $request->session()->put('temp_photo_operation', $compressedImagePath);
         }
 
         $data = $request->validate([
@@ -110,9 +110,9 @@ class OperationController extends Controller
             ]);
             $data['garage_id'] = $newGarage->id;
         }
-        // Use temp_photo_path if no new file is uploaded
-        if (!$request->hasFile('photo') && $request->input('temp_photo_path')) {
-            $data['photo'] = $request->input('temp_photo_path');
+        // Use temp_photo_operation if no new file is uploaded
+        if (!$request->hasFile('photo') && $request->input('temp_photo_operation')) {
+            $data['photo'] = $request->input('temp_photo_operation');
         } elseif ($request->hasFile('photo')) {
             $data['photo'] = $compressedImagePath;
         }
@@ -136,7 +136,7 @@ class OperationController extends Controller
 
         // Flash message to the session
 
-        $request->session()->forget('temp_photo_path');
+        $request->session()->forget('temp_photo_operation');
         session()->flash('success', 'Operation ajoutée');
         session()->flash('subtitle', 'Votre Operation a été ajoutée avec succès à la liste.');
         return redirect()->route('voiture.show', $voiture);

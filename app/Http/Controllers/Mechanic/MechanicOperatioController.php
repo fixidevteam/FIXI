@@ -82,7 +82,7 @@ class MechanicOperatioController extends Controller
             }
             imagedestroy($image);
             $compressedImagePath = '/user/operations/' . $uniqueName;
-            $request->session()->put('temp_photo_path', $compressedImagePath);
+            $request->session()->put('temp_photo_garage_operation', $compressedImagePath);
         }
 
 
@@ -104,9 +104,9 @@ class MechanicOperatioController extends Controller
         } else {
             $data['autre_operation'] = null; // Clear custom name for predefined operations
         }
-        // Use temp_photo_path if no new file is uploaded
-        if (!$request->hasFile('photo') && $request->input('temp_photo_path')) {
-            $data['photo'] = $request->input('temp_photo_path');
+        // Use temp_photo_garage_operation if no new file is uploaded
+        if (!$request->hasFile('photo') && $request->input('temp_photo_garage_operation')) {
+            $data['photo'] = $request->input('temp_photo_garage_operation');
         } elseif ($request->hasFile('photo')) {
             $data['photo'] = $compressedImagePath;
         }
@@ -129,7 +129,7 @@ class MechanicOperatioController extends Controller
                 );
             }
         }
-        $request->session()->forget('temp_photo_path');
+        $request->session()->forget('temp_photo_garage_operation');
         // Flash message to the session
         session()->flash('success', 'Operation ajoutée');
         session()->flash('subtitle', 'Votre Operation a été ajoutée avec succès à la liste.');
