@@ -40,54 +40,122 @@ class PapierPeronnelController extends Controller
      */
     public function store(Request $request)
     {
-        // update store :
+        // Retrieve the current user's ID
         $user_id = Auth::user()->id;
+
+        // Validate the request for the photo
         $request->validate([
-            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048']
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'], // Only allow JPG, PNG, and PDF with max size 2MB
         ]);
+
+        $compressedFilePath = null; // Initialize compressed file path
+
         if ($request->hasFile('photo')) {
             // Handle file upload and compression
-            $extension = strtolower($request->file('photo')->getClientOriginalExtension());
+            $file = $request->file('photo');
+            $extension = strtolower($file->getClientOriginalExtension());
             $uniqueName = uniqid() . '_' . time() . '.' . $extension;
             $outputPath = storage_path('app/public/user/papierperso/' . $uniqueName);
 
             if (in_array($extension, ['jpg', 'jpeg'])) {
-                $image = imagecreatefromjpeg($request->file('photo')->getRealPath());
-                imagejpeg($image, $outputPath, 25); // Compress JPEG/JPG
+                $image = imagecreatefromjpeg($file->getRealPath());
+                imagejpeg($image, $outputPath, 25); // Compress JPEG
                 imagedestroy($image);
             } elseif ($extension === 'png') {
-                $image = imagecreatefrompng($request->file('photo')->getRealPath());
-                imagepng($image, $outputPath, 6);
+                $image = imagecreatefrompng($file->getRealPath());
+                imagepng($image, $outputPath, 6); // Compress PNG
                 imagedestroy($image);
             } elseif ($extension === 'pdf') {
-                $request->file('photo')->move(storage_path('app/public/user/papierperso'), $uniqueName);
+                $file->move(storage_path('app/public/user/papierperso'), $uniqueName); // Move PDF without compression
             }
 
             $compressedFilePath = 'user/papierperso/' . $uniqueName;
-            // Store path in the session
-            $request->session()->put('temp_photo_perso', $compressedFilePath);
-           
-        }
-        $request->validate([
-            'type' => ['required', 'string', Rule::in(type_papierp::pluck('type')->toArray())],
-            'note' => ['nullable', 'max:255'],
-            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB
-            'date_debut' => ['required', 'date'],
-            'date_fin' => ['required', 'date'],
-        ]);
-        // Prepare data for insertion
-        $data = $request->all();
-        $data['user_id'] = $user_id;
-        $data['photo'] = $compressedFilePath ?? $request->input('temp_photo_perso');
 
+            // Store the file path in the session
+            $request->session()->put('temp_photo_perso', $compressedFilePath);
+        }
+
+        // Fetch valid types from the database
+        $validTypes = type_papierp::pluck('type')->toArray();
+
+        // Validate the rest of the input fields
+        $request->validate([
+            'type' => ['required', 'string', Rule::in($validTypes)], // Ensure type is valid
+            'note' => ['nullable', 'max:255'],
+            'date_debut' => ['required', 'date'],
+            'date_fin' => ['required', 'date', 'after_or_equal:date_debut'], // Ensure date_fin is after date_debut
+        ]);
+
+        // Prepare the data for insertion
+        $data = $request->only(['type', 'note', 'date_debut', 'date_fin']); // Only extract validated fields
+        $data['user_id'] = $user_id;
+
+        // Use temp_photo_path if no new file is uploaded
+        if (!$request->hasFile('photo') && $request->session()->has('temp_photo_perso')) {
+            $data['photo'] = $request->session()->get('temp_photo_perso');
+        } else {
+            $data['photo'] = $compressedFilePath;
+        }
+
+        // Create the document
         UserPapier::create($data);
 
-        // Clear session after use
+        // Clear the temp photo path from the session
         $request->session()->forget('temp_photo_perso');
 
+        // Flash success message and redirect
         session()->flash('success', 'Document ajouté');
         session()->flash('subtitle', 'Votre document a été ajouté avec succès à la liste.');
         return redirect()->route('paiperPersonnel.index');
+        //     // update store :
+        //     $user_id = Auth::user()->id;
+        //     $request->validate([
+        //         'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048']
+        //     ]);
+        //     $compressedFilePath = null;
+        //     if ($request->hasFile('photo')) {
+        //         // Handle file upload and compression
+        //         $file = $request->file('photo');
+        //         $extension = strtolower($file->getClientOriginalExtension());
+        //         $uniqueName = uniqid() . '_' . time() . '.' . $extension;
+        //         $outputPath = storage_path('app/public/user/papierperso/' . $uniqueName);
+
+        //         if (in_array($extension, ['jpg', 'jpeg'])) {
+        //             $image = imagecreatefromjpeg($file->getRealPath());
+        //             imagejpeg($image, $outputPath, 25); // Compress JPEG
+        //             imagedestroy($image);
+        //         } elseif ($extension === 'png') {
+        //             $image = imagecreatefrompng($file->getRealPath());
+        //             imagepng($image, $outputPath, 6); // Compress PNG
+        //             imagedestroy($image);
+        //         } elseif ($extension === 'pdf') {
+        //             $file->move(storage_path('app/public/user/papierperso'), $uniqueName);
+        //         }
+
+        //         $compressedFilePath = 'user/papierperso/' . $uniqueName;
+        //         // Store path in the session
+        //         $request->session()->put('temp_photo_perso', $compressedFilePath);
+        //     }
+        //     $request->validate([
+        //         'type' => ['required', 'string', Rule::in(type_papierp::pluck('type')->toArray())],
+        //         'note' => ['nullable', 'max:255'],
+        //         'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB
+        //         'date_debut' => ['required', 'date'],
+        //         'date_fin' => ['required', 'date'],
+        //     ]);
+        //     // Prepare data for insertion
+        //     $data = $request->all();
+        //     $data['user_id'] = $user_id;
+        //     $data['photo'] = $compressedFilePath ?? $request->session()->get('temp_photo_perso');
+
+        //     UserPapier::create($data);
+
+        //     // Clear session after use
+        //     $request->session()->forget('temp_photo_perso');
+
+        //     session()->flash('success', 'Document ajouté');
+        //     session()->flash('subtitle', 'Votre document a été ajouté avec succès à la liste.');
+        //     return redirect()->route('paiperPersonnel.index');
         // normal store :
         // $user_id = Auth::user()->id;
 
