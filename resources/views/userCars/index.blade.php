@@ -151,14 +151,11 @@
                                         {{$voiture->date_de_première_mise_en_circulation ?? 'N/A'}}
                                     </td>
                                     <td class="px-6 py-4">
-                                        <a href="{{ route('voiture.show',$voiture->id) }}">
-
                                             @if($voiture->photo !== NULL)
                                             <img class="rounded-full w-8 h-8 object-cover" src="{{asset('storage/'.$voiture->photo)}}" alt="image description">
                                             @else
                                             <img class="rounded-full w-8 h-8 object-cover" src="/images/defaultimage.jpg" alt="image description">
                                             @endif
-                                        </a>
                                     </td>
                                     <td class="px-6 py-4">
                                         <a href="{{ route('voiture.show',$voiture->id) }}" class="font-medium capitalize text-blue-600 dark:text-blue-500 hover:underline">Détails</a>
@@ -171,7 +168,12 @@
                     @endif
                 </div>
                 {{-- table close --}}
-
+                <div id="imageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-75 flex items-center justify-center">
+                    <div class="relative max-w-4xl w-full mx-auto">
+                        <img id="modalImage" src="" alt="Expanded Document Image" class="w-full max-h-[80vh] object-contain">
+                        <button class="absolute top-4 right-4 text-white text-2xl font-bold bg-black bg-opacity-50 rounded-full px-3 py-1 hover:bg-opacity-75 hover:text-red-500 transition-all duration-300 ease-in" onclick="toggleModalImage(false)">&times;</button>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -181,4 +183,26 @@
             @include('layouts.footer')
         </div>
     </div>
+    <script>
+        const modal = document.getElementById('imageModal');
+        const images = document.querySelectorAll('img.object-cover');
+
+        images.forEach(image => {
+            image.addEventListener('click', () => {
+                document.getElementById('modalImage').src = image.src;
+                toggleModalImage(true);
+            });
+        });
+
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                toggleModalImage(false);
+            }
+        });
+
+        function toggleModalImage(show) {
+            modal.classList.toggle('hidden', !show);
+            modal.classList.toggle('flex', show);
+        }
+    </script>
 </x-app-layout>

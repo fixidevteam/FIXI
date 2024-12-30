@@ -32,7 +32,7 @@
               <a
                 href="{{ route('garages.index') }}"
                 class="inline-flex items-center text-sm font-medium text-gray-700   ">
-                Listing des garage
+                Garages partenaires
               </a>
             </div>
           </li>
