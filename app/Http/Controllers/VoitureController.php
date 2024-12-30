@@ -60,14 +60,17 @@ class VoitureController extends Controller
             $compressedImagePath = '/user/voitures/' . $uniqueName;
             $request->session()->put('temp_photo_voiture', $compressedImagePath);
         }
+
         // Validation des données d'entrée
         $data = $request->validate([
             'part1' => ['required', 'digits_between:1,6'],
             'part2' => ['required', 'string', 'size:1'],
             'part3' => ['required', 'digits_between:1,2'],
         ]);
+
         // Combiner les parties pour créer le numéro d'immatriculation
         $numeroImmatriculation = $data['part1'] . '-' . $data['part2'] . '-' . $data['part3'];
+
         // Vérification de l'unicité du numéro d'immatriculation
         $exists = Voiture::where('user_id', $user_id)
             ->where('numero_immatriculation', $numeroImmatriculation)

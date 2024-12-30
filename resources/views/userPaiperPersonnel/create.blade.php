@@ -112,7 +112,7 @@
                         <x-file-input id="file_input" onchange="loadFile(event)" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" accept="image/jpeg,image/png,application/pdf" />
                         <!-- Hidden Input to Preserve Old Value -->
                         @if(session('temp_photo_perso'))
-                        <input type="hidden" name="temp_photo_path" value="{{ session('temp_photo_perso') }}">
+                        <input type="hidden" name="temp_photo_perso" value="{{ session('temp_photo_perso') }}">
                         @endif
                         <x-input-error :messages="$errors->get('photo')" class="mt-2" />
                     </div>
