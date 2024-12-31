@@ -168,6 +168,7 @@
                     @endif
                 </div>
                 {{-- table close --}}
+                
                 <div id="imageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-75 flex items-center justify-center">
                     <div class="relative max-w-4xl w-full mx-auto">
                         <img id="modalImage" src="" alt="Expanded Document Image" class="w-full max-h-[80vh] object-contain">

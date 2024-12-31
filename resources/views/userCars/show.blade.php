@@ -372,7 +372,7 @@
           @if($voiture->operations->isNotEmpty())
           <div>
             <a href="{{ route('voiture.pdf', $voiture->id) }}">
-              <x-primary-button class="hidden md:block">
+              <x-primary-button class="btn-pdf hidden md:block">
                 Télécharger l'historique 
               </x-primary-button>
               <x-primary-button class="sm:hidden">
