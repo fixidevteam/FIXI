@@ -22,7 +22,7 @@ class ProfileUpdateRequestMechanic extends FormRequest
                 'required',
                 'string',
                 'max:20',
-                'regex:/^(\+2126\d{8}|\+2127\d{8}|06\d{8}|07\d{8})$/',
+                'regex:/^(06\d{8}|07\d{8})$/',
             ],
         ];
     }
