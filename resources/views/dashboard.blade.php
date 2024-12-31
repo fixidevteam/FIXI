@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout :subtitle="'Accueil'">
 
   <div class="p-4 sm:ml-64">
 
