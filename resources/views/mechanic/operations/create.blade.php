@@ -1,4 +1,4 @@
-<x-mechanic-app-layout>
+<x-mechanic-app-layout :subtitle="'Ajouter une operation'">
     <div class="p-4 sm:ml-64">
         <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-14">
             {{-- content (slot on layouts/app.blade.php)--}}
