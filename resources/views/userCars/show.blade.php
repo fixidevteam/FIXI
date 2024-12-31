@@ -89,9 +89,9 @@
           {{-- Car Image --}}
           <div class="md:w-[160px] md:h-[160px] overflow-hidden md:rounded-full border flex-shrink-0">
             @if($voiture->photo !== NULL)
-            <img class="w-full h-full object-cover" src="{{asset('storage/'.$voiture->photo)}}" alt="voiture image">
+            <img class="w-full h-full object-cover cursor-pointer" src="{{asset('storage/'.$voiture->photo)}}" alt="voiture image" id="voitureImage">
             @else
-            <img class="w-full h-full object-cover" src="/images/defaultimage.jpg" alt="image description">
+            <img class="w-full h-full object-cover cursor-pointer" src="/images/defaultimage.jpg" alt="image description" id="voitureImage">
             @endif
           </div>
 
@@ -142,22 +142,16 @@
             </div>
           </div>
         </div>
-        <div class="my-4 sm:w-full flex flex-col gap-0 ">
-          @if($voiture->operations->isNotEmpty())
-          <div class="flex sm:justify-start w-full">
-            <a href="{{ route('voiture.pdf', $voiture->id) }}">
-              <x-primary-button class="block md:inline-block">
-                Télécharger l’historique 
-              </x-primary-button>
-            </a>
-          </div>
-          @endif
-
+        <div class="my-4">
           @if($voiture->marque !== 'autre')
-          <div class="mt-2 flex  sm:justify-start w-full">
+          <p class="text-gray-600 mb-2">
+            Pour consulter des conseils d'entretien adaptés  à votre <br class="hidden md:block"> voiture 
+            <strong>{{ $voiture->marque }}</strong>, cliquez sur le bouton ci-dessous.
+          </p>
+          <div class="mb-2">
             <a href="https://fixi.ma/marques-de-voitures/{{ urlencode($voiture->marque) }}" target="_blank">
               <x-primary-button class="block md:inline-block">
-                Conseils d’entretien
+                Conseils d'entretien
               </x-primary-button>
             </a>
           </div>
@@ -365,16 +359,30 @@
     <div class=" px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
       <div class="flex justify-between items-center my-6">
         <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Liste des operations du véhicule</h2>
-        <div>
-          <a href="{{route('operation.create')}}">
-            <x-primary-button class="hidden md:block">ajouter une operation</x-primary-button>
-            <x-primary-button class="sm:hidden">
-              <svg class="w-5 h-5 text-white" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12.75 9C12.75 8.58579 12.4142 8.25 12 8.25C11.5858 8.25 11.25 8.58579 11.25 9L11.25 11.25H9C8.58579 11.25 8.25 11.5858 8.25 12C8.25 12.4142 8.58579 12.75 9 12.75H11.25V15C11.25 15.4142 11.5858 15.75 12 15.75C12.4142 15.75 12.75 15.4142 12.75 15L12.75 12.75H15C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25H12.75V9Z" fill="currentColor" />
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25C6.06294 1.25 1.25 6.06294 1.25 12C1.25 17.9371 6.06294 22.75 12 22.75C17.9371 22.75 22.75 17.9371 22.75 12C22.75 6.06294 17.9371 1.25 12 1.25ZM2.75 12C2.75 6.89137 6.89137 2.75 12 2.75C17.1086 2.75 21.25 6.89137 21.25 12C21.25 17.1086 17.1086 21.25 12 21.25C6.89137 21.25 2.75 17.1086 2.75 12Z" fill="currentColor" />
-              </svg>
-            </x-primary-button>
-          </a>
+        <div class="flex items-center gap-4">
+            <a href="{{route('operation.create')}}">
+              <x-primary-button class="hidden md:block">ajouter une operation</x-primary-button>
+              <x-primary-button class="sm:hidden">
+                <svg class="w-5 h-5 text-white" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12.75 9C12.75 8.58579 12.4142 8.25 12 8.25C11.5858 8.25 11.25 8.58579 11.25 9L11.25 11.25H9C8.58579 11.25 8.25 11.5858 8.25 12C8.25 12.4142 8.58579 12.75 9 12.75H11.25V15C11.25 15.4142 11.5858 15.75 12 15.75C12.4142 15.75 12.75 15.4142 12.75 15L12.75 12.75H15C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25H12.75V9Z" fill="currentColor" />
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25C6.06294 1.25 1.25 6.06294 1.25 12C1.25 17.9371 6.06294 22.75 12 22.75C17.9371 22.75 22.75 17.9371 22.75 12C22.75 6.06294 17.9371 1.25 12 1.25ZM2.75 12C2.75 6.89137 6.89137 2.75 12 2.75C17.1086 2.75 21.25 6.89137 21.25 12C21.25 17.1086 17.1086 21.25 12 21.25C6.89137 21.25 2.75 17.1086 2.75 12Z" fill="currentColor" />
+                </svg>
+              </x-primary-button>
+            </a>
+          @if($voiture->operations->isNotEmpty())
+          <div>
+            <a href="{{ route('voiture.pdf', $voiture->id) }}">
+              <x-primary-button class="hidden md:block">
+                Télécharger l'historique 
+              </x-primary-button>
+              <x-primary-button class="sm:hidden">
+                <svg class="w-5 h-5 text-white" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M5.07868 5.06891C8.87402 1.27893 15.0437 1.31923 18.8622 5.13778C22.6824 8.95797 22.7211 15.1313 18.9262 18.9262C15.1312 22.7211 8.95793 22.6824 5.13774 18.8622C2.87389 16.5984 1.93904 13.5099 2.34047 10.5812C2.39672 10.1708 2.775 9.88377 3.18537 9.94002C3.59575 9.99627 3.88282 10.3745 3.82658 10.7849C3.4866 13.2652 4.27782 15.881 6.1984 17.8016C9.44288 21.0461 14.6664 21.0646 17.8655 17.8655C21.0646 14.6664 21.046 9.44292 17.8015 6.19844C14.5587 2.95561 9.33889 2.93539 6.13935 6.12957L6.88705 6.13333C7.30126 6.13541 7.63535 6.47288 7.63327 6.88709C7.63119 7.3013 7.29372 7.63539 6.87951 7.63331L4.33396 7.62052C3.92269 7.61845 3.58981 7.28556 3.58774 6.8743L3.57495 4.32874C3.57286 3.91454 3.90696 3.57707 4.32117 3.57498C4.73538 3.5729 5.07285 3.907 5.07493 4.32121L5.07868 5.06891ZM11.9999 7.24992C12.4141 7.24992 12.7499 7.58571 12.7499 7.99992V11.6893L15.0302 13.9696C15.3231 14.2625 15.3231 14.7374 15.0302 15.0302C14.7373 15.3231 14.2624 15.3231 13.9696 15.0302L11.2499 12.3106V7.99992C11.2499 7.58571 11.5857 7.24992 11.9999 7.24992Z" fill="currentColor"/>
+                </svg>
+              </x-primary-button>
+            </a>
+          </div>
+          @endif
         </div>
       </div>
       {{-- table --}}
@@ -446,8 +454,20 @@
       {{-- table close --}}
     </div>
   </div>
-
-  <!-- Confirmation Modal (Hidden by default) -->
+  {{-- model --}}
+  <div id="imageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-75 flex items-center justify-center">
+    <div class="relative max-w-4xl w-full mx-auto">
+      <img
+        id="modalImage"
+        src="{{ $voiture->photo !== NULL ? asset('storage/'.$voiture->photo) : asset('/images/defaultimage.jpg') }}"
+        alt="Voiture image"
+        class="w-full max-h-[80vh] object-contain">
+      <button
+        class="absolute top-4 right-4 text-white text-2xl font-bold bg-black bg-opacity-50 rounded-full px-3 py-1 hover:bg-opacity-75 hover:text-red-500 transition-all duration-300 ease-in"
+        onclick="toggleModalImage(false)">&times;</button>
+    </div>
+  </div>
+  {{-- Confirmation Modal (Hidden by default)  --}}
   <div id="confirmationModal" class="fixed inset-0 bg-white bg-opacity-30 backdrop-blur-[2px] flex items-center justify-center hidden">
     <div class="bg-white rounded-lg p-6 w-96 shadow-lg ">
       <h2 class="text-lg font-bold text-gray-800">Confirmation de suppression</h2>
@@ -475,4 +495,26 @@
     @include('layouts.footer')
   </div>
   </div>
+  <script>
+    const modal = document.getElementById('imageModal');
+    const voitureImage = document.getElementById('voitureImage');
+
+    if (voitureImage) {
+      voitureImage.addEventListener('click', () => {
+        toggleModalImage(true);
+      });
+    }
+
+    modal.addEventListener('click', (event) => {
+      // Close the modal if the click is outside the image
+      if (event.target === modal) {
+        toggleModalImage(false);
+      }
+    });
+
+    function toggleModalImage(show) {
+      modal.classList.toggle('hidden', !show);
+      modal.classList.toggle('flex', show);
+    }
+  </script>
 </x-app-layout>
