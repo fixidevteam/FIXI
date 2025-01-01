@@ -276,17 +276,17 @@
 
                       @if(in_array(strtolower($fileExtension), ['jpg', 'jpeg', 'png']))
                       <!-- Display the actual photo -->
-                      <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('storage/' . $papier->photo) }}" alt="image description">
+                      <img class="rounded-full w-8 h-8 object-cover cursor-pointer papiervoiture" src="{{ asset('storage/' . $papier->photo) }}" alt="image description">
                       @elseif(strtolower($fileExtension) === 'pdf')
                       <!-- Display the default image for PDFs -->
-                      <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('/images/file.png') }}" alt="default image">
+                      <img class="rounded-full w-8 h-8 object-cover cursor-pointer papiervoiture" src="{{ asset('/images/file.png') }}" alt="default image">
                       @else
                       <!-- Display the default image for unsupported formats -->
-                      <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('/images/defaultimage.jpg') }}" alt="default image">
+                      <img class="rounded-full w-8 h-8 object-cover cursor-pointer papiervoiture" src="{{ asset('/images/defaultimage.jpg') }}" alt="default image">
                       @endif
                       @else
                       <!-- Display the default image if no photo is provided -->
-                      <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('/images/defaultimage.jpg') }}" alt="default image">
+                      <img class="rounded-full w-8 h-8 object-cover cursor-pointer papiervoiture" src="{{ asset('/images/defaultimage.jpg') }}" alt="default image">
                       @endif
                   </td>
                   <td class="px-6 py-4">
@@ -423,13 +423,11 @@
 
                 {{-- description --}}
                 <td class="px-6 py-4">
-                  <a href="{{ route('operation.show',$operation->id) }}">
                     @if($operation->photo !== NULL)
-                    <img class="rounded-full w-8 h-8 object-cover" src="{{asset('storage/'.$operation->photo)}}" alt="image description">
+                    <img class="rounded-full w-8 h-8 object-cover cursor-pointer operation" src="{{asset('storage/'.$operation->photo)}}" alt="image description">
                     @else
-                    <img class="rounded-full w-8 h-8 object-cover" src="/images/defaultimage.jpg" alt="image description">
+                    <img class="rounded-full w-8 h-8 object-cover cursor-pointer operation" src="/images/defaultimage.jpg" alt="image description">
                     @endif
-                  </a>
                 </td>
 
                 {{-- date doperation --}}
@@ -451,7 +449,7 @@
       {{-- table close --}}
     </div>
   </div>
-  {{-- model image --}}
+  {{-- model image voiture--}}
   <div id="imageModalVoiture" class="fixed inset-0 z-50 hidden bg-black bg-opacity-75 flex items-center justify-center">
     <div class="relative max-w-4xl w-full mx-auto">
       <img
@@ -462,6 +460,20 @@
       <button
         class="absolute top-4 right-4 text-white text-2xl font-bold bg-black bg-opacity-50 rounded-full px-3 py-1 hover:bg-opacity-75 hover:text-red-500 transition-all duration-300 ease-in"
         onclick="toggleModalImageVoiture(false)">&times;</button>
+    </div>
+  </div>
+  {{-- model image papierV --}}
+  <div id="imageModalPapierVoiture" class="fixed inset-0 z-50 hidden bg-black bg-opacity-75 flex items-center justify-center">
+    <div class="relative max-w-4xl w-full mx-auto">
+        <img id="modalImagePapierVoiture" src="" alt="Operation Image" class="w-full max-h-[80vh] object-contain">
+        <button class="absolute top-4 right-4 text-white text-2xl font-bold bg-black bg-opacity-50 rounded-full px-3 py-1 hover:bg-opacity-75 hover:text-red-500 transition-all duration-300 ease-in" onclick="toggleModalImagePapierVoiture(false)">&times;</button>
+    </div>
+  </div>
+  {{-- model image operation --}}
+  <div id="imageModalOperation" class="fixed inset-0 z-50 hidden bg-black bg-opacity-75 flex items-center justify-center">
+    <div class="relative max-w-4xl w-full mx-auto">
+        <img id="modalImageOperation" src="" alt="Operation Image" class="w-full max-h-[80vh] object-contain">
+        <button class="absolute top-4 right-4 text-white text-2xl font-bold bg-black bg-opacity-50 rounded-full px-3 py-1 hover:bg-opacity-75 hover:text-red-500 transition-all duration-300 ease-in" onclick="toggleModalImageOperation(false)">&times;</button>
     </div>
   </div>
   {{-- Confirmation Modal (Hidden by default)  --}}
@@ -493,6 +505,7 @@
   </div>
   </div>
   <script>
+    // model image voiture
     const modal = document.getElementById('imageModalVoiture');
     const voitureImage = document.getElementById('voitureImage');
 
@@ -513,5 +526,47 @@
       modal.classList.toggle('hidden', !show);
       modal.classList.toggle('flex', show);
     }
+    // model image papierV
+    const modalPapierVoiture = document.getElementById('imageModalPapierVoiture');
+    const imagesPapierVoiture = document.querySelectorAll('img.papiervoiture');
+
+        imagesPapierVoiture.forEach(image => {
+            image.addEventListener('click', () => {
+                document.getElementById('modalImagePapierVoiture').src = image.src;
+                toggleModalImagePapierVoiture(true);
+            });
+        });
+
+        modalPapierVoiture.addEventListener('click', (event) => {
+            if (event.target === modalPapierVoiture) {
+                toggleModalImagePapierVoiture(false);
+            }
+        });
+
+        function toggleModalImagePapierVoiture(show) {
+            modalPapierVoiture.classList.toggle('hidden', !show);
+            modalPapierVoiture.classList.toggle('flex', show);
+        }
+    // model image operation
+    const modalOperation = document.getElementById('imageModalOperation');
+    const imagesOperation = document.querySelectorAll('img.operation');
+
+        imagesOperation.forEach(image => {
+            image.addEventListener('click', () => {
+                document.getElementById('modalImageOperation').src = image.src;
+                toggleModalImageOperation(true);
+            });
+        });
+
+        modalOperation.addEventListener('click', (event) => {
+            if (event.target === modalOperation) {
+                toggleModalImageOperation(false);
+            }
+        });
+
+        function toggleModalImageOperation(show) {
+            modalOperation.classList.toggle('hidden', !show);
+            modalOperation.classList.toggle('flex', show);
+        }
   </script>
 </x-app-layout>

@@ -155,17 +155,17 @@
 
                                             @if(in_array(strtolower($fileExtension), ['jpg', 'jpeg', 'png']))
                                             <!-- Display the actual photo -->
-                                            <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('storage/' . $papier->photo) }}" alt="image description">
+                                            <img class="rounded-full w-8 h-8 object-cover cursor-pointer" src="{{ asset('storage/' . $papier->photo) }}" alt="image description">
                                             @elseif(strtolower($fileExtension) === 'pdf')
                                             <!-- Display the default image for PDFs -->
-                                            <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('/images/file.png') }}" alt="default image">
+                                            <img class="rounded-full w-8 h-8 object-cover cursor-pointer" src="{{ asset('/images/file.png') }}" alt="default image">
                                             @else
                                             <!-- Display the default image for unsupported formats -->
-                                            <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('/images/defaultimage.jpg') }}" alt="default image">
+                                            <img class="rounded-full w-8 h-8 object-cover cursor-pointer" src="{{ asset('/images/defaultimage.jpg') }}" alt="default image">
                                             @endif
                                             @else
                                             <!-- Display the default image if no photo is provided -->
-                                            <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('/images/defaultimage.jpg') }}" alt="default image">
+                                            <img class="rounded-full w-8 h-8 object-cover cursor-pointer" src="{{ asset('/images/defaultimage.jpg') }}" alt="default image">
                                             @endif
                                     </td>
                                     <td class="px-6 py-4">
