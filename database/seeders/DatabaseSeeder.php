@@ -158,19 +158,9 @@ class DatabaseSeeder extends Seeder
             type_papierv::create(['type' => $type]);
         }
         $types = [
-            'Carte nationale d\'identité (cin)',
-            'Passeport',
-            'Permis de conduire',
-            'Certificat de résidence',
-            'Carte bancaire',
-            'Certificat médical',
-            'Diplômes académiques',
-            'Certificat de travail',
-            'Carte de séjour',
-            'Certificat de mariage',
-            'Certificat de décès',
-            'Acte de naissance',
-            'Livret de famille',
+            'Permis de Conduire',
+            'Visite Médicale (Conduite)',
+            'Autorisation de Conduire',
         ]; // Replace with your types
 
         foreach ($types as $type) {
