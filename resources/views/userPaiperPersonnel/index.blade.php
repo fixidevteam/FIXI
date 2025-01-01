@@ -148,8 +148,6 @@
                                         {{$papier->date_fin}}
                                     </td>
                                     <td class="px-6 py-4">
-                                        <a href="{{route('paiperPersonnel.show',$papier->id)}}">
-
                                             @if($papier->photo !== NULL)
                                             @php
                                             $fileExtension = pathinfo($papier->photo, PATHINFO_EXTENSION);
@@ -169,7 +167,6 @@
                                             <!-- Display the default image if no photo is provided -->
                                             <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('/images/defaultimage.jpg') }}" alt="default image">
                                             @endif
-                                        </a>
                                     </td>
                                     <td class="px-6 py-4">
                                         <a href="{{route('paiperPersonnel.show',$papier->id)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Détails</a>
@@ -228,6 +225,12 @@
             </table>
             @endif
         </div>
+        <div id="imageModalPapierPerso" class="fixed inset-0 z-50 hidden bg-black bg-opacity-75 flex items-center justify-center">
+            <div class="relative max-w-4xl w-full mx-auto">
+                <img id="modalImagePapierPerso" src="" alt="Operation Image" class="w-full max-h-[80vh] object-contain">
+                <button class="absolute top-4 right-4 text-white text-2xl font-bold bg-black bg-opacity-50 rounded-full px-3 py-1 hover:bg-opacity-75 hover:text-red-500 transition-all duration-300 ease-in" onclick="toggleModalImagePapierPerso(false)">&times;</button>
+            </div>
+        </div>
     </div>
     {{-- table close --}}
 
@@ -240,4 +243,26 @@
         @include('layouts.footer')
     </div>
     </div>
+    <script>
+        const modal = document.getElementById('imageModalPapierPerso');
+        const images = document.querySelectorAll('img.object-cover');
+
+        images.forEach(image => {
+            image.addEventListener('click', () => {
+                document.getElementById('modalImagePapierPerso').src = image.src;
+                toggleModalImagePapierPerso(true);
+            });
+        });
+
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                toggleModalImagePapierPerso(false);
+            }
+        });
+
+        function toggleModalImagePapierPerso(show) {
+            modal.classList.toggle('hidden', !show);
+            modal.classList.toggle('flex', show);
+        }
+    </script>
 </x-app-layout>

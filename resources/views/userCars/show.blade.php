@@ -269,8 +269,6 @@
                     {{$papier->date_fin}}
                   </td>
                   <td class="px-6 py-4">
-                    <a href="{{route('paiperVoiture.show',$papier)}}">
-
                       @if($papier->photo !== NULL)
                       @php
                       $fileExtension = pathinfo($papier->photo, PATHINFO_EXTENSION);
@@ -290,7 +288,6 @@
                       <!-- Display the default image if no photo is provided -->
                       <img class="rounded-full w-8 h-8 object-cover" src="{{ asset('/images/defaultimage.jpg') }}" alt="default image">
                       @endif
-                    </a>
                   </td>
                   <td class="px-6 py-4">
                     <a href="{{route('paiperVoiture.show',$papier)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Détails</a>
@@ -454,17 +451,17 @@
       {{-- table close --}}
     </div>
   </div>
-  {{-- model --}}
-  <div id="imageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-75 flex items-center justify-center">
+  {{-- model image --}}
+  <div id="imageModalVoiture" class="fixed inset-0 z-50 hidden bg-black bg-opacity-75 flex items-center justify-center">
     <div class="relative max-w-4xl w-full mx-auto">
       <img
-        id="modalImage"
+        id="modalImageVoiture"
         src="{{ $voiture->photo !== NULL ? asset('storage/'.$voiture->photo) : asset('/images/defaultimage.jpg') }}"
         alt="Voiture image"
         class="w-full max-h-[80vh] object-contain">
       <button
         class="absolute top-4 right-4 text-white text-2xl font-bold bg-black bg-opacity-50 rounded-full px-3 py-1 hover:bg-opacity-75 hover:text-red-500 transition-all duration-300 ease-in"
-        onclick="toggleModalImage(false)">&times;</button>
+        onclick="toggleModalImageVoiture(false)">&times;</button>
     </div>
   </div>
   {{-- Confirmation Modal (Hidden by default)  --}}
@@ -496,23 +493,23 @@
   </div>
   </div>
   <script>
-    const modal = document.getElementById('imageModal');
+    const modal = document.getElementById('imageModalVoiture');
     const voitureImage = document.getElementById('voitureImage');
 
     if (voitureImage) {
       voitureImage.addEventListener('click', () => {
-        toggleModalImage(true);
+        toggleModalImageVoiture(true);
       });
     }
 
     modal.addEventListener('click', (event) => {
       // Close the modal if the click is outside the image
       if (event.target === modal) {
-        toggleModalImage(false);
+        toggleModalImageVoiture(false);
       }
     });
 
-    function toggleModalImage(show) {
+    function toggleModalImageVoiture(show) {
       modal.classList.toggle('hidden', !show);
       modal.classList.toggle('flex', show);
     }
