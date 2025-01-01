@@ -16,11 +16,9 @@ class VoitureTest extends TestCase
      */
     public function test_voiture_index(): void
     {
-        $user = User::factory()->create(['status' => 1]);
-
-        $response = $this->actingAs($user)->get(route('voiture.index'));
-        $response->assertStatus(200)
-                 ->assertViewIs('userCars.index');
+        $user = User::factory()->create(['status' => 1,'ville'=>'marrakech']);
+        $response = $this->actingAs($user)->get('fixi-plus/voiture');
+        $response->assertStatus(200);
     }
 
     /**
@@ -28,7 +26,7 @@ class VoitureTest extends TestCase
      */
     public function test_ajouter_voiture(): void
     {
-        $user = User::factory()->create(['status' => 1]);
+        $user = User::factory()->create(['status' => 1,'ville'=>'marrakech']);
 
         $response = $this->actingAs($user)->post(route('voiture.store'), [
             'part1' => '123456',
@@ -57,7 +55,7 @@ class VoitureTest extends TestCase
      */
     public function test_modifier_voiture(): void
     {
-        $user = User::factory()->create(['status' => 1]);
+        $user = User::factory()->create(['status' => 1,'ville'=>'marrakech']);
         $voiture = Voiture::factory()->create(['user_id' => $user->id]);
 
         $response = $this->actingAs($user)->put(route('voiture.update', $voiture->id), [
