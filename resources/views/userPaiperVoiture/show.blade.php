@@ -79,7 +79,6 @@
           </div>
           {{-- alert close --}}
         </div>
-        {{-- details of paiper perso --}}
         <div class="flex justify-between items-center my-6">
           <h3 class="text-xl font-medium leading-9 tracking-tight text-gray-900">{{$papier->type}}</h3>
           <div class="flex items-center">
@@ -97,7 +96,9 @@
             </button>
           </div>
         </div>
-        <div class="flex flex-col justify-center gap-4 my-8 overflow-hidden">
+        {{-- details of paiper  --}}
+        <div class="flex flex-col md:flex-row gap-10 items-center my-6">
+          <div class="md:w-[500px] md:h-[250px] border flex-shrink-0">
           @if($papier->photo)
           @php
               $fileExtension = pathinfo($papier->photo, PATHINFO_EXTENSION);
@@ -106,7 +107,7 @@
           @if(in_array(strtolower($fileExtension), ['jpg', 'jpeg', 'png']))
               <!-- Display Image with Modal Trigger -->
               <img 
-                class="m-auto w-full md:w-4/5 h-60 object-cover cursor-pointer" 
+                class="w-full h-full object-cover cursor-pointer" 
                 src="{{ asset('storage/' . $papier->photo) }}" 
                 alt="Document Image" 
                 id="documentImage"
@@ -115,64 +116,73 @@
               <!-- Display PDF -->
               <iframe 
                 src="{{ asset('storage/' . $papier->photo) }}" 
-                width="100%" 
-                height="384px" 
                 title="{{$papier->type}}"
-                style="border: none;">
+                class="w-full h-full object-cover"
+                >                
               </iframe>
-              <p>
-                  <a href="{{ asset('storage/' . $papier->photo) }}" download>
-                    <x-primary-button>Télécharger le PDF</x-primary-button>
-                  </a>
-              </p>
           @else
               <p>Fichier non supporté.</p>
           @endif
           @else
           <img 
-            class="m-auto w-full md:w-4/5 h-60 object-cover cursor-pointer" 
-            src="/images/defaultimage.jpg" 
-            id="documentImage"
+            class="w-full h-full object-cover cursor-pointer" 
+            src="/images/defaultimage.jpg"
+            id="documentImage" 
             alt="Image par défaut"
           >
           @endif
-        </div>
-        {{-- paipe close  --}}
-        {{-- paipe note  --}}
-        <div class="grid grid-cols-1 md:grid-cols-2">
-          {{-- date debut --}}
-          <div class="mb-4">
-            <p class="first-letter:capitalize text-sm font-medium text-gray-900 ">
-              date debut
-            </p>
-            <p class="text-sm text-gray-500 ">
-              {{$papier->date_debut}}
-            </p>
           </div>
-          {{-- date fin --}}
-          <div>
-            <p class="first-letter:capitalize text-sm font-medium text-gray-900 ">
-              date fin
-            </p>
-            <p class="text-sm text-gray-500 ">
-              {{$papier->date_fin}}
-
-            </p>
+          {{-- Details in Two Columns --}}
+          <div class="flex flex-col md:flex-row gap-5 w-full justify-center md:justify-start">
+            {{-- Column 1 --}}
+            <div class="flex-1 space-y-4">
+              <div>
+                <p class="first-letter:uppercase text-sm font-medium text-gray-900">type de papier</p>
+                <p class="text-sm text-gray-500">
+                  {{$papier->type}}
+                </p>
+              </div>
+              <div>
+                <p class="first-letter:uppercase text-sm font-medium text-gray-900">date fin</p>
+                <p class="text-sm text-gray-500"> 
+                  {{$papier->date_fin}}
+                </p>
+              </div>
+            </div>
+            {{-- Column 2 --}}
+            <div class="flex-1 space-y-4">
+              <div>
+                <p class="first-letter:uppercase text-sm font-medium text-gray-900">date debut</p>
+                <p class="text-sm text-gray-500">
+                  {{$papier->date_debut}}
+                </p>
+              </div>
+              @if($papier->note !== NULL)
+              <div>
+                <p class="first-letter:uppercase text-sm font-medium text-gray-900">note</p>
+                <p class="text-sm text-gray-500">{{$papier->note}}</p>
+              </div>
+              @endif
+            </div>
           </div>
         </div>
-        {{-- note --}}
-        @if($papier->note !== NULL)
-        <div class="my-4">
-          <p class="capitalize text-sm font-medium text-gray-900 ">
-            note
-          </p>
-          <p class="text-sm text-gray-500 ">
-            {{$papier->note}}
+        {{-- pdf download --}}
+        @if($papier->photo)
+        @php
+            $fileExtension = pathinfo($papier->photo, PATHINFO_EXTENSION);
+        @endphp
+        @if(strtolower($fileExtension) === 'pdf')
+        <div  class="my-2">
+          <p>
+            <a href="{{ asset('storage/' . $papier->photo) }}" download>
+              <x-primary-button>Télécharger le PDF</x-primary-button>
+            </a>
           </p>
         </div>
         @endif
-        {{-- paipe note close  --}}
-        {{-- details of paiper perso close --}}
+        @endif
+        {{-- pdf download close --}}
+        {{-- details of paiper close --}}
       </div>
     </div>
     <!-- Confirmation Modal (Hidden by default) -->

@@ -151,7 +151,7 @@
               </div>
               {{-- ref --}}
               <div>
-                <p class="capitalize text-sm font-medium text-gray-900">Reference de garage</p>
+                <p class="text-sm font-medium text-gray-900">Reference de garage</p>
                 <p class="text-sm text-gray-500">{{$garage->ref}}</p>
               </div>
               <div>
