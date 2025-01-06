@@ -182,7 +182,7 @@
                         .catch(err => {
                             console.error('Error copying text: ', err);
                         });
-                })
+                });
     </script>
 </body>
 
