@@ -15,7 +15,19 @@ class ConseilsEntretienTest extends TestCase
     /**
      * A basic feature test example.
      */    use RefreshDatabase;
-
+    public function test_conseils_entretien()
+    {
+        $user = User::factory()->create(['status' => 1, 'ville' => 'marrakech']);
+        $voiture = Voiture::create([
+            'marque' => 'Dacia',
+            'modele' => 'Corolla',
+            'numero_immatriculation' => '123-أ-45',
+            'user_id' => $user->id,
+        ]);
+        $response = $this->actingAs($user)->get(route('voiture.show', $voiture->id));
+        $response->assertViewIs('userCars.show');
+        $response->assertOk();
+    }
     public function test_get_Conseils(): void
     {
         $user = User::factory()->create(['status' => 1, 'ville' => 'marrakech']);

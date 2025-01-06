@@ -22,7 +22,7 @@ class DocumentExpiryNotification extends Notification
     public function via($notifiable)
     {
         // Use database channel for notifications
-        return ['database'];
+        return ['database','mail'];
     }
     public function toDatabase($notifiable)
     {
@@ -35,20 +35,20 @@ class DocumentExpiryNotification extends Notification
             'car_id' => $this->isCar ? $this->document->voiture_id : null,
         ];
     }
-    // public function toMail($notifiable)
-    // {
-    //     $url = $this->isCar
-    //         ? route('paiperVoiture.show', $this->document->id)
-    //         : route('paiperPersonnel.show', $this->document->id);
+    public function toMail($notifiable)
+    {
+        $url = $this->isCar
+            ? route('paiperVoiture.show', $this->document->id)
+            : route('paiperPersonnel.show', $this->document->id);
 
-    //     return (new \Illuminate\Notifications\Messages\MailMessage)
-    //         ->subject('Notification de document expiré')
-    //         ->view('emails.notifications', [
-    //             'title' => 'Notification de document expiré',
-    //             'user' => $notifiable,
-    //             'body' => $this->message,
-    //             'actionText' => 'Voir le document',
-    //             'actionUrl' => $url,
-    //         ]);
-    // }
+        return (new \Illuminate\Notifications\Messages\MailMessage)
+            ->subject('Notification de document expiré')
+            ->view('emails.notifications', [
+                'title' => 'Notification de document expiré',
+                'user' => $notifiable,
+                'body' => $this->message,
+                'actionText' => 'Voir le document',
+                'actionUrl' => $url,
+            ]);
+    }
 }
