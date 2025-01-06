@@ -53,8 +53,8 @@ class SendDocumentNotifications extends Command
             $this->processDocuments($carDocuments, $user, $now, true);
         }
         // see the message in the storage/logs/laravel.log
-        \Log::info("Notification message}");
-        
+        // \Log::info("Notification  amessage}");
+
         $this->info('Notifications sent successfully to all users!');
     }
 
