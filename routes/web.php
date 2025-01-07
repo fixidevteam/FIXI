@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\ProviderController;
 use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\DocumentVoitureController;
 use App\Http\Controllers\generateVehicleHistoryPDF;
 use App\Http\Controllers\getQuartiersController;
 use App\Http\Controllers\getAnalyticsDataController;
@@ -47,6 +48,7 @@ Route::middleware(['auth', 'checkdocuments', 'checkUserStatus'])->prefix('fixi-p
     Route::resource('/voiture', VoitureController::class);
     Route::resource('/paiperPersonnel', PapierPeronnelController::class);
     Route::resource('/paiperVoiture', PapierVoitureController::class);
+    Route::resource('/documentVoiture', DocumentVoitureController::class);
     Route::resource('/operation', OperationController::class);
     Route::resource('/garages', ListingGaragesController::class);
     Route::resource('/promotions', PromotionController::class);

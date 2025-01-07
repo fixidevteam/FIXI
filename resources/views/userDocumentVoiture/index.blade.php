@@ -1,4 +1,4 @@
-<x-app-layout :subtitle="'Liste des papier personnels'">
+<x-app-layout :subtitle="'Liste des papier voiture'">
     <div class="p-4 sm:ml-64">
         <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg mt-14">
             {{-- content (slot on layouts/app.blade.php)--}}
@@ -30,9 +30,9 @@
                                     d="m1 9 4-4-4-4" />
                             </svg>
                             <a
-                                href="{{ route('paiperPersonnel.index') }}"
-                                class="inline-flex items-center text-sm font-medium text-gray-700   ">
-                                Mes papiers personnels
+                                href="{{ route('documentVoiture.index') }}"
+                                class="inline-flex items-center text-sm font-medium text-gray-700">
+                                Mes fichiers de voitures
                             </a>
                         </div>
                     </li>
@@ -45,9 +45,9 @@
             {{-- content (slot on layouts/app.blade.php)--}}
             <div class=" px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex justify-between items-center my-6">
-                    <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Liste des papier personnels</h2>
+                    <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Liste des papiers du véhicule</h2>
                     <div>
-                        <a href="{{ route('paiperPersonnel.create') }}">
+                        <a href="{{ route('documentVoiture.create') }}">
                             <x-primary-button class="hidden md:block">Ajouter un papier</x-primary-button>
                             <x-primary-button class="sm:hidden">
                                 <svg class="w-5 h-5 text-white" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -105,13 +105,16 @@
                     @endforeach
                     {{-- alert close --}}
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        @if($papiers->isEmpty())
+                        @if($documents->isEmpty())
                         <p class="p-4 text-gray-500 text-center">Aucun papier disponible.</p>
                         @else
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-                            <caption class="sr-only">Liste des papier personnels</caption>
+                            <caption class="sr-only">Liste des papier voiture</caption>
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr>
+                                    <th scope="col" class="px-6 py-3">
+                                        N°immatriculation
+                                    </th>
                                     <th scope="col" class="px-6 py-3">
                                         type
                                     </th>
@@ -133,29 +136,33 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($papiers as $papier)
+                                @foreach($documents as $document)
                                 <tr class="bg-white border-b">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                        <a href="{{route('paiperPersonnel.show',$papier->id)}}">
-
-                                            {{$papier->type}}
+                                        <a href="{{route('voiture.show',$document->voiture->id)}}">
+                                            <span>{{ explode('-', $document->voiture->numero_immatriculation)[0] }}</span>-<span dir="rtl">{{ explode('-', $document->voiture->numero_immatriculation)[1] }}</span>-<span>{{ explode('-', $document->voiture->numero_immatriculation)[2] }}</span>
                                         </a>
                                     </th>
                                     <td class="px-6 py-4">
-                                        {{$papier->date_debut}}
+                                        <a href="{{route('paiperVoiture.show',$document->id)}}">
+                                            {{$document->type}}
+                                        </a>
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{$papier->date_fin}}
+                                        {{$document->date_debut}}
                                     </td>
                                     <td class="px-6 py-4">
-                                            @if($papier->photo !== NULL)
+                                        {{$document->date_fin}}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                            @if($document->photo !== NULL)
                                             @php
-                                            $fileExtension = pathinfo($papier->photo, PATHINFO_EXTENSION);
+                                            $fileExtension = pathinfo($document->photo, PATHINFO_EXTENSION);
                                             @endphp
 
                                             @if(in_array(strtolower($fileExtension), ['jpg', 'jpeg', 'png']))
                                             <!-- Display the actual photo -->
-                                            <img class="rounded-full w-8 h-8 object-cover cursor-pointer" src="{{ asset('storage/' . $papier->photo) }}" alt="image description">
+                                            <img class="rounded-full w-8 h-8 object-cover cursor-pointer" src="{{ asset('storage/' . $document->photo) }}" alt="image description">
                                             @elseif(strtolower($fileExtension) === 'pdf')
                                             <!-- Display the default image for PDFs -->
                                             <img class="rounded-full w-8 h-8 object-cover cursor-pointer" src="{{ asset('/images/file.png') }}" alt="default image">
@@ -169,11 +176,11 @@
                                             @endif
                                     </td>
                                     <td class="px-6 py-4">
-                                        <a href="{{route('paiperPersonnel.show',$papier->id)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Détails</a>
+                                        <a href="{{route('paiperVoiture.show',$document->id)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Détails</a>
                                     </td>
                                     <td class="px-6 py-4">
                                         @php
-                                        $dateFin = \Carbon\Carbon::parse($papier->date_fin);
+                                        $dateFin = \Carbon\Carbon::parse($document->date_fin);
                                         $daysRemaining = now()->diffInDays($dateFin, false);
                                         @endphp
 
@@ -225,10 +232,13 @@
             </table>
             @endif
         </div>
-        <div id="imageModalPapierPerso" class="fixed inset-0 z-50 hidden bg-black bg-opacity-75 flex items-center justify-center">
+        <div class="my-4">
+            {{ $documents->links() }}
+        </div>
+        <div id="imageModalDocumentVoiture" class="fixed inset-0 z-50 hidden bg-black bg-opacity-75 flex items-center justify-center">
             <div class="relative max-w-4xl w-full mx-auto">
-                <img id="modalImagePapierPerso" src="" alt="Operation Image" class="w-full max-h-[80vh] object-contain">
-                <button class="absolute top-4 right-4 text-white text-2xl font-bold bg-black bg-opacity-50 rounded-full px-3 py-1 hover:bg-opacity-75 hover:text-red-500 transition-all duration-300 ease-in" onclick="toggleModalImagePapierPerso(false)">&times;</button>
+                <img id="modalImageDocumentVoiture" src="" alt="Operation Image" class="w-full max-h-[80vh] object-contain">
+                <button class="absolute top-4 right-4 text-white text-2xl font-bold bg-black bg-opacity-50 rounded-full px-3 py-1 hover:bg-opacity-75 hover:text-red-500 transition-all duration-300 ease-in" onclick="toggleModalImageDocumentVoiture(false)">&times;</button>
             </div>
         </div>
     </div>
@@ -244,23 +254,23 @@
     </div>
     </div>
     <script>
-        const modal = document.getElementById('imageModalPapierPerso');
+        const modal = document.getElementById('imageModalDocumentVoiture');
         const images = document.querySelectorAll('img.object-cover');
 
         images.forEach(image => {
             image.addEventListener('click', () => {
-                document.getElementById('modalImagePapierPerso').src = image.src;
-                toggleModalImagePapierPerso(true);
+                document.getElementById('modalImageDocumentVoiture').src = image.src;
+                toggleModalImageDocumentVoiture(true);
             });
         });
 
         modal.addEventListener('click', (event) => {
             if (event.target === modal) {
-                toggleModalImagePapierPerso(false);
+                toggleModalImageDocumentVoiture(false);
             }
         });
 
-        function toggleModalImagePapierPerso(show) {
+        function toggleModalImageDocumentVoiture(show) {
             modal.classList.toggle('hidden', !show);
             modal.classList.toggle('flex', show);
         }

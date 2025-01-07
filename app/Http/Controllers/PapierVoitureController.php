@@ -187,7 +187,7 @@ class PapierVoitureController extends Controller
     {
 
         $papier = VoiturePapier::find($id);
-        if (!$papier || $papier->voiture_id != Session::get('voiture_id')) {
+        if (!$papier || $papier->voiture_id != $papier->voiture_id) {
             abort(403);
         }
         // Add the file extension to the view
@@ -208,7 +208,7 @@ class PapierVoitureController extends Controller
     {
         $types = type_papierv::all();
         $papier = VoiturePapier::find($id);
-        if (!$papier || $papier->voiture_id != Session::get('voiture_id')) {
+        if (!$papier || $papier->voiture_id != $papier->voiture_id) {
             abort(403);
         }
         return view('userPaiperVoiture.edit', compact('papier', 'types'));
@@ -221,8 +221,7 @@ class PapierVoitureController extends Controller
     {
         // new update :
         $papier = VoiturePapier::find($id);
-        $voiture_id = Session::get('voiture_id');
-
+        $voiture_id = $papier->voiture_id;
         if (!$papier) {
             session()->flash('error', 'Document introuvable');
             return redirect()->route('voiture.show', $voiture_id);
