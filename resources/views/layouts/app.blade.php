@@ -15,10 +15,103 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <script src="https://unpkg.com/flowbite@latest/dist/flowbite.min.js"></script>
-
+    
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
+    {{-- select 2 --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <style>
+        /* Select2 input container */
+        .select2-container .select2-selection--single {
+            display: flex;
+            align-items: center; /* Vertically center the text and (X) button */
+            justify-content: space-between; /* Space out the elements */
+            width: 100%;
+            background-color: #FFF; /* Light gray background */
+            border: 1px solid #D1D5DB; /* Light border */
+            color: #1F2937; /* Dark text color */
+            font-size: 0.875rem; /* Font size */
+            border-radius: 0.375rem; /* Rounded corners */
+            padding: 1rem 0; /* Adjusted padding to center content */
+            transition: all 0.2s ease-in-out; /* Smooth transition for hover/focus states */
+        }
+    
+        /* Select2 input container on focus */
+        .select2-container .select2-selection--single:focus {
+            border-color: #3B82F6; /* Blue border on focus */
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4); /* Blue focus ring */
+            outline: none; /* Remove default outline */
+        }
+    
+        /* Text inside the select box */
+        .select2-container .select2-selection__rendered {
+            line-height: 1.5rem; /* Align text vertically */
+            font-weight: 400; /* Normal font weight */
+            color: #1F2937; /* Text color */
+            flex-grow: 1; /* Allow text to take available space */
+            text-align: left; /* Ensure text is left-aligned */
+        }
+    
+        /* Placeholder text color */
+        .select2-container .select2-selection__rendered[aria-placeholder="true"] {
+            color: #111827; /* Dark gray color for placeholder */
+        }
+    
+        /* Dropdown container */
+        .select2-container--default .select2-results__option {
+            padding: 0.5rem; /* Padding inside the dropdown options */
+            font-size: 0.875rem; /* Smaller text size */
+            color: #1F2937; /* Text color */
+            background-color: #FFFFFF; /* White background */
+            transition: background-color 0.2s ease-in-out; /* Smooth background transition */
+        }
+    
+        /* Hover effect on options */
+        .select2-container--default .select2-results__option:hover {
+            background-color: #E0F2FE; /* Light blue background on hover */
+            color: #1F2937; /* Dark text on hover */
+        }
+    
+        /* Selected option highlight */
+        .select2-container--default .select2-results__option--highlighted {
+            background-color: #3B82F6; /* Blue highlight on selected */
+            color: #FFFFFF; /* White text on highlight */
+        }
+    
+        /* Focus effect for the search input */
+        .select2-search__field {
+            font-size: 0.875rem; /* Text size for search */
+            color: #4B5563; /* Gray text for search */
+            padding: 0.5rem; /* Padding around search input */
+            border-radius: 0.375rem; /* Rounded corners for search input */
+            border: 1px solid #D1D5DB; /* Light gray border */
+            background-color: #F9FAFB; /* Light background */
+            margin-bottom: 5px; /* Space below search input */
+            transition: all 0.2s ease-in-out; /* Smooth transition */
+        }
+    
+        /* Focus effect on the search input */
+        .select2-search__field:focus {
+            border-color: #3B82F6; /* Blue border when focused */
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4); /* Blue focus ring */
+            outline: none; /* Remove default outline */
+        }
+    
+        /* Clear button style */
+        .select2-container .select2-selection__clear {
+            color: #3B82F6; /* Blue color for clear button */
+            font-size: 1.25rem; /* Clear button size */
+            transition: color 0.2s ease-in-out; /* Smooth transition */
+            padding-left: 8px; /* Space between text and (X) */
+        }
+    
+        /* Clear button hover effect */
+        .select2-container .select2-selection__clear:hover {
+            color: #2563EB; /* Darker blue on hover */
+        }
+    </style>
 </head>
 
 <body class="font-sans antialiased">
