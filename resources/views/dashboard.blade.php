@@ -1,29 +1,5 @@
 <style>
-  /* @keyframes boxShadowAnimation {
-    0% {
-      box-shadow: none;
-    }
 
-    25% {
-      box-shadow: 0px 0px 20px rgb(220, 38, 38);
-    }
-
-    50% {
-      box-shadow: none;
-    }
-
-    75% {
-      box-shadow: 0px 0px 20px rgb(220, 38, 38);
-    }
-
-    100% {
-      box-shadow: none;
-    }
-  }
-
-  .animated-box {
-    animation: boxShadowAnimation 2s 2;
-  } */
   /* Keyframes for the animation */
   @keyframes boxShadowAnimation {
     0%, 50%, 100% {
@@ -34,7 +10,6 @@
       box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.5), 0 2px 4px -2px rgba(220, 38, 38, 0.5);
     }
   }
-
   /* Animated Box */
   .animated-box {
     animation: boxShadowAnimation 2s ease-in-out 2; /* 2s animation, runs 2 times */
