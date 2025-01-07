@@ -30,9 +30,9 @@
                                     d="m1 9 4-4-4-4" />
                             </svg>
                             <a
-                                href=""
-                                class="inline-flex items-center text-sm font-medium text-gray-700   ">
-                                Details du véhicule
+                                href="{{ route('documentVoiture.index') }}"
+                                class="inline-flex items-center text-sm font-medium text-gray-700">
+                                Mes fichiers de voitures
                             </a>
                         </div>
                     </li>
@@ -67,8 +67,21 @@
             {{-- content (slot on layouts/app.blade.php)--}}
             <div class=" px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <h2 class="mt-10  text-2xl font-bold leading-9 tracking-tight text-gray-900">Ajouter un papier du véhicule</h2>
-                <form method="POST" action="{{ route('paiperVoiture.store') }}" class="space-y-6" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('documentVoiture.store') }}" class="space-y-6" enctype="multipart/form-data">
                     @csrf
+                    <div>
+                        <x-input-label for="voiture_id" :value="__('Sélectionnez une voiture')" />
+                        <!-- Select Dropdown -->
+                        <select id="voiture_id" name="voiture_id" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <option value="" disabled selected>{{ __('Choisissez une voiture') }}</option>
+                            @foreach($userVehicles as $vehicle)
+                            <option value="{{ $vehicle->id }}" {{ old('voiture_id') == $vehicle->id ? 'selected' : '' }}>
+                                {{ $vehicle->marque }} - <span>{{ explode('-', $vehicle->numero_immatriculation)[0] }}</span>-<span dir="rtl">{{ explode('-', $vehicle->numero_immatriculation)[1] }}</span>-<span>{{ explode('-', $vehicle->numero_immatriculation)[2] }}</span>
+                            </option>
+                            @endforeach
+                        </select>
+                        <x-input-error :messages="$errors->get('voiture_id')" class="mt-2" />
+                    </div>
                     <div>
                         <x-input-label for="type" :value="__('Type')" />
                         <!-- Select Dropdown -->
@@ -100,10 +113,10 @@
                     </div>
                     <div class="shrink-0">
                         <img id='preview_img' class="h-16 w-16 object-cover rounded-full" src="{{ 
-                                    session('temp_photo_p_voiture') 
-                                    ? (pathinfo(session('temp_photo_p_voiture'), PATHINFO_EXTENSION) === 'pdf' 
+                                    session('temp_photo_document_voiture') 
+                                    ? (pathinfo(session('temp_photo_document_voiture'), PATHINFO_EXTENSION) === 'pdf' 
                                         ? asset('./images/file.png') 
-                                        : asset('storage/' . session('temp_photo_p_voiture'))) 
+                                        : asset('storage/' . session('temp_photo_document_voiture'))) 
                                     : asset('./images/defaultimage.jpg') 
                                 }}"
                             alt="Current profile photo" />
@@ -112,8 +125,8 @@
                         <x-input-label for="file_input" :value="__('Photo')" />
                         <x-file-input id="file_input" onchange="loadFile(event)" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" accept="image/jpeg,image/png,application/pdf"/>
                         <!-- Hidden Input to Preserve Old Value -->
-                        @if(session('temp_photo_voiture'))
-                        <input type="hidden" name="temp_photo_p_voiture" value="{{ session('temp_photo_voiture') }}">
+                        @if(session('temp_photo_document_voiture'))
+                        <input type="hidden" name="temp_photo_document_voiture" value="{{ session('temp_photo_document_voiture') }}">
                         @endif
                         <x-input-error :messages="$errors->get('photo')" class="mt-2" />
                     </div>

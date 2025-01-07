@@ -67,77 +67,67 @@
       {{-- content (slot on layouts/app.blade.php)--}}
       <div class=" px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900 mb-4">Détails d'operation</h2>
-        {{-- content of Détails  --}}
-        <div class="grid grid-cols-1 md:grid-cols-2">
-          {{-- Categorie --}}
-          <div class="mb-4">
-            <p class="capitalize text-sm font-medium text-gray-900 truncate">
-              Categorie
-            </p>
-            <p class="text-sm text-gray-500 truncate">
-              {{ $categories->where('id', $operation->categorie)->first()->nom_categorie ?? 'N/A' }}
-            </p>
+        {{-- test --}}
+        <div class="flex flex-col md:flex-row gap-10 items-center my-6">
+          <div class="md:w-[500px] md:h-[250px] overflow-hidden  border flex-shrink-0">
+            <img
+              class="w-full h-full object-cover cursor-pointer"
+              src="{{ $operation->photo ? asset('storage/'.$operation->photo) : asset('/images/defaultimage.jpg') }}"
+              alt="{{ $operation->photo ? 'Operation Image' : 'Default Image' }}"
+              id="operationImage">
           </div>
-          {{-- Operation --}}
-          <div class="mb-4">
-            <p class="capitalize text-sm font-medium text-gray-900 truncate">
-              Operation
-            </p>
-            <p class="text-sm text-gray-500 truncate">
-              {{ 
-                $operation->nom === 'Autre' 
-                ? $operation->autre_operation
-                : ($ope->where('id', $operation->nom)->first()->nom_operation ?? 'N/A') 
-              }}
-            </p>
-          </div>
-          {{-- Date --}}
-          <div class="mb-4">
-            <p class="capitalize text-sm font-medium text-gray-900 truncate">
-              Date
-            </p>
-            <p class="text-sm text-gray-500 truncate">
-              {{ $operation->date_operation }}
-            </p>
-          </div>
-          {{-- Sous operation --}}
-          <div>
-            <p class="first-letter:capitalize text-sm font-medium text-gray-900 truncate">
-              Sous operation
-            </p>
-            @if($operation->sousoperations->isEmpty())
-            <p class="text-sm text-gray-500 truncate">
-              N/A
-            </p>
-            @else
-            @foreach ($operation->sousoperations as $sousOp)
-            <p class="text-sm text-gray-500 truncate">
-              {{$sousOperation->where('id', $sousOp->nom)->first()->nom_sous_operation}}
-            </p>
-            @endforeach
-            @endif
+
+          {{-- Details in Two Columns --}}
+          <div class="flex flex-col md:flex-row gap-5 w-full justify-center md:justify-start">
+            {{-- Column 1 --}}
+            <div class="flex-1 space-y-4">
+              <div>
+                <p class="capitalize text-sm font-medium text-gray-900">Categorie</p>
+                <p class="text-sm text-gray-500">
+                  {{ $categories->where('id', $operation->categorie)->first()->nom_categorie ?? 'N/A' }}
+                </p>
+              </div>
+              <div>
+                <p class="first-letter:uppercase text-sm font-medium text-gray-900">date d'operation</p>
+                <p class="text-sm text-gray-500">
+                  {{ $operation->date_operation }}
+                </p>
+              </div>
+              @if($operation->description !== NULL)
+              <div>
+                <p class="first-letter:uppercase text-sm font-medium text-gray-900">description</p>
+                <p class="text-sm text-gray-500">
+                  {{ $operation->description }}
+                </p>
+              </div>
+              @endif
+            </div>
+            {{-- Column 2 --}}
+            <div class="flex-1 space-y-4">
+              <div>
+                <p class="capitalize text-sm font-medium text-gray-900">operation</p>
+                <p class="text-sm text-gray-500">
+                  {{ 
+                    $operation->nom === 'Autre' 
+                    ? $operation->autre_operation
+                    : ($ope->where('id', $operation->nom)->first()->nom_operation ?? 'N/A') 
+                  }}
+                </p>
+              </div>
+              @if(!$operation->sousoperations->isEmpty())
+              <div>
+                <p class="first-letter:uppercase text-sm font-medium text-gray-900">Sous operation</p>
+                @foreach ($operation->sousoperations as $sousOp)
+                <p class="text-sm text-gray-500 truncate">
+                  {{$sousOperation->where('id', $sousOp->nom)->first()->nom_sous_operation }}
+                </p>
+                @endforeach
+              </div>
+              @endif
+            </div>
           </div>
         </div>
-        {{-- description --}}
-        @if($operation->description !== NULL)
-        <div class="my-4">
-          <p class="capitalize text-sm font-medium text-gray-900 truncate">
-            description
-          </p>
-          <p class="text-sm text-gray-500 truncate">
-            operation description 
-          </p>
-        </div>
-        @endif
-        {{-- operation description close  --}}
-        <div class="flex justify-center my-8 overflow-hidden">
-          <img
-            class="m-auto w-full md:w-4/5 h-60 object-cover cursor-pointer"
-            src="{{ $operation->photo !== NULL ? asset('storage/'.$operation->photo) : '/images/defaultimage.jpg' }}"
-            alt="Image d'opération"
-            id="operationImage"
-          >
-        </div>
+        {{-- test --}}
         {{-- content of Détails  --}}
         <div class="grid grid-cols-1 md:grid-cols-2">
           {{-- Matricule --}}
