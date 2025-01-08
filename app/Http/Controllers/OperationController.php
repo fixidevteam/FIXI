@@ -8,6 +8,7 @@ use App\Models\nom_operation;
 use App\Models\nom_sous_operation;
 use App\Models\Operation;
 use App\Models\SousOperation;
+use App\Models\Ville;
 use App\Models\Voiture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,8 +50,9 @@ class OperationController extends Controller
                 ->whereNull('user_id')               // Global garages only
                 ->orWhere('user_id', Auth::id());    // User-specific garages
         })->get();
+        $villes = Ville::all();
         $categories = nom_categorie::all();
-        return view('userOperations.create', compact('categories', 'garages'));
+        return view('userOperations.create', compact('categories', 'garages', 'villes'));
     }
 
     /**

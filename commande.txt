@@ -2,3 +2,59 @@ php artisan cache:clear
 php artisan config:clear
 php artisan route:clear
 php artisan view:clear
+
+        get the garage by city :
+        HTML : 
+        <div>
+            <x-input-label for="ville_garage" :value="__('Ville du garage')" />
+            <select id="ville_garage" name="ville_garage" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                @foreach ($villes as $ville)
+                <option value="{{ $ville->ville }}" @if(old('ville_garage')==$ville->ville) selected @endif>{{ $ville->ville }}</option>
+                @endforeach
+            </select>
+            <x-input-error :messages="$errors->get('ville_garage')" class="mt-2" />
+        </div>
+
+        JS :
+        document.getElementById('ville_garage').addEventListener('change', function() {
+            let ville = this.value;
+            let garageSelect = document.getElementById('garage');
+            // Clear previous options
+            garageSelect.innerHTML = '<option value="">Select garage</option>';
+
+            if (ville) {
+                fetch(`/garages-by-ville/${ville}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.forEach(garage => {
+                            console.log(garage);
+                            
+                            let option = document.createElement('option');
+                            option.value = garage.id;
+                            option.textContent = garage.name + (garage.quartier ? ' - ' + garage.quartier : '');
+                            garageSelect.appendChild(option);
+                        });
+
+                        // Add 'Autre' option
+                        let autreOption = document.createElement('option');
+                        autreOption.value = 'autre';
+                        autreOption.textContent = 'Autre';
+                        garageSelect.appendChild(autreOption);
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        });
+
+        controller  :
+        public function getGaragesByVille(Request $request)
+        {
+            $garages = Garage::where(function ($query) use ($request) {
+                $query->where('ville', $request->ville)
+                    ->whereNull('user_id')
+                    ->orWhere('user_id', Auth::id());
+            })->get();
+            return response()->json($garages);
+        }
+
+        Route: 
+        Route::get('/garages-by-ville/{ville}', [OperationController::class, 'getGaragesByVille'])->name('garages.by.ville');

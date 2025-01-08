@@ -59,6 +59,8 @@ Route::middleware(['auth', 'checkdocuments', 'checkUserStatus'])->prefix('fixi-p
     Route::get('/voiture/{id}/pdf', [generateVehicleHistoryPDF::class, 'generateVehicleHistoryPDF'])->name('voiture.pdf');
     Route::get('/fixiPlus', [FixiPlusController::class, 'index'])->name('fixiPlus.index');
 });
+
+
 // General Authentication Routes
 require_once __DIR__ . '/auth.php';
 
