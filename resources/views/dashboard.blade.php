@@ -60,8 +60,8 @@
     @endif
     <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg {{ $promotions->isEmpty() ? 'mt-14' : 'mt-4' }}">
       {{-- content (slot on layouts/app.blade.php)--}}
-      <div class="w-full grid grid-cols-1 md:grid-cols-10 gap-0 md:gap-4  ">
-        <div class="{{Auth::user()->unreadNotifications->isEmpty() ? 'col-span-10 md:col-span-6' : 'col-span-6'}} p-6 text-gray-900 bg-white p-8 rounded-lg shadow align-item-center ">
+      <div class="w-full grid grid-cols-1 md:grid-cols-10 gap-0 md:gap-4">
+        <div class="{{Auth::user()->unreadNotifications->isEmpty() ? 'col-span-10 md:col-span-10' : 'col-span-6'}} p-6 text-gray-900 bg-white p-8 rounded-lg shadow align-item-center">
           <h1 class="text-lg font-medium text-gray-900">Bonjour, {{ Auth::user()->name }} </h1>
           <p class="text-sm text-gray-600 md:w-[300px] sm:w-full mx-0 text-left">Ajoutez vos informations en quelques clics,et accédez à une vue d’ensemble claire et sécurisée de toutes vos données importantes.</p>
           <div class="mt-4">
@@ -79,7 +79,7 @@
           </div>
           <div class="overflow-y-auto">
             @foreach(Auth::user()->unreadNotifications->take(3) as $notification)
-            <a href="{{route('notifications.markAsRead',$notification->id)}}" class=" rounded-lg flex items-center gap-4 px-2 py-2  mt-1 text-sm border-b {{ $notification->read_at ? 'bg-gray-100' : 'bg-white' }}">
+            <a href="{{route('notifications.markAsRead',$notification->id)}}" class=" rounded-lg flex items-center gap-4 px-2 py-2 mt-1 text-sm hover:bg-gray-100 {{ $notification->read_at ? 'bg-gray-100' : 'bg-white' }}">
               <!-- Icon -->
               <div class="flex-shrink-0">
                 <svg class="text-yellow-500" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

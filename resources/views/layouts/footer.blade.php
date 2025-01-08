@@ -3,7 +3,8 @@
       <li><a href="https://fixi.ma/blog/" target="_blanck" class="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Fixi blogs</a></li>
       <li><a href="https://fixi.ma/conditions-generales/" class="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Conditions generales</a></li>
       <li><a href="https://fixi.ma/mentions-legales/" target="_blanck" class="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Mentions legales</a></li>
-      <li><a href="mailto:contact@fixi.ma" class="text-sm font-normal text-gray-500 hover:underline">Contact</a></li>
+      <li><a href="mailto:contact@fixi.ma" class="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Contact</a></li>
+      <li><a href="{{ route('fixiPlus.index') }}" class="text-sm font-normal text-gray-500 hover:underline">C'est quoi FIXI+</a></li>
   </ul>
   <div class="flex sm:justify-center space-x-6">
       <a href="https://web.facebook.com/FIXI.MAROC" target="_blanck" class="text-gray-500 hover:text-gray-900">
