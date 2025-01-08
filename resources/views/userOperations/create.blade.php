@@ -111,6 +111,7 @@
                         <x-text-input id="date_operation" class="block mt-1 w-full" type="date" name="date_operation" :value="old('date_operation')" autofocus autocomplete="date_operation" />
                         <x-input-error :messages="$errors->get('date_operation')" class="mt-2" />
                     </div>
+
                     <div>
                         <x-input-label for="garage" :value="__('Garage')" />
                         <select id="garage" name="garage_id" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -212,29 +213,31 @@
                 URL.revokeObjectURL(output.src) // free memory
             }
         };
-    // select 2 :  
-    $(document).ready(function () {
-    // Initialize select2 for the garage field
-    $('#garage').select2({
-        placeholder: "Rechercher un garage",
-        allowClear: true,
-        width: '100%',
-        dropdownAutoWidth: true,
-    });
+        // select 2 :  
+        $(document).ready(function() {
+            // Initialize select2 for the garage field
+            $('#garage').select2({
+                placeholder: "Rechercher un garage",
+                allowClear: true,
+                width: '100%',
+                dropdownAutoWidth: true,
+            });
 
-    // Show or hide the custom garage input based on the selected option
-    $('#garage').on('change', function () {
-        if ($(this).val() === 'autre') {
-            $('#new_garage_name').removeClass('hidden').attr('required', 'required');
-        } else {
-            $('#new_garage_name').addClass('hidden').removeAttr('required');
-        }
-    });
+            // Show or hide the custom garage input based on the selected option
+            $('#garage').on('change', function() {
+                if ($(this).val() === 'autre') {
+                    $('#new_garage_name').removeClass('hidden').attr('required', 'required');
+                } else {
+                    $('#new_garage_name').addClass('hidden').removeAttr('required');
+                }
+            });
 
-    // Ensure the "Autre" field is visible if it was selected on validation failure
-    if ($('#garage').val() === 'autre') {
-        $('#new_garage_name').removeClass('hidden').attr('required', 'required');
-        }
-    });
+            // Ensure the "Autre" field is visible if it was selected on validation failure
+            if ($('#garage').val() === 'autre') {
+                $('#new_garage_name').removeClass('hidden').attr('required', 'required');
+            }
+        });
+
+
     </script>
 </x-app-layout>

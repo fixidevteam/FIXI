@@ -8,6 +8,7 @@ use App\Models\nom_operation;
 use App\Models\nom_sous_operation;
 use App\Models\Operation;
 use App\Models\SousOperation;
+use App\Models\Ville;
 use App\Models\Voiture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
