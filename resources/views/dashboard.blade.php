@@ -12,7 +12,7 @@
   }
   /* Animated Box */
   .animated-box {
-    animation: boxShadowAnimation 2s ease-in-out 2; /* 2s animation, runs 2 times */
+    animation: boxShadowAnimation 2s ease-in-out 3; /* 2s animation, runs 2 times */
   }
 </style>
 <x-app-layout :subtitle="'Accueil'">
