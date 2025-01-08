@@ -114,14 +114,18 @@
 
                     <div>
                         <x-input-label for="garage" :value="__('Garage')" />
-                        <select id="garage" name="garage_id">
+                        <select id="garage" name="garage_id" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             <option value="">Select garage</option>
-                            @foreach ($garages as $garage)
-                            <option value="{{ $garage->id }}" @if(old('garage_id')==$garage->id) selected @endif>
-                                {{ $garage->name }}{{ $garage->quartier ? ' - ' . $garage->quartier : '' }}
-                            </option>
+                            @foreach ($garages as $ville => $villeGarages)
+                                <optgroup label="{{ $ville }}">
+                                    @foreach ($villeGarages as $garage)
+                                        <option value="{{ $garage->id }}" @if(old('garage_id') == $garage->id) selected @endif>
+                                            {{ $garage->name }}{{ $garage->quartier ? ' - ' . $garage->quartier : '' }}
+                                        </option>
+                                    @endforeach
+                                </optgroup>
                             @endforeach
-                            <option value="autre" @if(old('garage_id')=='autre' ) selected @endif>Autre</option>
+                            <option value="autre" @if(old('garage_id') == 'autre') selected @endif>Autre</option>
                         </select>
                         <p class="mt-1 text-sm text-gray-500" id="operation_input_help">Si le nom du garage n'apparaît pas dans la liste, sélectionnez "Autre" pour le saisir manuellement.</p>
                         <x-input-error :messages="$errors->get('garage_id')" class="mt-2" />
