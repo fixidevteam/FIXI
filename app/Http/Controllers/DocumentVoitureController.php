@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\type_papierv;
 use App\Models\Voiture;
 use App\Models\VoiturePapier;
+use App\Notifications\AddDocumentNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -104,16 +105,17 @@ class DocumentVoitureController extends Controller
         } elseif ($request->hasFile('photo')) {
             $data['photo'] = $compressedFilePath;
         }
-
         // Assign the voiture_id to the data
         $data['voiture_id'] = $request->input('voiture_id');
-
         // Create the document
-        VoiturePapier::create($data);
+        $document  = VoiturePapier::create($data);
+
+
+        Auth::user()->notify(new AddDocumentNotification($document, 'Vous avouez ajouté le document ' . $document->type, 'ajouter'. $document->id .'car', true));
+
 
         // Clear the temp_photo_document_voiture session
         $request->session()->forget('temp_photo_document_voiture');
-
         // Flash success message and redirect
         session()->flash('success', 'Document ajouté');
         session()->flash('subtitle', 'Votre document a été ajouté avec succès à la liste.');

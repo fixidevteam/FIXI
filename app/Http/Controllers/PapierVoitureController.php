@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\type_papierv;
 use App\Models\VoiturePapier;
+use App\Notifications\AddDocumentNotification;
 use App\Notifications\DocumentExpiryNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 
@@ -99,8 +101,9 @@ class PapierVoitureController extends Controller
         $data['voiture_id'] = $voiture_id;
 
         // Create the document
-        VoiturePapier::create($data);
-
+        $document = VoiturePapier::create($data);
+        
+        Auth::user()->notify(new AddDocumentNotification($document, 'Vous avouez ajouté le document ' . $document->type, 'ajouter'. $document->id .'car', true));
         // Clear the temp_photo_path from the session
         $request->session()->forget('temp_photo_p_voiture');
 

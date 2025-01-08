@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\type_papierp;
 use App\Models\UserPapier;
+use App\Notifications\AddDocumentNotification;
 use App\Notifications\DocumentExpiryNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -98,8 +99,11 @@ class PapierPeronnelController extends Controller
         }
 
         // Create the document
-        UserPapier::create($data);
+        $document = UserPapier::create($data);
 
+        
+        Auth::user()->notify(new AddDocumentNotification($document, 'Vous avouez ajouté le document ' . $document->type, 'ajouter'. $document->id .'user', false));
+        
         // Clear the temp photo path from the session
         $request->session()->forget('temp_photo_perso');
 

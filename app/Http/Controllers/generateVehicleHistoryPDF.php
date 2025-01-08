@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\nom_categorie;
 use App\Models\nom_operation;
+use App\Models\Operation;
 use App\Models\Voiture;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -32,6 +33,27 @@ class generateVehicleHistoryPDF extends Controller
 
             // Return the PDF as a download
             return $pdf->download('vehicle-history-' . $voiture->numero_immatriculation . '.pdf');
+        } catch (\Exception $e) {
+            // Handle any errors during PDF generation
+            session()->flash('error', 'Erreur de téléchargement.');
+            session()->flash('subtitle', 'Veuillez réessayer après quelques minutes.');
+            // Redirect back with an error message
+            return redirect()->back()->withErrors(['message' => 'Erreur lors de la génération du PDF.']);
+        }
+    }
+    public function generateOperationsHistoryPDF()
+    {
+        $operations = Operation::whereHas('voiture', function ($query) {
+            $query->where('user_id', Auth::id());
+        })->orderBy('date_operation', 'desc')->get();
+        if($operations->isEmpty()) {
+            return  back();
+        }
+        try {
+            $categories = nom_categorie::all();
+            $opers = nom_operation::all();
+            $pdf = Pdf::loadView('pdf.operations-history', compact('operations', 'categories', 'opers'))->setPaper('a4', 'portrait');
+            return $pdf->download('operations-history.pdf');
         } catch (\Exception $e) {
             // Handle any errors during PDF generation
             session()->flash('error', 'Erreur de téléchargement.');
