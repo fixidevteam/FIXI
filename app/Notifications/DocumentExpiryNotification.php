@@ -22,7 +22,7 @@ class DocumentExpiryNotification extends Notification
     public function via($notifiable)
     {
         // Use database channel for notifications
-        return ['database','mail'];
+        return ['database', 'mail'];
     }
     public function toDatabase($notifiable)
     {
@@ -35,6 +35,22 @@ class DocumentExpiryNotification extends Notification
             'car_id' => $this->isCar ? $this->document->voiture_id : null,
         ];
     }
+    // public function toMail($notifiable)
+    // {
+    //     $url = $this->isCar
+    //         ? route('paiperVoiture.show', $this->document->id)
+    //         : route('paiperPersonnel.show', $this->document->id);
+
+    //     return (new \Illuminate\Notifications\Messages\MailMessage)
+    //         ->subject('Notification de document expiré')
+    //         ->view('emails.notifications', [
+    //             'title' => 'Notification de document expiré',
+    //             'user' => $notifiable,
+    //             'body' => $this->message,
+    //             'actionText' => 'Voir le document',
+    //             'actionUrl' => $url,
+    //         ]);
+    // }
     public function toMail($notifiable)
     {
         $url = $this->isCar
@@ -42,11 +58,11 @@ class DocumentExpiryNotification extends Notification
             : route('paiperPersonnel.show', $this->document->id);
 
         return (new \Illuminate\Notifications\Messages\MailMessage)
-            ->subject('Notification de document expiré')
+            ->subject('⚠️ ' . $this->document->type . ' nécessite votre attention')
             ->view('emails.notifications', [
-                'title' => 'Notification de document expiré',
+                'title' => '⚠️ ' . $this->document->type . ' nécessite votre attention',
                 'user' => $notifiable,
-                'body' => $this->message,
+                'document' => $this->document, // Pass the document variable here
                 'actionText' => 'Voir le document',
                 'actionUrl' => $url,
             ]);
