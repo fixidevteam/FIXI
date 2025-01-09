@@ -54,9 +54,9 @@
                             name="ville" 
                             class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         >
-                            <option value="">Sélectionner une ville</option>
+                            <option value="">Tout les villes</option>
                             @foreach($villes as $ville)
-                                <option value="{{ $ville->ville }}" {{ request('ville') == $ville->ville ? 'selected' : '' }}>
+                                <option value="{{ $ville->ville }}" {{ $searchVille == $ville->ville ? 'selected' : '' }}>
                                     {{ $ville->ville }} ({{ $ville->garages_count }})
                                 </option>
                             @endforeach
@@ -68,7 +68,7 @@
                             </svg>                            
                             <span class="sr-only">Search</span>
                         </button>
-                        {{-- Reset Button --}}
+                        <!-- Reset Button -->
                         <a href="{{ route('garages.index') }}" class="hidden md:block p-2.5 ms-2 bg-gray-200 text-gray-900 rounded-lg hover:bg-gray-300">
                             Réinitialiser
                         </a>
@@ -79,7 +79,7 @@
                             <span class="sr-only">Réinitialiser Search</span>
                         </a>
                     </div>
-                </form>                
+                </form>                                
                 {{-- card --}}
                 <div class="my-5">
                     <div class="">

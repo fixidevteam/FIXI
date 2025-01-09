@@ -19,7 +19,8 @@ class ListingGaragesController extends Controller
         }])->get();
 
         // Search for garages based on the selected 'ville' and exclude those with 'user_id'
-        $searchVille = $request->input('ville');
+        $defaultVille = auth()->user()?->ville; // Replace 'ville' with the actual column name in your users table
+        $searchVille = $request->input('ville', $defaultVille); // Use the selected 'ville' or default to the user's city
         $garages = Garage::when($searchVille, function ($query, $searchVille) {
             return $query->where('ville', $searchVille);
         })
