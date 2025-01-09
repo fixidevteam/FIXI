@@ -47,13 +47,15 @@ class generateVehicleHistoryPDF extends Controller
             $query->where('user_id', Auth::id());
         })->orderBy('date_operation', 'desc')->get();
         if($operations->isEmpty()) {
-            return  back();
+            return back()->with('error', 'Aucune opération trouvée.');
         }
         try {
             $categories = nom_categorie::all();
             $opers = nom_operation::all();
+
             $pdf = Pdf::loadView('pdf.operations-history', compact('operations', 'categories', 'opers'))->setPaper('a4', 'portrait');
             return $pdf->download('operations-history.pdf');
+
         } catch (\Exception $e) {
             // Handle any errors during PDF generation
             session()->flash('error', 'Erreur de téléchargement.');
