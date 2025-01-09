@@ -217,6 +217,7 @@
                             <span class="ms-3 first-letter:capitalize">ajouter une voiture</span>
                         </a>
                     </li>
+                    @if(Auth::user()->voitures->isNotEmpty())
                     <li>
                         <a href="{{ route('documentVoiture.create') }}" class="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
                             <svg class="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -226,6 +227,7 @@
                             <span class="ms-3 first-letter:capitalize">Ajouter un papier de voiture</span>
                         </a>
                     </li>
+                    @endif
                     <li>
                         <a href="{{ route('paiperPersonnel.create') }}" class="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
                             <svg class="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
