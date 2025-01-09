@@ -53,18 +53,44 @@ class DocumentExpiryNotification extends Notification
     // }
     public function toMail($notifiable)
     {
+        // Calculate the days remaining until expiration
+        $daysRemaining = $this->calculateDaysRemaining();
+
+        if ($daysRemaining === 0) {
+            $alertMessage = "Expire aujourd'hui";
+        } elseif ($daysRemaining > 0 && $daysRemaining <= 7) {
+            $alertMessage = "Le document expire dans {$daysRemaining} jours";
+        } elseif ($daysRemaining < 0) {
+            $alertMessage = "Le document est expiré depuis " . abs($daysRemaining) . " jours";
+        } else {
+            return; // Skip sending the notification if no alert is needed
+        }
         $url = $this->isCar
             ? route('paiperVoiture.show', $this->document->id)
             : route('paiperPersonnel.show', $this->document->id);
 
         return (new \Illuminate\Notifications\Messages\MailMessage)
-            ->subject('⚠️ ' . $this->document->type . ' nécessite votre attention')
+            ->subject('⚠️ ' . $alertMessage . ' - ' . $this->document->type . ' nécessite votre attention')
             ->view('emails.notifications', [
                 'title' => '⚠️ ' . $this->document->type . ' nécessite votre attention',
                 'user' => $notifiable,
+                'alertMessage' => $alertMessage,
                 'document' => $this->document, // Pass the document variable here
                 'actionText' => 'Voir le document',
                 'actionUrl' => $url,
             ]);
+    }
+    protected function calculateDaysRemaining()
+    {
+        // Ensure the document has a valid expiration date
+        if (!$this->document->date_fin) {
+            return null; // No expiration date defined
+        }
+
+        // Calculate the difference in days between the current date and the expiration date
+        $expirationDate = \Carbon\Carbon::parse($this->document->date_fin);
+        $currentDate = \Carbon\Carbon::now();
+
+        return $currentDate->diffInDays($expirationDate, false); // Use `false` for signed difference
     }
 }
