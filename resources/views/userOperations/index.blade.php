@@ -61,7 +61,7 @@
                     </div>
                     @endif --}}
                     {{--  --}}
-                    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-[24px] font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150" type="button">
+                    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="inline-flex items-center px-2 py-1 md:px-4 md:py-2 bg-red-600 border border-transparent rounded-[24px] font-semibold text-[10px] md:text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150" type="button">
                         Télécharger l'historique
                         <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
