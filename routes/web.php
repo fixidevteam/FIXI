@@ -14,6 +14,7 @@ use App\Http\Controllers\PapierPeronnelController;
 use App\Http\Controllers\PapierVoitureController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PromotionController;
+use App\Http\Controllers\UserOperationsController;
 use App\Http\Controllers\VoitureController;
 use Illuminate\Support\Facades\Route;
 /*
@@ -58,6 +59,7 @@ Route::middleware(['auth', 'checkdocuments', 'checkUserStatus'])->prefix('fixi-p
     Route::get('/notifications/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.markAllAsRead');
     Route::get('/voiture/{id}/pdf', [generateVehicleHistoryPDF::class, 'generateVehicleHistoryPDF'])->name('voiture.pdf');
     Route::get('/operations/pdf', [generateVehicleHistoryPDF::class, 'generateOperationsHistoryPDF'])->name('operations.pdf');
+    Route::get('/operations/export', [UserOperationsController::class, 'exportUserOperations'])->name('operations.export');
     Route::get('/fixiPlus', [FixiPlusController::class, 'index'])->name('fixiPlus.index');
 });
 
