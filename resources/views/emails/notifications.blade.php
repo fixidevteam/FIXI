@@ -85,7 +85,7 @@
             <img src="https://fixi.ma/wp-content/uploads/2024/02/logo-2-350-x-100-px.webp" alt="Fixi Logo" style="max-width: 150px;">
         </header> --}}
         <main>
-            <h1>⚠️ {{ $alertMessage ?? '' }} - {{ $document->type ?? 'Notification' }} nécessite votre attention</h1>
+            <h1>⚠️ {{ $document->type ?? 'Notification' }} nécessite votre attention</h1>
 
             <p>Bonjour, {{ $user->name }}</p>
 
