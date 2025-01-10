@@ -51,7 +51,7 @@ class PdfTest extends TestCase
         $response->assertOk();
         $response->assertSee('btn-pdf');
     }
-    public function test_download_pdf(): void
+    public function test_download_voiture_pdf(): void
     {
         $user = User::factory()->create(['status' => 1, 'ville' => 'marrakech']);
         // Create a voiture
