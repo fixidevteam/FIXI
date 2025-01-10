@@ -23,6 +23,7 @@ class DocumentExpiryNotification extends Notification
     {
         // Use database channel for notifications
         return ['database', 'mail'];
+        // return ['database'];
     }
     public function toDatabase($notifiable)
     {
@@ -51,6 +52,7 @@ class DocumentExpiryNotification extends Notification
     //             'actionUrl' => $url,
     //         ]);
     // }
+
     public function toMail($notifiable)
     {
         // Calculate the days remaining until expiration
