@@ -46,6 +46,7 @@
             <div class=" px-5 py-3 text-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex justify-between items-center my-6">
                     <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">Liste des papiers du véhicule</h2>
+                    @if(Auth::user()->voitures->isNotEmpty())
                     <div>
                         <a href="{{ route('documentVoiture.create') }}">
                             <x-primary-button class="hidden md:block">Ajouter un papier</x-primary-button>
@@ -57,6 +58,7 @@
                             </x-primary-button>
                         </a>
                     </div>
+                    @endif
                 </div>
                 {{-- table --}}
                 <div class="my-5">
