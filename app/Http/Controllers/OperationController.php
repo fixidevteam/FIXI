@@ -44,18 +44,36 @@ class OperationController extends Controller
      */
     public function create()
     {
-        //$garages = Garage::where(function ($query) {
-        //$query->where('ville', Auth::user()->ville) // Global garages for the same city
-        //->whereNull('user_id')               // Global garages only
-        //->orWhere('user_id', Auth::id());    // User-specific garages
-        //})->get();
+        // $garages = Garage::where(function ($query) {
+        // $query->where('ville', Auth::user()->ville) // Global garages for the same city
+        // ->whereNull('user_id')               // Global garages only
+        // ->orWhere('user_id', Auth::id());    // User-specific garages
+        // })->get();
         // Get garages in the user's 'ville' (prioritized)
-        $userVilleGarages = Garage::where('ville', Auth::user()->ville)
-            ->get();
+        // $userVilleGarages = Garage::where('ville', Auth::user()->ville)
+        //     ->get();
 
         // Get all other garages (excluding those already in the user's 'ville')
-        $otherGarages = Garage::where('ville', '!=', Auth::user()->ville)
-            ->get();
+        // $otherGarages = Garage::where('ville', '!=', Auth::user()->ville)
+        //     ->get();
+
+        // Get garages in the user's 'ville', including global garages and user-specific garages
+        $userVilleGarages = Garage::where(function ($query) {
+            $query->where('ville', Auth::user()->ville) // Garages in the same 'ville'
+                ->where(function ($subQuery) {
+                    $subQuery->whereNull('user_id') // Global garages only
+                        ->orWhere('user_id', Auth::id()); // User-specific garages
+                });
+        })->get();
+
+        // Get garages outside the user's 'ville' (excluding those already in the user's 'ville')
+        $otherGarages = Garage::where(function ($query) {
+            $query->where('ville', '!=', Auth::user()->ville) // Garages outside the user's 'ville'
+                ->where(function ($subQuery) {
+                    $subQuery->whereNull('user_id') // Global garages only
+                        ->orWhere('user_id', Auth::id()); // User-specific garages
+                });
+        })->get();
 
         // Combine both collections with the user's 'ville' garages on top
         $garages = $userVilleGarages->merge($otherGarages)->groupBy('ville'); // Group garages by 'ville'
@@ -185,11 +203,30 @@ class OperationController extends Controller
         //         ->orWhere('user_id', Auth::id());    // User-specific garages
         // })->get();
         // Get garages in the user's 'ville' (prioritized) and all other garages
-        $userVilleGarages = Garage::where('ville', Auth::user()->ville)
-            ->get();
+        // $userVilleGarages = Garage::where('ville', Auth::user()->ville)
+        //     ->get();
         // Get all other garages (excluding those already in the user's 'ville')
-        $otherGarages = Garage::where('ville', '!=', Auth::user()->ville)
-            ->get();
+        // $otherGarages = Garage::where('ville', '!=', Auth::user()->ville)
+        //     ->get();
+
+
+        // Get garages in the user's 'ville', including global garages and user-specific garages
+        $userVilleGarages = Garage::where(function ($query) {
+            $query->where('ville', Auth::user()->ville) // Garages in the same 'ville'
+                ->where(function ($subQuery) {
+                    $subQuery->whereNull('user_id') // Global garages only
+                        ->orWhere('user_id', Auth::id()); // User-specific garages
+                });
+        })->get();
+
+        // Get garages outside the user's 'ville' (excluding those already in the user's 'ville')
+        $otherGarages = Garage::where(function ($query) {
+            $query->where('ville', '!=', Auth::user()->ville) // Garages outside the user's 'ville'
+                ->where(function ($subQuery) {
+                    $subQuery->whereNull('user_id') // Global garages only
+                        ->orWhere('user_id', Auth::id()); // User-specific garages
+                });
+        })->get();
 
         // Combine both collections with the user's 'ville' garages on top
         $garages = $userVilleGarages->merge($otherGarages)->groupBy('ville'); // Group garages by 'ville'
