@@ -158,7 +158,6 @@ class AdminGestionGarageController extends Controller
                 return redirect()->route('admin.gestionGarages.index');
             }
 
-
             // Delete the garage if it has no mechanics
             $garage->delete();
             session()->flash('success', 'Garage supprimé');
