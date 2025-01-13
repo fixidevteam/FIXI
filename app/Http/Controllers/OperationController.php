@@ -44,19 +44,6 @@ class OperationController extends Controller
      */
     public function create()
     {
-        // $garages = Garage::where(function ($query) {
-        // $query->where('ville', Auth::user()->ville) // Global garages for the same city
-        // ->whereNull('user_id')               // Global garages only
-        // ->orWhere('user_id', Auth::id());    // User-specific garages
-        // })->get();
-        // Get garages in the user's 'ville' (prioritized)
-        // $userVilleGarages = Garage::where('ville', Auth::user()->ville)
-        //     ->get();
-
-        // Get all other garages (excluding those already in the user's 'ville')
-        // $otherGarages = Garage::where('ville', '!=', Auth::user()->ville)
-        //     ->get();
-
         // Get garages in the user's 'ville', including global garages and user-specific garages
         $userVilleGarages = Garage::where(function ($query) {
             $query->where('ville', Auth::user()->ville) // Garages in the same 'ville'
@@ -197,18 +184,6 @@ class OperationController extends Controller
     public function edit(string $id)
     {
         $categories = nom_categorie::all();
-        // $garages = Garage::where(function ($query) {
-        //     $query->where('ville', Auth::user()->ville) // Global garages for the same city
-        //         ->whereNull('user_id')               // Global garages only
-        //         ->orWhere('user_id', Auth::id());    // User-specific garages
-        // })->get();
-        // Get garages in the user's 'ville' (prioritized) and all other garages
-        // $userVilleGarages = Garage::where('ville', Auth::user()->ville)
-        //     ->get();
-        // Get all other garages (excluding those already in the user's 'ville')
-        // $otherGarages = Garage::where('ville', '!=', Auth::user()->ville)
-        //     ->get();
-
 
         // Get garages in the user's 'ville', including global garages and user-specific garages
         $userVilleGarages = Garage::where(function ($query) {
