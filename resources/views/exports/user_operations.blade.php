@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historique des opérations</title>
     <style>
         table {
             width: 100%;
@@ -27,26 +30,27 @@
 </head>
 <body>
     <table>
+        <caption class="sr-only">Suivi des opérations</caption>
         <thead>
             <tr>
-                <th colspan="6" class="header-logo">
+                <th scope="col" colspan="6" class="header-logo">
                     <img src="{{ $logoPath }}" alt="FIXIPRO Logo" width="100">
                 </th>
             </tr>
             <tr>
-                <th colspan="6" style="text-align: center;">Suivi des Opérations</th>
+                <th scope="col" colspan="6" style="text-align: center;">Suivi des Opérations</th>
             </tr>
             <tr>
-                <th colspan="6" style="text-align: center;">
+                <th scope="col" colspan="6" style="text-align: center;">
                     Généré par {{ $user->name }} le {{ now()->format('d-m-Y') }}
                 </th>
             </tr>
             <tr>
-                <th>Numero d'immatriculation</th>
-                <th>Catégorie</th>
-                <th>Nom de l'opération</th>
-                <th>Garage</th>
-                <th>Date</th>
+                <th scope="col">Numero d'immatriculation</th>
+                <th scope="col">Catégorie</th>
+                <th scope="col">Nom de l'opération</th>
+                <th scope="col">Garage</th>
+                <th scope="col">Date</th>
             </tr>
         </thead>
         <tbody>

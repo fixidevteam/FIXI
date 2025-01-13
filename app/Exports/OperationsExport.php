@@ -15,7 +15,7 @@ class OperationsExport implements FromView, WithColumnWidths
     protected $voiture;
     protected $logoPath;
 
-    public function __construct($user, $operations, $nom_categories, $nom_operations, $voiture,$logoPath)
+    public function __construct($user, $operations, $nom_categories, $nom_operations, $voiture, $logoPath)
     {
         $this->user = $user;
         $this->operations = $operations;

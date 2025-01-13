@@ -54,7 +54,6 @@ class ListingGaragesController extends Controller
     public function show(string $id)
     {
         $garage = garage::find($id);
-        // dd($garage);
         return view('userListingGarages.show', compact('garage'));
     }
 

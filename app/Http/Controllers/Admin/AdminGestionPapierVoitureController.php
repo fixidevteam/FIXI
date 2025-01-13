@@ -82,7 +82,6 @@ class AdminGestionPapierVoitureController extends Controller
     public function destroy(string $id)
     {
         $type = type_papierv::find($id);
-        // dd($type);
         if ($type) {
             $type->delete();
         }

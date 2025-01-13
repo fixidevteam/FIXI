@@ -11,6 +11,8 @@ use Illuminate\Validation\Rule;
 
 class AdminGestionGarageController extends Controller
 {
+    // Define the constant for repeated messages
+    const GARAGE_NOT_FOUND = 'Garage introuvable';
     /**
      * Display a listing of the resource.
      */
@@ -78,7 +80,7 @@ class AdminGestionGarageController extends Controller
         if ($garage) {
             return view('admin.gestionGarages.show', compact('garage'));
         }
-        return back()->with('error', 'Garage introuvable');
+        return back()->with('error', self::GARAGE_NOT_FOUND);
     }
 
     /**
@@ -94,7 +96,7 @@ class AdminGestionGarageController extends Controller
         if ($garage) {
             return view('admin.gestionGarages.edit', compact('garage', 'villes', 'quartiers'));
         }
-        return back()->with('error', 'Garage introuvable');
+        return back()->with('error', self::GARAGE_NOT_FOUND);
     }
 
     /**
@@ -164,7 +166,7 @@ class AdminGestionGarageController extends Controller
             return redirect()->route('admin.gestionGarages.index');
         }
 
-        session()->flash('error', 'Garage introuvable');
+        session()->flash('error', self::GARAGE_NOT_FOUND);
         session()->flash('subtitle', 'Le garage que vous essayez de supprimer n\'existe pas.');
         return redirect()->route('admin.gestionGarages.index');
     }

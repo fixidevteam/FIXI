@@ -24,7 +24,6 @@ class AdminGestionUserController extends Controller
         $user = User::findOrFail($id);
         $user->status = !$user->status; // Toggle the status
         $user->save();
-
         return redirect()->route('admin.gestionUtilisateurs.index')->with('success', 'Statut de l\'utilisateur mis à jour avec succès.');
     }
     /**

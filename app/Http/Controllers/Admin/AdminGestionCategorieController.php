@@ -22,7 +22,6 @@ class AdminGestionCategorieController extends Controller
         // Merge the two collections
         $allOperations = $operations->merge($operationsCreatedByUser);
         
-        // dd($allOperations);
         $sousOperations = nom_sous_operation::all();
         return view('admin.gestionCategorie.index', compact('categories', 'allOperations', 'operations', 'sousOperations'));
     }
@@ -93,7 +92,6 @@ class AdminGestionCategorieController extends Controller
     {
 
         $categorie = nom_categorie::find($id);
-        // dd($categorie);
         if ($categorie) {
             foreach ($categorie->operations as $operation) {
                 $operation->sousOperations()->delete();

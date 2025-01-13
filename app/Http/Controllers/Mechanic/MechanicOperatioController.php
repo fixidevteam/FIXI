@@ -21,10 +21,8 @@ class MechanicOperatioController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-
         // Get the search query
         $search = $request->input('search');
-
         // Fetch the authenticated mechanic's operations and include necessary relationships
         $operations = Operation::whereHas('garage', function ($query) use ($user) {
             $query->where('id', $user->garage_id);
@@ -37,10 +35,8 @@ class MechanicOperatioController extends Controller
                 });
             })
             ->get();
-
         $ope = nom_operation::all();
         $categories = nom_categorie::all();
-        // dd($operations);
         return view('mechanic.operations.index', compact('operations', 'categories', 'ope', 'search'));
     }
 
@@ -84,8 +80,6 @@ class MechanicOperatioController extends Controller
             $compressedImagePath = '/user/operations/' . $uniqueName;
             $request->session()->put('temp_photo_garage_operation', $compressedImagePath);
         }
-
-
         $data = $request->validate([
             'categorie' => [
                 'required',
@@ -95,7 +89,6 @@ class MechanicOperatioController extends Controller
             'description' => ['max:255'],
             'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
             'date_operation' => ['required', 'date'],
-
         ]);
         // Check if "Autre" is selected and handle it
         if ($request->nom === 'autre') {
@@ -110,13 +103,10 @@ class MechanicOperatioController extends Controller
         } elseif ($request->hasFile('photo')) {
             $data['photo'] = $compressedImagePath;
         }
-
-
         $data['voiture_id'] = $voiture;
         $data['garage_id'] = $garage;
         $data['create_by'] = 'garage';
         $operation = Operation::create($data);
-
         // add sous operation 
         if ($request->filled('sousOperations')) {
             foreach ($request->input('sousOperations') as $idSous) {
@@ -142,7 +132,6 @@ class MechanicOperatioController extends Controller
     public function show(string $id)
     {
         $user = Auth::user();
-
         // Find the operation that belongs to the mechanic's garage
         $operation = Operation::whereHas('garage', function ($query) use ($user) {
             $query->where('id', $user->garage_id);

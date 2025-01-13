@@ -6,7 +6,7 @@ use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
 
-class UserOperationsExport implements FromView,WithColumnWidths
+class UserOperationsExport implements FromView, WithColumnWidths
 {
     protected $user;
     protected $operations;
@@ -39,7 +39,7 @@ class UserOperationsExport implements FromView,WithColumnWidths
     public function columnWidths(): array
     {
         return [
-            'A' => 15, // Column for "Numéro d’Immatriculation"
+            'A' => 20, // Column for "Numéro d’Immatriculation"
             'B' => 30, // Column for "Date de l’Opération"
             'C' => 20, // Column for "Catégorie d’Opération"
             'D' => 20, // Column for "Nom de l’Opération"

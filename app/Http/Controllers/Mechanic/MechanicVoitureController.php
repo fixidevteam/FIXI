@@ -69,7 +69,6 @@ class MechanicVoitureController extends Controller
     {
         $client = Session::get('client');
         $marques = MarqueVoiture::all();
-        // dd($client);
         return view('mechanic.voitures.create', compact('marques', 'client'));
     }
 
@@ -178,7 +177,6 @@ class MechanicVoitureController extends Controller
             $operations = Operation::where('voiture_id', $voiture->id)
                 ->where('garage_id', $user->garage_id)
                 ->get();
-            // dd($operations); // Debug: Check if the operations are found
             $nom_categories = nom_categorie::all();
             $nom_operations = nom_operation::all();
             return view('mechanic.voitures.show', compact('voiture', 'operations', 'nom_categories', 'nom_operations'));
