@@ -16,7 +16,7 @@
         <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
             <div class="sm:mx-auto sm:w-full sm:max-w-sm">
                 <a href="">
-                    <img class="mx-auto h-16 w-auto" src="/images/fixi.png" alt="Fixi">
+                    <img class="mx-auto h-28 w-auto" src="/images/fixi-plus.svg" alt="Fixi">
                 </a>
             </div>
             {{-- Content of login and register pages (auth/login and auth/register ) --}}

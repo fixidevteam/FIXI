@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-mechanic-guest-layout>
     <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Creéz votre compte</h2>
     <form method="POST" action="{{ route('mechanic.register') }}">
         @csrf
@@ -66,4 +66,4 @@
         Vous avez déjà un compte?
         <a href="{{ route('mechanic.login') }}" class="font-semibold leading-6 text-blue-600 hover:text-blue-500">{{ __('Connectez-vous') }}</a>
     </p>
-</x-guest-layout>
+</x-mechanic-guest-layout>

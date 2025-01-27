@@ -3,7 +3,7 @@
         display: none;
     }
 </style>
-<x-guest-layout>
+<x-mechanic-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
     <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Connectez-vous à votre compte</h2>
@@ -93,4 +93,4 @@
             }
         });
     </script>
-</x-guest-layout>
+</x-mechanic-guest-layout>
