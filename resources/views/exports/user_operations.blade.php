@@ -51,6 +51,7 @@
                 <th scope="col">Nom de l'opération</th>
                 <th scope="col">Garage</th>
                 <th scope="col">Date</th>
+                <th scope="col">Kilométrage</th>
             </tr>
         </thead>
         <tbody>
@@ -61,6 +62,7 @@
                     <td>{{ $operation->nom === 'Autre' ? $operation->autre_operation : ($operationsAll->where('id', $operation->nom)->first()->nom_operation ?? 'N/A') }}</td>
                     <td>{{ $garages->where('id', $operation->garage_id)->first()->name ?? 'N/A' }}</td>
                     <td>{{ $operation->date_operation ?? 'N/A' }}</td>
+                    <td>{{ $operation->kilometrage ? $operation->kilometrage . ' KM' : 'N/A' }}</td>
                 </tr>
             @endforeach
         </tbody>

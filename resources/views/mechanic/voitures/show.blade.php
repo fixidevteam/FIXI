@@ -186,6 +186,7 @@
                   <th scope="col" class="px-6 py-3">Categorie</th>
                   <th scope="col" class="px-6 py-3">Operation</th>
                   <th scope="col" class="px-6 py-3">Date d'operation</th>
+                  <th scope="col" class="px-6 py-3">Kilométrage</th>
                   <th scope="col" class="px-6 py-3">Action</th>
                 </tr>
               </thead>
@@ -212,6 +213,9 @@
                   {{-- date doperation --}}
                   <td class="px-6 py-4">
                     {{ $operation->date_operation}}
+                  </td>
+                  <td class="px-6 py-4">
+                    {{ $operation->kilometrage ? $operation->kilometrage . ' KM' : 'N/A' }}
                   </td>
                   {{-- Action --}}
                   <td class="px-6 py-4">

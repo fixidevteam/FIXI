@@ -44,6 +44,7 @@ class UserOperationsExport implements FromView, WithColumnWidths
             'C' => 20, // Column for "Catégorie d’Opération"
             'D' => 20, // Column for "Nom de l’Opération"
             'E' => 15, // Column for "Nom de l’Opération"
+            'F' => 15, // Column for "Nom de l’Opération"
         ];
     }
 }

@@ -71,6 +71,7 @@
                                     <th scope="col" class="px-6 py-3">Catégorie</th>
                                     <th scope="col" class="px-6 py-3">Opération</th>
                                     <th scope="col" class="px-6 py-3">Date d'opération</th>
+                                    <th scope="col" class="px-6 py-3">Kilométrage</th>
                                     <th scope="col" class="px-6 py-3">Photo</th>
                                     <th scope="col" class="px-6 py-3">Action</th>
                                 </tr>
@@ -96,6 +97,9 @@
                                     
                                         <td class="px-6 py-4">
                                             {{ $operation->date_operation }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ $operation->kilometrage ? $operation->kilometrage . ' KM' : 'N/A' }}
                                         </td>
                                         <td class="px-6 py-4">
                                             <a href="{{ route('mechanic.operations.show',$operation->id) }}">

@@ -112,6 +112,11 @@
                         <x-input-error :messages="$errors->get('date_operation')" class="mt-2" />
                     </div>
                     <div>
+                        <x-input-label for="kilometrage" :value="__('kilometrage')" />
+                        <x-text-input id="kilometrage" class="block mt-1 w-full" type="number" name="kilometrage" :value="old('kilometrage')" autofocus autocomplete="kilometrage"  min="0" step="1" />
+                        <x-input-error :messages="$errors->get('kilometrage')" class="mt-2" />
+                    </div>
+                    <div>
                         <x-input-label for="description" :value="__('Description')" />
                         <x-text-textarea id="description" class="block mt-1 w-full" name="description" autofocus autocomplete="description">
                             {{ old('description') }}

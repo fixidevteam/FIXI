@@ -93,14 +93,12 @@
                   {{ $operation->date_operation }}
                 </p>
               </div>
-              @if($operation->description !== NULL)
               <div>
-                <p class="first-letter:uppercase text-sm font-medium text-gray-900">description</p>
+                <p class="first-letter:uppercase text-sm font-medium text-gray-900">Kilométrage</p>
                 <p class="text-sm text-gray-500">
-                  {{ $operation->description }}
+                  {{ $operation->kilometrage ? $operation->kilometrage . ' KM' : 'N/A' }}
                 </p>
               </div>
-              @endif
             </div>
             {{-- Column 2 --}}
             <div class="flex-1 space-y-4">
@@ -124,6 +122,14 @@
                 @endforeach
               </div>
               @endif
+              @if($operation->description !== NULL)
+              <div>
+                <p class="first-letter:uppercase text-sm font-medium text-gray-900">description</p>
+                <p class="text-sm text-gray-500">
+                  {{ $operation->description }}
+                </p>
+              </div>
+              @endif  
             </div>
           </div>
         </div>

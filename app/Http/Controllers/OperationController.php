@@ -106,6 +106,7 @@ class OperationController extends Controller
             'description' => ['max:255'],
             'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:5120'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
             'date_operation' => ['required', 'date'],
+            'kilometrage' => ['nullable', 'integer', 'min:0'],
             'garage_id' => ['nullable'],
             'new_garage_name' => ['nullable', 'string', 'max:255'],
         ]);
