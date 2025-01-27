@@ -114,7 +114,7 @@
                     
                     <div>
                         <x-input-label for="kilometrage" :value="__('Kilométrage (Optionnel)')" />
-                        <x-text-input id="kilometrage" class="block mt-1 w-full" type="number" name="kilometrage" :value="old('kilometrage')" autofocus autocomplete="kilometrage"  min="0" step="1" />
+                        <x-text-input id="kilometrage" class="block mt-1 w-full" type="number" name="kilometrage" :value="old('kilometrage')" autofocus autocomplete="kilometrage"  min="0" step="1" placeholder='kilometrage du vehicule '/>
                         <x-input-error :messages="$errors->get('kilometrage')" class="mt-2" />
                     </div>
 
