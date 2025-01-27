@@ -128,17 +128,17 @@
                         <x-input-error :messages="$errors->get('modele')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="date_de_première_mise_en_circulation" :value="__('Date de première mise en circulation')" />
+                        <x-input-label for="date_de_première_mise_en_circulation" :value="__('Date de première mise en circulation (Optionnel)')" />
                         <x-text-input id="date_de_première_mise_en_circulation" class="block mt-1 w-full" type="date" name="date_de_première_mise_en_circulation" :value="old('date_de_première_mise_en_circulation')  ?? $voiture->date_de_première_mise_en_circulation" autofocus autocomplete="date_de_première_mise_en_circulation" />
                         <x-input-error :messages="$errors->get('date_de_première_mise_en_circulation')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="date_achat" :value="__('Date d\'achat')" />
+                        <x-input-label for="date_achat" :value="__('Date d\'achat (Optionnel)')" />
                         <x-text-input id="date_achat" class="block mt-1 w-full" type="date" name="date_achat" :value="old('date_achat') ?? $voiture->date_achat" autofocus autocomplete="date_achat" />
                         <x-input-error :messages="$errors->get('date_achat')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="date_de_dédouanement" :value="__('Date de dédouanement')" />
+                        <x-input-label for="date_de_dédouanement" :value="__('Date de dédouanement (Optionnel)')" />
                         <x-text-input id="date_de_dédouanement" class="block mt-1 w-full" type="date" name="date_de_dédouanement" :value="old('date_de_dédouanement') ?? $voiture->date_de_dédouanement" autofocus autocomplete="date_de_dédouanement" />
                         <x-input-error :messages="$errors->get('date_de_dédouanement')" class="mt-2" />
                     </div>
@@ -146,7 +146,7 @@
                         <img id='preview_img' class="h-16 w-16 object-cover rounded-full" src=" {{$voiture->photo ? asset('storage/'. $voiture->photo ) : asset('./images/defaultimage.jpg')}}" alt="Current profile photo" />
                     </div>
                     <div>
-                        <x-input-label for="file_input" :value="__('Photo')" />
+                        <x-input-label for="file_input" :value="__('Photo (Optionnel)')" />
                         <x-file-input id="file_input" onchange="loadFile(event)" class="block mt-1 w-full" type="file" name="photo" :value="old('photo') ?? $voiture->photo" autofocus autocomplete="photo" accept="image/jpeg,png" />
                         <x-input-error :messages="$errors->get('photo')" class="mt-2" />
                     </div>

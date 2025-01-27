@@ -77,7 +77,7 @@
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="email" :value="__('Email')" />
+                        <x-input-label for="email" :value="__('Email (Optionnel)')" />
                         <x-text-input id="email" class="block mt-1 w-full" type="text" name="email" :value="old('email')" autofocus autocomplete="email" />
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
@@ -86,11 +86,6 @@
                         <x-text-input id="telephone" class="block mt-1 w-full" type="text" name="telephone" :value="old('telephone')" autofocus autocomplete="telephone" />
                         <x-input-error :messages="$errors->get('telephone')" class="mt-2" />
                     </div>
-                    {{-- <div>
-                        <x-input-label for="ville" :value="__('Ville')" />
-                        <x-text-input id="ville" class="block mt-1 w-full" type="text" name="ville" :value="old('ville')" autofocus autocomplete="ville" />
-                        <x-input-error :messages="$errors->get('ville')" class="mt-2" />
-                    </div> --}}
                     <div>
                         <x-input-label for="ville" :value="__('Ville')" />
                         <select id="ville" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" name="ville" autofocus>
@@ -142,7 +137,7 @@
                     <div>
                         <x-input-label for="marque" :value="__('Marque')" />
                         <select id="marque" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" name="marque" autofocus>
-                            <option value="">{{ __('Select a marque') }}</option>
+                            <option value="">{{ __('Selecter la marque') }}</option>
                             @foreach($marques as $marque)
                             <option value="{{ $marque->marque }}" {{ old('marque') == $marque->marque ? 'selected' : '' }}>
                                 {{ $marque->marque }}
@@ -161,7 +156,7 @@
                         <img id='preview_img' class="h-16 w-16 object-cover rounded-full" src="{{session('temp_photo_garage_voiture') ? asset('storage/'.session('temp_photo_garage_voiture')) : asset('./images/defaultimage.jpg')}}" alt="Current profile photo" />
                     </div>
                     <div>
-                        <x-input-label for="file_input" :value="__('Photo')" />
+                        <x-input-label for="file_input" :value="__('Photo (Optionnel)')" />
                         <x-file-input id="file_input" onchange="loadFile(event)" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" accept="image/jpeg,png"/>
                         <!-- Hidden Input to Preserve Old Value -->
                         @if(session('temp_photo_garage_voiture'))

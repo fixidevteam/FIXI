@@ -105,7 +105,7 @@
                     <div>
                         <x-input-label for="marque" :value="__('Marque')" />
                         <select id="marque" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" name="marque" autofocus>
-                            <option value="">{{ __('Select a marque') }}</option>
+                            <option value="">{{ __('Selecter la marque') }}</option>
                             @foreach($marques as $marque)
                                 <option value="{{ $marque->marque }}" {{ old('marque') == $marque->marque ? 'selected' : '' }}>
                                     {{ $marque->marque }}
@@ -121,17 +121,17 @@
                         <x-input-error :messages="$errors->get('modele')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="date_de_première_mise_en_circulation" :value="__('Date de première mise en circulation')" />
+                        <x-input-label for="date_de_première_mise_en_circulation" :value="__('Date de première mise en circulation (Optionnel)')" />
                         <x-text-input id="date_de_première_mise_en_circulation" class="block mt-1 w-full" type="date" name="date_de_première_mise_en_circulation" :value="old('date_de_première_mise_en_circulation')" autofocus autocomplete="date_de_première_mise_en_circulation" />
                         <x-input-error :messages="$errors->get('date_de_première_mise_en_circulation')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="date_achat" :value="__('Date d\'achat')" />
+                        <x-input-label for="date_achat" :value="__('Date d\'achat (Optionnel)')" />
                         <x-text-input id="date_achat" class="block mt-1 w-full" type="date" name="date_achat" :value="old('date_achat')" autofocus autocomplete="date_achat" />
                         <x-input-error :messages="$errors->get('date_achat')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="date_de_dédouanement" :value="__('Date de dédouanement')" />
+                        <x-input-label for="date_de_dédouanement" :value="__('Date de dédouanement (Optionnel)')" />
                         <x-text-input id="date_de_dédouanement" class="block mt-1 w-full" type="date" name="date_de_dédouanement" :value="old('date_de_dédouanement')" autofocus autocomplete="date_de_dédouanement" />
                         <x-input-error :messages="$errors->get('date_de_dédouanement')" class="mt-2" />
                     </div>
@@ -140,7 +140,7 @@
                     </div>
                     <div class="">
                         <label class="block">
-                            <x-input-label for="file_input" :value="__('Photo')" />
+                            <x-input-label for="file_input" :value="__('Photo (Optionnel)')" />
                             <x-file-input id="file_input" onchange="loadFile(event)" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" accept="image/jpeg,png" />
                             <x-input-error :messages="$errors->get('photo')" class="mt-2" />
                             @if(session('temp_photo_voiture'))

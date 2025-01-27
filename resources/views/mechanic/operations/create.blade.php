@@ -80,7 +80,7 @@
                         <x-input-error :messages="$errors->get('categorie')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="nom" :value="__('Nom de l\'opération')" />
+                        <x-input-label for="nom" :value="__('Nom de l\'opération (Optionnel)')" />
                         <input type="hidden" id="existingOperationId" value="{{old('nom')}}">
                         <select id="operation" name="nom" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             <option value="">Select operation</option>
@@ -112,12 +112,12 @@
                         <x-input-error :messages="$errors->get('date_operation')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="kilometrage" :value="__('kilometrage')" />
+                        <x-input-label for="kilometrage" :value="__('Kilométrage (Optionnel)')" />
                         <x-text-input id="kilometrage" class="block mt-1 w-full" type="number" name="kilometrage" :value="old('kilometrage')" autofocus autocomplete="kilometrage"  min="0" step="1" />
                         <x-input-error :messages="$errors->get('kilometrage')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="description" :value="__('Description')" />
+                        <x-input-label for="description" :value="__('Description (Optionnel)')" />
                         <x-text-textarea id="description" class="block mt-1 w-full" name="description" autofocus autocomplete="description">
                             {{ old('description') }}
                         </x-text-textarea>
@@ -127,7 +127,7 @@
                         <img id='preview_img' class="h-16 w-16 object-cover rounded-full" src="{{session('temp_photo_garage_operation') ? asset('storage/'.session('temp_photo_garage_operation')) : asset('./images/defaultimage.jpg')}}" alt="Current profile photo" />
                     </div>
                     <div>
-                        <x-input-label for="file_input" :value="__('Photo')" />
+                        <x-input-label for="file_input" :value="__('Photo (Optionnel)')" />
                         <x-file-input id="file_input" onchange="loadFile(event)" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus autocomplete="photo" accept="image/jpeg,png" />
                         <!-- Hidden Input to Preserve Old Value -->
                         @if(session('temp_photo_garage_operation'))

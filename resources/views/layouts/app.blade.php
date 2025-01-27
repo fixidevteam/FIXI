@@ -217,7 +217,7 @@
                     .then(data => {
                         if (data.length > 0) {
                             const p = document.createElement('p');
-                            p.textContent = 'Sous opération';
+                            p.textContent = 'Sous opération (Optionnel)';
                             p.className = 'block text-sm font-medium leading-6 text-gray-900';
                             sousOperationContainer.appendChild(p);
 
