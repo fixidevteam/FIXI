@@ -7,7 +7,6 @@ use App\Models\User;
 use Carbon\Carbon;
 use App\Notifications\DocumentExpiryNotification;
 
-
 class SendDocumentNotifications extends Command
 {
     /**
