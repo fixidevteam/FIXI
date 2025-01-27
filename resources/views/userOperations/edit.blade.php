@@ -127,6 +127,7 @@
                             autocomplete="kilometrage"  
                             min="0" 
                             step="1" 
+                            placeholder='kilometrage du vehicule'
                         />
                         <x-input-error :messages="$errors->get('kilometrage')" class="mt-2" />
                     </div>                    
