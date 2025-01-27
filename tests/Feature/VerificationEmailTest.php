@@ -13,6 +13,20 @@ use Tests\TestCase;
 class VerificationEmailTest extends TestCase
 {
     use RefreshDatabase;
+    public function test_VerificationEmail_send_auto(): void
+    {
+        $user = User::factory()->create([
+            'email'=>'youssefelmofid2@gmail.com',
+            'ville' => 'marrakech',
+            'email_verified_at' => null,
+        ]);
+
+        $response = $this->actingAs($user)->get('/fixi-plus/verify-email');
+
+        $response->assertStatus(200);
+    }
+
+
 
     public function test_VerificationEmail_screen(): void
     {
