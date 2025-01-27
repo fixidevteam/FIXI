@@ -42,7 +42,8 @@ class OperationsExport implements FromView, WithColumnWidths
             'A' => 20, // Column for "Numéro d’Immatriculation"
             'B' => 30, // Column for "Date de l’Opération"
             'C' => 30, // Column for "Catégorie d’Opération"
-            'D' => 50, // Column for "Nom de l’Opération"
+            'D' => 30, // Column for "Nom de l’Opération"
+            'E' => 50, // Column for "Nom de l’Opération"
         ];
     }
 }

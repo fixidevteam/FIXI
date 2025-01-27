@@ -116,6 +116,21 @@
                         <x-input-error :messages="$errors->get('date_operation')" class="mt-2" />
                     </div>
                     <div>
+                        <x-input-label for="kilometrage" :value="__('Kilométrage')" />
+                        <x-text-input 
+                            id="kilometrage" 
+                            class="block mt-1 w-full" 
+                            type="number" 
+                            name="kilometrage" 
+                            :value="old('kilometrage') ?? $operation->kilometrage" 
+                            autofocus 
+                            autocomplete="kilometrage"  
+                            min="0" 
+                            step="1" 
+                        />
+                        <x-input-error :messages="$errors->get('kilometrage')" class="mt-2" />
+                    </div>                    
+                    <div>
                         <x-input-label for="garage" :value="__('Garage')" />
                         <select id="garage" name="garage_id" class="block mt-1 w-full rounded-md border-0 py-1.5 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             <option value="">Select garage</option>

@@ -21,7 +21,9 @@ class Operation extends Model
         'voiture_id',
         'garage_id',
         'autre_operation',
-        'create_by'
+        'kilometrage',
+        'create_by',
+
     ];
     public function voiture(): BelongsTo
     {
