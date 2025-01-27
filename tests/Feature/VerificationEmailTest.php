@@ -14,19 +14,20 @@ class VerificationEmailTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_VerificationEmailTest_screen(): void
+    public function test_VerificationEmail_screen(): void
     {
         $user = User::factory()->create([
+            'email'=>'youssefelmofid2@gmail.com',
             'ville' => 'marrakech',
             'email_verified_at' => null,
         ]);
 
-        $response = $this->actingAs($user)->get('/my-fixi/verify-email');
+        $response = $this->actingAs($user)->get('/fixi-plus/verify-email');
 
         $response->assertStatus(200);
     }
 
-    public function test_email_can_be_verified(): void
+    public function test_VerificationEmail_can_be_verified(): void
     {
         $user = User::factory()->create([
             'ville' => 'marrakech',
@@ -48,7 +49,7 @@ class VerificationEmailTest extends TestCase
         $response->assertRedirect(RouteServiceProvider::HOME . '?verified=1');
     }
 
-    public function test_email_is_not_verified_with_invalid_hash(): void
+    public function test_is_not_verified_with_invalid_hash(): void
     {
         $user = User::factory()->create([
             'ville' => 'marrakech',
