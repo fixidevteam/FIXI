@@ -79,7 +79,7 @@ class MechanicClientController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:5120'], // Allow only JPG, PNG, and PDF, max size 2MB
         ]);
         if ($request->hasFile('photo')) {
             // Source image path (temporary uploaded file)
@@ -107,7 +107,7 @@ class MechanicClientController extends Controller
             'part3' => ['required', 'digits_between:1,2'], // 1 to 2 digits
             'marque' => ['required', 'max:30'],
             'modele' => ['required', 'max:30'],
-            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:5120'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
         ]);
         $request->validate([
             'name' => 'required|string|max:255',

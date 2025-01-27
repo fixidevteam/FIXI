@@ -58,7 +58,7 @@ class MechanicOperatioController extends Controller
         $garage = Auth::user()->garage_id;
         $voiture = Session::get('voiture_id');
         $request->validate([
-            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:5120'], // Allow only JPG, PNG, and PDF, max size 2MB
         ]);
         if ($request->hasFile('photo')) {
             // Source image path (temporary uploaded file)
@@ -87,7 +87,7 @@ class MechanicOperatioController extends Controller
             'nom' => ['nullable'],
             'autre_operation' => ['nullable', 'string', 'max:255'],
             'description' => ['max:255'],
-            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:5120'], // Allow only JPG, PNG, and PDF, max size 2MB                'date_debut' => ['required', 'date'],
             'date_operation' => ['required', 'date'],
         ]);
         // Check if "Autre" is selected and handle it

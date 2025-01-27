@@ -46,7 +46,7 @@ class PapierPeronnelController extends Controller
 
         // Validate the request for the photo
         $request->validate([
-            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'], // Only allow JPG, PNG, and PDF with max size 2MB
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:5120'], // Only allow JPG, PNG, and PDF with max size 2MB
         ]);
 
         $compressedFilePath = null; // Initialize compressed file path
@@ -161,7 +161,7 @@ class PapierPeronnelController extends Controller
             $validatedData = $request->validate([
                 'type' => ['required'],
                 'note' => ['nullable', 'max:255'],
-                'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'],
+                'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:5120'],
                 'date_debut' => ['required', 'date'],
                 'date_fin' => ['required', 'date', 'after_or_equal:date_debut'],
             ]);

@@ -45,7 +45,7 @@ class AdminGestionGarageController extends Controller
             'ville' => ['required', 'string'],
             'virtualGarage' => ['nullable', 'string'],
             'services' => ['nullable', 'array'], // Expecting an array for services
-            'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2048'],
+            'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:5120'],
         ]);
 
         // Fetch the ville name based on the ID
@@ -117,7 +117,7 @@ class AdminGestionGarageController extends Controller
             'ville' => ['required', 'string'],
             'virtualGarage' => ['nullable', 'string'],
             'services' => ['nullable', 'array'], // Expecting an array for services
-            'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2048']
+            'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:5120']
         ]);
         // Fetch the ville name based on the ID
         $ville = Ville::findOrFail($request->ville); // Ensure the ville ID is valid
