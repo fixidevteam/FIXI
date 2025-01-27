@@ -51,7 +51,7 @@ class PapierVoitureController extends Controller
 
         // Validate the request data
         $request->validate([
-            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:5120'], // Allow only JPG, PNG, and PDF, max size 2MB
         ]);
 
         $compressedFilePath = null; // Initialize the compressed file path
@@ -170,7 +170,7 @@ class PapierVoitureController extends Controller
 
         // Validate file input
         $request->validate([
-            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'], // Allow only JPG, PNG, PDF
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:5120'], // Allow only JPG, PNG, PDF
         ]);
 
         $compressedFilePath = null;

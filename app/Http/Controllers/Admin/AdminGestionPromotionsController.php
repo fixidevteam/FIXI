@@ -44,7 +44,7 @@ class AdminGestionPromotionsController extends Controller
             'lien_promotion' => 'required|url',
             'garage_id' => 'required|exists:garages,id',
             'description' => 'nullable|string|max:500',
-            'photo_promotion' => 'required|image|mimes:jpeg,png,jpg|max:2048', // Validate image file
+            'photo_promotion' => 'required|image|mimes:jpeg,png,jpg|max:5120', // Validate image file
         ]);
 
         // Handle the photo upload if present
@@ -108,7 +108,7 @@ class AdminGestionPromotionsController extends Controller
             'lien_promotion' => 'nullable|url',
             'garage_id' => 'required|exists:garages,id',
             'description' => 'nullable|string|max:500',
-            'photo_promotion' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Allow null if no new photo
+            'photo_promotion' => 'nullable|image|mimes:jpeg,png,jpg|max:5120', // Allow null if no new photo
         ]);
 
         // Handle the photo upload if a new photo is uploaded
