@@ -95,7 +95,7 @@
                         <x-input-error :messages="$errors->get('date_fin')" class="mt-2" />
                     </div>
                     <div>
-                        <x-input-label for="note" :value="__('Note')" />
+                        <x-input-label for="note" :value="__('Note (Optionnel)')" />
                         <x-text-textarea id="note" class="block mt-1 w-full" name="note" autofocus autocomplete="note">
                             {{ old('note', $papier->note) }}
                         </x-text-textarea>
@@ -112,7 +112,7 @@
                             alt="Current profile photo" />
                     </div>
                     <div>
-                        <x-input-label for="file_input" :value="__('Photo')" />
+                        <x-input-label for="file_input" :value="__('Photo (Optionnel)')" />
                         <x-file-input id="file_input" onchange="loadFile(event)" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')  ?? $papier->photo" autofocus autocomplete="photo" accept="image/jpeg,image/png,application/pdf" />
                         <x-input-error :messages="$errors->get('photo')" class="mt-2" />
                     </div>
