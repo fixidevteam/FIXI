@@ -27,9 +27,11 @@ class ProviderController extends Controller
             if ($user) {
                 if ($user->provider === $provider && $user->provider_id === $socialUser->getId()) {
                     Auth::login($user);
+
                     if (empty($user->telephone) || empty($user->ville)) {
                         return redirect('/fixi-plus/complete-profile');
                     }
+
                     return redirect(self::DASHBOARD_ROUTE);
                 } else {
                     return redirect('/fixi-plus/login')->withErrors([
@@ -44,7 +46,6 @@ class ProviderController extends Controller
                 'provider' => $provider,
                 'provider_id' => $socialUser->getId(),
                 'provider_token' => $socialUser->token,
-                'email_verified_at' => now(),
             ]);
 
             Auth::login($user);
@@ -79,10 +80,16 @@ class ProviderController extends Controller
         ]);
 
         $user = Auth::user();
+
         $user->update([
             'telephone' => $request->telephone,
             'ville' => $request->ville,
         ]);
+
+        // Send email verification notification
+        if (!$user->hasVerifiedEmail()) {
+            $user->sendEmailVerificationNotification();
+        }
 
         return redirect(self::DASHBOARD_ROUTE);
     }
