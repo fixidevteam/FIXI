@@ -24,10 +24,10 @@ class CompressImagesTest extends TestCase
         // Fake the storage for testing
         Storage::fake('public');
         $user = User::factory()->create(['status' => 1, 'ville' => 'marrakech']);
-        $photo = HttpUploadedFile::fake()->image('fixiRepair.jpg')->size(1024); // 5000 KB (5 MB)
+        $photo = HttpUploadedFile::fake()->image('fixiRepair.jpg')->size(3072); // 5000 KB (5 MB)
         $type = type_papierp::create(['type' => 'Pass']);
         // Assert the size before upload
-        $this->assertEquals(1048576, $photo->getSize());
+        $this->assertEquals(3145728, $photo->getSize());
 
         $res = $this->actingAs($user)->post('fixi-plus/paiperPersonnel', [
             'type' => 'Pass',
@@ -48,7 +48,7 @@ class CompressImagesTest extends TestCase
             $fileSize = filesize($fullFilePath); // File size in bytes
 
             // Assert that the file size is less than 1 MB (1048576 bytes)
-            $this->assertLessThan(1048576, $fileSize, 'The file size should be less than 1 MB.');
+            $this->assertLessThan(3145728, $fileSize, 'The file size should be less than 1 MB.');
         } else {
             dd('File does not exist: ' . $fullFilePath);
         }

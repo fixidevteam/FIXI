@@ -44,6 +44,7 @@ class OperationControllerTest extends TestCase
             'nom' => 'test',
             'description' => 'This is a test operation',
             'date_operation' => '2023-11-01',
+            'kilometrage'=>11999,
             'garage_id' => $garage->id
         ]);
 
@@ -53,6 +54,7 @@ class OperationControllerTest extends TestCase
             'description' => 'This is a test operation',
             'date_operation' => '2023-11-01',
             'voiture_id' => $voiture->id,
+            'kilometrage'=>11999
         ]);
         $response->assertStatus(302);
         $response->assertRedirect(route('voiture.show', $voiture->id));

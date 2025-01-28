@@ -132,6 +132,7 @@
                 <th scope="col">Catégorie</th>
                 <th scope="col">Opération</th>
                 <th scope="col">Garage</th>
+                <th scope="col">kilometrage</th>
                 <th scope="col">Description</th>
                 <th scope="col">Date d'opération</th>
             </tr>
@@ -157,7 +158,10 @@
                 <td>
                     {{ $operation->garage->name ?? 'N/A' }}
                 </td>
-
+                <!-- kilometrage -->
+                <td>
+                    {{ $operation->kilometrage ? $operation->kilometrage . ' KM' : 'N/A' }}
+                </td>
                 <!-- Description -->
                 <td>
                     {{ $operation->description ?? 'N/A' }}
