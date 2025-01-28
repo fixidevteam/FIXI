@@ -75,9 +75,26 @@ class OperationController extends Controller
     public function store(Request $request)
     {
         $voiture = Session::get('voiture_id');
+        // $request->validate([
+        //     'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:5120'], // Allow only JPG, PNG, and PDF, max size 2MB
+        // ]);
+
         $request->validate([
-            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:5120'], // Allow only JPG, PNG, and PDF, max size 2MB
+            'kilometrage' => [
+                'nullable',
+                'integer',
+                'min:0',
+                function ($attribute, $value, $fail) {
+                    $lastOperation = Operation::where('voiture_id', Session::get('voiture_id'))
+                        ->latest()->first();
+                    if ($lastOperation && $value < $lastOperation->kilometrage) {
+                        $fail('Le kilométrage doit être supérieur ou égal au kilométrage précédent.');
+                    }
+                },
+            ],
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:5120'],
         ]);
+
         if ($request->hasFile('photo')) {
             // Source image path (temporary uploaded file)
             $sourcePath = $request->file('photo')->getRealPath();

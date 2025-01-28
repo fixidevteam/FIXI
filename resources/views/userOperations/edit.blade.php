@@ -123,10 +123,7 @@
                             type="number" 
                             name="kilometrage" 
                             :value="old('kilometrage') ?? $operation->kilometrage" 
-                            autofocus 
-                            autocomplete="kilometrage"  
-                            min="0" 
-                            step="1" 
+                            min="0"
                         />
                         <x-input-error :messages="$errors->get('kilometrage')" class="mt-2" />
                     </div>                    
