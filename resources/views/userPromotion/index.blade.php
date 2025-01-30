@@ -51,7 +51,7 @@
                 <div class="my-5">
                     <div class="">
                         @if($promotions->isEmpty())
-                        <p class="p-4 text-gray-500 text-center">Aucun promotion disponible.</p>
+                        <p class="p-4 text-gray-500 text-center">Aucune promotion disponible.</p>
                         @else
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             @foreach($promotions as $promotion)
