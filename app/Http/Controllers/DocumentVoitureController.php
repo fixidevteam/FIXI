@@ -50,7 +50,7 @@ class DocumentVoitureController extends Controller
     {
         // Validate the request data
         $request->validate([
-            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'], // Allow only JPG, PNG, and PDF, max size 2MB
+            'photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:5120'], // Allow only JPG, PNG, and PDF, max size 2MB
             'voiture_id' => ['required', Rule::exists('voitures', 'id')->where('user_id', Auth::id())], // Ensure voiture belongs to the user
         ]);
 
@@ -111,7 +111,7 @@ class DocumentVoitureController extends Controller
         $document  = VoiturePapier::create($data);
 
 
-        Auth::user()->notify(new AddDocumentNotification($document, 'Vous avouez ajouté le document ' . $document->type, 'ajouter'. $document->id .'car', true));
+        Auth::user()->notify(new AddDocumentNotification($document, 'Vous avouez ajouté le document ' . $document->type, 'ajouter' . $document->id . 'car', true));
 
 
         // Clear the temp_photo_document_voiture session
